@@ -1,8 +1,9 @@
 name: Dispatch codegen
 on:
+  workflow_dispatch: {}
   push:
     branches:
-      - master
+      - main
 
 jobs:
   dispatch:
