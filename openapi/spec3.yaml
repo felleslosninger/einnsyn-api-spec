@@ -1078,6 +1078,7 @@ components:
                   maxLength: 500
                 - $ref: "#/components/schemas/Enhet"
           required:
+            - systemId
             - journalenhet
           x-expandableFields:
             - journalenhet
