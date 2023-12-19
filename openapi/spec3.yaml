@@ -1032,6 +1032,35 @@ paths:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
 
+  /search:
+    get:
+      description: "Search"
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortBy"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/Query"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          anyOf:
+                            - $ref: "#/components/schemas/Journalpost"
+                            - $ref: "#/components/schemas/Moetemappe"
+                            - $ref: "#/components/schemas/Moetesak"
+                            - $ref: "#/components/schemas/Saksmappe"
+
 security:
   - ApiKey: []
 
@@ -1973,6 +2002,23 @@ components:
       required: false
       schema:
         type: integer
+
+    SortBy:
+      description: >-
+        The field to sort the result set by. The default is created.
+      in: query
+      name: sortBy
+      required: false
+      schema:
+        type: string
+        enum:
+          [
+            "created",
+            "updated",
+            "offentligTittel",
+            "offentligTittelSensitiv",
+            "administrativEnhetObjekt",
+          ]
 
     SortOrder:
       description: >-
