@@ -29,7 +29,7 @@ paths:
       description: Get a Enhet list.
       tags:
         - Enhet
-      operationId: GetEnhets
+      operationId: GetEnhetList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
@@ -51,7 +51,7 @@ paths:
       description: Add a new Enhet.
       tags:
         - Enhet
-      operationId: AddEnhet
+      operationId: PostEnhet
       requestBody:
         content:
           application/json:
@@ -85,7 +85,7 @@ paths:
       description: Update a single Enhet.
       tags:
         - Enhet
-      operationId: UpdateEnhet
+      operationId: PutEnhet
       parameters:
         - $ref: "#/components/parameters/Id"
       responses:
@@ -115,7 +115,7 @@ paths:
       description: Get all underenhet for a Enhet.
       tags:
         - Enhet
-      operationId: GetUnderenhets
+      operationId: GetUnderenhetList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
@@ -139,7 +139,7 @@ paths:
       description: Add a subEnhet to a Enhet.
       tags:
         - Enhet
-      operationId: AddUnderenhet
+      operationId: PostEnhetUnderenhet
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -155,7 +155,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Enhet"
 
-  /enhet/{id}/underenhet/{underenhetId}:
+  /enhet/{id}/underenhet/{subId}:
     delete:
       description: Delete a subEnhet from a Enhet.
       tags:
@@ -163,12 +163,7 @@ paths:
       operationId: DeleteUnderenhet
       parameters:
         - $ref: "#/components/parameters/Id"
-        - in: path
-          name: underenhetId
-          required: true
-          schema:
-            type: string
-            maxLength: 500
+        - $ref: "#/components/parameters/SubId"
       responses:
         "200":
           description: Successful response.
@@ -182,7 +177,7 @@ paths:
       description: Get a list of journalpost.
       tags:
         - Journalpost
-      operationId: GetJournalposts
+      operationId: GetJournalpostList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
@@ -200,6 +195,23 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Journalpost"
+    post:
+      description: Add a new journalpost.
+      tags:
+        - Journalpost
+      operationId: PostJournalpost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Journalpost"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Journalpost"
 
   /journalpost/{id}:
     get:
@@ -221,7 +233,7 @@ paths:
       description: Update a record
       tags:
         - Journalpost
-      operationId: UpdateJournalpost
+      operationId: PutJournalpost
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -272,7 +284,7 @@ paths:
       description: Update a document
       tags:
         - Dokumentbeskrivelse
-      operationId: UpdateDokumentbeskrivelse
+      operationId: PutDokumentbeskrivelse
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -351,7 +363,7 @@ paths:
       description: Add a new Saksmappe.
       tags:
         - Saksmappe
-      operationId: AddSaksmappe
+      operationId: PostSaksmappe
       requestBody:
         content:
           application/json:
@@ -385,7 +397,7 @@ paths:
       description: Update a Saksmappe.
       tags:
         - Saksmappe
-      operationId: UpdateSaksmappe
+      operationId: PutSaksmappe
       parameters:
         - $ref: "#/components/parameters/Id"
       responses:
@@ -415,7 +427,7 @@ paths:
       description: Get Journalpost list for a Saksmappe.
       tags:
         - Saksmappe
-      operationId: GetJournalpostListForSaksmappe
+      operationId: GetSaksmappeJournalpostList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
@@ -439,7 +451,7 @@ paths:
       description: Add a Journalpost to a Saksmappe.
       tags:
         - Saksmappe
-      operationId: AddJournalpostToSaksmappe
+      operationId: PostSaksmappeJournalpost
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -455,7 +467,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Saksmappe"
 
-  /saksmappe/{id}/journalpost/{journalpostId}:
+  /saksmappe/{id}/journalpost/{subId}:
     delete:
       description: Remove a Journalpost from a Saksmappe.
       tags:
@@ -463,12 +475,7 @@ paths:
       operationId: RemoveJournalpostFromSaksmappe
       parameters:
         - $ref: "#/components/parameters/Id"
-        - in: path
-          name: journalpostId
-          required: true
-          schema:
-            type: string
-            maxLength: 500
+        - $ref: "#/components/parameters/SubId"
       responses:
         "200":
           description: Successful response.
@@ -504,7 +511,7 @@ paths:
       description: Add a new Moetemappe.
       tags:
         - Moetemappe
-      operationId: AddMoetemappe
+      operationId: PostMoetemappe
       requestBody:
         content:
           application/json:
@@ -538,7 +545,7 @@ paths:
       description: Update a Moetemappe.
       tags:
         - Moetemappe
-      operationId: UpdateMoetemappe
+      operationId: PutMoetemappe
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -597,7 +604,7 @@ paths:
       description: Add a document to a meeting.
       tags:
         - Moetemappe
-      operationId: AddMoetedokumentToMoetemappe
+      operationId: PostMoetemappeMoetedokument
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -613,7 +620,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetemappe"
 
-  /moetemappe/{id}/moetedokument/{moetedokumentId}:
+  /moetemappe/{id}/moetedokument/{subId}:
     delete:
       description: >-
         Remove a document from a meeting. This will delete the Moetedokument if it is orphaned.
@@ -622,12 +629,7 @@ paths:
       operationId: RemoveMoetedokumentFromMoetemappe
       parameters:
         - $ref: "#/components/parameters/Id"
-        - in: path
-          name: moetedokumentId
-          required: true
-          schema:
-            type: string
-            maxLength: 500
+        - $ref: "#/components/parameters/SubId"
       responses:
         "200":
           description: Successful response.
@@ -641,7 +643,7 @@ paths:
       description: Get a Moetesak list for a Moetemappe.
       tags:
         - Moetemappe
-      operationId: GetMoetesakListForMoetemappe
+      operationId: GetMoetemappeMoetesakList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
@@ -652,14 +654,19 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Moetesak"
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetesak"
     post:
       description: Add a Moetesak to a Moetemappe.
       tags:
         - Moetemappe
-      operationId: AddMoetesakToMoetemappe
+      operationId: PostMoetemappeMoetesak
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -675,7 +682,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetemappe"
 
-  /moetemappe/{id}/moetesak/{moetesakId}:
+  /moetemappe/{id}/moetesak/{subId}:
     delete:
       description: Remove a Moetesak from a Moetemappe. This will delete the Moetesak if it is orphaned.
       tags:
@@ -683,12 +690,7 @@ paths:
       operationId: RemoveMoetesakFromMoetemappe
       parameters:
         - $ref: "#/components/parameters/Id"
-        - in: path
-          name: moetesakId
-          required: true
-          schema:
-            type: string
-            maxLength: 500
+        - $ref: "#/components/parameters/SubId"
       responses:
         "200":
           description: Successful response.
@@ -725,7 +727,7 @@ paths:
       description: Add a new Bruker.
       tags:
         - Bruker
-      operationId: AddBruker
+      operationId: PostBruker
       requestBody:
         content:
           application/json:
@@ -759,7 +761,7 @@ paths:
       description: Update a single Bruker.
       tags:
         - Bruker
-      operationId: UpdateBruker
+      operationId: PutBruker
       parameters:
         - $ref: "#/components/parameters/Id"
       responses:
@@ -789,7 +791,7 @@ paths:
       description: Get all innsynskrav for a Bruker.
       tags:
         - Bruker
-      operationId: GetInnsynskravListForBruker
+      operationId: GetBrukerInnsynskravList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
@@ -814,7 +816,7 @@ paths:
       description: Add a Innsynskrav to a Bruker.
       tags:
         - Bruker
-      operationId: AddInnsynskravToBruker
+      operationId: PostBrukerInnsynskrav
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -830,7 +832,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{id}/innsynskrav/{innsynskravId}:
+  /bruker/{id}/innsynskrav/{subId}:
     delete:
       description: Delete a Innsynskrav from a Bruker.
       tags:
@@ -838,12 +840,7 @@ paths:
       operationId: DeleteInnsynskravFromBruker
       parameters:
         - $ref: "#/components/parameters/Id"
-        - in: path
-          name: innsynskravId
-          required: true
-          schema:
-            type: string
-            maxLength: 500
+        - $ref: "#/components/parameters/SubId"
       responses:
         "200":
           description: Successful response.
@@ -852,12 +849,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{id}/lagretSok:
+  /bruker/{id}/lagretSoek:
     get:
-      description: Get LagretSok list for a Bruker.
+      description: Get LagretSoek list for a Bruker.
       tags:
         - Bruker
-      operationId: GetLagretSokListForBruker
+      operationId: GetBrukerLagretSoekList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
@@ -882,7 +879,7 @@ paths:
       description: Add a saved search to a Bruker.
       tags:
         - Bruker
-      operationId: AddLagretSokToBruker
+      operationId: PostBrukerLagretSoek
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -898,20 +895,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{id}/lagretSok/{searchId}:
+  /bruker/{id}/lagretSoek/{subId}:
     delete:
-      description: Delete a LagretSok from a Bruker.
+      description: Delete a LagretSoek from a Bruker.
       tags:
         - Bruker
-      operationId: DeleteLagretSokFromBruker
+      operationId: DeleteBrukerLagretSoek
       parameters:
         - $ref: "#/components/parameters/Id"
-        - in: path
-          name: searchId
-          required: true
-          schema:
-            type: string
-            maxLength: 500
+        - $ref: "#/components/parameters/SubId"
       responses:
         "200":
           description: Successful response.
@@ -925,7 +917,7 @@ paths:
       description: Get LagretSak list for a Bruker.
       tags:
         - Bruker
-      operationId: GetLagretSakListForBruker
+      operationId: GetBrukerLagretSakList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
@@ -950,7 +942,7 @@ paths:
       description: Add a saved case to a Bruker.
       tags:
         - Bruker
-      operationId: AddLagretSakToBruker
+      operationId: PostBrukerLagretSak
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -966,20 +958,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{id}/lagretSak/{caseId}:
+  /bruker/{id}/lagretSak/{subId}:
     delete:
       description: Delete a LagretSak from a Bruker.
       tags:
         - Bruker
-      operationId: DeleteLagretSakFromBruker
+      operationId: DeleteBrukerLagretSak
       parameters:
         - $ref: "#/components/parameters/Id"
-        - in: path
-          name: caseId
-          required: true
-          schema:
-            type: string
-            maxLength: 500
+        - $ref: "#/components/parameters/SubId"
       responses:
         "200":
           description: Successful response.
@@ -1044,6 +1031,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
 
+security:
+  - ApiKey: []
+
 components:
   schemas:
     Base:
@@ -1063,10 +1053,14 @@ components:
         deleted:
           type: boolean
           readOnly: true
+        entity:
+          type: string
+          readOnly: true
       required:
         - id
         - created
         - updated
+        - entity
 
     ArkivBase:
       type: object
@@ -1920,29 +1914,8 @@ components:
             query:
               type: string
 
-    SearchQuery:
-      properties:
-        limit:
-          type: integer
-          default: 25
-          minimum: 1
-          maximum: 50
-        query:
-          type: string
-        filter:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              value:
-                type: string
-              matching:
-                type: string
-                enum: ["=", "!=", ">", "<", "~"]
-
     ResultList:
+      x-resourceId: ResultList
       properties:
         next:
           type: string
@@ -1955,6 +1928,14 @@ components:
     Id:
       in: path
       name: id
+      required: true
+      schema:
+        type: string
+        maxLength: 500
+
+    SubId:
+      in: path
+      name: subId
       required: true
       schema:
         type: string
@@ -1983,4 +1964,33 @@ components:
       required: false
       schema:
         type: integer
-      style: form
+
+    Query:
+      description: >-
+        A query string used to filter the result set.
+      in: query
+      name: query
+      required: false
+      schema:
+        type: string
+
+    Filter:
+      description: >-
+        An array of filters used to filter the result set based on 
+        specified fields and values.
+      in: query
+      name: filter
+      required: false
+      style: deepObject
+      schema:
+        type: array
+        items:
+          type: object
+          properties:
+            field:
+              type: string
+            value:
+              type: string
+            matching:
+              type: string
+              enum: ["=", "!=", ">", "<", "~"]
