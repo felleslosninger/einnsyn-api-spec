@@ -1,0 +1,24 @@
+name: Dispatch codegen
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  dispatch:
+    name: Dispatch codegen for ein-api-client-ts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch app installation token
+        uses: tibdex/github-app-token@v2.1.0
+        id: gh-api-token
+        with:
+          app_id: ${{ secrets.DIGDIR_PLATFORM_CI_APP_ID }}
+          private_key: ${{ secrets.DIGDIR_PLATFORM_CI_APP_PRIVATE_KEY }}
+
+      - name: TS Client
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ steps.gh-api-token.outputs.token }}
+          repository: felleslosninger/ein-api-client-ts
+          event-type: codegen
