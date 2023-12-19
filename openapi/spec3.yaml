@@ -1598,6 +1598,7 @@ components:
             journalpost:
               anyOf:
                 - type: string
+                  maxLength: 500
                 - $ref: "#/components/schemas/Journalpost"
           required:
             - korrespondansepartNavn
@@ -1659,20 +1660,24 @@ components:
             email:
               type: string
               format: email
+              maxLength: 500
             password:
               type: string
               writeOnly: true
+              maxLength: 500
             savedSaksmappe:
               type: array
               items:
                 anyOf:
                   - type: string
+                    maxLength: 500
                   - $ref: "#/components/schemas/Saksmappe"
             savedSearches:
               type: array
               items:
                 anyOf:
                   - type: string
+                    maxLength: 500
                   - $ref: "#/components/schemas/LagretSoek"
           required:
             - email
@@ -1692,6 +1697,7 @@ components:
               readOnly: true
             email:
               type: string
+              maxLength: 500
             innsynskravDel:
               type: array
               items:
@@ -1735,10 +1741,12 @@ components:
             innsynskrav:
               anyOf:
                 - type: string
+                  maxLength: 500
                 - $ref: "#/components/schemas/Innsynskrav"
             journalpost:
               anyOf:
                 - type: string
+                  maxLength: 500
                 - $ref: "#/components/schemas/Journalpost"
           required:
             - innsynskrav
@@ -1965,6 +1973,16 @@ components:
       schema:
         type: integer
 
+    SortOrder:
+      description: >-
+        The sort order of the result set. The default is ascending.
+      in: query
+      name: sortOrder
+      required: false
+      schema:
+        type: string
+        enum: ["asc", "desc"]
+
     Query:
       description: >-
         A query string used to filter the result set.
@@ -1973,24 +1991,3 @@ components:
       required: false
       schema:
         type: string
-
-    Filter:
-      description: >-
-        An array of filters used to filter the result set based on 
-        specified fields and values.
-      in: query
-      name: filter
-      required: false
-      style: deepObject
-      schema:
-        type: array
-        items:
-          type: object
-          properties:
-            field:
-              type: string
-            value:
-              type: string
-            matching:
-              type: string
-              enum: ["=", "!=", ">", "<", "~"]
