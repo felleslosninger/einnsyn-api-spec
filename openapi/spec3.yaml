@@ -1042,6 +1042,7 @@ paths:
         - $ref: "#/components/parameters/SortBy"
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/Query"
+        - $ref: "#/components/parameters/Resource"
       responses:
         "200":
           description: Successful response.
@@ -2036,6 +2037,15 @@ components:
         A query string used to filter the result set.
       in: query
       name: query
+      required: false
+      schema:
+        type: string
+
+    Resource:
+      description: >-
+        Filter the source by resource type.
+      in: query
+      name: resource
       required: false
       schema:
         type: string
