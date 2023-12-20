@@ -1034,7 +1034,8 @@ paths:
 
   /search:
     get:
-      description: "Search"
+      description: Search Journalpost, Moetemappe, Moetesak, Saksmappe
+      operationId: Search
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
