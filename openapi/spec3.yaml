@@ -1039,10 +1039,55 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortBy"
         - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/Query"
-        - $ref: "#/components/parameters/Resource"
+        - name: sortBy
+          in: query
+          description: >-
+            The field to sort the result set by. The default is created.
+          required: false
+          schema:
+            type: string
+            enum:
+              [
+                "created",
+                "updated",
+                "offentligTittel",
+                "offentligTittelSensitiv",
+              ]
+        - name: query
+          in: query
+          description: >-
+            A query string used to filter the result set.
+          required: false
+          schema:
+            type: string
+        - name: resource
+          in: query
+          description: >-
+            Filter the source by resource type.
+          required: false
+          schema:
+            type: string
+            enum: ["Journalpost", "Moetemappe", "Moetesak", "Saksmappe"]
+        - name: administrativEnhetId
+          in: query
+          description: >-
+            Filter the source by administrativEnhetId.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: administrativEnhetTransitiveId
+          in: query
+          description: >-
+            Filter the source by administrativeEnhet, including parent units.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+
       responses:
         "200":
           description: Successful response.
@@ -2005,23 +2050,6 @@ components:
       schema:
         type: integer
 
-    SortBy:
-      description: >-
-        The field to sort the result set by. The default is created.
-      in: query
-      name: sortBy
-      required: false
-      schema:
-        type: string
-        enum:
-          [
-            "created",
-            "updated",
-            "offentligTittel",
-            "offentligTittelSensitiv",
-            "administrativEnhetObjekt",
-          ]
-
     SortOrder:
       description: >-
         The sort order of the result set. The default is ascending.
@@ -2031,21 +2059,3 @@ components:
       schema:
         type: string
         enum: ["asc", "desc"]
-
-    Query:
-      description: >-
-        A query string used to filter the result set.
-      in: query
-      name: query
-      required: false
-      schema:
-        type: string
-
-    Resource:
-      description: >-
-        Filter the source by resource type.
-      in: query
-      name: resource
-      required: false
-      schema:
-        type: string
