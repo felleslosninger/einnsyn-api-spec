@@ -1,9 +1,10 @@
 name: Dispatch codegen
 on:
   workflow_dispatch: {}
+  repository_dispatch:
+    types: [codegen]
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   dispatch:
