@@ -24,6 +24,925 @@ tags:
   - name: Skjerming
 
 paths:
+  /arkiv/{id}:
+    get:
+      description: Get a single Arkiv.
+      tags:
+        - Arkiv
+      operationId: GetArkiv
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arkiv"
+    put:
+      description: Update a single Arkiv.
+      tags:
+        - Arkiv
+      operationId: PutArkiv
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arkiv"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arkiv"
+    delete:
+      description: Delete a single Arkiv.
+      tags:
+        - Arkiv
+      operationId: DeleteArkiv
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arkiv"
+
+  /arkivdel/{id}:
+    get:
+      description: Get a single Arkivdel.
+      tags:
+        - Arkivdel
+      operationId: GetArkivdel
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arkivdel"
+    put:
+      description: Update a single Arkivdel.
+      tags:
+        - Arkivdel
+      operationId: PutArkivdel
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arkivdel"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arkivdel"
+    delete:
+      description: Delete a single Arkivdel.
+      tags:
+        - Arkivdel
+      operationId: DeleteArkivdel
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arkivdel"
+
+  /behandlingsprotokoll/{id}:
+    get:
+      description: Get a single Behandlingsprotokoll.
+      tags:
+        - Behandlingsprotokoll
+      operationId: GetBehandlingsprotokoll
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Behandlingsprotokoll"
+    put:
+      description: Update a single Behandlingsprotokoll.
+      tags:
+        - Behandlingsprotokoll
+      operationId: PutBehandlingsprotokoll
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Behandlingsprotokoll"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Behandlingsprotokoll"
+    delete:
+      description: Delete a single Behandlingsprotokoll.
+      tags:
+        - Behandlingsprotokoll
+      operationId: DeleteBehandlingsprotokoll
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Behandlingsprotokoll"
+
+  /dokumentobjekt/{id}:
+    get:
+      description: Get a single Dokumentobjekt.
+      tags:
+        - Dokumentobjekt
+      operationId: GetDokumentobjekt
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dokumentobjekt"
+    put:
+      description: Update a single Dokumentobjekt.
+      tags:
+        - Dokumentobjekt
+      operationId: PutDokumentobjekt
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dokumentobjekt"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dokumentobjekt"
+    delete:
+      description: Delete a single Dokumentobjekt.
+      tags:
+        - Dokumentobjekt
+      operationId: DeleteDokumentobjekt
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dokumentobjekt"
+
+  /identifikator/{id}:
+    get:
+      description: Get a single Identifikator.
+      tags:
+        - Identifikator
+      operationId: GetIdentifikator
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Identifikator"
+    put:
+      description: Update a single Identifikator.
+      tags:
+        - Identifikator
+      operationId: PutIdentifikator
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Identifikator"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Identifikator"
+    delete:
+      description: Delete a single Identifikator.
+      tags:
+        - Identifikator
+      operationId: DeleteIdentifikator
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /innsynskrav:
+    get:
+      description: Get a Innsynskrav list.
+      tags:
+        - Innsynskrav
+      operationId: GetInnsynskravList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Innsynskrav"
+
+  /innsynskrav/{id}/:
+    get:
+      description: Get a Innsynskrav.
+      tags:
+        - Innsynskrav
+      operationId: GetInnsynskrav
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Innsynskrav"
+    put:
+      description: Update a Innsynskrav.
+      tags:
+        - Innsynskrav
+      operationId: PutInnsynskrav
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Innsynskrav"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Innsynskrav"
+    delete:
+      description: Delete a request.
+      tags:
+        - Innsynskrav
+      operationId: DeleteInnsynskrav
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Innsynskrav"
+
+  /innsynskravDel/{id}:
+    get:
+      description: Get a single InnsynskravDel.
+      tags:
+        - InnsynskravDel
+      operationId: GetInnsynskravDel
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InnsynskravDel"
+    put:
+      description: Update a single InnsynskravDel.
+      tags:
+        - InnsynskravDel
+      operationId: PutInnsynskravDel
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InnsynskravDel"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InnsynskravDel"
+    delete:
+      description: Delete a single InnsynskravDel.
+      tags:
+        - InnsynskravDel
+      operationId: DeleteInnsynskravDel
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /klasse/{id}:
+    get:
+      description: Get a single Klasse.
+      tags:
+        - Klasse
+      operationId: GetKlasse
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klasse"
+    put:
+      description: Update a single Klasse.
+      tags:
+        - Klasse
+      operationId: PutKlasse
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Klasse"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klasse"
+    delete:
+      description: Delete a single Klasse.
+      tags:
+        - Klasse
+      operationId: DeleteKlasse
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /korrespondansepart/{id}:
+    get:
+      description: Get a single Korrespondansepart.
+      tags:
+        - Korrespondansepart
+      operationId: GetKorrespondansepart
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Korrespondansepart"
+    put:
+      description: Update a single Korrespondansepart.
+      tags:
+        - Korrespondansepart
+      operationId: PutKorrespondansepart
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Korrespondansepart"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Korrespondansepart"
+    delete:
+      description: Delete a single Korrespondansepart.
+      tags:
+        - Korrespondansepart
+      operationId: DeleteKorrespondansepart
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /lagretSak/{id}:
+    get:
+      description: Get a single LagretSak.
+      tags:
+        - LagretSak
+      operationId: GetLagretSak
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LagretSak"
+    put:
+      description: Update a single LagretSak.
+      tags:
+        - LagretSak
+      operationId: PutLagretSak
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LagretSak"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LagretSak"
+    delete:
+      description: Delete a single LagretSak.
+      tags:
+        - LagretSak
+      operationId: DeleteLagretSak
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /lagretSoek/{id}:
+    get:
+      description: Get a single LagretSoek.
+      tags:
+        - LagretSoek
+      operationId: GetLagretSoek
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LagretSoek"
+    put:
+      description: Update a single LagretSoek.
+      tags:
+        - LagretSoek
+      operationId: PutLagretSoek
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LagretSoek"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LagretSoek"
+    delete:
+      description: Delete a single LagretSoek.
+      tags:
+        - LagretSoek
+      operationId: DeleteLagretSoek
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /moetedeltaker/{id}:
+    get:
+      description: Get a single Moetedeltaker.
+      tags:
+        - Moetedeltaker
+      operationId: GetMoetedeltaker
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetedeltaker"
+    put:
+      description: Update a single Moetedeltaker.
+      tags:
+        - Moetedeltaker
+      operationId: PutMoetedeltaker
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Moetedeltaker"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetedeltaker"
+    delete:
+      description: Delete a single Moetedeltaker.
+      tags:
+        - Moetedeltaker
+      operationId: DeleteMoetedeltaker
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /moetedokument/{id}:
+    get:
+      description: Get a single Moetedokument.
+      tags:
+        - Moetedokument
+      operationId: GetMoetedokument
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetedokument"
+    put:
+      description: Update a single Moetedokument.
+      tags:
+        - Moetedokument
+      operationId: PutMoetedokument
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Moetedokument"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetedokument"
+    delete:
+      description: Delete a single Moetedokument.
+      tags:
+        - Moetedokument
+      operationId: DeleteMoetedokument
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /moetesak/{id}:
+    get:
+      description: Get a single Moetesak.
+      tags:
+        - Moetesak
+      operationId: GetMoetesak
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetesak"
+    put:
+      description: Update a single Moetesak.
+      tags:
+        - Moetesak
+      operationId: PutMoetesak
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Moetesak"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetesak"
+    delete:
+      description: Delete a single Moetesak.
+      tags:
+        - Moetesak
+      operationId: DeleteMoetesak
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /moetesaksbeskrivelse/{id}:
+    get:
+      description: Get a single Moetesaksbeskrivelse.
+      tags:
+        - Moetesaksbeskrivelse
+      operationId: GetMoetesaksbeskrivelse
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetesaksbeskrivelse"
+    put:
+      description: Update a single Moetesaksbeskrivelse.
+      tags:
+        - Moetesaksbeskrivelse
+      operationId: PutMoetesaksbeskrivelse
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Moetesaksbeskrivelse"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetesaksbeskrivelse"
+    delete:
+      description: Delete a single Moetesaksbeskrivelse.
+      tags:
+        - Moetesaksbeskrivelse
+      operationId: DeleteMoetesaksbeskrivelse
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /skjerming/{id}:
+    get:
+      description: Get a single Skjerming.
+      tags:
+        - Skjerming
+      operationId: GetSkjerming
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Skjerming"
+    put:
+      description: Update a single Skjerming.
+      tags:
+        - Skjerming
+      operationId: PutSkjerming
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Skjerming"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Skjerming"
+    delete:
+      description: Delete a single Skjerming.
+      tags:
+        - Skjerming
+      operationId: DeleteSkjerming
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /utredning/{id}:
+    get:
+      description: Get a single Utredning.
+      tags:
+        - Utredning
+      operationId: GetUtredning
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Utredning"
+    put:
+      description: Update a single Utredning.
+      tags:
+        - Utredning
+      operationId: PutUtredning
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Utredning"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Utredning"
+    delete:
+      description: Delete a single Utredning.
+      tags:
+        - Utredning
+      operationId: DeleteUtredning
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /vedtak/{id}:
+    get:
+      description: Get a single Vedtak.
+      tags:
+        - Vedtak
+      operationId: GetVedtak
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vedtak"
+    put:
+      description: Update a single Vedtak.
+      tags:
+        - Vedtak
+      operationId: PutVedtak
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Vedtak"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vedtak"
+    delete:
+      description: Delete a single Vedtak.
+      tags:
+        - Vedtak
+      operationId: DeleteVedtak
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
+  /votering/{id}:
+    get:
+      description: Get a single Votering.
+      tags:
+        - Votering
+      operationId: GetVotering
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Votering"
+    put:
+      description: Update a single Votering.
+      tags:
+        - Votering
+      operationId: PutVotering
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Votering"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Votering"
+    delete:
+      description: Delete a single Votering.
+      tags:
+        - Votering
+      operationId: DeleteVotering
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+
   /enhet:
     get:
       description: Get a Enhet list.
@@ -975,62 +1894,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Bruker"
-
-  /innsynskrav/:
-    get:
-      description: Get a Innsynskrav list.
-      tags:
-        - Innsynskrav
-      operationId: GetInnsynskravList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Innsynskrav"
-
-  /innsynskrav/{id}/:
-    get:
-      description: Get a Innsynskrav.
-      tags:
-        - Innsynskrav
-      operationId: GetInnsynskrav
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Innsynskrav"
-    delete:
-      description: Delete a request.
-      tags:
-        - Innsynskrav
-      operationId: DeleteInnsynskrav
-      parameters:
-        - $ref: "#/components/parameters/Id"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Innsynskrav"
 
   /search:
     get:
@@ -2038,6 +2901,7 @@ components:
           maxLength: 500
           type: string
         type: array
+        default: []
       style: deepObject
 
     Limit:
