@@ -269,6 +269,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Identifikator"
 
   /innsynskrav:
     get:
@@ -390,6 +394,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InnsynskravDel"
 
   /klasse/{id}:
     get:
@@ -436,6 +444,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klasse"
 
   /korrespondansepart/{id}:
     get:
@@ -482,6 +494,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Korrespondansepart"
 
   /lagretSak/{id}:
     get:
@@ -528,6 +544,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LagretSak"
 
   /lagretSoek/{id}:
     get:
@@ -574,6 +594,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LagretSoek"
 
   /moetedeltaker/{id}:
     get:
@@ -620,6 +644,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetedeltaker"
 
   /moetedokument/{id}:
     get:
@@ -666,6 +694,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetedokument"
 
   /moetesak/{id}:
     get:
@@ -712,6 +744,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetesak"
 
   /moetesaksbeskrivelse/{id}:
     get:
@@ -758,6 +794,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetesaksbeskrivelse"
 
   /skjerming/{id}:
     get:
@@ -804,6 +844,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Skjerming"
 
   /utredning/{id}:
     get:
@@ -850,6 +894,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Utredning"
 
   /vedtak/{id}:
     get:
@@ -896,6 +944,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vedtak"
 
   /votering/{id}:
     get:
@@ -942,6 +994,10 @@ paths:
       responses:
         "200":
           description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Votering"
 
   /enhet:
     get:
