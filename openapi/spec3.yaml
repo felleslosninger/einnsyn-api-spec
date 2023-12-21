@@ -1813,7 +1813,7 @@ paths:
       description: Delete a Innsynskrav from a Bruker.
       tags:
         - Bruker
-      operationId: DeleteInnsynskravFromBruker
+      operationId: DeleteBrukerInnsynskrav
       parameters:
         - $ref: "#/components/parameters/Id"
         - $ref: "#/components/parameters/SubId"
@@ -1956,7 +1956,7 @@ paths:
       description: Activate a Bruker.
       tags:
         - Bruker
-      operationId: PostBrukerActivate
+      operationId: Activate
       parameters:
         - $ref: "#/components/parameters/Id"
         - in: path
@@ -2035,7 +2035,7 @@ paths:
       description: Request password reset for a Bruker.
       tags:
         - Bruker
-      operationId: PostBrukerPasswordReset
+      operationId: RequestPasswordReset
       parameters:
         - $ref: "#/components/parameters/Id"
       responses:
