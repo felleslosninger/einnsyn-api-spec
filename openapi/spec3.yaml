@@ -1956,7 +1956,7 @@ paths:
       description: Activate a Bruker.
       tags:
         - Bruker
-      operationId: ActivateBruker
+      operationId: PostBrukerActivate
       parameters:
         - $ref: "#/components/parameters/Id"
         - in: path
@@ -1977,7 +1977,7 @@ paths:
       description: Update password for a Bruker.
       tags:
         - Bruker
-      operationId: UpdatePasswordBruker
+      operationId: PutBrukerPassword
       parameters:
         - $ref: "#/components/parameters/Id"
       requestBody:
@@ -2005,7 +2005,7 @@ paths:
       description: Update password for a Bruker.
       tags:
         - Bruker
-      operationId: UpdatePasswordWithSecretBruker
+      operationId: PutBrukerPasswordWithSecret
       parameters:
         - $ref: "#/components/parameters/Id"
         - in: path
@@ -2035,7 +2035,7 @@ paths:
       description: Request password reset for a Bruker.
       tags:
         - Bruker
-      operationId: RequestPasswordResetBruker
+      operationId: PostBrukerPasswordReset
       parameters:
         - $ref: "#/components/parameters/Id"
       responses:
