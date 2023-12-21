@@ -1951,6 +1951,101 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
+  /bruker/{id}/activate/{secret}:
+    post:
+      description: Activate a Bruker.
+      tags:
+        - Bruker
+      operationId: ActivateBruker
+      parameters:
+        - $ref: "#/components/parameters/Id"
+        - in: path
+          name: secret
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bruker"
+
+  /bruker/{id}/updatePassword:
+    put:
+      description: Update password for a Bruker.
+      tags:
+        - Bruker
+      operationId: UpdatePasswordBruker
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oldPassword:
+                  type: string
+                  format: password
+                newPassword:
+                  type: string
+                  format: password
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bruker"
+
+  /bruker/{id}/updatePassword/{secret}:
+    put:
+      description: Update password for a Bruker.
+      tags:
+        - Bruker
+      operationId: UpdatePasswordWithSecretBruker
+      parameters:
+        - $ref: "#/components/parameters/Id"
+        - in: path
+          name: secret
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newPassword:
+                  type: string
+                  format: password
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bruker"
+
+  /bruker/{id}/requestPasswordReset:
+    post:
+      description: Request password reset for a Bruker.
+      tags:
+        - Bruker
+      operationId: RequestPasswordResetBruker
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bruker"
+
   /search:
     get:
       description: Search Journalpost, Moetemappe, Moetesak, Saksmappe
