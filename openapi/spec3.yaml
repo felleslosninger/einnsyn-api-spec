@@ -2681,7 +2681,7 @@ components:
             korrespondansepartNavnSensitiv:
               type: string
               maxLength: 500
-            korrespondansepartType:
+            korrespondanseparttype:
               type: string
               maxLength: 500
             journalpost:
