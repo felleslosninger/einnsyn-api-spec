@@ -2692,7 +2692,7 @@ components:
           required:
             - korrespondansepartNavn
             - korrespondansepartNavnSensitiv
-            - korrespondansepartType
+            - korrespondanseparttype
             - journalpost
           x-expandableFields:
             - journalpost
