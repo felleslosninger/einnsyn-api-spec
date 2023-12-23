@@ -2363,7 +2363,6 @@ components:
           required:
             - saksaar
             - sakssekvensnummer
-            - saksdato
           x-expandableFields:
             - journalpost
             - administrativEnhetObjekt
