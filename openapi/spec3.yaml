@@ -2129,6 +2129,7 @@ components:
   schemas:
     Base:
       type: object
+      x-resourceId: Base
       properties:
         id:
           type: string
@@ -2155,6 +2156,7 @@ components:
 
     ArkivBase:
       type: object
+      x-resourceId: ArkivBase
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
@@ -2173,8 +2175,8 @@ components:
             - journalenhet
 
     Arkiv:
-      x-resourceId: Arkiv
       type: object
+      x-resourceId: Arkiv
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - properties:
@@ -2185,8 +2187,8 @@ components:
             - tittel
 
     Arkivdel:
-      x-resourceId: Arkivdel
       type: object
+      x-resourceId: Arkivdel
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - properties:
@@ -2201,6 +2203,7 @@ components:
             - tittel
 
     Klasse:
+      type: object
       x-resourceId: Klasse
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2217,6 +2220,8 @@ components:
             - tittel
 
     Registrering:
+      type: object
+      x-resourceId: Registrering
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -2258,6 +2263,7 @@ components:
             - dokumentbeskrivelse
 
     Journalpost:
+      type: object
       x-resourceId: Journalpost
       allOf:
         - $ref: "#/components/schemas/Registrering"
@@ -2296,6 +2302,8 @@ components:
             - saksmappe
 
     Mappe:
+      type: object
+      x-resourceId: Mappe
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -2327,6 +2335,7 @@ components:
             - parent
 
     Saksmappe:
+      type: object
       x-resourceId: Saksmappe
       allOf:
         - $ref: "#/components/schemas/Mappe"
@@ -2367,6 +2376,7 @@ components:
             - administrativEnhetObjekt
 
     Moetemappe:
+      type: object
       x-resourceId: Moetemappe
       allOf:
         - $ref: "#/components/schemas/Mappe"
@@ -2433,6 +2443,7 @@ components:
             - moetesak
 
     Moetesak:
+      type: object
       x-resourceId: Moetesak
       allOf:
         - $ref: "#/components/schemas/Registrering"
@@ -2492,6 +2503,7 @@ components:
             - moetemappe
 
     Utredning:
+      type: object
       x-resourceId: Utredning
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2527,6 +2539,7 @@ components:
             - utredningsdokumenter
 
     Vedtak:
+      type: object
       x-resourceId: Vedtak
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2574,6 +2587,7 @@ components:
             - vedtaksdokumenter
 
     Votering:
+      type: object
       x-resourceId: Votering
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2607,6 +2621,7 @@ components:
             - representerer
 
     Moetesaksbeskrivelse:
+      type: object
       x-resourceId: Moetesaksbeskrivelse
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2627,6 +2642,7 @@ components:
             - tekstFormat
 
     Behandlingsprotokoll:
+      type: object
       x-resourceId: Behandlingsprotokoll
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2647,6 +2663,7 @@ components:
             - tekstFormat
 
     Moetedeltaker:
+      type: object
       x-resourceId: Moetedeltaker
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2666,6 +2683,7 @@ components:
             - moetedeltakerNavn
 
     Korrespondansepart:
+      type: object
       x-resourceId: Korrespondansepart
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2698,6 +2716,7 @@ components:
             - journalpost
 
     Skjerming:
+      type: object
       x-resourceId: Skjerming
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2716,6 +2735,7 @@ components:
             - tilgangsrestriksjon
 
     Identifikator:
+      type: object
       x-resourceId: Identifikator
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
@@ -2738,6 +2758,7 @@ components:
               maxLength: 500
 
     Bruker:
+      type: object
       x-resourceId: Bruker
       allOf:
         - $ref: "#/components/schemas/Base"
@@ -2776,6 +2797,7 @@ components:
             - savedSearches
 
     Innsynskrav:
+      type: object
       x-resourceId: Innsynskrav
       allOf:
         - $ref: "#/components/schemas/Base"
@@ -2819,6 +2841,7 @@ components:
             - innsynskravDel
 
     InnsynskravDel:
+      type: object
       x-resourceId: InnsynskravDel
       allOf:
         - $ref: "#/components/schemas/Base"
@@ -2845,6 +2868,7 @@ components:
             - journalpost
 
     Enhet:
+      type: object
       x-resourceId: Enhet
       allOf:
         - $ref: "#/components/schemas/Base"
@@ -2927,6 +2951,7 @@ components:
             - parent
 
     Dokumentbeskrivelse:
+      type: object
       x-resourceId: Dokumentbeskrivelse
       allOf:
         - $ref: "#/components/schemas/Base"
@@ -2953,6 +2978,7 @@ components:
             - tilknyttetRegistreringSom
 
     Dokumentobjekt:
+      type: object
       x-resourceId: Dokumentobjekt
       allOf:
         - $ref: "#/components/schemas/Base"
@@ -2976,6 +3002,7 @@ components:
             - sjekksumAlgoritme
 
     Moetedokument:
+      type: object
       x-resourceId: Moetedokument
       allOf:
         - $ref: "#/components/schemas/Registrering"
@@ -2988,6 +3015,7 @@ components:
               type: string
 
     LagretSoek:
+      type: object
       x-resourceId: LagretSoek
       allOf:
         - $ref: "#/components/schemas/Base"
@@ -3000,6 +3028,7 @@ components:
               type: string
 
     LagretSak:
+      type: object
       x-resourceId: LagretSak
       allOf:
         - $ref: "#/components/schemas/Base"
@@ -3012,6 +3041,7 @@ components:
               type: string
 
     ResultList:
+      type: object
       x-resourceId: ResultList
       properties:
         next:
