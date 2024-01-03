@@ -24,3 +24,10 @@ jobs:
           token: ${{ steps.gh-api-token.outputs.token }}
           repository: felleslosninger/ein-api-client-ts
           event-type: codegen
+
+      - name: Backend
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ steps.gh-api-token.outputs.token }}
+          repository: felleslosninger/ein-api-experimental
+          event-type: codegen
