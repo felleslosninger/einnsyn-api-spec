@@ -2771,30 +2771,57 @@ components:
               type: string
               format: email
               maxLength: 500
-            password:
+            active:
+              type: boolean
+              default: false
+              readOnly: true
+            language:
               type: string
-              writeOnly: true
-              maxLength: 500
+              default: nb
+              enum:
+                - nb
+                - nn
+                - en
+                - se
             savedSaksmappe:
               type: array
+              readOnly: true
               items:
                 anyOf:
                   - type: string
                     maxLength: 500
                   - $ref: "#/components/schemas/Saksmappe"
-            savedSearches:
+            savedSearch:
               type: array
+              readOnly: true
               items:
                 anyOf:
                   - type: string
                     maxLength: 500
                   - $ref: "#/components/schemas/LagretSoek"
+            innsynskrav:
+              type: array
+              readOnly: true
+              items:
+                anyOf:
+                  - type: string
+                    maxLength: 500
+                  - $ref: "#/components/schemas/Innsynskrav"
+            innsynskravDel:
+              type: array
+              readOnly: true
+              items:
+                anyOf:
+                  - type: string
+                    maxLength: 500
+                  - $ref: "#/components/schemas/InnsynskravDel"
           required:
             - email
-            - password
           x-expandableFields:
             - savedSaksmappe
-            - savedSearches
+            - savedSearch
+            - innsynskrav
+            - innsynskravDel
 
     Innsynskrav:
       type: object
@@ -2970,6 +2997,11 @@ components:
               type: integer
             tilknyttetRegistreringSom:
               type: string
+            dokumentobjekt:
+              anyOf:
+                - type: string
+                  maxLength: 500
+                - $ref: "#/components/schemas/Dokumentobjekt"
           required:
             - tittel
             - tittelSensitiv
