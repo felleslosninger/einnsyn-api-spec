@@ -283,6 +283,10 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1009,6 +1013,9 @@ paths:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1093,9 +1100,13 @@ paths:
         - Enhet
       operationId: GetUnderenhetList
       parameters:
-        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
+        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1157,6 +1168,10 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1322,6 +1337,10 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1406,9 +1425,13 @@ paths:
         - Saksmappe
       operationId: GetSaksmappeJournalpostList
       parameters:
-        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
+        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1442,7 +1465,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Saksmappe"
+                $ref: "#/components/schemas/Journalpost"
 
   /saksmappe/{id}/journalpost/{subId}:
     delete:
@@ -1470,6 +1493,10 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1559,9 +1586,13 @@ paths:
         - Moetemappe
       operationId: GetMoetedokumentList
       parameters:
-        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
+        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1595,7 +1626,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Moetemappe"
+                $ref: "#/components/schemas/Moetedokument"
 
   /moetemappe/{id}/moetedokument/{subId}:
     delete:
@@ -1622,9 +1653,13 @@ paths:
         - Moetemappe
       operationId: GetMoetemappeMoetesakList
       parameters:
-        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
+        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1657,7 +1692,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Moetemappe"
+                $ref: "#/components/schemas/Moetesak"
 
   /moetemappe/{id}/moetesak/{subId}:
     delete:
@@ -1685,6 +1720,10 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1770,9 +1809,13 @@ paths:
         - Bruker
       operationId: GetBrukerInnsynskravList
       parameters:
-        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
+        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1807,7 +1850,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Bruker"
+                $ref: "#/components/schemas/Innsynskrav"
 
   /bruker/{id}/innsynskrav/{subId}:
     delete:
@@ -1833,9 +1876,13 @@ paths:
         - Bruker
       operationId: GetBrukerLagretSoekList
       parameters:
-        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
+        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1870,7 +1917,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Bruker"
+                $ref: "#/components/schemas/LagretSoek"
 
   /bruker/{id}/lagretSoek/{subId}:
     delete:
@@ -1896,9 +1943,13 @@ paths:
         - Bruker
       operationId: GetBrukerLagretSakList
       parameters:
-        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Id"
+        - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1933,7 +1984,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Bruker"
+                $ref: "#/components/schemas/LagretSak"
 
   /bruker/{id}/lagretSak/{subId}:
     delete:
@@ -3086,6 +3137,30 @@ components:
           type: string
           readOnly: true
 
+    ListQueryParameters:
+      type: object
+      x-resourceId: ListQueryParameters
+      properties:
+        expand:
+          $ref: "#/components/parameters/Expand"
+        limit:
+          $ref: "#/components/parameters/Limit"
+        sortOrder:
+          $ref: "#/components/parameters/SortOrder"
+        startingAfter:
+          $ref: "#/components/parameters/StartingAfter"
+        endingBefore:
+          $ref: "#/components/parameters/EndingBefore"
+        ids:
+          $ref: "#/components/parameters/Ids"
+
+    SingleQueryParameters:
+      type: object
+      x-resourceId: GetQueryParameters
+      properties:
+        expand:
+          $ref: "#/components/parameters/Expand"
+
   parameters:
     Id:
       in: path
@@ -3135,3 +3210,31 @@ components:
       schema:
         type: string
         enum: ["asc", "desc"]
+
+    StartingAfter:
+      description: >-
+        A cursor for use in pagination. StartingAfter is a resource ID that
+        defines your place in the list.
+      in: query
+      name: startingAfter
+      schema:
+        type: string
+
+    EndingBefore:
+      description: >-
+        A cursor for use in pagination. EndingBefore is a resource ID that
+        defines your place in the list.
+      in: query
+      name: endingBefore
+      schema:
+        type: string
+
+    Ids:
+      description: >-
+        A list of resource IDs to return.
+      in: query
+      name: ids
+      schema:
+        type: array
+        items:
+          type: string
