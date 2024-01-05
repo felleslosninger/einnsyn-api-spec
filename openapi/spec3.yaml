@@ -1290,7 +1290,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Dokumentbeskrivelse"
 
-  /dokumentbeskrivelse/{id}/download/{id}.{docExtension}:
+  /dokumentbeskrivelse/{id}/download/{subId}.{docExtension}:
     get:
       description: Download the binary file.
       tags:
@@ -1298,6 +1298,7 @@ paths:
       operationId: DownloadDokumentbeskrivelse
       parameters:
         - $ref: "#/components/parameters/Id"
+        - $ref: "#/components/parameters/SubId"
         - in: path
           name: docExtension
           required: true
