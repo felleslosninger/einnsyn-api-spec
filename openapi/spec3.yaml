@@ -3133,29 +3133,31 @@ components:
           type: string
           readOnly: true
 
-    ListQueryParameters:
-      type: object
-      x-resourceId: ListQueryParameters
-      properties:
-        expand:
-          $ref: "#/components/parameters/Expand"
-        limit:
-          $ref: "#/components/parameters/Limit"
-        sortOrder:
-          $ref: "#/components/parameters/SortOrder"
-        startingAfter:
-          $ref: "#/components/parameters/StartingAfter"
-        endingBefore:
-          $ref: "#/components/parameters/EndingBefore"
-        ids:
-          $ref: "#/components/parameters/Ids"
-
     QueryParameters:
       type: object
       x-resourceId: GetQueryParameters
       properties:
         expand:
           $ref: "#/components/parameters/Expand"
+
+    ListQueryParameters:
+      type: object
+      x-resourceId: ListQueryParameters
+      allOf:
+        - $ref: "#/components/schemas/QueryParameters"
+        - properties:
+            expand:
+              $ref: "#/components/parameters/Expand"
+            limit:
+              $ref: "#/components/parameters/Limit"
+            sortOrder:
+              $ref: "#/components/parameters/SortOrder"
+            startingAfter:
+              $ref: "#/components/parameters/StartingAfter"
+            endingBefore:
+              $ref: "#/components/parameters/EndingBefore"
+            ids:
+              $ref: "#/components/parameters/Ids"
 
   parameters:
     Id:
