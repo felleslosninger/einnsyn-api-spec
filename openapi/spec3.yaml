@@ -2162,12 +2162,10 @@ components:
         - properties:
             systemId:
               type: string
-              maxLength: 500
             journalenhet:
               readOnly: true
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Enhet"
           required:
             - journalenhet
@@ -2280,11 +2278,12 @@ components:
               type: integer
             journalposttype:
               type: string
-              maxLength: 500
             journaldato:
               type: string
               format: date
-              maxLength: 500
+            dokumentetsDato:
+              type: string
+              format: date
             sorteringstype:
               type: string
               readOnly: true
@@ -2835,6 +2834,7 @@ components:
               readOnly: true
             email:
               type: string
+              format: email
               maxLength: 500
             innsynskravDel:
               type: array
@@ -2934,6 +2934,7 @@ components:
               maxLength: 500
             innsynskravEpost:
               type: string
+              format: email
               maxLength: 500
             enhetstype:
               type: string
@@ -2981,7 +2982,7 @@ components:
       type: object
       x-resourceId: Dokumentbeskrivelse
       allOf:
-        - $ref: "#/components/schemas/Base"
+        - $ref: "#/components/schemas/ArkivBase"
         - properties:
             entity:
               type: string
@@ -3013,7 +3014,7 @@ components:
       type: object
       x-resourceId: Dokumentobjekt
       allOf:
-        - $ref: "#/components/schemas/Base"
+        - $ref: "#/components/schemas/ArkivBase"
         - properties:
             entity:
               type: string
@@ -3021,6 +3022,7 @@ components:
               readOnly: true
             referanseDokumentfil:
               type: string
+              format: url
             format:
               type: string
             sjekksum:
@@ -3090,7 +3092,6 @@ components:
       required: true
       schema:
         type: string
-        maxLength: 500
 
     SubId:
       in: path
@@ -3098,7 +3099,6 @@ components:
       required: true
       schema:
         type: string
-        maxLength: 500
 
     Expand:
       description: >-
