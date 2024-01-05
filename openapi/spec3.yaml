@@ -2782,7 +2782,7 @@ components:
                 - nn
                 - en
                 - se
-            savedSaksmappe:
+            lagretSak:
               type: array
               readOnly: true
               items:
@@ -2790,7 +2790,7 @@ components:
                   - type: string
                     maxLength: 500
                   - $ref: "#/components/schemas/Saksmappe"
-            savedSearch:
+            lagretSoek:
               type: array
               readOnly: true
               items:
