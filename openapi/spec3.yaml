@@ -2840,7 +2840,6 @@ components:
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Saksmappe"
             lagretSoek:
               type: array
@@ -2848,7 +2847,6 @@ components:
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/LagretSoek"
             innsynskrav:
               type: array
@@ -2856,7 +2854,6 @@ components:
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Innsynskrav"
             innsynskravDel:
               type: array
@@ -2864,13 +2861,12 @@ components:
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/InnsynskravDel"
           required:
             - email
           x-expandableFields:
-            - savedSaksmappe
-            - savedSearch
+            - lagretSak
+            - lagretSoek
             - innsynskrav
             - innsynskravDel
 
@@ -3154,7 +3150,7 @@ components:
         ids:
           $ref: "#/components/parameters/Ids"
 
-    SingleQueryParameters:
+    QueryParameters:
       type: object
       x-resourceId: GetQueryParameters
       properties:
