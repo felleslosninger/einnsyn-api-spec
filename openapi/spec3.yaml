@@ -2684,10 +2684,8 @@ components:
               readOnly: true
             tekstInnhold:
               type: string
-              maxLength: 500
             tekstFormat:
               type: string
-              maxLength: 500
           required:
             - tekstInnhold
             - tekstFormat
@@ -2705,13 +2703,14 @@ components:
               readOnly: true
             tekstInnhold:
               type: string
-              maxLength: 500
             tekstFormat:
               type: string
-              maxLength: 500
+            test:
+              type: number
           required:
             - tekstInnhold
             - tekstFormat
+            - test
 
     Moetedeltaker:
       type: object
@@ -2726,10 +2725,8 @@ components:
               readOnly: true
             moetedeltakerNavn:
               type: string
-              maxLength: 500
             moetedeltakerFunksjon:
               type: string
-              maxLength: 500
           required:
             - moetedeltakerNavn
 
@@ -2746,17 +2743,13 @@ components:
               readOnly: true
             korrespondansepartNavn:
               type: string
-              maxLength: 500
             korrespondansepartNavnSensitiv:
               type: string
-              maxLength: 500
             korrespondanseparttype:
               type: string
-              maxLength: 500
             journalpost:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Journalpost"
           required:
             - korrespondansepartNavn
@@ -3121,6 +3114,11 @@ components:
               readOnly: true
             query:
               type: string
+            foo:
+              type: object
+              properties:
+                bar:
+                  type: string
 
     ResultList:
       type: object
@@ -3138,7 +3136,7 @@ components:
       x-resourceId: GetQueryParameters
       properties:
         expand:
-          $ref: "#/components/parameters/Expand"
+          $ref: "#/components/parameters/Expand/schema"
 
     ListQueryParameters:
       type: object
@@ -3147,17 +3145,17 @@ components:
         - $ref: "#/components/schemas/QueryParameters"
         - properties:
             expand:
-              $ref: "#/components/parameters/Expand"
+              $ref: "#/components/parameters/Expand/schema"
             limit:
-              $ref: "#/components/parameters/Limit"
+              $ref: "#/components/parameters/Limit/schema"
             sortOrder:
-              $ref: "#/components/parameters/SortOrder"
+              $ref: "#/components/parameters/SortOrder/schema"
             startingAfter:
-              $ref: "#/components/parameters/StartingAfter"
+              $ref: "#/components/parameters/StartingAfter/schema"
             endingBefore:
-              $ref: "#/components/parameters/EndingBefore"
+              $ref: "#/components/parameters/EndingBefore/schema"
             ids:
-              $ref: "#/components/parameters/Ids"
+              $ref: "#/components/parameters/Ids/schema"
 
   parameters:
     Id:
