@@ -32,7 +32,12 @@ paths:
       operationId: GetArkiv
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
       responses:
         "200":
           description: Successful response.
@@ -46,7 +51,12 @@ paths:
         - Arkiv
       operationId: PutArkiv
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
       requestBody:
         content:
           application/json:
@@ -65,7 +75,12 @@ paths:
         - Arkiv
       operationId: DeleteArkiv
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
       responses:
         "200":
           description: Successful response.
@@ -82,7 +97,12 @@ paths:
       operationId: GetArkivdel
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
       responses:
         "200":
           description: Successful response.
@@ -96,7 +116,12 @@ paths:
         - Arkivdel
       operationId: PutArkivdel
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
       requestBody:
         content:
           application/json:
@@ -115,7 +140,12 @@ paths:
         - Arkivdel
       operationId: DeleteArkivdel
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
       responses:
         "200":
           description: Successful response.
@@ -132,7 +162,12 @@ paths:
       operationId: GetBehandlingsprotokoll
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Behandlingsprotokoll
       responses:
         "200":
           description: Successful response.
@@ -146,7 +181,12 @@ paths:
         - Behandlingsprotokoll
       operationId: PutBehandlingsprotokoll
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Behandlingsprotokoll
       requestBody:
         content:
           application/json:
@@ -165,7 +205,12 @@ paths:
         - Behandlingsprotokoll
       operationId: DeleteBehandlingsprotokoll
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Behandlingsprotokoll
       responses:
         "200":
           description: Successful response.
@@ -182,7 +227,12 @@ paths:
       operationId: GetDokumentobjekt
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Dokumentobjekt
       responses:
         "200":
           description: Successful response.
@@ -196,7 +246,12 @@ paths:
         - Dokumentobjekt
       operationId: PutDokumentobjekt
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Dokumentobjekt
       requestBody:
         content:
           application/json:
@@ -215,7 +270,12 @@ paths:
         - Dokumentobjekt
       operationId: DeleteDokumentobjekt
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Dokumentobjekt
       responses:
         "200":
           description: Successful response.
@@ -232,7 +292,12 @@ paths:
       operationId: GetIdentifikator
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Identifikator
       responses:
         "200":
           description: Successful response.
@@ -246,7 +311,12 @@ paths:
         - Identifikator
       operationId: PutIdentifikator
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Identifikator
       requestBody:
         content:
           application/json:
@@ -265,7 +335,12 @@ paths:
         - Identifikator
       operationId: DeleteIdentifikator
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Identifikator
       responses:
         "200":
           description: Successful response.
@@ -287,6 +362,11 @@ paths:
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
         - $ref: "#/components/parameters/Ids"
+        - name: bruker
+          in: query
+          description: Filter by BrukerId
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -302,8 +382,25 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Innsynskrav"
+    post:
+      description: Create a Innsynskrav.
+      tags:
+        - Innsynskrav
+      operationId: PostInnsynskrav
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Innsynskrav"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Innsynskrav"
 
-  /innsynskrav/{id}/:
+  /innsynskrav/{id}:
     get:
       description: Get a Innsynskrav.
       tags:
@@ -311,7 +408,12 @@ paths:
       operationId: GetInnsynskrav
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Innsynskrav
       responses:
         "200":
           description: Successful response.
@@ -325,7 +427,12 @@ paths:
         - Innsynskrav
       operationId: PutInnsynskrav
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Innsynskrav
       requestBody:
         content:
           application/json:
@@ -344,7 +451,38 @@ paths:
         - Innsynskrav
       operationId: DeleteInnsynskrav
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Innsynskrav
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Innsynskrav"
+
+  /innsynskrav/{id}/verify/{secret}:
+    put:
+      description: Verify a Innsynskrav.
+      tags:
+        - Innsynskrav
+      operationId: VerifyInnsynskrav
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Innsynskrav
+        - name: secret
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -361,7 +499,12 @@ paths:
       operationId: GetInnsynskravDel
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: InnsynskravDel
       responses:
         "200":
           description: Successful response.
@@ -375,7 +518,12 @@ paths:
         - InnsynskravDel
       operationId: PutInnsynskravDel
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: InnsynskravDel
       requestBody:
         content:
           application/json:
@@ -394,7 +542,12 @@ paths:
         - InnsynskravDel
       operationId: DeleteInnsynskravDel
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: InnsynskravDel
       responses:
         "200":
           description: Successful response.
@@ -411,7 +564,12 @@ paths:
       operationId: GetKlasse
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klasse
       responses:
         "200":
           description: Successful response.
@@ -425,7 +583,12 @@ paths:
         - Klasse
       operationId: PutKlasse
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klasse
       requestBody:
         content:
           application/json:
@@ -444,7 +607,12 @@ paths:
         - Klasse
       operationId: DeleteKlasse
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klasse
       responses:
         "200":
           description: Successful response.
@@ -452,6 +620,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Klasse"
+
+  /korrespondansepart:
+    get:
+      description: Get a Korrespondansepart list.
+      tags:
+        - Korrespondansepart
+      operationId: GetKorrespondansepartList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
+        - name: journalpost
+          in: query
+          description: Filter by Journalpost
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Korrespondansepart"
 
   /korrespondansepart/{id}:
     get:
@@ -461,7 +663,12 @@ paths:
       operationId: GetKorrespondansepart
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Korrespondansepart
       responses:
         "200":
           description: Successful response.
@@ -475,7 +682,12 @@ paths:
         - Korrespondansepart
       operationId: PutKorrespondansepart
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Korrespondansepart
       requestBody:
         content:
           application/json:
@@ -494,7 +706,12 @@ paths:
         - Korrespondansepart
       operationId: DeleteKorrespondansepart
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Korrespondansepart
       responses:
         "200":
           description: Successful response.
@@ -502,6 +719,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Korrespondansepart"
+
+  /lagretSak:
+    get:
+      description: Get a LagretSak list.
+      tags:
+        - LagretSak
+      operationId: GetLagretSakList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
+        - name: bruker
+          in: query
+          description: Filter by BrukerId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/LagretSak"
 
   /lagretSak/{id}:
     get:
@@ -511,7 +762,12 @@ paths:
       operationId: GetLagretSak
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: LagretSak
       responses:
         "200":
           description: Successful response.
@@ -525,7 +781,12 @@ paths:
         - LagretSak
       operationId: PutLagretSak
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: LagretSak
       requestBody:
         content:
           application/json:
@@ -544,7 +805,12 @@ paths:
         - LagretSak
       operationId: DeleteLagretSak
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: LagretSak
       responses:
         "200":
           description: Successful response.
@@ -552,6 +818,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LagretSak"
+
+  /lagretSoek:
+    get:
+      description: Get a LagretSoek list.
+      tags:
+        - LagretSoek
+      operationId: GetLagretSoekList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
+        - name: bruker
+          in: query
+          description: Filter by BrukerId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/LagretSoek"
 
   /lagretSoek/{id}:
     get:
@@ -561,7 +861,12 @@ paths:
       operationId: GetLagretSoek
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: LagretSoek
       responses:
         "200":
           description: Successful response.
@@ -575,7 +880,12 @@ paths:
         - LagretSoek
       operationId: PutLagretSoek
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: LagretSoek
       requestBody:
         content:
           application/json:
@@ -594,7 +904,12 @@ paths:
         - LagretSoek
       operationId: DeleteLagretSoek
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: LagretSoek
       responses:
         "200":
           description: Successful response.
@@ -611,7 +926,12 @@ paths:
       operationId: GetMoetedeltaker
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetedeltaker
       responses:
         "200":
           description: Successful response.
@@ -625,7 +945,12 @@ paths:
         - Moetedeltaker
       operationId: PutMoetedeltaker
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetedeltaker
       requestBody:
         content:
           application/json:
@@ -644,7 +969,12 @@ paths:
         - Moetedeltaker
       operationId: DeleteMoetedeltaker
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetedeltaker
       responses:
         "200":
           description: Successful response.
@@ -652,6 +982,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetedeltaker"
+
+  /moetedokument:
+    get:
+      description: Get a Moetedokument list.
+      tags:
+        - Moetemappe
+      operationId: GetMoetedokumentList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
+        - name: moetemappe
+          in: query
+          description: Filter by MoetemappeId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetedokument"
 
   /moetedokument/{id}:
     get:
@@ -661,7 +1025,12 @@ paths:
       operationId: GetMoetedokument
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetedokument
       responses:
         "200":
           description: Successful response.
@@ -675,7 +1044,12 @@ paths:
         - Moetedokument
       operationId: PutMoetedokument
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetedokument
       requestBody:
         content:
           application/json:
@@ -694,7 +1068,12 @@ paths:
         - Moetedokument
       operationId: DeleteMoetedokument
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetedokument
       responses:
         "200":
           description: Successful response.
@@ -702,6 +1081,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetedokument"
+
+  /moetesak:
+    get:
+      description: Get a Moetesak list.
+      tags:
+        - Moetemappe
+      operationId: GetMoetesakList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
+        - name: moetemappe
+          in: query
+          description: Filter by MoetemappeId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetesak"
 
   /moetesak/{id}:
     get:
@@ -711,7 +1124,12 @@ paths:
       operationId: GetMoetesak
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetesak
       responses:
         "200":
           description: Successful response.
@@ -725,7 +1143,12 @@ paths:
         - Moetesak
       operationId: PutMoetesak
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetesak
       requestBody:
         content:
           application/json:
@@ -744,7 +1167,12 @@ paths:
         - Moetesak
       operationId: DeleteMoetesak
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetesak
       responses:
         "200":
           description: Successful response.
@@ -761,7 +1189,12 @@ paths:
       operationId: GetMoetesaksbeskrivelse
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetesaksbeskrivelse
       responses:
         "200":
           description: Successful response.
@@ -775,7 +1208,12 @@ paths:
         - Moetesaksbeskrivelse
       operationId: PutMoetesaksbeskrivelse
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetesaksbeskrivelse
       requestBody:
         content:
           application/json:
@@ -794,7 +1232,12 @@ paths:
         - Moetesaksbeskrivelse
       operationId: DeleteMoetesaksbeskrivelse
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetesaksbeskrivelse
       responses:
         "200":
           description: Successful response.
@@ -811,7 +1254,12 @@ paths:
       operationId: GetSkjerming
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Skjerming
       responses:
         "200":
           description: Successful response.
@@ -825,7 +1273,12 @@ paths:
         - Skjerming
       operationId: PutSkjerming
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Skjerming
       requestBody:
         content:
           application/json:
@@ -844,7 +1297,12 @@ paths:
         - Skjerming
       operationId: DeleteSkjerming
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Skjerming
       responses:
         "200":
           description: Successful response.
@@ -861,7 +1319,12 @@ paths:
       operationId: GetUtredning
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Utredning
       responses:
         "200":
           description: Successful response.
@@ -875,7 +1338,12 @@ paths:
         - Utredning
       operationId: PutUtredning
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Utredning
       requestBody:
         content:
           application/json:
@@ -894,7 +1362,12 @@ paths:
         - Utredning
       operationId: DeleteUtredning
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Utredning
       responses:
         "200":
           description: Successful response.
@@ -911,7 +1384,12 @@ paths:
       operationId: GetVedtak
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Vedtak
       responses:
         "200":
           description: Successful response.
@@ -925,7 +1403,12 @@ paths:
         - Vedtak
       operationId: PutVedtak
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Vedtak
       requestBody:
         content:
           application/json:
@@ -944,7 +1427,12 @@ paths:
         - Vedtak
       operationId: DeleteVedtak
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Vedtak
       responses:
         "200":
           description: Successful response.
@@ -961,7 +1449,12 @@ paths:
       operationId: GetVotering
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Votering
       responses:
         "200":
           description: Successful response.
@@ -975,7 +1468,12 @@ paths:
         - Votering
       operationId: PutVotering
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Votering
       requestBody:
         content:
           application/json:
@@ -994,7 +1492,12 @@ paths:
         - Votering
       operationId: DeleteVotering
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Votering
       responses:
         "200":
           description: Successful response.
@@ -1016,6 +1519,11 @@ paths:
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
         - $ref: "#/components/parameters/Ids"
+        - name: parent
+          in: query
+          description: Filter by parent
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -1056,7 +1564,12 @@ paths:
       operationId: GetEnhet
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
       responses:
         "200":
           description: Successful response.
@@ -1070,7 +1583,17 @@ paths:
         - Enhet
       operationId: PutEnhet
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Enhet"
       responses:
         "200":
           description: Successful response.
@@ -1084,7 +1607,12 @@ paths:
         - Enhet
       operationId: DeleteEnhet
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
       responses:
         "200":
           description: Successful response.
@@ -1100,7 +1628,12 @@ paths:
         - Enhet
       operationId: GetUnderenhetList
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
@@ -1128,7 +1661,12 @@ paths:
         - Enhet
       operationId: PostEnhetUnderenhet
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
       requestBody:
         content:
           application/json:
@@ -1149,8 +1687,18 @@ paths:
         - Enhet
       operationId: DeleteUnderenhet
       parameters:
-        - $ref: "#/components/parameters/Id"
-        - $ref: "#/components/parameters/SubId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
       responses:
         "200":
           description: Successful response.
@@ -1172,6 +1720,11 @@ paths:
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
         - $ref: "#/components/parameters/Ids"
+        - name: saksmappe
+          in: query
+          description: Filter by SaksmappeId
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -1186,23 +1739,6 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Journalpost"
-    post:
-      description: Add a new journalpost.
-      tags:
-        - Journalpost
-      operationId: PostJournalpost
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Journalpost"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Journalpost"
 
   /journalpost/{id}:
     get:
@@ -1212,7 +1748,12 @@ paths:
       operationId: GetJournalpost
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
       responses:
         "200":
           description: Successful response.
@@ -1226,7 +1767,12 @@ paths:
         - Journalpost
       operationId: PutJournalpost
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
       requestBody:
         content:
           application/json:
@@ -1245,7 +1791,12 @@ paths:
         - Journalpost
       operationId: DeleteJournalpost
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
       responses:
         "200":
           description: Successful response.
@@ -1254,8 +1805,210 @@ paths:
               schema:
                 $ref: "#/components/schemas/Journalpost"
 
+  /journalpost/{id}/korrespondansepart:
+    get:
+      description: Get a list of Korrespondansepart for a Journalpost.
+      tags:
+        - Journalpost
+      operationId: GetJournalpostKorrespondansepartList
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Korrespondansepart"
+    post:
+      description: Add a new Korrespondansepart to a Journalpost.
+      tags:
+        - Journalpost
+      operationId: PostJournalpostKorrespondansepart
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Korrespondansepart"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Korrespondansepart"
+
+  /journalpost/{id}/korrespondansepart/{subId}:
+    delete:
+      description: Delete a Korrespondansepart from a Journalpost.
+      tags:
+        - Journalpost
+      operationId: RemoveKorrespondansepartFromJournalpost
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Korrespondansepart
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Journalpost"
+
+  /journalpost/{id}/dokumentbeskrivelse:
+    get:
+      description: Get a list of Dokumentbeskrivelse for a Journalpost.
+      tags:
+        - Journalpost
+      operationId: GetJournalpostDokumentbeskrivelseList
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Dokumentbeskrivelse"
+    post:
+      description: Add a new Dokumentbeskrivelse to a Journalpost.
+      tags:
+        - Journalpost
+      operationId: PostJournalpostDokumentbeskrivelse
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dokumentbeskrivelse"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dokumentbeskrivelse"
+
+  /journalpost/{id}/dokumentbeskrivelse/{subId}:
+    delete:
+      description: Delete a Dokumentbeskrivelse from a Journalpost.
+      tags:
+        - Journalpost
+      operationId: RemoveDokumentbeskrivelseFromJournalpost
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Dokumentbeskrivelse
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Journalpost"
+
+  /dokumentbeskrivelse:
+    get:
+      description: Get a Dokumentbeskrivelse list.
+      tags:
+        - Dokumentbeskrivelse
+      operationId: GetDokumentbeskrivelseList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
+        - name: journalpost
+          in: query
+          description: Filter by Journalpost id.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Dokumentbeskrivelse"
+
   /dokumentbeskrivelse/{id}:
-    description: Metadata for actual downloadable files.
     get:
       description: Get a single record.
       tags:
@@ -1263,7 +2016,12 @@ paths:
       operationId: GetDokumentbeskrivelse
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Dokumentbeskrivelse
       responses:
         "200":
           description: Successful response.
@@ -1277,7 +2035,12 @@ paths:
         - Dokumentbeskrivelse
       operationId: PutDokumentbeskrivelse
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Dokumentbeskrivelse
       requestBody:
         content:
           application/json:
@@ -1296,7 +2059,12 @@ paths:
         - Dokumentbeskrivelse
       operationId: DeleteDokumentbeskrivelse
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Dokumentbeskrivelse
       responses:
         "200":
           description: Successful response.
@@ -1312,8 +2080,18 @@ paths:
         - Dokumentbeskrivelse
       operationId: DownloadDokumentbeskrivelse
       parameters:
-        - $ref: "#/components/parameters/Id"
-        - $ref: "#/components/parameters/SubId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Dokumentbeskrivelse
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Dokumentobjekt
         - in: path
           name: docExtension
           required: true
@@ -1381,7 +2159,12 @@ paths:
       operationId: GetSaksmappe
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Saksmappe
       responses:
         "200":
           description: Successful response.
@@ -1395,7 +2178,17 @@ paths:
         - Saksmappe
       operationId: PutSaksmappe
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Saksmappe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Saksmappe"
       responses:
         "200":
           description: Successful response.
@@ -1409,7 +2202,12 @@ paths:
         - Saksmappe
       operationId: DeleteSaksmappe
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Saksmappe
       responses:
         "200":
           description: Successful response.
@@ -1425,7 +2223,12 @@ paths:
         - Saksmappe
       operationId: GetSaksmappeJournalpostList
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Saksmappe
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
@@ -1453,7 +2256,12 @@ paths:
         - Saksmappe
       operationId: PostSaksmappeJournalpost
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Saksmappe
       requestBody:
         content:
           application/json:
@@ -1474,8 +2282,18 @@ paths:
         - Saksmappe
       operationId: RemoveJournalpostFromSaksmappe
       parameters:
-        - $ref: "#/components/parameters/Id"
-        - $ref: "#/components/parameters/SubId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Saksmappe
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Journalpost
       responses:
         "200":
           description: Successful response.
@@ -1537,7 +2355,12 @@ paths:
       operationId: GetMoetemappe
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetemappe
       responses:
         "200":
           description: Successful response.
@@ -1551,7 +2374,12 @@ paths:
         - Moetemappe
       operationId: PutMoetemappe
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetemappe
       requestBody:
         content:
           application/json:
@@ -1570,7 +2398,12 @@ paths:
         - Moetemappe
       operationId: DeleteMoetemappe
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetemappe
       responses:
         "200":
           description: Successful response.
@@ -1584,9 +2417,14 @@ paths:
       description: Get a Moetedokument list.
       tags:
         - Moetemappe
-      operationId: GetMoetedokumentList
+      operationId: GetMoetemappeMoetedokumentList
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetemappe
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
@@ -1614,7 +2452,12 @@ paths:
         - Moetemappe
       operationId: PostMoetemappeMoetedokument
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetemappe
       requestBody:
         content:
           application/json:
@@ -1636,8 +2479,18 @@ paths:
         - Moetemappe
       operationId: RemoveMoetedokumentFromMoetemappe
       parameters:
-        - $ref: "#/components/parameters/Id"
-        - $ref: "#/components/parameters/SubId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetemappe
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetedokument
       responses:
         "200":
           description: Successful response.
@@ -1653,7 +2506,12 @@ paths:
         - Moetemappe
       operationId: GetMoetemappeMoetesakList
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetemappe
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
@@ -1680,7 +2538,12 @@ paths:
         - Moetemappe
       operationId: PostMoetemappeMoetesak
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetemappe
       requestBody:
         content:
           application/json:
@@ -1701,8 +2564,18 @@ paths:
         - Moetemappe
       operationId: RemoveMoetesakFromMoetemappe
       parameters:
-        - $ref: "#/components/parameters/Id"
-        - $ref: "#/components/parameters/SubId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetemappe
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetesak
       responses:
         "200":
           description: Successful response.
@@ -1765,7 +2638,12 @@ paths:
       operationId: GetBruker
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
       responses:
         "200":
           description: Successful response.
@@ -1779,7 +2657,17 @@ paths:
         - Bruker
       operationId: PutBruker
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bruker"
       responses:
         "200":
           description: Successful response.
@@ -1793,7 +2681,12 @@ paths:
         - Bruker
       operationId: DeleteBruker
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
       responses:
         "200":
           description: Successful response.
@@ -1809,7 +2702,12 @@ paths:
         - Bruker
       operationId: GetBrukerInnsynskravList
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
@@ -1838,7 +2736,12 @@ paths:
         - Bruker
       operationId: PostBrukerInnsynskrav
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
       requestBody:
         content:
           application/json:
@@ -1859,8 +2762,18 @@ paths:
         - Bruker
       operationId: DeleteBrukerInnsynskrav
       parameters:
-        - $ref: "#/components/parameters/Id"
-        - $ref: "#/components/parameters/SubId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Innsynskrav
       responses:
         "200":
           description: Successful response.
@@ -1876,7 +2789,12 @@ paths:
         - Bruker
       operationId: GetBrukerLagretSoekList
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
@@ -1905,7 +2823,12 @@ paths:
         - Bruker
       operationId: PostBrukerLagretSoek
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
       requestBody:
         content:
           application/json:
@@ -1926,8 +2849,18 @@ paths:
         - Bruker
       operationId: DeleteBrukerLagretSoek
       parameters:
-        - $ref: "#/components/parameters/Id"
-        - $ref: "#/components/parameters/SubId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: LagretSoek
       responses:
         "200":
           description: Successful response.
@@ -1943,7 +2876,12 @@ paths:
         - Bruker
       operationId: GetBrukerLagretSakList
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
@@ -1972,7 +2910,12 @@ paths:
         - Bruker
       operationId: PostBrukerLagretSak
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
       requestBody:
         content:
           application/json:
@@ -1993,8 +2936,18 @@ paths:
         - Bruker
       operationId: DeleteBrukerLagretSak
       parameters:
-        - $ref: "#/components/parameters/Id"
-        - $ref: "#/components/parameters/SubId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
+        - name: subId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: LagretSak
       responses:
         "200":
           description: Successful response.
@@ -2004,13 +2957,18 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{id}/activate/{secret}:
-    post:
+    put:
       description: Activate a Bruker.
       tags:
         - Bruker
       operationId: Activate
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
         - in: path
           name: secret
           required: true
@@ -2031,7 +2989,12 @@ paths:
         - Bruker
       operationId: PutBrukerPassword
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
       requestBody:
         content:
           application/json:
@@ -2040,7 +3003,6 @@ paths:
               properties:
                 oldPassword:
                   type: string
-                  format: password
                 newPassword:
                   type: string
                   format: password
@@ -2059,7 +3021,12 @@ paths:
         - Bruker
       operationId: PutBrukerPasswordWithSecret
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
         - in: path
           name: secret
           required: true
@@ -2074,6 +3041,7 @@ paths:
                 newPassword:
                   type: string
                   format: password
+
       responses:
         "200":
           description: Successful response.
@@ -2083,13 +3051,18 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{id}/requestPasswordReset:
-    post:
+    put:
       description: Request password reset for a Bruker.
       tags:
         - Bruker
       operationId: RequestPasswordReset
       parameters:
-        - $ref: "#/components/parameters/Id"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
       responses:
         "200":
           description: Successful response.
@@ -2097,6 +3070,117 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Bruker"
+
+  /tilbakemelding:
+    get:
+      description: Get a Tilbakemelding list.
+      tags:
+        - Tilbakemelding
+      operationId: GetTilbakemeldingList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Ids"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Tilbakemelding"
+    post:
+      description: Add a new Tilbakemelding.
+      tags:
+        - Tilbakemelding
+      operationId: PostTilbakemelding
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Tilbakemelding"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tilbakemelding"
+
+  /tilbakemelding/{id}:
+    get:
+      description: Get a single Tilbakemelding.
+      tags:
+        - Tilbakemelding
+      operationId: GetTilbakemelding
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Tilbakemelding
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tilbakemelding"
+    put:
+      description: Update a single Tilbakemelding.
+      tags:
+        - Tilbakemelding
+      operationId: PutTilbakemelding
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Tilbakemelding
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Tilbakemelding"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tilbakemelding"
+    delete:
+      description: Delete a single Tilbakemelding.
+      tags:
+        - Tilbakemelding
+      operationId: DeleteTilbakemelding
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Tilbakemelding
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tilbakemelding"
 
   /search:
     get:
@@ -2109,7 +3193,7 @@ paths:
         - name: sortBy
           in: query
           description: >-
-            The field to sort the result set by. The default is created.
+            The field to sort the result set by. The default is `created`.
           required: false
           schema:
             type: string
@@ -2145,6 +3229,24 @@ paths:
             items:
               type: string
         - name: administrativEnhetTransitiveId
+          in: query
+          description: >-
+            Filter the source by administrativeEnhet, including parent units.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: administrativEnhetIri
+          in: query
+          description: >-
+            Filter the source by administrativEnhetIri.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: administrativEnhetTransitiveIri
           in: query
           description: >-
             Filter the source by administrativeEnhet, including parent units.
@@ -2197,9 +3299,11 @@ components:
         deleted:
           type: boolean
           readOnly: true
-        entity:
+        externalId:
           type: string
-          readOnly: true
+          description: >-
+            An external ID for the resource. This is similar to "systemId", but
+            will be used for legacy IRIs that were used in earlier eInnsyn versions.
       required:
         - id
         - created
@@ -2230,9 +3334,12 @@ components:
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - properties:
+            entity:
+              type: string
+              enum: ["Arkiv"]
+              readOnly: true
             tittel:
               type: string
-              maxLength: 500
           required:
             - tittel
 
@@ -2248,7 +3355,6 @@ components:
               readOnly: true
             tittel:
               type: string
-              maxLength: 500
           required:
             - tittel
 
@@ -2265,7 +3371,6 @@ components:
               readOnly: true
             tittel:
               type: string
-              maxLength: 500
           required:
             - tittel
 
@@ -2278,31 +3383,29 @@ components:
           properties:
             offentligTittel:
               type: string
-              maxLength: 500
             offentligTittelSensitiv:
               type: string
-              maxLength: 500
             beskrivelse:
               type: string
-              maxLength: 500
             skjerming:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Skjerming"
+            publisertDato:
+              type: string
+              format: date
+              readOnly: true
             korrespondansepart:
               type: array
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Korrespondansepart"
             dokumentbeskrivelse:
               type: array
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Dokumentbeskrivelse"
           required:
             - offentligTittel
@@ -2336,6 +3439,12 @@ components:
             dokumentetsDato:
               type: string
               format: date
+            administrativEnhet:
+              type: string
+            administrativEnhetObjekt:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Enhet"
             sorteringstype:
               type: string
               readOnly: true
@@ -2361,20 +3470,19 @@ components:
           properties:
             offentligTittel:
               type: string
-              maxLength: 500
             offentligTittelSensitiv:
               type: string
-              maxLength: 500
             beskrivelse:
               type: string
-              maxLength: 500
             noekkelord:
               type: string
-              maxLength: 500
+            publisertDato:
+              type: string
+              format: date
+              readOnly: true
             parent:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Mappe"
                 - $ref: "#/components/schemas/Arkiv"
                 - $ref: "#/components/schemas/Arkivdel"
@@ -2400,24 +3508,23 @@ components:
               type: integer
             sakssekvensnummer:
               type: integer
+            saksnummer:
+              type: string
+              readOnly: true
             saksdato:
               type: string
               format: date
-              maxLength: 500
             journalpost:
               type: array
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Journalpost"
             administrativEnhet:
               type: string
-              maxLength: 500
             administrativEnhetObjekt:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Enhet"
           required:
             - saksaar
@@ -2439,48 +3546,39 @@ components:
               readOnly: true
             moetenummer:
               type: string
-              maxLength: 500
             utvalg:
               type: string
-              maxLength: 500
             utvalgObjekt:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Enhet"
             moetedato:
               type: string
               format: date-time
-              maxLength: 500
             moetested:
               type: string
-              maxLength: 500
             videoLink:
               type: string
               maxLength: 5000
             referanseForrigeMoete:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Moetemappe"
             referanseNesteMoete:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Moetemappe"
             moetedokument:
               type: array
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Moetedokument"
             moetesak:
               type: array
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Moetesak"
           required:
             - moetenummer
@@ -2506,41 +3604,33 @@ components:
               readOnly: true
             moetesakstype:
               type: string
-              maxLength: 500
             moetesaksaar:
               type: integer
             moetesakssekvensnummer:
               type: integer
             administrativEnhet:
               type: string
-              maxLength: 500
             administrativEnhetObjekt:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Enhet"
             videoLink:
               type: string
-              maxLength: 500
             utredning:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Utredning"
             innstilling:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Moetesaksbeskrivelse"
             vedtak:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Vedtak"
             moetemappe:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Moetemappe"
           required:
             - moetesakstype
@@ -2567,19 +3657,16 @@ components:
             saksbeskrivelse:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Moetesaksbeskrivelse"
             innstilling:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Moetesaksbeskrivelse"
             utredningsdokumenter:
               type: array
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Dokumentbeskrivelse"
           required:
             - saksbeskrivelse
@@ -2603,31 +3690,26 @@ components:
             vedtakstekst:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Moetesaksbeskrivelse"
             votering:
               type: array
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Votering"
             behandlingsprotokoll:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Behandlingsprotokoll"
             vedtaksdokumenter:
               type: array
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/Dokumentbeskrivelse"
             dato:
               type: string
               format: date
-              maxLength: 500
           required:
             - vedtakstekst
             - dato
@@ -2651,7 +3733,6 @@ components:
             moetedeltaker:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Moetedeltaker"
             stemme:
               type: string
@@ -2662,7 +3743,6 @@ components:
             representerer:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Identifikator"
           required:
             - moetedeltaker
@@ -2705,8 +3785,6 @@ components:
               type: string
             tekstFormat:
               type: string
-            test:
-              type: number
           required:
             - tekstInnhold
             - tekstFormat
@@ -2747,6 +3825,16 @@ components:
               type: string
             korrespondanseparttype:
               type: string
+            saksbehandler:
+              type: string
+            epostadresse:
+              type: string
+            postnummer:
+              type: string
+            erBehandlingsansvarlig:
+              type: boolean
+            administrativEnhet:
+              type: string
             journalpost:
               anyOf:
                 - type: string
@@ -2755,7 +3843,6 @@ components:
             - korrespondansepartNavn
             - korrespondansepartNavnSensitiv
             - korrespondanseparttype
-            - journalpost
           x-expandableFields:
             - journalpost
 
@@ -2771,10 +3858,8 @@ components:
               readOnly: true
             skjermingshjemmel:
               type: string
-              maxLength: 500
             tilgangsrestriksjon:
               type: string
-              maxLength: 500
           required:
             - tilgangsrestriksjon
 
@@ -2790,16 +3875,12 @@ components:
               readOnly: true
             navn:
               type: string
-              maxLength: 500
             identifikator:
               type: string
-              maxLength: 500
             initialer:
               type: string
-              maxLength: 500
             epostadresse:
               type: string
-              maxLength: 500
 
     Bruker:
       type: object
@@ -2814,7 +3895,9 @@ components:
             email:
               type: string
               format: email
-              maxLength: 500
+            password:
+              type: string
+              format: password
             active:
               type: boolean
               default: false
@@ -2827,36 +3910,9 @@ components:
                 - nn
                 - en
                 - se
-            lagretSak:
-              type: array
-              readOnly: true
-              items:
-                anyOf:
-                  - type: string
-                  - $ref: "#/components/schemas/Saksmappe"
-            lagretSoek:
-              type: array
-              readOnly: true
-              items:
-                anyOf:
-                  - type: string
-                  - $ref: "#/components/schemas/LagretSoek"
-            innsynskrav:
-              type: array
-              readOnly: true
-              items:
-                anyOf:
-                  - type: string
-                  - $ref: "#/components/schemas/Innsynskrav"
-            innsynskravDel:
-              type: array
-              readOnly: true
-              items:
-                anyOf:
-                  - type: string
-                  - $ref: "#/components/schemas/InnsynskravDel"
           required:
             - email
+            - password
           x-expandableFields:
             - lagretSak
             - lagretSoek
@@ -2876,15 +3932,12 @@ components:
             email:
               type: string
               format: email
-              maxLength: 500
             innsynskravDel:
               type: array
               items:
                 anyOf:
                   - type: string
-                    maxLength: 500
                   - $ref: "#/components/schemas/InnsynskravDel"
-            # sendtTilVirksomhet date?
             verified:
               type: boolean
               default: false
@@ -2892,7 +3945,6 @@ components:
             bruker:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Bruker"
             language:
               type: string
@@ -2921,15 +3973,21 @@ components:
             innsynskrav:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Innsynskrav"
             journalpost:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Journalpost"
+            enhet:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Enhet"
+              readOnly: true
+            sent:
+              type: string
+              format: date-time
+              readOnly: true
           required:
-            - innsynskrav
             - journalpost
           x-expandableFields:
             - innsynskrav
@@ -2947,36 +4005,26 @@ components:
               readOnly: true
             navn:
               type: string
-              maxLength: 500
             navnNynorsk:
               type: string
-              maxLength: 500
             navnEngelsk:
               type: string
-              maxLength: 500
             navnSami:
               type: string
-              maxLength: 500
             orgnummer:
               type: string
-              maxLength: 500
             enhetskode:
               type: string
-              maxLength: 500
             kontaktpunktAdresse:
               type: string
-              maxLength: 500
             kontaktpunktEpost:
               type: string
               format: email
-              maxLength: 500
             kontaktpunktTelefon:
               type: string
-              maxLength: 500
             innsynskravEpost:
               type: string
               format: email
-              maxLength: 500
             enhetstype:
               type: string
               enum:
@@ -2987,6 +4035,9 @@ components:
                 - SEKSJON
                 - BYDEL
                 - KOMMUNE
+            avsluttetDato:
+              type: string
+              format: date
             skjult:
               type: boolean
               default: false
@@ -3002,13 +4053,20 @@ components:
             skalMottaKvittering:
               type: boolean
               default: false
+            visToppnode:
+              type: boolean
+              default: false
             orderXmlVersjon:
-              type: string
-              maxLength: 500
+              type: integer
+            underenhet:
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                  - $ref: "#/components/schemas/Enhet"
             parent:
               anyOf:
                 - type: string
-                  maxLength: 500
                 - $ref: "#/components/schemas/Enhet"
           required:
             - navn
@@ -3033,21 +4091,19 @@ components:
               type: string
             tittelSensitiv:
               type: string
-            dokumenttype:
-              type: string
             dokumentnummer:
               type: integer
             tilknyttetRegistreringSom:
               type: string
             dokumentobjekt:
-              anyOf:
-                - type: string
-                  maxLength: 500
-                - $ref: "#/components/schemas/Dokumentobjekt"
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                  - $ref: "#/components/schemas/Dokumentobjekt"
           required:
             - tittel
             - tittelSensitiv
-            - dokumenttype
             - dokumentnummer
             - tilknyttetRegistreringSom
 
@@ -3088,6 +4144,17 @@ components:
               readOnly: true
             moetedokumenttype:
               type: string
+            dokumentbeskrivelse:
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                  - $ref: "#/components/schemas/Dokumentbeskrivelse"
+            moetemappe:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Moetemappe"
+              readOnly: true
 
     LagretSoek:
       type: object
@@ -3101,6 +4168,13 @@ components:
               readOnly: true
             query:
               type: string
+            bruker:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Bruker"
+            varsling:
+              type: boolean
+              default: false
 
     LagretSak:
       type: object
@@ -3112,13 +4186,54 @@ components:
               type: string
               enum: ["LagretSak"]
               readOnly: true
-            query:
+            bruker:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Bruker"
+            varsling:
+              type: boolean
+              default: false
+
+    Tilbakemelding:
+      type: object
+      x-resourceId: Tilbakemelding
+      allOf:
+        - $ref: "#/components/schemas/Base"
+        - properties:
+            entity:
               type: string
-            foo:
-              type: object
-              properties:
-                bar:
-                  type: string
+              enum: ["Tilbakemelding"]
+              readOnly: true
+            messageFromUser:
+              type: string
+            path:
+              type: string
+            referer:
+              type: string
+            userAgent:
+              type: string
+            screenHeight:
+              type: integer
+            screenWidth:
+              type: integer
+            docHeight:
+              type: integer
+            docWidth:
+              type: integer
+            winHeight:
+              type: integer
+            winWidth:
+              type: integer
+            scrollX:
+              type: integer
+            scrollY:
+              type: integer
+            userSatisfied:
+              type: boolean
+            handledByAdmin:
+              type: boolean
+            adminComment:
+              type: string
 
     ResultList:
       type: object
@@ -3133,19 +4248,15 @@ components:
 
     QueryParameters:
       type: object
-      x-resourceId: GetQueryParameters
       properties:
         expand:
           $ref: "#/components/parameters/Expand/schema"
 
     ListQueryParameters:
       type: object
-      x-resourceId: ListQueryParameters
       allOf:
         - $ref: "#/components/schemas/QueryParameters"
         - properties:
-            expand:
-              $ref: "#/components/parameters/Expand/schema"
             limit:
               $ref: "#/components/parameters/Limit/schema"
             sortOrder:
@@ -3158,20 +4269,6 @@ components:
               $ref: "#/components/parameters/Ids/schema"
 
   parameters:
-    Id:
-      in: path
-      name: id
-      required: true
-      schema:
-        type: string
-
-    SubId:
-      in: path
-      name: subId
-      required: true
-      schema:
-        type: string
-
     Expand:
       description: >-
         Specifies which fields in the response should be expanded.
@@ -3181,7 +4278,6 @@ components:
       required: false
       schema:
         items:
-          maxLength: 500
           type: string
         type: array
         default: []
