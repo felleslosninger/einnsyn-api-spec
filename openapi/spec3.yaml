@@ -4144,12 +4144,6 @@ components:
               readOnly: true
             moetedokumenttype:
               type: string
-            dokumentbeskrivelse:
-              type: array
-              items:
-                anyOf:
-                  - type: string
-                  - $ref: "#/components/schemas/Dokumentbeskrivelse"
             moetemappe:
               anyOf:
                 - type: string
@@ -4292,6 +4286,7 @@ components:
       required: false
       schema:
         type: integer
+        default: 25
 
     SortOrder:
       description: >-
