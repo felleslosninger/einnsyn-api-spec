@@ -4259,8 +4259,6 @@ components:
               $ref: "#/components/parameters/StartingAfter/schema"
             endingBefore:
               $ref: "#/components/parameters/EndingBefore/schema"
-            ids:
-              $ref: "#/components/parameters/Ids/schema"
 
   parameters:
     Expand:
