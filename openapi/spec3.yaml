@@ -361,7 +361,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
         - name: bruker
           in: query
           description: Filter by BrukerId
@@ -633,7 +632,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
         - name: journalpost
           in: query
           description: Filter by Journalpost
@@ -732,7 +730,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
         - name: bruker
           in: query
           description: Filter by BrukerId
@@ -831,7 +828,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
         - name: bruker
           in: query
           description: Filter by BrukerId
@@ -995,7 +991,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
         - name: moetemappe
           in: query
           description: Filter by MoetemappeId
@@ -1094,7 +1089,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
         - name: moetemappe
           in: query
           description: Filter by MoetemappeId
@@ -1518,7 +1512,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
         - name: parent
           in: query
           description: Filter by parent
@@ -1639,7 +1632,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1719,7 +1711,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
         - name: saksmappe
           in: query
           description: Filter by SaksmappeId
@@ -1823,7 +1814,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1908,7 +1898,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -1987,7 +1976,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
         - name: journalpost
           in: query
           description: Filter by Journalpost id.
@@ -2118,7 +2106,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -2234,7 +2221,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -2314,7 +2300,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -2430,7 +2415,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -2517,7 +2501,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -2596,7 +2579,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -2713,7 +2695,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -2800,7 +2781,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -2887,7 +2867,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -3083,7 +3062,6 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/Ids"
       responses:
         "200":
           description: Successful response.
@@ -3387,10 +3365,6 @@ components:
               type: string
             beskrivelse:
               type: string
-            skjerming:
-              anyOf:
-                - type: string
-                - $ref: "#/components/schemas/Skjerming"
             publisertDato:
               type: string
               format: date
@@ -3411,7 +3385,6 @@ components:
             - offentligTittel
             - offentligTittelSensitiv
           x-expandableFields:
-            - skjerming
             - korrespondansepart
             - dokumentbeskrivelse
 
@@ -3452,6 +3425,10 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Saksmappe"
+            skjerming:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Skjerming"
           required:
             - journalaar
             - journalsekvensnummer
@@ -3460,6 +3437,7 @@ components:
             - journaldato
           x-expandableFields:
             - saksmappe
+            - skjerming
 
     Mappe:
       type: object
@@ -4313,13 +4291,3 @@ components:
       name: endingBefore
       schema:
         type: string
-
-    Ids:
-      description: >-
-        A list of resource IDs to return.
-      in: query
-      name: ids
-      schema:
-        type: array
-        items:
-          type: string
