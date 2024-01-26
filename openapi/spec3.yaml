@@ -3266,17 +3266,29 @@ components:
         id:
           type: string
           readOnly: true
+          description: >-
+            The unique identifier for the resource. This is is assigned by the
+            system when the resource is created.
         created:
           type: string
           format: date-time
           readOnly: true
+          description: >-
+            A timestamp of when the resource was created. This field is updated
+            automatically.
         updated:
           type: string
           format: date-time
           readOnly: true
+          description: >-
+            A timestamp of when the resource was last updated. This field is
+            updated automatically.
         deleted:
           type: boolean
           readOnly: true
+          description: >-
+            This field is only present if the resource has been deleted. If
+            present, it will always be `true`.
         externalId:
           type: string
           description: >-
@@ -3296,11 +3308,17 @@ components:
         - properties:
             systemId:
               type: string
+              description: >-
+                The unique identifier for the resource, given by the user's system.
             journalenhet:
               readOnly: true
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Enhet"
+              description: >-
+                The administrative unit that is responsible for the resource. This
+                is derived from the credentials used to authenticate the request
+                on creation.
           required:
             - journalenhet
           x-expandableFields:
@@ -3462,7 +3480,8 @@ components:
             parent:
               anyOf:
                 - type: string
-                - $ref: "#/components/schemas/Mappe"
+                - $ref: "#/components/schemas/Saksmappe"
+                - $ref: "#/components/schemas/Moetemappe"
                 - $ref: "#/components/schemas/Arkiv"
                 - $ref: "#/components/schemas/Arkivdel"
                 - $ref: "#/components/schemas/Klasse"
