@@ -3398,6 +3398,7 @@ components:
             entity:
               type: string
               enum: ["Journalpost"]
+              readOnly: true
             journalaar:
               type: integer
             journalsekvensnummer:
