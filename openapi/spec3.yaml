@@ -4033,6 +4033,7 @@ components:
                 - SEKSJON
                 - BYDEL
                 - KOMMUNE
+                - DUMMYENHET
             avsluttetDato:
               type: string
               format: date
