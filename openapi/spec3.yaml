@@ -242,7 +242,7 @@ paths:
       description: Create a Arkiv.
       tags:
         - Arkiv
-      operationId: PostArkiv
+      operationId: PostArkivArkiv
       parameters:
         - name: id
           in: path
