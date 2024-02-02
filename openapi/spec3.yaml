@@ -138,8 +138,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Arkiv"
-
-  /arkivdel:
+  /arkiv/{id}/arkivdel:
     get:
       description: Get a Arkivdel list.
       tags:
@@ -188,6 +187,55 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Arkivdel"
+  /arkiv/{id}/arkiv:
+    get:
+      description: Get a Arkiv list.
+      tags:
+        - Arkiv
+      operationId: GetArkivList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: arkiv
+          in: query
+          description: Filter by Arkiv
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Arkiv"
+    post:
+      description: Create a Arkiv.
+      tags:
+        - Arkiv
+      operationId: PostArkiv
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arkiv"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arkiv"
 
   /arkivdel/{id}:
     get:
@@ -654,56 +702,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InnsynskravDel"
-
-  /klasse:
-    get:
-      description: Get a Klasse list.
-      tags:
-        - Klasse
-      operationId: GetKlasseList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - name: arkivdel
-          in: query
-          description: Filter by Arkivdel
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Klasse"
-    post:
-      description: Create a Klasse.
-      tags:
-        - Klasse
-      operationId: PostKlasse
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Klasse"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Klasse"
 
   /klasse/{id}:
     get:
