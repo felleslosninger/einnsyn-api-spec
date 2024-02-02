@@ -3327,6 +3327,7 @@ components:
     Arkiv:
       type: object
       x-resourceId: Arkiv
+      x-idPrefix: "ark"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - properties:
@@ -3336,12 +3337,19 @@ components:
               readOnly: true
             tittel:
               type: string
+            parent:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Arkiv"
           required:
             - tittel
+          x-expandableFields:
+            - parent
 
     Arkivdel:
       type: object
       x-resourceId: Arkivdel
+      x-idPrefix: "arkd"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - properties:
@@ -3351,12 +3359,19 @@ components:
               readOnly: true
             tittel:
               type: string
+            parent:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Arkiv"
           required:
             - tittel
+          x-expandableFields:
+            - parent
 
     Klasse:
       type: object
       x-resourceId: Klasse
+      x-idPrefix: "kla"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -3367,8 +3382,15 @@ components:
               readOnly: true
             tittel:
               type: string
+            parent:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Arkivdel"
+                - $ref: "#/components/schemas/Klasse"
           required:
             - tittel
+          x-expandableFields:
+            - parent
 
     Registrering:
       type: object
@@ -3409,6 +3431,7 @@ components:
     Journalpost:
       type: object
       x-resourceId: Journalpost
+      x-idPrefix: "jp"
       allOf:
         - $ref: "#/components/schemas/Registrering"
         - type: object
@@ -3494,6 +3517,7 @@ components:
     Saksmappe:
       type: object
       x-resourceId: Saksmappe
+      x-idPrefix: "sm"
       allOf:
         - $ref: "#/components/schemas/Mappe"
         - type: object
@@ -3534,6 +3558,7 @@ components:
     Moetemappe:
       type: object
       x-resourceId: Moetemappe
+      x-idPrefix: "mm"
       allOf:
         - $ref: "#/components/schemas/Mappe"
         - type: object
@@ -3592,6 +3617,7 @@ components:
     Moetesak:
       type: object
       x-resourceId: Moetesak
+      x-idPrefix: "ms"
       allOf:
         - $ref: "#/components/schemas/Registrering"
         - type: object
@@ -3644,6 +3670,7 @@ components:
     Utredning:
       type: object
       x-resourceId: Utredning
+      x-idPrefix: "utr"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -3677,6 +3704,7 @@ components:
     Vedtak:
       type: object
       x-resourceId: Vedtak
+      x-idPrefix: "ved"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -3720,6 +3748,7 @@ components:
     Votering:
       type: object
       x-resourceId: Votering
+      x-idPrefix: "vot"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -3752,6 +3781,7 @@ components:
     Moetesaksbeskrivelse:
       type: object
       x-resourceId: Moetesaksbeskrivelse
+      x-idPrefix: "msb"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -3771,6 +3801,7 @@ components:
     Behandlingsprotokoll:
       type: object
       x-resourceId: Behandlingsprotokoll
+      x-idPrefix: "bp"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -3791,6 +3822,7 @@ components:
     Moetedeltaker:
       type: object
       x-resourceId: Moetedeltaker
+      x-idPrefix: "md"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -3809,6 +3841,7 @@ components:
     Korrespondansepart:
       type: object
       x-resourceId: Korrespondansepart
+      x-idPrefix: "kp"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - type: object
@@ -3847,6 +3880,7 @@ components:
     Skjerming:
       type: object
       x-resourceId: Skjerming
+      x-idPrefix: "skj"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - properties:
@@ -3864,6 +3898,7 @@ components:
     Identifikator:
       type: object
       x-resourceId: Identifikator
+      x-idPrefix: "ide"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - properties:
@@ -3883,6 +3918,7 @@ components:
     Bruker:
       type: object
       x-resourceId: Bruker
+      x-idPrefix: "bru"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
@@ -3920,6 +3956,7 @@ components:
     Innsynskrav:
       type: object
       x-resourceId: Innsynskrav
+      x-idPrefix: "ik"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
@@ -3961,6 +3998,7 @@ components:
     InnsynskravDel:
       type: object
       x-resourceId: InnsynskravDel
+      x-idPrefix: "ikd"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
@@ -3994,6 +4032,7 @@ components:
     Enhet:
       type: object
       x-resourceId: Enhet
+      x-idPrefix: "enh"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
@@ -4079,6 +4118,7 @@ components:
     Dokumentbeskrivelse:
       type: object
       x-resourceId: Dokumentbeskrivelse
+      x-idPrefix: "db"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - properties:
@@ -4109,6 +4149,7 @@ components:
     Dokumentobjekt:
       type: object
       x-resourceId: Dokumentobjekt
+      x-idPrefix: "do"
       allOf:
         - $ref: "#/components/schemas/ArkivBase"
         - properties:
@@ -4134,6 +4175,7 @@ components:
     Moetedokument:
       type: object
       x-resourceId: Moetedokument
+      x-idPrefix: "md"
       allOf:
         - $ref: "#/components/schemas/Registrering"
         - properties:
@@ -4152,6 +4194,7 @@ components:
     LagretSoek:
       type: object
       x-resourceId: LagretSoek
+      x-idPrefix: "lsoek"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
@@ -4172,6 +4215,7 @@ components:
     LagretSak:
       type: object
       x-resourceId: LagretSak
+      x-idPrefix: "lsak"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
@@ -4190,6 +4234,7 @@ components:
     Tilbakemelding:
       type: object
       x-resourceId: Tilbakemelding
+      x-idPrefix: "tbm"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
