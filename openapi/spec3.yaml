@@ -143,13 +143,19 @@ paths:
       description: Get a Arkivdel list.
       tags:
         - Arkivdel
-      operationId: GetArkivdelList
+      operationId: GetArkivArkivdelList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
         - name: arkiv
           in: query
           description: Filter by Arkiv
@@ -174,6 +180,13 @@ paths:
       description: Create a Arkivdel.
       tags:
         - Arkivdel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
       operationId: PostArkivdel
       requestBody:
         content:
@@ -192,13 +205,19 @@ paths:
       description: Get a Arkiv list.
       tags:
         - Arkiv
-      operationId: GetArkivList
+      operationId: GetArkivArkivList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
         - name: arkiv
           in: query
           description: Filter by Arkiv
@@ -224,6 +243,13 @@ paths:
       tags:
         - Arkiv
       operationId: PostArkiv
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
       requestBody:
         content:
           application/json:
@@ -1767,7 +1793,7 @@ paths:
       description: Get all underenhet for a Enhet.
       tags:
         - Enhet
-      operationId: GetUnderenhetList
+      operationId: GetEnhetUnderenhetList
       parameters:
         - name: id
           in: path
@@ -1825,7 +1851,7 @@ paths:
       description: Delete a subEnhet from a Enhet.
       tags:
         - Enhet
-      operationId: DeleteUnderenhet
+      operationId: DeleteEnhetUnderenhet
       parameters:
         - name: id
           in: path
@@ -2006,7 +2032,7 @@ paths:
       description: Delete a Korrespondansepart from a Journalpost.
       tags:
         - Journalpost
-      operationId: RemoveKorrespondansepartFromJournalpost
+      operationId: DeleteJournalpostKorrespondansepart
       parameters:
         - name: id
           in: path
@@ -2090,7 +2116,7 @@ paths:
       description: Delete a Dokumentbeskrivelse from a Journalpost.
       tags:
         - Journalpost
-      operationId: RemoveDokumentbeskrivelseFromJournalpost
+      operationId: DeleteJournalpostDokumentbeskrivelse
       parameters:
         - name: id
           in: path
@@ -2414,7 +2440,7 @@ paths:
       description: Remove a Journalpost from a Saksmappe.
       tags:
         - Saksmappe
-      operationId: RemoveJournalpostFromSaksmappe
+      operationId: DeleteSaksmappeJournalpost
       parameters:
         - name: id
           in: path
@@ -2609,7 +2635,7 @@ paths:
         Remove a document from a meeting. This will delete the Moetedokument if it is orphaned.
       tags:
         - Moetemappe
-      operationId: RemoveMoetedokumentFromMoetemappe
+      operationId: DeleteMoetemappeMoetedokument
       parameters:
         - name: id
           in: path
@@ -2693,7 +2719,7 @@ paths:
       description: Remove a Moetesak from a Moetemappe. This will delete the Moetesak if it is orphaned.
       tags:
         - Moetemappe
-      operationId: RemoveMoetesakFromMoetemappe
+      operationId: DeleteMoetemappeMoetesak
       parameters:
         - name: id
           in: path
