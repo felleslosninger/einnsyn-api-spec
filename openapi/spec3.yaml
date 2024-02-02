@@ -24,6 +24,56 @@ tags:
   - name: Skjerming
 
 paths:
+  /arkiv:
+    get:
+      description: Get a Arkiv list.
+      tags:
+        - Arkiv
+      operationId: GetArkivList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: arkiv
+          in: query
+          description: Filter by Arkiv
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Arkiv"
+    post:
+      description: Create a Arkiv.
+      tags:
+        - Arkiv
+      operationId: PostArkiv
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arkiv"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arkiv"
+
   /arkiv/{id}:
     get:
       description: Get a single Arkiv.
@@ -88,6 +138,56 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Arkiv"
+
+  /arkivdel:
+    get:
+      description: Get a Arkivdel list.
+      tags:
+        - Arkivdel
+      operationId: GetArkivdelList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: arkiv
+          in: query
+          description: Filter by Arkiv
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Arkivdel"
+    post:
+      description: Create a Arkivdel.
+      tags:
+        - Arkivdel
+      operationId: PostArkivdel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arkivdel"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arkivdel"
 
   /arkivdel/{id}:
     get:
