@@ -3566,6 +3566,29 @@ components:
           x-expandableFields:
             - parent
 
+    Klassifikasjonssystem:
+      type: object
+      x-resourceId: Klassifikasjonssystem
+      x-idPrefix: "ksys"
+      allOf:
+        - $ref: "#/components/schemas/ArkivBase"
+        - type: object
+          properties:
+            entity:
+              type: string
+              enum: ["Klassifikasjonssystem"]
+              readOnly: true
+            tittel:
+              type: string
+            parent:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Arkivdel"
+          required:
+            - tittel
+          x-expandableFields:
+            - parent
+
     Registrering:
       type: object
       x-resourceId: Registrering
