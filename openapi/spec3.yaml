@@ -328,6 +328,258 @@ paths:
               schema:
                 $ref: "#/components/schemas/Arkivdel"
 
+  /arkivdel/{id}/klasse:
+    get:
+      description: Get a Klasse list.
+      tags:
+        - Klasse
+      operationId: GetArkivdelKlasseList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
+        - name: arkivdel
+          in: query
+          description: Filter by Arkivdel
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Klasse"
+    post:
+      description: Create a Klasse.
+      tags:
+        - Klasse
+      operationId: PostArkivdelKlasse
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Klasse"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klasse"
+
+  /arkivdel/{id}/klassifikasjonssystem:
+    get:
+      description: Get a Klassifikasjonssystem list.
+      tags:
+        - Klassifikasjonssystem
+      operationId: GetArkivdelKlassifikasjonssystemList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
+        - name: arkivdel
+          in: query
+          description: Filter by Arkivdel
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Klassifikasjonssystem"
+    post:
+      description: Create a Klassifikasjonssystem.
+      tags:
+        - Klassifikasjonssystem
+      operationId: PostArkivdelKlassifikasjonssystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Klassifikasjonssystem"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klassifikasjonssystem"
+
+  /arkivdel/{id}/saksmappe:
+    get:
+      description: Get a Saksmappe list.
+      tags:
+        - Saksmappe
+      operationId: GetArkivdelSaksmappeList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
+        - name: arkivdel
+          in: query
+          description: Filter by Arkivdel
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Saksmappe"
+    post:
+      description: Create a Saksmappe.
+      tags:
+        - Saksmappe
+      operationId: PostArkivdelSaksmappe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Saksmappe"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Saksmappe"
+
+  /arkivdel/{id}/moetemappe:
+    get:
+      description: Get a Moetemappe list.
+      tags:
+        - Moetemappe
+      operationId: GetArkivdelMoetemappeList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
+        - name: arkivdel
+          in: query
+          description: Filter by Arkivdel
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetemappe"
+    post:
+      description: Create a Moetemappe.
+      tags:
+        - Moetemappe
+      operationId: PostArkivdelMoetemappe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkivdel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Moetemappe"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetemappe"
+
   /behandlingsprotokoll/{id}:
     get:
       description: Get a single Behandlingsprotokoll.
@@ -786,6 +1038,197 @@ paths:
           schema:
             type: string
           x-resourceId: Klasse
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klasse"
+
+  /klasse/{id}/klasse:
+    get:
+      description: Get a Klasse list.
+      tags:
+        - Klasse
+      operationId: GetKlasseKlasseList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klasse
+        - name: klasse
+          in: query
+          description: Filter by Klasse
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Klasse"
+    post:
+      description: Create a Klasse.
+      tags:
+        - Klasse
+      operationId: PostKlasseKlasse
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klasse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Klasse"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klasse"
+
+  /klassifikasjonssystem/{id}:
+    get:
+      description: Get a single Klassifikasjonssystem.
+      tags:
+        - Klassifikasjonssystem
+      operationId: GetKlassifikasjonssystem
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klassifikasjonssystem
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klassifikasjonssystem"
+    put:
+      description: Update a single Klassifikasjonssystem.
+      tags:
+        - Klassifikasjonssystem
+      operationId: PutKlassifikasjonssystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klassifikasjonssystem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Klassifikasjonssystem"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klassifikasjonssystem"
+    delete:
+      description: Delete a single Klassifikasjonssystem.
+      tags:
+        - Klassifikasjonssystem
+      operationId: DeleteKlassifikasjonssystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klassifikasjonssystem
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Klassifikasjonssystem"
+
+  /klassifikasjonssystem/{id}/klasse:
+    get:
+      description: Get a Klasse list.
+      tags:
+        - Klasse
+      operationId: GetKlassifikasjonssystemKlasseList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klassifikasjonssystem
+        - name: klassifikasjonssystem
+          in: query
+          description: Filter by Klassifikasjonssystem
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Klasse"
+    post:
+      description: Create a Klasse.
+      tags:
+        - Klasse
+      operationId: PostKlassifikasjonssystemKlasse
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klassifikasjonssystem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Klasse"
       responses:
         "200":
           description: Successful response.
@@ -3561,6 +4004,7 @@ components:
                 - type: string
                 - $ref: "#/components/schemas/Arkivdel"
                 - $ref: "#/components/schemas/Klasse"
+                - $ref: "#/components/schemas/Klassifikasjonssystem"
           required:
             - tittel
           x-expandableFields:
