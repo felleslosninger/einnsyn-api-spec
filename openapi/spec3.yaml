@@ -25,37 +25,6 @@ tags:
 
 paths:
   /arkiv:
-    get:
-      description: Get a Arkiv list.
-      tags:
-        - Arkiv
-      operationId: GetArkivList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - name: arkiv
-          in: query
-          description: Filter by Arkiv
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Arkiv"
     post:
       description: Create a Arkiv.
       tags:
@@ -74,7 +43,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Arkiv"
 
-  /arkiv/{id}:
+  /arkiv/{arkivId}:
     get:
       description: Get a single Arkiv.
       tags:
@@ -82,7 +51,7 @@ paths:
       operationId: GetArkiv
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: arkivId
           in: path
           required: true
           schema:
@@ -101,7 +70,7 @@ paths:
         - Arkiv
       operationId: PutArkiv
       parameters:
-        - name: id
+        - name: arkivId
           in: path
           required: true
           schema:
@@ -125,7 +94,7 @@ paths:
         - Arkiv
       operationId: DeleteArkiv
       parameters:
-        - name: id
+        - name: arkivId
           in: path
           required: true
           schema:
@@ -138,7 +107,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Arkiv"
-  /arkiv/{id}/arkivdel:
+
+  /arkiv/{arkivId}/arkivdel:
     get:
       description: Get a Arkivdel list.
       tags:
@@ -150,13 +120,13 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: id
+        - name: arkivId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Arkiv
-        - name: arkiv
+        - name: arkivId
           in: query
           description: Filter by Arkiv
           schema:
@@ -181,7 +151,7 @@ paths:
       tags:
         - Arkivdel
       parameters:
-        - name: id
+        - name: arkivId
           in: path
           required: true
           schema:
@@ -200,7 +170,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Arkivdel"
-  /arkiv/{id}/arkiv:
+
+  /arkiv/{arkivId}/arkiv:
     get:
       description: Get a Arkiv list.
       tags:
@@ -212,13 +183,13 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: id
+        - name: arkivId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Arkiv
-        - name: arkiv
+        - name: arkivId
           in: query
           description: Filter by Arkiv
           schema:
@@ -244,7 +215,7 @@ paths:
         - Arkiv
       operationId: PostArkivArkiv
       parameters:
-        - name: id
+        - name: arkivId
           in: path
           required: true
           schema:
@@ -263,7 +234,133 @@ paths:
               schema:
                 $ref: "#/components/schemas/Arkiv"
 
-  /arkivdel/{id}:
+  /arkiv/{arkivId}/saksmappe:
+    get:
+      description: Get a Saksmappe list.
+      tags:
+        - Saksmappe
+      operationId: GetArkivSaksmappeList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: arkivId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
+        - name: arkivId
+          in: query
+          description: Filter by Arkiv
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Saksmappe"
+    post:
+      description: Create a Saksmappe.
+      tags:
+        - Saksmappe
+      operationId: PostArkivSaksmappe
+      parameters:
+        - name: arkivId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Saksmappe"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Saksmappe"
+
+  /arkiv/{arkivId}/moetemappe:
+    get:
+      description: Get a Moetemappe list.
+      tags:
+        - Moetemappe
+      operationId: GetArkivMoetemappeList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: arkivId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
+        - name: arkivId
+          in: query
+          description: Filter by Arkiv
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetemappe"
+    post:
+      description: Create a Moetemappe.
+      tags:
+        - Moetemappe
+      operationId: PostArkivMoetemappe
+      parameters:
+        - name: arkivId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Arkiv
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Moetemappe"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetemappe"
+
+  /arkivdel/{arkivdelId}:
     get:
       description: Get a single Arkivdel.
       tags:
@@ -271,7 +368,7 @@ paths:
       operationId: GetArkivdel
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
@@ -290,7 +387,7 @@ paths:
         - Arkivdel
       operationId: PutArkivdel
       parameters:
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
@@ -314,7 +411,7 @@ paths:
         - Arkivdel
       operationId: DeleteArkivdel
       parameters:
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
@@ -328,7 +425,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Arkivdel"
 
-  /arkivdel/{id}/klasse:
+  /arkivdel/{arkivdelId}/klasse:
     get:
       description: Get a Klasse list.
       tags:
@@ -340,13 +437,13 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Arkivdel
-        - name: arkivdel
+        - name: arkivdelId
           in: query
           description: Filter by Arkivdel
           schema:
@@ -372,7 +469,7 @@ paths:
         - Klasse
       operationId: PostArkivdelKlasse
       parameters:
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
@@ -391,7 +488,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Klasse"
 
-  /arkivdel/{id}/klassifikasjonssystem:
+  /arkivdel/{arkivdelId}/klassifikasjonssystem:
     get:
       description: Get a Klassifikasjonssystem list.
       tags:
@@ -403,13 +500,13 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Arkivdel
-        - name: arkivdel
+        - name: arkivdelId
           in: query
           description: Filter by Arkivdel
           schema:
@@ -435,7 +532,7 @@ paths:
         - Klassifikasjonssystem
       operationId: PostArkivdelKlassifikasjonssystem
       parameters:
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
@@ -454,7 +551,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Klassifikasjonssystem"
 
-  /arkivdel/{id}/saksmappe:
+  /arkivdel/{arkivdelId}/saksmappe:
     get:
       description: Get a Saksmappe list.
       tags:
@@ -466,13 +563,13 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Arkivdel
-        - name: arkivdel
+        - name: arkivdelId
           in: query
           description: Filter by Arkivdel
           schema:
@@ -498,7 +595,7 @@ paths:
         - Saksmappe
       operationId: PostArkivdelSaksmappe
       parameters:
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
@@ -517,7 +614,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Saksmappe"
 
-  /arkivdel/{id}/moetemappe:
+  /arkivdel/{arkivdelId}/moetemappe:
     get:
       description: Get a Moetemappe list.
       tags:
@@ -529,13 +626,13 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Arkivdel
-        - name: arkivdel
+        - name: arkivdelId
           in: query
           description: Filter by Arkivdel
           schema:
@@ -561,7 +658,7 @@ paths:
         - Moetemappe
       operationId: PostArkivdelMoetemappe
       parameters:
-        - name: id
+        - name: arkivdelId
           in: path
           required: true
           schema:
@@ -580,7 +677,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetemappe"
 
-  /behandlingsprotokoll/{id}:
+  /behandlingsprotokoll/{behandlingsprotokollId}:
     get:
       description: Get a single Behandlingsprotokoll.
       tags:
@@ -588,7 +685,7 @@ paths:
       operationId: GetBehandlingsprotokoll
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: behandlingsprotokollId
           in: path
           required: true
           schema:
@@ -607,7 +704,7 @@ paths:
         - Behandlingsprotokoll
       operationId: PutBehandlingsprotokoll
       parameters:
-        - name: id
+        - name: behandlingsprotokollId
           in: path
           required: true
           schema:
@@ -631,7 +728,7 @@ paths:
         - Behandlingsprotokoll
       operationId: DeleteBehandlingsprotokoll
       parameters:
-        - name: id
+        - name: behandlingsprotokollId
           in: path
           required: true
           schema:
@@ -645,7 +742,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Behandlingsprotokoll"
 
-  /dokumentobjekt/{id}:
+  /dokumentobjekt/{dokumentobjektId}:
     get:
       description: Get a single Dokumentobjekt.
       tags:
@@ -653,7 +750,7 @@ paths:
       operationId: GetDokumentobjekt
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: dokumentobjektId
           in: path
           required: true
           schema:
@@ -672,7 +769,7 @@ paths:
         - Dokumentobjekt
       operationId: PutDokumentobjekt
       parameters:
-        - name: id
+        - name: dokumentobjektId
           in: path
           required: true
           schema:
@@ -696,7 +793,7 @@ paths:
         - Dokumentobjekt
       operationId: DeleteDokumentobjekt
       parameters:
-        - name: id
+        - name: dokumentobjektId
           in: path
           required: true
           schema:
@@ -710,7 +807,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Dokumentobjekt"
 
-  /identifikator/{id}:
+  /identifikator/{identifikatorId}:
     get:
       description: Get a single Identifikator.
       tags:
@@ -718,7 +815,7 @@ paths:
       operationId: GetIdentifikator
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: identifikatorId
           in: path
           required: true
           schema:
@@ -737,7 +834,7 @@ paths:
         - Identifikator
       operationId: PutIdentifikator
       parameters:
-        - name: id
+        - name: identifikatorId
           in: path
           required: true
           schema:
@@ -761,7 +858,7 @@ paths:
         - Identifikator
       operationId: DeleteIdentifikator
       parameters:
-        - name: id
+        - name: identifikatorId
           in: path
           required: true
           schema:
@@ -787,7 +884,7 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: bruker
+        - name: brukerId
           in: query
           description: Filter by BrukerId
           schema:
@@ -825,7 +922,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
 
-  /innsynskrav/{id}:
+  /innsynskrav/{innsynskravId}:
     get:
       description: Get a Innsynskrav.
       tags:
@@ -833,7 +930,7 @@ paths:
       operationId: GetInnsynskrav
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: innsynskravId
           in: path
           required: true
           schema:
@@ -852,7 +949,7 @@ paths:
         - Innsynskrav
       operationId: PutInnsynskrav
       parameters:
-        - name: id
+        - name: innsynskravId
           in: path
           required: true
           schema:
@@ -876,7 +973,7 @@ paths:
         - Innsynskrav
       operationId: DeleteInnsynskrav
       parameters:
-        - name: id
+        - name: innsynskravId
           in: path
           required: true
           schema:
@@ -890,14 +987,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
 
-  /innsynskrav/{id}/verify/{secret}:
+  /innsynskrav/{innsynskravId}/verify/{secret}:
     put:
       description: Verify a Innsynskrav.
       tags:
         - Innsynskrav
       operationId: VerifyInnsynskrav
       parameters:
-        - name: id
+        - name: innsynskravId
           in: path
           required: true
           schema:
@@ -916,7 +1013,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
 
-  /innsynskravDel/{id}:
+  /innsynskravDel/{innsynskravDelId}:
     get:
       description: Get a single InnsynskravDel.
       tags:
@@ -924,7 +1021,7 @@ paths:
       operationId: GetInnsynskravDel
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: innsynskravDelId
           in: path
           required: true
           schema:
@@ -943,7 +1040,7 @@ paths:
         - InnsynskravDel
       operationId: PutInnsynskravDel
       parameters:
-        - name: id
+        - name: innsynskravDelId
           in: path
           required: true
           schema:
@@ -967,7 +1064,7 @@ paths:
         - InnsynskravDel
       operationId: DeleteInnsynskravDel
       parameters:
-        - name: id
+        - name: innsynskravDelId
           in: path
           required: true
           schema:
@@ -981,7 +1078,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/InnsynskravDel"
 
-  /klasse/{id}:
+  /klasse/{klasseId}:
     get:
       description: Get a single Klasse.
       tags:
@@ -989,7 +1086,7 @@ paths:
       operationId: GetKlasse
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: klasseId
           in: path
           required: true
           schema:
@@ -1008,7 +1105,7 @@ paths:
         - Klasse
       operationId: PutKlasse
       parameters:
-        - name: id
+        - name: klasseId
           in: path
           required: true
           schema:
@@ -1032,7 +1129,7 @@ paths:
         - Klasse
       operationId: DeleteKlasse
       parameters:
-        - name: id
+        - name: klasseId
           in: path
           required: true
           schema:
@@ -1046,7 +1143,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Klasse"
 
-  /klasse/{id}/klasse:
+  /klasse/{klasseId}/klasse:
     get:
       description: Get a Klasse list.
       tags:
@@ -1058,13 +1155,13 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: id
+        - name: klasseId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Klasse
-        - name: klasse
+        - name: klasseId
           in: query
           description: Filter by Klasse
           schema:
@@ -1090,7 +1187,7 @@ paths:
         - Klasse
       operationId: PostKlasseKlasse
       parameters:
-        - name: id
+        - name: klasseId
           in: path
           required: true
           schema:
@@ -1109,7 +1206,134 @@ paths:
               schema:
                 $ref: "#/components/schemas/Klasse"
 
-  /klassifikasjonssystem/{id}:
+  /klasse/{klasseId}/saksmappe:
+    get:
+      description: Get a Saksmappe list.
+      tags:
+        - Saksmappe
+      operationId: GetKlasseSaksmappeList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: klasseId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klasse
+        - name: klasseId
+          in: query
+          description: Filter by Klasse
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Saksmappe"
+    post:
+      description: Create a Saksmappe.
+      tags:
+        - Saksmappe
+      operationId: PostKlasseSaksmappe
+      parameters:
+        - name: klasseId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klasse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Saksmappe"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Saksmappe"
+
+  /klasse/{klasseId}/moetemappe:
+    get:
+      description: Get a Moetemappe list.
+      tags:
+        - Moetemappe
+      operationId: GetKlasseMoetemappeList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: klasseId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klasse
+        - name: klasseId
+          in: query
+          description: Filter by Klasse
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetemappe"
+    post:
+      description: Create a Moetemappe.
+      tags:
+        - Moetemappe
+      operationId: PostKlasseMoetemappe
+      parameters:
+        - name: klasseId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Klasse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Moetemappe"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetemappe"
+
+  /klassifikasjonssystem/{klassifikasjonssystemId}:
     get:
       description: Get a single Klassifikasjonssystem.
       tags:
@@ -1117,7 +1341,7 @@ paths:
       operationId: GetKlassifikasjonssystem
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: klassifikasjonssystemId
           in: path
           required: true
           schema:
@@ -1136,7 +1360,7 @@ paths:
         - Klassifikasjonssystem
       operationId: PutKlassifikasjonssystem
       parameters:
-        - name: id
+        - name: klassifikasjonssystemId
           in: path
           required: true
           schema:
@@ -1160,7 +1384,7 @@ paths:
         - Klassifikasjonssystem
       operationId: DeleteKlassifikasjonssystem
       parameters:
-        - name: id
+        - name: klassifikasjonssystemId
           in: path
           required: true
           schema:
@@ -1174,7 +1398,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Klassifikasjonssystem"
 
-  /klassifikasjonssystem/{id}/klasse:
+  /klassifikasjonssystem/{klassifikasjonssystemId}/klasse:
     get:
       description: Get a Klasse list.
       tags:
@@ -1186,13 +1410,13 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: id
+        - name: klassifikasjonssystemId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Klassifikasjonssystem
-        - name: klassifikasjonssystem
+        - name: klassifikasjonssystemId
           in: query
           description: Filter by Klassifikasjonssystem
           schema:
@@ -1218,7 +1442,7 @@ paths:
         - Klasse
       operationId: PostKlassifikasjonssystemKlasse
       parameters:
-        - name: id
+        - name: klassifikasjonssystemId
           in: path
           required: true
           schema:
@@ -1237,40 +1461,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Klasse"
 
-  /korrespondansepart:
-    get:
-      description: Get a Korrespondansepart list.
-      tags:
-        - Korrespondansepart
-      operationId: GetKorrespondansepartList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - name: journalpost
-          in: query
-          description: Filter by Journalpost
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Korrespondansepart"
-
-  /korrespondansepart/{id}:
+  /korrespondansepart/{korrespondansepartId}:
     get:
       description: Get a single Korrespondansepart.
       tags:
@@ -1278,7 +1469,7 @@ paths:
       operationId: GetKorrespondansepart
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: korrespondansepartId
           in: path
           required: true
           schema:
@@ -1297,7 +1488,7 @@ paths:
         - Korrespondansepart
       operationId: PutKorrespondansepart
       parameters:
-        - name: id
+        - name: korrespondansepartId
           in: path
           required: true
           schema:
@@ -1321,7 +1512,7 @@ paths:
         - Korrespondansepart
       operationId: DeleteKorrespondansepart
       parameters:
-        - name: id
+        - name: korrespondansepartId
           in: path
           required: true
           schema:
@@ -1347,7 +1538,7 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: bruker
+        - name: brukerId
           in: query
           description: Filter by BrukerId
           schema:
@@ -1368,7 +1559,7 @@ paths:
                         items:
                           $ref: "#/components/schemas/LagretSak"
 
-  /lagretSak/{id}:
+  /lagretSak/{lagretSakId}:
     get:
       description: Get a single LagretSak.
       tags:
@@ -1376,7 +1567,7 @@ paths:
       operationId: GetLagretSak
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: lagretSakId
           in: path
           required: true
           schema:
@@ -1395,7 +1586,7 @@ paths:
         - LagretSak
       operationId: PutLagretSak
       parameters:
-        - name: id
+        - name: lagretSakId
           in: path
           required: true
           schema:
@@ -1419,7 +1610,7 @@ paths:
         - LagretSak
       operationId: DeleteLagretSak
       parameters:
-        - name: id
+        - name: lagretSakId
           in: path
           required: true
           schema:
@@ -1445,7 +1636,7 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: bruker
+        - name: brukerId
           in: query
           description: Filter by BrukerId
           schema:
@@ -1466,7 +1657,7 @@ paths:
                         items:
                           $ref: "#/components/schemas/LagretSoek"
 
-  /lagretSoek/{id}:
+  /lagretSoek/{lagretSoekId}:
     get:
       description: Get a single LagretSoek.
       tags:
@@ -1474,7 +1665,7 @@ paths:
       operationId: GetLagretSoek
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: lagretSoekId
           in: path
           required: true
           schema:
@@ -1493,7 +1684,7 @@ paths:
         - LagretSoek
       operationId: PutLagretSoek
       parameters:
-        - name: id
+        - name: lagretSoekId
           in: path
           required: true
           schema:
@@ -1517,7 +1708,7 @@ paths:
         - LagretSoek
       operationId: DeleteLagretSoek
       parameters:
-        - name: id
+        - name: lagretSoekId
           in: path
           required: true
           schema:
@@ -1531,7 +1722,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/LagretSoek"
 
-  /moetedeltaker/{id}:
+  /moetedeltaker/{moetedeltakerId}:
     get:
       description: Get a single Moetedeltaker.
       tags:
@@ -1539,7 +1730,7 @@ paths:
       operationId: GetMoetedeltaker
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: moetedeltakerId
           in: path
           required: true
           schema:
@@ -1558,7 +1749,7 @@ paths:
         - Moetedeltaker
       operationId: PutMoetedeltaker
       parameters:
-        - name: id
+        - name: moetedeltakerId
           in: path
           required: true
           schema:
@@ -1582,7 +1773,7 @@ paths:
         - Moetedeltaker
       operationId: DeleteMoetedeltaker
       parameters:
-        - name: id
+        - name: moetedeltakerId
           in: path
           required: true
           schema:
@@ -1596,40 +1787,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetedeltaker"
 
-  /moetedokument:
-    get:
-      description: Get a Moetedokument list.
-      tags:
-        - Moetemappe
-      operationId: GetMoetedokumentList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - name: moetemappe
-          in: query
-          description: Filter by MoetemappeId
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Moetedokument"
-
-  /moetedokument/{id}:
+  /moetedokument/{moetedokumentId}:
     get:
       description: Get a single Moetedokument.
       tags:
@@ -1637,7 +1795,7 @@ paths:
       operationId: GetMoetedokument
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: moetedokumentId
           in: path
           required: true
           schema:
@@ -1656,7 +1814,7 @@ paths:
         - Moetedokument
       operationId: PutMoetedokument
       parameters:
-        - name: id
+        - name: moetedokumentId
           in: path
           required: true
           schema:
@@ -1680,7 +1838,7 @@ paths:
         - Moetedokument
       operationId: DeleteMoetedokument
       parameters:
-        - name: id
+        - name: moetedokumentId
           in: path
           required: true
           schema:
@@ -1694,21 +1852,27 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetedokument"
 
-  /moetesak:
+  /moetedokument/{moetedokumentId}/dokumentbeskrivelse:
     get:
-      description: Get a Moetesak list.
+      description: Get a Dokumentbeskrivelse list.
       tags:
-        - Moetemappe
-      operationId: GetMoetesakList
+        - Dokumentbeskrivelse
+      operationId: GetMoetedokumentDokumentbeskrivelseList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: moetemappe
+        - name: moetedokumentId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetedokument
+        - name: moetedokumentId
           in: query
-          description: Filter by MoetemappeId
+          description: Filter by Moetedokument
           schema:
             type: string
       responses:
@@ -1725,9 +1889,33 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: "#/components/schemas/Moetesak"
+                          $ref: "#/components/schemas/Dokumentbeskrivelse"
+    post:
+      description: Create a Dokumentbeskrivelse.
+      tags:
+        - Dokumentbeskrivelse
+      operationId: PostMoetedokumentDokumentbeskrivelse
+      parameters:
+        - name: moetedokumentId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetedokument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dokumentbeskrivelse"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dokumentbeskrivelse"
 
-  /moetesak/{id}:
+  /moetesak/{moetesakId}:
     get:
       description: Get a single Moetesak.
       tags:
@@ -1735,7 +1923,7 @@ paths:
       operationId: GetMoetesak
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: moetesakId
           in: path
           required: true
           schema:
@@ -1754,7 +1942,7 @@ paths:
         - Moetesak
       operationId: PutMoetesak
       parameters:
-        - name: id
+        - name: moetesakId
           in: path
           required: true
           schema:
@@ -1778,7 +1966,7 @@ paths:
         - Moetesak
       operationId: DeleteMoetesak
       parameters:
-        - name: id
+        - name: moetesakId
           in: path
           required: true
           schema:
@@ -1792,7 +1980,70 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetesak"
 
-  /moetesaksbeskrivelse/{id}:
+  /moetesak/{moetesakId}/dokumentbeskrivelse:
+    get:
+      description: Get a Dokumentbeskrivelse list.
+      tags:
+        - Dokumentbeskrivelse
+      operationId: GetMoetesakDokumentbeskrivelseList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: moetesakId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetesak
+        - name: moetesakId
+          in: query
+          description: Filter by Moetesak
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Dokumentbeskrivelse"
+    post:
+      description: Create a Dokumentbeskrivelse.
+      tags:
+        - Dokumentbeskrivelse
+      operationId: PostMoetesakDokumentbeskrivelse
+      parameters:
+        - name: moetesakId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Moetesak
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dokumentbeskrivelse"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dokumentbeskrivelse"
+
+  /moetesaksbeskrivelse/{moetesaksbeskrivelseId}:
     get:
       description: Get a single Moetesaksbeskrivelse.
       tags:
@@ -1800,7 +2051,7 @@ paths:
       operationId: GetMoetesaksbeskrivelse
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: moetesaksbeskrivelseId
           in: path
           required: true
           schema:
@@ -1819,7 +2070,7 @@ paths:
         - Moetesaksbeskrivelse
       operationId: PutMoetesaksbeskrivelse
       parameters:
-        - name: id
+        - name: moetesaksbeskrivelseId
           in: path
           required: true
           schema:
@@ -1843,7 +2094,7 @@ paths:
         - Moetesaksbeskrivelse
       operationId: DeleteMoetesaksbeskrivelse
       parameters:
-        - name: id
+        - name: moetesaksbeskrivelseId
           in: path
           required: true
           schema:
@@ -1857,7 +2108,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetesaksbeskrivelse"
 
-  /skjerming/{id}:
+  /skjerming/{skjermingId}:
     get:
       description: Get a single Skjerming.
       tags:
@@ -1865,7 +2116,7 @@ paths:
       operationId: GetSkjerming
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: skjermingId
           in: path
           required: true
           schema:
@@ -1884,7 +2135,7 @@ paths:
         - Skjerming
       operationId: PutSkjerming
       parameters:
-        - name: id
+        - name: skjermingId
           in: path
           required: true
           schema:
@@ -1908,7 +2159,7 @@ paths:
         - Skjerming
       operationId: DeleteSkjerming
       parameters:
-        - name: id
+        - name: skjermingId
           in: path
           required: true
           schema:
@@ -1922,7 +2173,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Skjerming"
 
-  /utredning/{id}:
+  /utredning/{utredningId}:
     get:
       description: Get a single Utredning.
       tags:
@@ -1930,7 +2181,7 @@ paths:
       operationId: GetUtredning
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: utredningId
           in: path
           required: true
           schema:
@@ -1949,7 +2200,7 @@ paths:
         - Utredning
       operationId: PutUtredning
       parameters:
-        - name: id
+        - name: utredningId
           in: path
           required: true
           schema:
@@ -1973,7 +2224,7 @@ paths:
         - Utredning
       operationId: DeleteUtredning
       parameters:
-        - name: id
+        - name: utredningId
           in: path
           required: true
           schema:
@@ -1987,7 +2238,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Utredning"
 
-  /vedtak/{id}:
+  /vedtak/{vedtakId}:
     get:
       description: Get a single Vedtak.
       tags:
@@ -1995,7 +2246,7 @@ paths:
       operationId: GetVedtak
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: vedtakId
           in: path
           required: true
           schema:
@@ -2014,7 +2265,7 @@ paths:
         - Vedtak
       operationId: PutVedtak
       parameters:
-        - name: id
+        - name: vedtakId
           in: path
           required: true
           schema:
@@ -2038,7 +2289,7 @@ paths:
         - Vedtak
       operationId: DeleteVedtak
       parameters:
-        - name: id
+        - name: vedtakId
           in: path
           required: true
           schema:
@@ -2052,7 +2303,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Vedtak"
 
-  /votering/{id}:
+  /votering/{voteringId}:
     get:
       description: Get a single Votering.
       tags:
@@ -2060,7 +2311,7 @@ paths:
       operationId: GetVotering
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: voteringId
           in: path
           required: true
           schema:
@@ -2079,7 +2330,7 @@ paths:
         - Votering
       operationId: PutVotering
       parameters:
-        - name: id
+        - name: voteringId
           in: path
           required: true
           schema:
@@ -2103,7 +2354,7 @@ paths:
         - Votering
       operationId: DeleteVotering
       parameters:
-        - name: id
+        - name: voteringId
           in: path
           required: true
           schema:
@@ -2129,7 +2380,7 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: parent
+        - name: parentId
           in: query
           description: Filter by parent
           schema:
@@ -2166,7 +2417,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Enhet"
 
-  /enhet/{id}:
+  /enhet/{enhetId}:
     get:
       description: Get a single Enhet.
       tags:
@@ -2174,7 +2425,7 @@ paths:
       operationId: GetEnhet
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: enhetId
           in: path
           required: true
           schema:
@@ -2193,7 +2444,7 @@ paths:
         - Enhet
       operationId: PutEnhet
       parameters:
-        - name: id
+        - name: enhetId
           in: path
           required: true
           schema:
@@ -2217,7 +2468,7 @@ paths:
         - Enhet
       operationId: DeleteEnhet
       parameters:
-        - name: id
+        - name: enhetId
           in: path
           required: true
           schema:
@@ -2231,14 +2482,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Enhet"
 
-  /enhet/{id}/underenhet:
+  /enhet/{enhetId}/underenhet:
     get:
       description: Get all underenhet for a Enhet.
       tags:
         - Enhet
       operationId: GetEnhetUnderenhetList
       parameters:
-        - name: id
+        - name: enhetId
           in: path
           required: true
           schema:
@@ -2270,7 +2521,7 @@ paths:
         - Enhet
       operationId: PostEnhetUnderenhet
       parameters:
-        - name: id
+        - name: enhetId
           in: path
           required: true
           schema:
@@ -2289,66 +2540,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Enhet"
 
-  /enhet/{id}/underenhet/{subId}:
-    delete:
-      description: Delete a subEnhet from a Enhet.
-      tags:
-        - Enhet
-      operationId: DeleteEnhetUnderenhet
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Enhet
-        - name: subId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Enhet
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Enhet"
-
-  /journalpost:
-    get:
-      description: Get a list of journalpost.
-      tags:
-        - Journalpost
-      operationId: GetJournalpostList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - name: saksmappe
-          in: query
-          description: Filter by SaksmappeId
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Journalpost"
-
-  /journalpost/{id}:
+  /journalpost/{journalpostId}:
     get:
       description: Get a single record.
       tags:
@@ -2356,7 +2548,7 @@ paths:
       operationId: GetJournalpost
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: journalpostId
           in: path
           required: true
           schema:
@@ -2375,7 +2567,7 @@ paths:
         - Journalpost
       operationId: PutJournalpost
       parameters:
-        - name: id
+        - name: journalpostId
           in: path
           required: true
           schema:
@@ -2399,7 +2591,7 @@ paths:
         - Journalpost
       operationId: DeleteJournalpost
       parameters:
-        - name: id
+        - name: journalpostId
           in: path
           required: true
           schema:
@@ -2413,14 +2605,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Journalpost"
 
-  /journalpost/{id}/korrespondansepart:
+  /journalpost/{journalpostId}/korrespondansepart:
     get:
       description: Get a list of Korrespondansepart for a Journalpost.
       tags:
         - Journalpost
       operationId: GetJournalpostKorrespondansepartList
       parameters:
-        - name: id
+        - name: journalpostId
           in: path
           required: true
           schema:
@@ -2431,6 +2623,11 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - name: journalpostId
+          in: query
+          description: Filter by Journalpost
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -2451,7 +2648,7 @@ paths:
         - Journalpost
       operationId: PostJournalpostKorrespondansepart
       parameters:
-        - name: id
+        - name: journalpostId
           in: path
           required: true
           schema:
@@ -2470,41 +2667,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Korrespondansepart"
 
-  /journalpost/{id}/korrespondansepart/{subId}:
-    delete:
-      description: Delete a Korrespondansepart from a Journalpost.
-      tags:
-        - Journalpost
-      operationId: DeleteJournalpostKorrespondansepart
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Journalpost
-        - name: subId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Korrespondansepart
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Journalpost"
-
-  /journalpost/{id}/dokumentbeskrivelse:
+  /journalpost/{journalpostId}/dokumentbeskrivelse:
     get:
       description: Get a list of Dokumentbeskrivelse for a Journalpost.
       tags:
         - Journalpost
       operationId: GetJournalpostDokumentbeskrivelseList
       parameters:
-        - name: id
+        - name: journalpostId
           in: path
           required: true
           schema:
@@ -2515,6 +2685,11 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - name: journalpostId
+          in: query
+          description: Filter by Journalpost id.
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -2535,7 +2710,7 @@ paths:
         - Journalpost
       operationId: PostJournalpostDokumentbeskrivelse
       parameters:
-        - name: id
+        - name: journalpostId
           in: path
           required: true
           schema:
@@ -2554,20 +2729,20 @@ paths:
               schema:
                 $ref: "#/components/schemas/Dokumentbeskrivelse"
 
-  /journalpost/{id}/dokumentbeskrivelse/{subId}:
+  /journalpost/{journalpostId}/dokumentbeskrivelse/{dokumentbeskrivelseId}:
     delete:
       description: Delete a Dokumentbeskrivelse from a Journalpost.
       tags:
         - Journalpost
       operationId: DeleteJournalpostDokumentbeskrivelse
       parameters:
-        - name: id
+        - name: journalpostId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Journalpost
-        - name: subId
+        - name: dokumentbeskrivelseId
           in: path
           required: true
           schema:
@@ -2581,39 +2756,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Journalpost"
 
-  /dokumentbeskrivelse:
-    get:
-      description: Get a Dokumentbeskrivelse list.
-      tags:
-        - Dokumentbeskrivelse
-      operationId: GetDokumentbeskrivelseList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - name: journalpost
-          in: query
-          description: Filter by Journalpost id.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Dokumentbeskrivelse"
-
-  /dokumentbeskrivelse/{id}:
+  /dokumentbeskrivelse/{dokumentbeskrivelseId}:
     get:
       description: Get a single record.
       tags:
@@ -2621,7 +2764,7 @@ paths:
       operationId: GetDokumentbeskrivelse
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: dokumentbeskrivelseId
           in: path
           required: true
           schema:
@@ -2640,7 +2783,7 @@ paths:
         - Dokumentbeskrivelse
       operationId: PutDokumentbeskrivelse
       parameters:
-        - name: id
+        - name: dokumentbeskrivelseId
           in: path
           required: true
           schema:
@@ -2664,7 +2807,7 @@ paths:
         - Dokumentbeskrivelse
       operationId: DeleteDokumentbeskrivelse
       parameters:
-        - name: id
+        - name: dokumentbeskrivelseId
           in: path
           required: true
           schema:
@@ -2678,14 +2821,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Dokumentbeskrivelse"
 
-  /dokumentbeskrivelse/{id}/download/{subId}.{docExtension}:
+  /dokumentbeskrivelse/{dokumentbeskrivelseId}/download/{subId}.{docExtension}:
     get:
       description: Download the binary file.
       tags:
         - Dokumentbeskrivelse
       operationId: DownloadDokumentbeskrivelse
       parameters:
-        - name: id
+        - name: dokumentbeskrivelseId
           in: path
           required: true
           schema:
@@ -2711,51 +2854,7 @@ paths:
                 type: string
                 format: binary
 
-  /saksmappe:
-    get:
-      description: Get a Saksmappe list.
-      tags:
-        - Saksmappe
-      operationId: GetSaksmappeList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Saksmappe"
-    post:
-      description: Add a new Saksmappe.
-      tags:
-        - Saksmappe
-      operationId: PostSaksmappe
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Saksmappe"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Saksmappe"
-
-  /saksmappe/{id}:
+  /saksmappe/{saksmappeId}:
     get:
       description: Get a Saksmappe.
       tags:
@@ -2763,7 +2862,7 @@ paths:
       operationId: GetSaksmappe
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: saksmappeId
           in: path
           required: true
           schema:
@@ -2782,7 +2881,7 @@ paths:
         - Saksmappe
       operationId: PutSaksmappe
       parameters:
-        - name: id
+        - name: saksmappeId
           in: path
           required: true
           schema:
@@ -2806,7 +2905,7 @@ paths:
         - Saksmappe
       operationId: DeleteSaksmappe
       parameters:
-        - name: id
+        - name: saksmappeId
           in: path
           required: true
           schema:
@@ -2820,14 +2919,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Saksmappe"
 
-  /saksmappe/{id}/journalpost:
+  /saksmappe/{saksmappeId}/journalpost:
     get:
       description: Get Journalpost list for a Saksmappe.
       tags:
         - Saksmappe
       operationId: GetSaksmappeJournalpostList
       parameters:
-        - name: id
+        - name: saksmappeId
           in: path
           required: true
           schema:
@@ -2838,6 +2937,11 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - name: saksmappeId
+          in: query
+          description: Filter by SaksmappeId
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -2859,7 +2963,7 @@ paths:
         - Saksmappe
       operationId: PostSaksmappeJournalpost
       parameters:
-        - name: id
+        - name: saksmappeId
           in: path
           required: true
           schema:
@@ -2878,78 +2982,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Journalpost"
 
-  /saksmappe/{id}/journalpost/{subId}:
-    delete:
-      description: Remove a Journalpost from a Saksmappe.
-      tags:
-        - Saksmappe
-      operationId: DeleteSaksmappeJournalpost
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Saksmappe
-        - name: subId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Journalpost
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Saksmappe"
-
-  /moetemappe:
-    get:
-      description: Get a Moetemappe list.
-      tags:
-        - Moetemappe
-      operationId: GetMoetemappeList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Moetemappe"
-    post:
-      description: Add a new Moetemappe.
-      tags:
-        - Moetemappe
-      operationId: PostMoetemappe
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Moetemappe"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Moetemappe"
-
-  /moetemappe/{id}:
+  /moetemappe/{moetemappeId}:
     get:
       description: Get a Moetemappe.
       tags:
@@ -2957,7 +2990,7 @@ paths:
       operationId: GetMoetemappe
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: moetemappeId
           in: path
           required: true
           schema:
@@ -2976,7 +3009,7 @@ paths:
         - Moetemappe
       operationId: PutMoetemappe
       parameters:
-        - name: id
+        - name: moetemappeId
           in: path
           required: true
           schema:
@@ -3000,7 +3033,7 @@ paths:
         - Moetemappe
       operationId: DeleteMoetemappe
       parameters:
-        - name: id
+        - name: moetemappeId
           in: path
           required: true
           schema:
@@ -3014,14 +3047,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetemappe"
 
-  /moetemappe/{id}/moetedokument:
+  /moetemappe/{moetemappeId}/moetedokument:
     get:
       description: Get a Moetedokument list.
       tags:
         - Moetemappe
       operationId: GetMoetemappeMoetedokumentList
       parameters:
-        - name: id
+        - name: moetemappeId
           in: path
           required: true
           schema:
@@ -3032,6 +3065,11 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - name: moetemappeId
+          in: query
+          description: Filter by MoetemappeId
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -3053,7 +3091,7 @@ paths:
         - Moetemappe
       operationId: PostMoetemappeMoetedokument
       parameters:
-        - name: id
+        - name: moetemappeId
           in: path
           required: true
           schema:
@@ -3072,42 +3110,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetedokument"
 
-  /moetemappe/{id}/moetedokument/{subId}:
-    delete:
-      description: >-
-        Remove a document from a meeting. This will delete the Moetedokument if it is orphaned.
-      tags:
-        - Moetemappe
-      operationId: DeleteMoetemappeMoetedokument
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Moetemappe
-        - name: subId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Moetedokument
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Moetemappe"
-
-  /moetemappe/{id}/moetesak:
+  /moetemappe/{moetemappeId}/moetesak:
     get:
       description: Get a Moetesak list for a Moetemappe.
       tags:
         - Moetemappe
       operationId: GetMoetemappeMoetesakList
       parameters:
-        - name: id
+        - name: moetemappeId
           in: path
           required: true
           schema:
@@ -3118,6 +3128,11 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - name: moetemappeId
+          in: query
+          description: Filter by MoetemappeId
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -3138,7 +3153,7 @@ paths:
         - Moetemappe
       operationId: PostMoetemappeMoetesak
       parameters:
-        - name: id
+        - name: moetemappeId
           in: path
           required: true
           schema:
@@ -3156,33 +3171,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetesak"
-
-  /moetemappe/{id}/moetesak/{subId}:
-    delete:
-      description: Remove a Moetesak from a Moetemappe. This will delete the Moetesak if it is orphaned.
-      tags:
-        - Moetemappe
-      operationId: DeleteMoetemappeMoetesak
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Moetemappe
-        - name: subId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Moetesak
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Moetemappe"
 
   /bruker:
     get:
@@ -3229,7 +3217,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{id}:
+  /bruker/{brukerId}:
     get:
       description: Get a single Bruker.
       tags:
@@ -3237,7 +3225,7 @@ paths:
       operationId: GetBruker
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3256,7 +3244,7 @@ paths:
         - Bruker
       operationId: PutBruker
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3280,7 +3268,7 @@ paths:
         - Bruker
       operationId: DeleteBruker
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3294,14 +3282,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{id}/innsynskrav:
+  /bruker/{brukerId}/innsynskrav:
     get:
       description: Get all innsynskrav for a Bruker.
       tags:
         - Bruker
       operationId: GetBrukerInnsynskravList
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3334,7 +3322,7 @@ paths:
         - Bruker
       operationId: PostBrukerInnsynskrav
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3353,41 +3341,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
 
-  /bruker/{id}/innsynskrav/{subId}:
-    delete:
-      description: Delete a Innsynskrav from a Bruker.
-      tags:
-        - Bruker
-      operationId: DeleteBrukerInnsynskrav
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Bruker
-        - name: subId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Innsynskrav
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Bruker"
-
-  /bruker/{id}/lagretSoek:
+  /bruker/{brukerId}/lagretSoek:
     get:
       description: Get LagretSoek list for a Bruker.
       tags:
         - Bruker
       operationId: GetBrukerLagretSoekList
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3420,7 +3381,7 @@ paths:
         - Bruker
       operationId: PostBrukerLagretSoek
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3439,41 +3400,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/LagretSoek"
 
-  /bruker/{id}/lagretSoek/{subId}:
-    delete:
-      description: Delete a LagretSoek from a Bruker.
-      tags:
-        - Bruker
-      operationId: DeleteBrukerLagretSoek
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Bruker
-        - name: subId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: LagretSoek
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Bruker"
-
-  /bruker/{id}/lagretSak:
+  /bruker/{brukerId}/lagretSak:
     get:
       description: Get LagretSak list for a Bruker.
       tags:
         - Bruker
       operationId: GetBrukerLagretSakList
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3506,7 +3440,7 @@ paths:
         - Bruker
       operationId: PostBrukerLagretSak
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3525,41 +3459,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/LagretSak"
 
-  /bruker/{id}/lagretSak/{subId}:
-    delete:
-      description: Delete a LagretSak from a Bruker.
-      tags:
-        - Bruker
-      operationId: DeleteBrukerLagretSak
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Bruker
-        - name: subId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: LagretSak
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Bruker"
-
-  /bruker/{id}/activate/{secret}:
+  /bruker/{brukerId}/activate/{secret}:
     put:
       description: Activate a Bruker.
       tags:
         - Bruker
       operationId: Activate
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3578,14 +3485,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{id}/updatePassword:
+  /bruker/{brukerId}/updatePassword:
     put:
       description: Update password for a Bruker.
       tags:
         - Bruker
       operationId: PutBrukerPassword
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3610,14 +3517,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{id}/updatePassword/{secret}:
+  /bruker/{brukerId}/updatePassword/{secret}:
     put:
       description: Update password for a Bruker.
       tags:
         - Bruker
       operationId: PutBrukerPasswordWithSecret
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3646,14 +3553,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{id}/requestPasswordReset:
+  /bruker/{brukerId}/requestPasswordReset:
     put:
       description: Request password reset for a Bruker.
       tags:
         - Bruker
       operationId: RequestPasswordReset
       parameters:
-        - name: id
+        - name: brukerId
           in: path
           required: true
           schema:
@@ -3712,7 +3619,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Tilbakemelding"
 
-  /tilbakemelding/{id}:
+  /tilbakemelding/{tilbakemeldingId}:
     get:
       description: Get a single Tilbakemelding.
       tags:
@@ -3720,7 +3627,7 @@ paths:
       operationId: GetTilbakemelding
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: id
+        - name: tilbakemeldingId
           in: path
           required: true
           schema:
@@ -3739,7 +3646,7 @@ paths:
         - Tilbakemelding
       operationId: PutTilbakemelding
       parameters:
-        - name: id
+        - name: tilbakemeldingId
           in: path
           required: true
           schema:
@@ -3763,7 +3670,7 @@ paths:
         - Tilbakemelding
       operationId: DeleteTilbakemelding
       parameters:
-        - name: id
+        - name: tilbakemeldingId
           in: path
           required: true
           schema:
@@ -4328,7 +4235,7 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Moetesaksbeskrivelse"
-            utredningsdokumenter:
+            utredningsdokument:
               type: array
               items:
                 anyOf:
@@ -4340,7 +4247,7 @@ components:
           x-expandableFields:
             - saksbeskrivelse
             - innstilling
-            - utredningsdokumenter
+            - utredningsdokument
 
     Vedtak:
       type: object
@@ -4368,7 +4275,7 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Behandlingsprotokoll"
-            vedtaksdokumenter:
+            vedtaksdokument:
               type: array
               items:
                 anyOf:
@@ -4384,7 +4291,7 @@ components:
             - vedtakstekst
             - votering
             - behandlingsprotokoll
-            - vedtaksdokumenter
+            - vedtaksdokument
 
     Votering:
       type: object
@@ -4507,10 +4414,12 @@ components:
               type: boolean
             administrativEnhet:
               type: string
-            journalpost:
+            parent:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Journalpost"
+                - $ref: "#/components/schemas/Moetedokument"
+                - $ref: "#/components/schemas/Moetesak"
           required:
             - korrespondansepartNavn
             - korrespondansepartNavnSensitiv
@@ -4825,6 +4734,10 @@ components:
               enum: ["Moetedokument"]
               readOnly: true
             moetedokumenttype:
+              type: string
+            saksbehandler:
+              type: string
+            saksbehandlerSensitiv:
               type: string
             moetemappe:
               anyOf:
