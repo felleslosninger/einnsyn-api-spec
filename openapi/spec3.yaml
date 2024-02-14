@@ -2756,32 +2756,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/Journalpost"
 
-  /journalpost/{journalpostId}/matrikkelnummer:
-    post:
-      description: Add a Matrikkelnummer to a Journalpost.
-      tags:
-        - Journalpost
-      operationId: PostJournalpostMatrikkelnummer
-      parameters:
-        - name: journalpostId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Journalpost
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Matrikkelnummer"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Matrikkelnummer"
-
   /dokumentbeskrivelse/{dokumentbeskrivelseId}:
     get:
       description: Get a single record.
@@ -4054,32 +4028,6 @@ components:
           x-expandableFields:
             - saksmappe
             - skjerming
-
-    Matrikkelnummer:
-      type: object
-      x-resourceId: Matrikkelnummer
-      allOf:
-        - $ref: "#/components/schemas/ArkivBase"
-        - type: object
-          properties:
-            entity:
-              type: string
-              enum: ["Matrikkelnummer"]
-              readOnly: true
-            kommunenummer:
-              type: string
-            gardsnummer:
-              type: string
-            bruksnummer:
-              type: string
-            festenummer:
-              type: string
-            seksjonsnummer:
-              type: string
-          required:
-            - kommunenummer
-            - gardsnummer
-            - bruksnummer
 
     Mappe:
       type: object
