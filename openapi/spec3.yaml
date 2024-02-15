@@ -2238,6 +2238,69 @@ paths:
               schema:
                 $ref: "#/components/schemas/Utredning"
 
+  /utredning/{utredningId}/utredningsdokument:
+    get:
+      description: Get a Utredningsdokument list.
+      tags:
+        - Utredning
+      operationId: GetUtredningUtredningsdokumentList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: utredningId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Utredning
+        - name: utredningId
+          in: query
+          description: Filter by Utredning
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Dokumentbeskrivelse"
+    post:
+      description: Create a Utredningsdokument.
+      tags:
+        - Utredning
+      operationId: PostUtredningUtredningsdokument
+      parameters:
+        - name: utredningId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Utredning
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dokumentbeskrivelse"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dokumentbeskrivelse"
+
   /vedtak/{vedtakId}:
     get:
       description: Get a single Vedtak.
@@ -2302,6 +2365,69 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Vedtak"
+
+  /vedtak/{vedtakId}/vedtaksdokument:
+    get:
+      description: Get a Vedtaksdokument list.
+      tags:
+        - Vedtak
+      operationId: GetVedtakVedtaksdokumentList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: vedtakId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Vedtak
+        - name: vedtakId
+          in: query
+          description: Filter by Vedtak
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Dokumentbeskrivelse"
+    post:
+      description: Create a Vedtaksdokument.
+      tags:
+        - Vedtak
+      operationId: PostVedtakVedtaksdokument
+      parameters:
+        - name: vedtakId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Vedtak
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dokumentbeskrivelse"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dokumentbeskrivelse"
 
   /votering/{voteringId}:
     get:
@@ -4744,6 +4870,8 @@ components:
                 - type: string
                 - $ref: "#/components/schemas/Moetemappe"
               readOnly: true
+          required:
+            - moetedokumenttype
 
     LagretSoek:
       type: object
