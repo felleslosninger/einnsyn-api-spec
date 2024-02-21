@@ -4753,6 +4753,14 @@ components:
               type: string
               format: date-time
               readOnly: true
+            retryCount:
+              type: integer
+              default: 0
+              readOnly: true
+            retryTimestamp:
+              type: string
+              format: date-time
+              readOnly: true
           required:
             - journalpost
           x-expandableFields:
@@ -4877,6 +4885,8 @@ components:
             - tittelSensitiv
             - dokumentnummer
             - tilknyttetRegistreringSom
+          x-expandableFields:
+            - dokumentobjekt
 
     Dokumentobjekt:
       type: object
@@ -4900,9 +4910,6 @@ components:
               type: string
           required:
             - referanseDokumentfil
-            - format
-            - sjekksum
-            - sjekksumAlgoritme
 
     Moetedokument:
       type: object
