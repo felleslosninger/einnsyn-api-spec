@@ -873,37 +873,6 @@ paths:
                 $ref: "#/components/schemas/Identifikator"
 
   /innsynskrav:
-    get:
-      description: Get a Innsynskrav list.
-      tags:
-        - Innsynskrav
-      operationId: GetInnsynskravList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - name: brukerId
-          in: query
-          description: Filter by BrukerId
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Innsynskrav"
     post:
       description: Create a Innsynskrav.
       tags:
@@ -987,6 +956,45 @@ paths:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
 
+  /innsynskrav/{innsynskravId}/innsynskravDel:
+    get:
+      description: Get a InnsynskravDel list.
+      tags:
+        - InnsynskravDel
+      operationId: GetInnsynskravInnsynskravDelList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: innsynskravId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Innsynskrav
+        - name: innsynskravId
+          in: query
+          description: Filter by Innsynskrav
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/InnsynskravDel"
+
   /innsynskrav/{innsynskravId}/verify/{secret}:
     put:
       description: Verify a Innsynskrav.
@@ -1021,49 +1029,6 @@ paths:
       operationId: GetInnsynskravDel
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: innsynskravDelId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: InnsynskravDel
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InnsynskravDel"
-    put:
-      description: Update a single InnsynskravDel.
-      tags:
-        - InnsynskravDel
-      operationId: PutInnsynskravDel
-      parameters:
-        - name: innsynskravDelId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: InnsynskravDel
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InnsynskravDel"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InnsynskravDel"
-    delete:
-      description: Delete a single InnsynskravDel.
-      tags:
-        - InnsynskravDel
-      operationId: DeleteInnsynskravDel
-      parameters:
         - name: innsynskravDelId
           in: path
           required: true
@@ -2579,23 +2544,6 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Enhet"
-    post:
-      description: Add a new Enhet.
-      tags:
-        - Enhet
-      operationId: PostEnhet
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Enhet"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Enhet"
 
   /enhet/{enhetId}:
     get:
@@ -2669,17 +2617,17 @@ paths:
         - Enhet
       operationId: GetEnhetUnderenhetList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: enhetId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Enhet
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
       responses:
         "200":
           description: Successful response.
@@ -2719,6 +2667,144 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Enhet"
+
+  /enhet/{enhetId}/apiKey:
+    get:
+      description: Get a list of ApiKey for a Enhet.
+      tags:
+        - Enhet
+      operationId: GetEnhetApiKeyList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: enhetId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
+        - name: enhetId
+          in: query
+          description: Filter by Enhet
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/ApiKey"
+    post:
+      description: Add a new ApiKey to a Enhet.
+      tags:
+        - Enhet
+      operationId: PostEnhetApiKey
+      parameters:
+        - name: enhetId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiKey"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+
+  /enhet/{enhetId}/arkiv:
+    get:
+      description: Get a list of Arkiv for a Enhet.
+      tags:
+        - Enhet
+      operationId: GetEnhetArkivList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: enhetId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
+        - name: enhetId
+          in: query
+          description: Filter by Enhet
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Arkiv"
+
+  /enhet/{enhetId}/innsynskravDel:
+    get:
+      description: Get a list of InnsynskravDel for a Enhet.
+      tags:
+        - Enhet
+      operationId: GetEnhetInnsynskravDelList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: enhetId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Enhet
+        - name: enhetId
+          in: query
+          description: Filter by Enhet
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/InnsynskravDel"
 
   /journalpost/{journalpostId}:
     get:
@@ -2792,17 +2878,17 @@ paths:
         - Journalpost
       operationId: GetJournalpostKorrespondansepartList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: journalpostId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Journalpost
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
         - name: journalpostId
           in: query
           description: Filter by Journalpost
@@ -2854,17 +2940,17 @@ paths:
         - Journalpost
       operationId: GetJournalpostDokumentbeskrivelseList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: journalpostId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Journalpost
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
         - name: journalpostId
           in: query
           description: Filter by Journalpost id.
@@ -3106,17 +3192,17 @@ paths:
         - Saksmappe
       operationId: GetSaksmappeJournalpostList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: saksmappeId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Saksmappe
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
         - name: saksmappeId
           in: query
           description: Filter by SaksmappeId
@@ -3234,17 +3320,17 @@ paths:
         - Moetemappe
       operationId: GetMoetemappeMoetedokumentList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: moetemappeId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Moetemappe
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
         - name: moetemappeId
           in: query
           description: Filter by MoetemappeId
@@ -3297,17 +3383,17 @@ paths:
         - Moetemappe
       operationId: GetMoetemappeMoetesakList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: moetemappeId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Moetemappe
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
         - name: moetemappeId
           in: query
           description: Filter by MoetemappeId
@@ -3469,17 +3555,22 @@ paths:
         - Bruker
       operationId: GetBrukerInnsynskravList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: brukerId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Bruker
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
+        - name: brukerId
+          in: query
+          description: Filter by brukerId
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -3496,30 +3587,44 @@ paths:
                         items:
                           $ref: "#/components/schemas/Innsynskrav"
 
-    post:
-      description: Add a Innsynskrav to a Bruker.
+  /bruker/{brukerId}/innsynskravDel:
+    get:
+      description: Get all innsynskravDel for a Bruker.
       tags:
         - Bruker
-      operationId: PostBrukerInnsynskrav
+      operationId: GetBrukerInnsynskravDelList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: brukerId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Bruker
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Innsynskrav"
+        - name: brukerId
+          in: query
+          description: Filter by brukerId
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Innsynskrav"
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/InnsynskravDel"
 
   /bruker/{brukerId}/lagretSoek:
     get:
@@ -3528,17 +3633,22 @@ paths:
         - Bruker
       operationId: GetBrukerLagretSoekList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: brukerId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Bruker
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
+        - name: brukerId
+          in: query
+          description: Filter by brukerId
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -3587,17 +3697,22 @@ paths:
         - Bruker
       operationId: GetBrukerLagretSakList
       parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
         - name: brukerId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: Bruker
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
+        - name: brukerId
+          in: query
+          description: Filter by brukerId
+          schema:
+            type: string
       responses:
         "200":
           description: Successful response.
@@ -3652,8 +3767,8 @@ paths:
           schema:
             type: string
           x-resourceId: Bruker
-        - in: path
-          name: secret
+        - name: secret
+          in: path
           required: true
           schema:
             type: string
@@ -3958,6 +4073,71 @@ paths:
                             - $ref: "#/components/schemas/Moetesak"
                             - $ref: "#/components/schemas/Saksmappe"
 
+  /apiKey/{apiKeyId}:
+    get:
+      description: Get a single ApiKey.
+      tags:
+        - ApiKey
+      operationId: GetApiKey
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - name: apiKeyId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: ApiKey
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+    put:
+      description: Update a single ApiKey.
+      tags:
+        - ApiKey
+      operationId: PutApiKey
+      parameters:
+        - name: apiKeyId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiKey"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+    delete:
+      description: Delete a single ApiKey.
+      tags:
+        - ApiKey
+      operationId: DeleteApiKey
+      parameters:
+        - name: apiKeyId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: ApiKey
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+
 security:
   - ApiKey: []
 
@@ -4184,10 +4364,12 @@ components:
               format: date
             administrativEnhet:
               type: string
+              readOnly: true
             administrativEnhetObjekt:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Enhet"
+              readOnly: true
             sorteringstype:
               type: string
               readOnly: true
@@ -4360,9 +4542,9 @@ components:
               type: integer
             moetesakssekvensnummer:
               type: integer
-            administrativEnhet:
+            utvalg:
               type: string
-            administrativEnhetObjekt:
+            utvalgObjekt:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Enhet"
@@ -4908,6 +5090,11 @@ components:
               type: string
             sjekksumAlgoritme:
               type: string
+            dokumentbeskrivelse:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Dokumentbeskrivelse"
+              readOnly: true
           required:
             - referanseDokumentfil
 
@@ -5018,6 +5205,37 @@ components:
             adminComment:
               type: string
 
+    ApiKey:
+      type: object
+      x-resourceId: ApiKey
+      x-idPrefix: "key"
+      allOf:
+        - $ref: "#/components/schemas/Base"
+        - properties:
+            entity:
+              type: string
+              enum: ["ApiKey"]
+              readOnly: true
+            name:
+              type: string
+              description: >-
+                A name for the API key. This can be used to identify the key, in
+                case you have multiple keys for multiple systems.
+            secretKey:
+              type: string
+              description: >-
+                The API key used to authenticate requests. This will only be shown
+                once, and we will only store a hashed version.
+              readOnly: true
+            enhet:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Enhet"
+              description: >-
+                The Enhet that requests using this key will be associated with.
+          x-expandableFields:
+            - enhet
+
     ResultList:
       type: object
       x-resourceId: ResultList
@@ -5102,3 +5320,13 @@ components:
       name: endingBefore
       schema:
         type: string
+
+    IRI:
+      description: >-
+        The IRI of a resource.
+      in: query
+      name: iri
+      required: true
+      schema:
+        type: string
+        format: uri
