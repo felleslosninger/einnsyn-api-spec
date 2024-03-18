@@ -25,6 +25,34 @@ tags:
 
 paths:
   /arkiv:
+    get:
+      description: Get a Arkiv list.
+      tags:
+        - Arkiv
+      operationId: GetArkivList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Arkiv"
     post:
       description: Create a Arkiv.
       tags:
@@ -360,6 +388,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetemappe"
 
+  /arkivdel:
+    get:
+      description: Get an Arkivdel list.
+      tags:
+        - Arkivdel
+      operationId: GetArkivdelList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Arkivdel"
+
   /arkivdel/{arkivdelId}:
     get:
       description: Get a single Arkivdel.
@@ -677,6 +735,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetemappe"
 
+  /behandlingsprotokoll:
+    get:
+      description: Get a Behandlingsprotokoll list.
+      tags:
+        - Behandlingsprotokoll
+      operationId: GetBehandlingsprotokollList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Behandlingsprotokoll"
+
   /behandlingsprotokoll/{behandlingsprotokollId}:
     get:
       description: Get a single Behandlingsprotokoll.
@@ -742,6 +830,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Behandlingsprotokoll"
 
+  /dokumentobjekt:
+    get:
+      description: Get a Dokumentobjekt list.
+      tags:
+        - Dokumentobjekt
+      operationId: GetDokumentobjektList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Dokumentobjekt"
+
   /dokumentobjekt/{dokumentobjektId}:
     get:
       description: Get a single Dokumentobjekt.
@@ -806,6 +924,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Dokumentobjekt"
+
+  /identifikator:
+    get:
+      description: Get a Identifikator list.
+      tags:
+        - Identifikator
+      operationId: GetIdentifikatorList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Identifikator"
 
   /identifikator/{identifikatorId}:
     get:
@@ -873,6 +1021,34 @@ paths:
                 $ref: "#/components/schemas/Identifikator"
 
   /innsynskrav:
+    get:
+      description: Get a Innsynskrav list.
+      tags:
+        - Innsynskrav
+      operationId: GetInnsynskravList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Innsynskrav"
     post:
       description: Create a Innsynskrav.
       tags:
@@ -1021,6 +1197,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
 
+  /innsynskravDel:
+    get:
+      description: Get a InnsynskravDel list.
+      tags:
+        - InnsynskravDel
+      operationId: GetInnsynskravDelList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/InnsynskravDel"
+
   /innsynskravDel/{innsynskravDelId}:
     get:
       description: Get a single InnsynskravDel.
@@ -1042,6 +1248,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InnsynskravDel"
+
+  /klasse:
+    get:
+      description: Get a Klasse list.
+      tags:
+        - Klasse
+      operationId: GetKlasseList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Klasse"
 
   /klasse/{klasseId}:
     get:
@@ -1298,6 +1534,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetemappe"
 
+  /klassifikasjonssystem:
+    get:
+      description: Get a Klassifikasjonssystem list.
+      tags:
+        - Klassifikasjonssystem
+      operationId: GetKlassifikasjonssystemList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Klassifikasjonssystem"
+
   /klassifikasjonssystem/{klassifikasjonssystemId}:
     get:
       description: Get a single Klassifikasjonssystem.
@@ -1426,6 +1692,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Klasse"
 
+  /korrespondansepart:
+    get:
+      description: Get a Korrespondansepart list.
+      tags:
+        - Korrespondansepart
+      operationId: GetKorrespondansepartList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Korrespondansepart"
+
   /korrespondansepart/{korrespondansepartId}:
     get:
       description: Get a single Korrespondansepart.
@@ -1503,6 +1799,8 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
         - name: brukerId
           in: query
           description: Filter by BrukerId
@@ -1601,6 +1899,8 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
         - name: brukerId
           in: query
           description: Filter by BrukerId
@@ -1687,6 +1987,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/LagretSoek"
 
+  /moetedeltaker:
+    get:
+      description: Get a Moetedeltaker list.
+      tags:
+        - Moetedeltaker
+      operationId: GetMoetedeltakerList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetedeltaker"
+
   /moetedeltaker/{moetedeltakerId}:
     get:
       description: Get a single Moetedeltaker.
@@ -1751,6 +2081,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetedeltaker"
+
+  /moetedokument:
+    get:
+      description: Get a Moetedokument list.
+      tags:
+        - Moetedokument
+      operationId: GetMoetedokumentList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetedokument"
 
   /moetedokument/{moetedokumentId}:
     get:
@@ -1880,6 +2240,53 @@ paths:
               schema:
                 $ref: "#/components/schemas/Dokumentbeskrivelse"
 
+  /moetesak:
+    get:
+      description: Get a Moetesak list.
+      tags:
+        - Moetesak
+      operationId: GetMoetesakList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetesak"
+    post:
+      description: Create a Moetesak.
+      tags:
+        - Moetesak
+      operationId: PostMoetesak
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Moetesak"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Moetesak"
+
   /moetesak/{moetesakId}:
     get:
       description: Get a single Moetesak.
@@ -2008,6 +2415,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Dokumentbeskrivelse"
 
+  /moetesaksbeskrivelse:
+    get:
+      description: Get a Moetesaksbeskrivelse list.
+      tags:
+        - Moetesaksbeskrivelse
+      operationId: GetMoetesaksbeskrivelseList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetesaksbeskrivelse"
+
   /moetesaksbeskrivelse/{moetesaksbeskrivelseId}:
     get:
       description: Get a single Moetesaksbeskrivelse.
@@ -2073,6 +2510,53 @@ paths:
               schema:
                 $ref: "#/components/schemas/Moetesaksbeskrivelse"
 
+  /skjerming:
+    get:
+      description: Get a Skjerming list.
+      tags:
+        - Skjerming
+      operationId: GetSkjermingList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Skjerming"
+    post:
+      description: Create a Skjerming.
+      tags:
+        - Skjerming
+      operationId: PostSkjerming
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Skjerming"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Skjerming"
+
   /skjerming/{skjermingId}:
     get:
       description: Get a single Skjerming.
@@ -2137,6 +2621,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Skjerming"
+
+  /utredning:
+    get:
+      description: Get a Utredning list.
+      tags:
+        - Utredning
+      operationId: GetUtredningList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Utredning"
 
   /utredning/{utredningId}:
     get:
@@ -2293,6 +2807,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Dokumentbeskrivelse"
 
+  /vedtak:
+    get:
+      description: Get a Vedtak list.
+      tags:
+        - Vedtak
+      operationId: GetVedtakList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Vedtak"
+
   /vedtak/{vedtakId}:
     get:
       description: Get a single Vedtak.
@@ -2448,6 +2992,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Dokumentbeskrivelse"
 
+  /votering:
+    get:
+      description: Get a Votering list.
+      tags:
+        - Votering
+      operationId: GetVoteringList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Votering"
+
   /votering/{voteringId}:
     get:
       description: Get a single Votering.
@@ -2525,6 +3099,8 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
         - name: parentId
           in: query
           description: Filter by parent
@@ -2806,6 +3382,36 @@ paths:
                         items:
                           $ref: "#/components/schemas/InnsynskravDel"
 
+  /journalpost:
+    get:
+      description: Get a Journalpost list.
+      tags:
+        - Journalpost
+      operationId: GetJournalpostList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Journalpost"
+
   /journalpost/{journalpostId}:
     get:
       description: Get a single record.
@@ -3022,6 +3628,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Journalpost"
 
+  /dokumentbeskrivelse:
+    get:
+      description: Get a Dokumentbeskrivelse list.
+      tags:
+        - Dokumentbeskrivelse
+      operationId: GetDokumentbeskrivelseList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Dokumentbeskrivelse"
+
   /dokumentbeskrivelse/{dokumentbeskrivelseId}:
     get:
       description: Get a single record.
@@ -3119,6 +3755,36 @@ paths:
               schema:
                 type: string
                 format: binary
+
+  /saksmappe:
+    get:
+      description: Get a Saksmappe list.
+      tags:
+        - Saksmappe
+      operationId: GetSaksmappeList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Saksmappe"
 
   /saksmappe/{saksmappeId}:
     get:
@@ -3247,6 +3913,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Journalpost"
+
+  /moetemappe:
+    get:
+      description: Get a Moetemappe list.
+      tags:
+        - Moetemappe
+      operationId: GetMoetemappeList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Moetemappe"
 
   /moetemappe/{moetemappeId}:
     get:
@@ -3450,6 +4146,8 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
       responses:
         "200":
           description: Successful response.
@@ -3881,6 +4579,8 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
       responses:
         "200":
           description: Successful response.
@@ -4073,6 +4773,36 @@ paths:
                             - $ref: "#/components/schemas/Moetesak"
                             - $ref: "#/components/schemas/Saksmappe"
 
+  /apiKey:
+    get:
+      description: Get a ApiKey list.
+      tags:
+        - ApiKey
+      operationId: GetApiKeyList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/ApiKey"
+
   /apiKey/{apiKeyId}:
     get:
       description: Get a single ApiKey.
@@ -4195,16 +4925,14 @@ components:
               description: >-
                 The unique identifier for the resource, given by the user's system.
             journalenhet:
-              readOnly: true
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Enhet"
               description: >-
                 The administrative unit that is responsible for the resource. This
-                is derived from the credentials used to authenticate the request
-                on creation.
-          required:
-            - journalenhet
+                is by default derived from the credentials used to authenticate the
+                request on creation, or it can manually be set to an Enhet owned by
+                that derived Enhet.
           x-expandableFields:
             - journalenhet
 
@@ -4568,7 +5296,6 @@ components:
                 - $ref: "#/components/schemas/Moetemappe"
           required:
             - moetesakstype
-            - moetesaksaar
             - moetesakssekvensnummer
           x-expandableFields:
             - administrativEnhetObjekt
@@ -5255,17 +5982,21 @@ components:
 
     ListQueryParameters:
       type: object
-      allOf:
-        - $ref: "#/components/schemas/QueryParameters"
-        - properties:
-            limit:
-              $ref: "#/components/parameters/Limit/schema"
-            sortOrder:
-              $ref: "#/components/parameters/SortOrder/schema"
-            startingAfter:
-              $ref: "#/components/parameters/StartingAfter/schema"
-            endingBefore:
-              $ref: "#/components/parameters/EndingBefore/schema"
+      properties:
+        expand:
+          $ref: "#/components/parameters/Expand/schema"
+        limit:
+          $ref: "#/components/parameters/Limit/schema"
+        sortOrder:
+          $ref: "#/components/parameters/SortOrder/schema"
+        startingAfter:
+          $ref: "#/components/parameters/StartingAfter/schema"
+        endingBefore:
+          $ref: "#/components/parameters/EndingBefore/schema"
+        ids:
+          $ref: "#/components/parameters/IDs/schema"
+        externalIds:
+          $ref: "#/components/parameters/ExternalIDs/schema"
 
   parameters:
     Expand:
@@ -5321,12 +6052,24 @@ components:
       schema:
         type: string
 
-    IRI:
+    IDs:
       description: >-
-        The IRI of a resource.
+        A list of resource IDs to be returned. If this parameter is used, the
+        other parameters will be ignored.
       in: query
-      name: iri
-      required: true
+      name: ids
       schema:
-        type: string
-        format: uri
+        type: array
+        items:
+          type: string
+
+    ExternalIDs:
+      description: >-
+        A list of external IDs to be returned. If this parameter is used, the
+        other parameters will be ignored.
+      in: query
+      name: externalIds
+      schema:
+        type: array
+        items:
+          type: string
