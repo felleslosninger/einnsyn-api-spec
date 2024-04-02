@@ -5751,6 +5751,10 @@ components:
                 anyOf:
                   - type: string
                   - $ref: "#/components/schemas/Enhet"
+            handteresAv:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Enhet"
             parent:
               anyOf:
                 - type: string
