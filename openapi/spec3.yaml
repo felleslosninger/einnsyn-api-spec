@@ -5044,7 +5044,9 @@ components:
             publisertDato:
               type: string
               format: date
-              readOnly: true
+              description: >-
+                The date the resource was published. This field is updated
+                automatically, but can be set manually by admins.
             korrespondansepart:
               type: array
               items:
