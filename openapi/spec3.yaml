@@ -5053,6 +5053,12 @@ components:
               description: >-
                 The date the resource was published. This field is updated
                 automatically, but can be set manually by admins.
+            oppdatertDato:
+              type: string
+              format: date-time
+              description: >-
+                The date the resource was last updated. This field is updated
+                automatically, but can be set manually by admins.
             korrespondansepart:
               type: array
               items:
@@ -5120,9 +5126,6 @@ components:
                 - type: string
                 - $ref: "#/components/schemas/Enhet"
               readOnly: true
-            sorteringstype:
-              type: string
-              readOnly: true
             saksmappe:
               anyOf:
                 - type: string
@@ -5161,6 +5164,12 @@ components:
               format: date
               description: >-
                 The date the resource was published. This field is updated
+                automatically, but can be set manually by admins.
+            oppdatertDato:
+              type: string
+              format: date
+              description: >-
+                The date the resource was last updated. This field is updated
                 automatically, but can be set manually by admins.
             parent:
               anyOf:
