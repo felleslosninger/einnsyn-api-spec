@@ -5795,6 +5795,8 @@ components:
               type: string
             dokumentnummer:
               type: integer
+            dokumenttype:
+              type: string
             tilknyttetRegistreringSom:
               type: string
             dokumentobjekt:
