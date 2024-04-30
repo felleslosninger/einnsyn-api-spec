@@ -5092,6 +5092,20 @@ components:
               type: integer
             journalposttype:
               type: string
+              enum:
+                [
+                  "inngaaende_dokument",
+                  "utgaaende_dokument",
+                  "organinternt_dokument_uten_oppfoelging",
+                  "organinternt_dokument_for_oppfoelging",
+                  "saksframlegg",
+                  "sakskart",
+                  "moeteprotokoll",
+                  "moetebok",
+                  "ukjent",
+                ]
+            legacyJournalposttype:
+              type: string
             journaldato:
               type: string
               format: date
@@ -5275,6 +5289,19 @@ components:
               enum: ["Moetesak"]
               readOnly: true
             moetesakstype:
+              type: string
+              enum:
+                [
+                  "moete",
+                  "politisk",
+                  "delegert",
+                  "interpellasjon",
+                  "godkjenning",
+                  "orientering",
+                  "referat",
+                  "annet",
+                ]
+            legacyMoetesakstype:
               type: string
             moetesaksaar:
               type: integer
