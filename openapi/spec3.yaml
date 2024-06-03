@@ -5535,8 +5535,10 @@ components:
               readOnly: true
             korrespondansepartNavn:
               type: string
+              maxLength: 20000
             korrespondansepartNavnSensitiv:
               type: string
+              maxLength: 20000
             korrespondanseparttype:
               type: string
             saksbehandler:
