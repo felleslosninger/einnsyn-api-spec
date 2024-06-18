@@ -5340,6 +5340,8 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Moetemappe"
+            legacyReferanseTilMoetesak:
+              type: string
           required:
             - moetesakstype
             - moetesakssekvensnummer
