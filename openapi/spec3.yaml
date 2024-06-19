@@ -5161,13 +5161,13 @@ components:
               type: string
             publisertDato:
               type: string
-              format: date
+              format: date-time
               description: >-
                 The date the resource was published. This field is updated
                 automatically, but can be set manually by admins.
             oppdatertDato:
               type: string
-              format: date
+              format: date-time
               description: >-
                 The date the resource was last updated. This field is updated
                 automatically, but can be set manually by admins.
