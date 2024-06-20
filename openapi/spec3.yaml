@@ -5134,6 +5134,10 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Skjerming"
+            legacyFoelgsakenReferanse:
+              type: array
+              items:
+                type: string
           required:
             - journalaar
             - journalsekvensnummer
