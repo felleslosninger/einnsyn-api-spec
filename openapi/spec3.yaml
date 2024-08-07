@@ -5888,7 +5888,7 @@ components:
     Moetedokument:
       type: object
       x-resourceId: Moetedokument
-      x-idPrefix: "md"
+      x-idPrefix: "mdok"
       allOf:
         - $ref: "#/components/schemas/Registrering"
         - properties:
