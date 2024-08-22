@@ -5130,6 +5130,7 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Saksmappe"
+              readOnly: true
             skjerming:
               anyOf:
                 - type: string
@@ -5546,6 +5547,18 @@ components:
               type: string
               maxLength: 20000
             korrespondanseparttype:
+              type: string
+              enum:
+                [
+                  "avsender",
+                  "mottaker",
+                  "kopimottaker",
+                  "gruppemottaker",
+                  "intern_avsender",
+                  "intern_mottaker",
+                  "intern_kopimottaker",
+                ]
+            legacyKorrespondanseparttype:
               type: string
             saksbehandler:
               type: string
