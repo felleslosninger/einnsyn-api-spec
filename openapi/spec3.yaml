@@ -5130,6 +5130,7 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Saksmappe"
+              readOnly: true
             skjerming:
               anyOf:
                 - type: string
