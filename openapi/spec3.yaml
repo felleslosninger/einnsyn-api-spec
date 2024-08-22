@@ -5548,6 +5548,18 @@ components:
               maxLength: 20000
             korrespondanseparttype:
               type: string
+              enum:
+                [
+                  "avsender",
+                  "mottaker",
+                  "kopimottaker",
+                  "gruppemottaker",
+                  "intern_avsender",
+                  "intern_mottaker",
+                  "intern_kopimottaker",
+                ]
+            legacyKorrespondanseparttype:
+              type: string
             saksbehandler:
               type: string
             epostadresse:
