@@ -5551,12 +5551,19 @@ components:
               enum:
                 [
                   "avsender",
+                  "http://www.arkivverket.no/standarder/noark5/arkivstruktur/avsender",
                   "mottaker",
+                  "http://www.arkivverket.no/standarder/noark5/arkivstruktur/mottaker",
                   "kopimottaker",
+                  "http://www.arkivverket.no/standarder/noark5/arkivstruktur/kopimottaker",
                   "gruppemottaker",
+                  "http://www.arkivverket.no/standarder/noark5/arkivstruktur/gruppemottaker",
                   "intern_avsender",
+                  "http://www.arkivverket.no/standarder/noark5/arkivstruktur/intern_avsender",
                   "intern_mottaker",
+                  "http://www.arkivverket.no/standarder/noark5/arkivstruktur/intern_mottaker",
                   "intern_kopimottaker",
+                  "http://www.arkivverket.no/standarder/noark5/arkivstruktur/intern_kopimottaker",
                 ]
             legacyKorrespondanseparttype:
               type: string
