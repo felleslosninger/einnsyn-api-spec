@@ -5125,7 +5125,6 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Enhet"
-              readOnly: true
             saksmappe:
               anyOf:
                 - type: string
