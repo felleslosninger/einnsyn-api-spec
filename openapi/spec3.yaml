@@ -6074,6 +6074,8 @@ components:
           $ref: "#/components/parameters/IDs/schema"
         externalIds:
           $ref: "#/components/parameters/ExternalIDs/schema"
+        journalenhet:
+          $ref: "#/components/parameters/Journalenhet/schema"
 
   parameters:
     Expand:
@@ -6150,3 +6152,11 @@ components:
         type: array
         items:
           type: string
+
+    Journalenhet:
+      description: >-
+        The Journalenhet to filter the result set by.
+      in: query
+      name: journalenhet
+      schema:
+        type: string
