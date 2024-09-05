@@ -148,6 +148,7 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Journalenhet"
         - name: arkivId
           in: path
           required: true
@@ -495,6 +496,7 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Journalenhet"
         - name: arkivdelId
           in: path
           required: true
@@ -3322,6 +3324,7 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/Journalenhet"
         - name: enhetId
           in: path
           required: true
@@ -6074,8 +6077,6 @@ components:
           $ref: "#/components/parameters/IDs/schema"
         externalIds:
           $ref: "#/components/parameters/ExternalIDs/schema"
-        journalenhet:
-          $ref: "#/components/parameters/Journalenhet/schema"
 
   parameters:
     Expand:
