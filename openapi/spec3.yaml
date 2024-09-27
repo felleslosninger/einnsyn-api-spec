@@ -5941,13 +5941,15 @@ components:
               type: string
               enum: ["LagretSoek"]
               readOnly: true
-            query:
-              type: string
             bruker:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Bruker"
-            varsling:
+            navn:
+              type: string
+            spoerring:
+              type: string
+            abonnere:
               type: boolean
               default: false
 
@@ -5966,9 +5968,19 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Bruker"
-            varsling:
+            saksmappe:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Saksmappe"
+            moetemappe:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Moetemappe"
+            abonnere:
               type: boolean
               default: false
+          required:
+            - bruker
 
     Tilbakemelding:
       type: object
