@@ -5948,11 +5948,11 @@ components:
               readOnly: true # Insert-endpoints are under /bruker/{...}
             label:
               type: string
-            spoerring:
-              type: string
-            abonnere:
+            subscribe:
               type: boolean
               default: false
+            legacyQuery:
+              type: string
           required:
             - label
 
@@ -5980,7 +5980,7 @@ components:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Moetemappe"
-            abonnere:
+            subscribe:
               type: boolean
               default: false
 
