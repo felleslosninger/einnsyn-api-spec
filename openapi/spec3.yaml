@@ -5953,6 +5953,8 @@ components:
             abonnere:
               type: boolean
               default: false
+          required:
+            - navn
 
     LagretSak:
       type: object
