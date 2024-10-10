@@ -5956,6 +5956,8 @@ components:
           required:
             - label
             - legacyQuery
+          x-expandableFields:
+            - bruker
 
     LagretSak:
       type: object
@@ -5984,6 +5986,10 @@ components:
             subscribe:
               type: boolean
               default: false
+          x-expandableFields:
+            - bruker
+            - saksmappe
+            - moetemappe
 
     Tilbakemelding:
       type: object
