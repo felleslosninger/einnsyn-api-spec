@@ -5955,6 +5955,7 @@ components:
               type: string
           required:
             - label
+            - legacyQuery
 
     LagretSak:
       type: object
