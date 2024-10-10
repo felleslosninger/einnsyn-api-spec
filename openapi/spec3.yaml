@@ -5946,7 +5946,7 @@ components:
                 - type: string
                 - $ref: "#/components/schemas/Bruker"
               readOnly: true # Insert-endpoints are under /bruker/{...}
-            navn:
+            label:
               type: string
             spoerring:
               type: string
@@ -5954,7 +5954,7 @@ components:
               type: boolean
               default: false
           required:
-            - navn
+            - label
 
     LagretSak:
       type: object
