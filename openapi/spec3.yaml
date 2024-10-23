@@ -5732,6 +5732,10 @@ components:
                 - type: string
                 - $ref: "#/components/schemas/Enhet"
               readOnly: true
+            email:
+              type: string
+              format: email
+              readOnly: true
             sent:
               type: string
               format: date-time
