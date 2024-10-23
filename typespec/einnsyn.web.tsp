@@ -204,6 +204,7 @@ model InnsynskravDel extends EInnsynBase {
   innsynskrav?: EInnsynId | Innsynskrav;
   journalpost: EInnsynId | Journalpost;
   enhet?: EInnsynId | Enhet;
+  @visibility("read") @format("email") email?: string;
   sent?: utcDateTime;
   retryCount?: integer;
   retryTimestamp?: utcDateTime;
