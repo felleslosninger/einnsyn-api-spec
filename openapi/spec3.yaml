@@ -92,7 +92,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Arkiv"
-    put:
+    patch:
       description: Update a single Arkiv.
       tags:
         - Arkiv
@@ -440,7 +440,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Arkivdel"
-    put:
+    patch:
       description: Update a single Arkivdel.
       tags:
         - Arkivdel
@@ -788,7 +788,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Behandlingsprotokoll"
-    put:
+    patch:
       description: Update a single Behandlingsprotokoll.
       tags:
         - Behandlingsprotokoll
@@ -883,7 +883,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Dokumentobjekt"
-    put:
+    patch:
       description: Update a single Dokumentobjekt.
       tags:
         - Dokumentobjekt
@@ -978,7 +978,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Identifikator"
-    put:
+    patch:
       description: Update a single Identifikator.
       tags:
         - Identifikator
@@ -1090,7 +1090,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
-    put:
+    patch:
       description: Update a Innsynskrav.
       tags:
         - Innsynskrav
@@ -1174,7 +1174,7 @@ paths:
                           $ref: "#/components/schemas/InnsynskravDel"
 
   /innsynskrav/{innsynskravId}/verify/{secret}:
-    put:
+    patch:
       description: Verify a Innsynskrav.
       tags:
         - Innsynskrav
@@ -1302,7 +1302,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Klasse"
-    put:
+    patch:
       description: Update a single Klasse.
       tags:
         - Klasse
@@ -1587,7 +1587,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Klassifikasjonssystem"
-    put:
+    patch:
       description: Update a single Klassifikasjonssystem.
       tags:
         - Klassifikasjonssystem
@@ -1745,7 +1745,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Korrespondansepart"
-    put:
+    patch:
       description: Update a single Korrespondansepart.
       tags:
         - Korrespondansepart
@@ -1845,7 +1845,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LagretSak"
-    put:
+    patch:
       description: Update a single LagretSak.
       tags:
         - LagretSak
@@ -1945,7 +1945,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LagretSoek"
-    put:
+    patch:
       description: Update a single LagretSoek.
       tags:
         - LagretSoek
@@ -2040,7 +2040,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetedeltaker"
-    put:
+    patch:
       description: Update a single Moetedeltaker.
       tags:
         - Moetedeltaker
@@ -2135,7 +2135,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetedokument"
-    put:
+    patch:
       description: Update a single Moetedokument.
       tags:
         - Moetedokument
@@ -2312,7 +2312,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetesak"
-    put:
+    patch:
       description: Update a single Moetesak.
       tags:
         - Moetesak
@@ -2472,7 +2472,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetesaksbeskrivelse"
-    put:
+    patch:
       description: Update a single Moetesaksbeskrivelse.
       tags:
         - Moetesaksbeskrivelse
@@ -2584,7 +2584,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Skjerming"
-    put:
+    patch:
       description: Update a single Skjerming.
       tags:
         - Skjerming
@@ -2679,7 +2679,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Utredning"
-    put:
+    patch:
       description: Update a single Utredning.
       tags:
         - Utredning
@@ -2864,7 +2864,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Vedtak"
-    put:
+    patch:
       description: Update a single Vedtak.
       tags:
         - Vedtak
@@ -3049,7 +3049,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Votering"
-    put:
+    patch:
       description: Update a single Votering.
       tags:
         - Votering
@@ -3148,7 +3148,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Enhet"
-    put:
+    patch:
       description: Update a single Enhet.
       tags:
         - Enhet
@@ -3440,7 +3440,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Journalpost"
-    put:
+    patch:
       description: Update a record
       tags:
         - Journalpost
@@ -3688,7 +3688,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Dokumentbeskrivelse"
-    put:
+    patch:
       description: Update a document
       tags:
         - Dokumentbeskrivelse
@@ -3816,7 +3816,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Saksmappe"
-    put:
+    patch:
       description: Update a Saksmappe.
       tags:
         - Saksmappe
@@ -3974,7 +3974,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetemappe"
-    put:
+    patch:
       description: Update a Moetemappe.
       tags:
         - Moetemappe
@@ -4211,7 +4211,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Bruker"
-    put:
+    patch:
       description: Update a single Bruker.
       tags:
         - Bruker
@@ -4462,7 +4462,7 @@ paths:
                 $ref: "#/components/schemas/LagretSak"
 
   /bruker/{brukerId}/activate/{secret}:
-    put:
+    patch:
       description: Activate a Bruker.
       tags:
         - Bruker
@@ -4488,7 +4488,7 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{brukerId}/updatePassword:
-    put:
+    post:
       description: Update password for a Bruker.
       tags:
         - Bruker
@@ -4520,7 +4520,7 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{brukerId}/updatePassword/{secret}:
-    put:
+    post:
       description: Update password for a Bruker.
       tags:
         - Bruker
@@ -4556,7 +4556,7 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{brukerId}/requestPasswordReset:
-    put:
+    post:
       description: Request password reset for a Bruker.
       tags:
         - Bruker
@@ -4644,7 +4644,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Tilbakemelding"
-    put:
+    patch:
       description: Update a single Tilbakemelding.
       tags:
         - Tilbakemelding
@@ -4833,7 +4833,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiKey"
-    put:
+    patch:
       description: Update a single ApiKey.
       tags:
         - ApiKey
