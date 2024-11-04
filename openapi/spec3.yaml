@@ -4488,11 +4488,11 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{brukerId}/updatePassword:
-    post:
+    patch:
       description: Update password for a Bruker.
       tags:
         - Bruker
-      operationId: PostBrukerPassword
+      operationId: PatchBrukerPassword
       parameters:
         - name: brukerId
           in: path
@@ -4520,11 +4520,11 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{brukerId}/updatePassword/{secret}:
-    post:
+    patch:
       description: Update password for a Bruker.
       tags:
         - Bruker
-      operationId: PostBrukerPasswordWithSecret
+      operationId: PatchBrukerPasswordWithSecret
       parameters:
         - name: brukerId
           in: path
@@ -4556,7 +4556,7 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{brukerId}/requestPasswordReset:
-    post:
+    patch:
       description: Request password reset for a Bruker.
       tags:
         - Bruker
