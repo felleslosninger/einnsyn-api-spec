@@ -92,11 +92,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Arkiv"
-    put:
+    patch:
       description: Update a single Arkiv.
       tags:
         - Arkiv
-      operationId: PutArkiv
+      operationId: PatchArkiv
       parameters:
         - name: arkivId
           in: path
@@ -440,11 +440,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Arkivdel"
-    put:
+    patch:
       description: Update a single Arkivdel.
       tags:
         - Arkivdel
-      operationId: PutArkivdel
+      operationId: PatchArkivdel
       parameters:
         - name: arkivdelId
           in: path
@@ -788,11 +788,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Behandlingsprotokoll"
-    put:
+    patch:
       description: Update a single Behandlingsprotokoll.
       tags:
         - Behandlingsprotokoll
-      operationId: PutBehandlingsprotokoll
+      operationId: PatchBehandlingsprotokoll
       parameters:
         - name: behandlingsprotokollId
           in: path
@@ -883,11 +883,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Dokumentobjekt"
-    put:
+    patch:
       description: Update a single Dokumentobjekt.
       tags:
         - Dokumentobjekt
-      operationId: PutDokumentobjekt
+      operationId: PatchDokumentobjekt
       parameters:
         - name: dokumentobjektId
           in: path
@@ -978,11 +978,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Identifikator"
-    put:
+    patch:
       description: Update a single Identifikator.
       tags:
         - Identifikator
-      operationId: PutIdentifikator
+      operationId: PatchIdentifikator
       parameters:
         - name: identifikatorId
           in: path
@@ -1090,11 +1090,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
-    put:
+    patch:
       description: Update a Innsynskrav.
       tags:
         - Innsynskrav
-      operationId: PutInnsynskrav
+      operationId: PatchInnsynskrav
       parameters:
         - name: innsynskravId
           in: path
@@ -1174,7 +1174,7 @@ paths:
                           $ref: "#/components/schemas/InnsynskravDel"
 
   /innsynskrav/{innsynskravId}/verify/{secret}:
-    put:
+    patch:
       description: Verify a Innsynskrav.
       tags:
         - Innsynskrav
@@ -1302,11 +1302,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Klasse"
-    put:
+    patch:
       description: Update a single Klasse.
       tags:
         - Klasse
-      operationId: PutKlasse
+      operationId: PatchKlasse
       parameters:
         - name: klasseId
           in: path
@@ -1587,11 +1587,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Klassifikasjonssystem"
-    put:
+    patch:
       description: Update a single Klassifikasjonssystem.
       tags:
         - Klassifikasjonssystem
-      operationId: PutKlassifikasjonssystem
+      operationId: PatchKlassifikasjonssystem
       parameters:
         - name: klassifikasjonssystemId
           in: path
@@ -1745,11 +1745,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Korrespondansepart"
-    put:
+    patch:
       description: Update a single Korrespondansepart.
       tags:
         - Korrespondansepart
-      operationId: PutKorrespondansepart
+      operationId: PatchKorrespondansepart
       parameters:
         - name: korrespondansepartId
           in: path
@@ -1845,11 +1845,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LagretSak"
-    put:
+    patch:
       description: Update a single LagretSak.
       tags:
         - LagretSak
-      operationId: PutLagretSak
+      operationId: PatchLagretSak
       parameters:
         - name: lagretSakId
           in: path
@@ -1945,11 +1945,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LagretSoek"
-    put:
+    patch:
       description: Update a single LagretSoek.
       tags:
         - LagretSoek
-      operationId: PutLagretSoek
+      operationId: PatchLagretSoek
       parameters:
         - name: lagretSoekId
           in: path
@@ -2040,11 +2040,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetedeltaker"
-    put:
+    patch:
       description: Update a single Moetedeltaker.
       tags:
         - Moetedeltaker
-      operationId: PutMoetedeltaker
+      operationId: PatchMoetedeltaker
       parameters:
         - name: moetedeltakerId
           in: path
@@ -2135,11 +2135,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetedokument"
-    put:
+    patch:
       description: Update a single Moetedokument.
       tags:
         - Moetedokument
-      operationId: PutMoetedokument
+      operationId: PatchMoetedokument
       parameters:
         - name: moetedokumentId
           in: path
@@ -2312,11 +2312,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetesak"
-    put:
+    patch:
       description: Update a single Moetesak.
       tags:
         - Moetesak
-      operationId: PutMoetesak
+      operationId: PatchMoetesak
       parameters:
         - name: moetesakId
           in: path
@@ -2472,11 +2472,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetesaksbeskrivelse"
-    put:
+    patch:
       description: Update a single Moetesaksbeskrivelse.
       tags:
         - Moetesaksbeskrivelse
-      operationId: PutMoetesaksbeskrivelse
+      operationId: PatchMoetesaksbeskrivelse
       parameters:
         - name: moetesaksbeskrivelseId
           in: path
@@ -2584,11 +2584,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Skjerming"
-    put:
+    patch:
       description: Update a single Skjerming.
       tags:
         - Skjerming
-      operationId: PutSkjerming
+      operationId: PatchSkjerming
       parameters:
         - name: skjermingId
           in: path
@@ -2679,11 +2679,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Utredning"
-    put:
+    patch:
       description: Update a single Utredning.
       tags:
         - Utredning
-      operationId: PutUtredning
+      operationId: PatchUtredning
       parameters:
         - name: utredningId
           in: path
@@ -2864,11 +2864,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Vedtak"
-    put:
+    patch:
       description: Update a single Vedtak.
       tags:
         - Vedtak
-      operationId: PutVedtak
+      operationId: PatchVedtak
       parameters:
         - name: vedtakId
           in: path
@@ -3049,11 +3049,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Votering"
-    put:
+    patch:
       description: Update a single Votering.
       tags:
         - Votering
-      operationId: PutVotering
+      operationId: PatchVotering
       parameters:
         - name: voteringId
           in: path
@@ -3148,11 +3148,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Enhet"
-    put:
+    patch:
       description: Update a single Enhet.
       tags:
         - Enhet
-      operationId: PutEnhet
+      operationId: PatchEnhet
       parameters:
         - name: enhetId
           in: path
@@ -3440,11 +3440,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Journalpost"
-    put:
+    patch:
       description: Update a record
       tags:
         - Journalpost
-      operationId: PutJournalpost
+      operationId: PatchJournalpost
       parameters:
         - name: journalpostId
           in: path
@@ -3688,11 +3688,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Dokumentbeskrivelse"
-    put:
+    patch:
       description: Update a document
       tags:
         - Dokumentbeskrivelse
-      operationId: PutDokumentbeskrivelse
+      operationId: PatchDokumentbeskrivelse
       parameters:
         - name: dokumentbeskrivelseId
           in: path
@@ -3816,11 +3816,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Saksmappe"
-    put:
+    patch:
       description: Update a Saksmappe.
       tags:
         - Saksmappe
-      operationId: PutSaksmappe
+      operationId: PatchSaksmappe
       parameters:
         - name: saksmappeId
           in: path
@@ -3974,11 +3974,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Moetemappe"
-    put:
+    patch:
       description: Update a Moetemappe.
       tags:
         - Moetemappe
-      operationId: PutMoetemappe
+      operationId: PatchMoetemappe
       parameters:
         - name: moetemappeId
           in: path
@@ -4211,11 +4211,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Bruker"
-    put:
+    patch:
       description: Update a single Bruker.
       tags:
         - Bruker
-      operationId: PutBruker
+      operationId: PatchBruker
       parameters:
         - name: brukerId
           in: path
@@ -4462,7 +4462,7 @@ paths:
                 $ref: "#/components/schemas/LagretSak"
 
   /bruker/{brukerId}/activate/{secret}:
-    put:
+    patch:
       description: Activate a Bruker.
       tags:
         - Bruker
@@ -4488,11 +4488,11 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{brukerId}/updatePassword:
-    put:
+    patch:
       description: Update password for a Bruker.
       tags:
         - Bruker
-      operationId: PutBrukerPassword
+      operationId: PatchBrukerPassword
       parameters:
         - name: brukerId
           in: path
@@ -4520,11 +4520,11 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{brukerId}/updatePassword/{secret}:
-    put:
+    patch:
       description: Update password for a Bruker.
       tags:
         - Bruker
-      operationId: PutBrukerPasswordWithSecret
+      operationId: PatchBrukerPasswordWithSecret
       parameters:
         - name: brukerId
           in: path
@@ -4556,7 +4556,7 @@ paths:
                 $ref: "#/components/schemas/Bruker"
 
   /bruker/{brukerId}/requestPasswordReset:
-    put:
+    patch:
       description: Request password reset for a Bruker.
       tags:
         - Bruker
@@ -4644,11 +4644,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Tilbakemelding"
-    put:
+    patch:
       description: Update a single Tilbakemelding.
       tags:
         - Tilbakemelding
-      operationId: PutTilbakemelding
+      operationId: PatchTilbakemelding
       parameters:
         - name: tilbakemeldingId
           in: path
@@ -4833,11 +4833,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiKey"
-    put:
+    patch:
       description: Update a single ApiKey.
       tags:
         - ApiKey
-      operationId: PutApiKey
+      operationId: PatchApiKey
       parameters:
         - name: apiKeyId
           in: path
