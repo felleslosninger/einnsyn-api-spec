@@ -9,9 +9,8 @@ using Http;
 using OpenAPI;
 using Rest;
 using eInnsyn;
-using eInnsyn.noark;
 
-namespace eInnsyn.web;
+namespace eInnsyn;
 
 /**
  * eInnsyn bruker
@@ -76,18 +75,18 @@ interface BrukerRoutes extends GloballyRoutable<Bruker, "Bruker"> {
   ): LagretSoek;
 
   @route("/{brukerId}/activate/{secret}")
-  @put
-  @operationId("PutBrukerActivate")
+  @patch
+  @operationId("Activate")
   activate(@path brukerId: EInnsynId, @path secret: string): Bruker;
 
   @route("/{brukerId}/updatePassword")
-  @put
-  @operationId("PutBrukerPassword")
+  @patch
+  @operationId("PatchBrukerPassword")
   updatePassword(@path brukerId: EInnsynId, @body password: string): Bruker;
 
   @route("/{brukerId}/updatePassword/{secret}")
-  @put
-  @operationId("PutBrukerPasswordWithSecret")
+  @patch
+  @operationId("PatchBrukerPasswordWithSecret")
   updatePasswordWithSecret(
     @path brukerId: EInnsynId,
     @path secret: string,
@@ -95,7 +94,7 @@ interface BrukerRoutes extends GloballyRoutable<Bruker, "Bruker"> {
   ): Bruker;
 
   @route("/{brukerId}/requestPasswordReset")
-  @put
+  @patch
   @operationId("RequestPasswordReset")
   requestPasswordReset(@path brukerId: EInnsynId): Bruker;
 }
@@ -189,7 +188,7 @@ interface InnsynskravRoutes
   ): ResponseList<InnsynskravDel>;
 
   @route("/{innsynskravId}/verify/{secret}")
-  @put
+  @patch
   @operationId("VerifyInnsynskrav")
   verify(@path innsynskravId: EInnsynId, @path secret: string): Innsynskrav;
 }
@@ -214,3 +213,18 @@ model InnsynskravDel extends EInnsynBase {
 @tag("InnsynskravDel")
 interface InnsynskravDelRoutes
   extends Routable<InnsynskravDel, "InnsynskravDel"> {}
+
+/**
+ * Search journal data
+ */
+@route("/search")
+@tag("Search")
+interface SearchRoutes {
+  @get
+  @operationId("Search")
+  get(...SearchParameters): ResponseList<
+    | Journalpost
+    | Moetemappe
+    | Moetesak
+    | Saksmappe>;
+}

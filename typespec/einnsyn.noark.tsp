@@ -7,7 +7,7 @@ using Http;
 using OpenAPI;
 using eInnsyn;
 
-namespace eInnsyn.noark;
+namespace eInnsyn;
 
 /* Properties shared by all Noark objects */
 model NoarkBase extends EInnsynBase {
@@ -41,7 +41,7 @@ interface ArkivRoutes extends GloballyRoutable<Arkiv, "Arkiv"> {
   @get
   @operationId("GetArkivArkivdelList")
   getArkivdelList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path arkivId: EInnsynId,
   ): ResponseList<Arkivdel>;
 
@@ -54,7 +54,7 @@ interface ArkivRoutes extends GloballyRoutable<Arkiv, "Arkiv"> {
   @get
   @operationId("GetArkivArkivList")
   getArkivList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path arkivId: EInnsynId,
   ): ResponseList<Arkiv>;
 
@@ -67,7 +67,7 @@ interface ArkivRoutes extends GloballyRoutable<Arkiv, "Arkiv"> {
   @get
   @operationId("GetArkivSaksmappeList")
   getSaksmappeList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path arkivId: EInnsynId,
   ): ResponseList<Saksmappe>;
 
@@ -80,7 +80,7 @@ interface ArkivRoutes extends GloballyRoutable<Arkiv, "Arkiv"> {
   @get
   @operationId("GetArkivMoetemappeList")
   getMoetemappeList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path arkivId: EInnsynId,
   ): ResponseList<Moetemappe>;
 
@@ -108,7 +108,10 @@ interface ArkivdelRoutes extends Routable<Arkivdel, "Arkivdel"> {
   @route("/{id}/klasse")
   @get
   @operationId("GetArkivdelKlasseList")
-  getKlasseList(...ListParameters, @path id: EInnsynId): ResponseList<Klasse>;
+  getKlasseList(
+    ...ListQueryParameters,
+    @path id: EInnsynId,
+  ): ResponseList<Klasse>;
 
   @route("/{id}/klasse")
   @post
@@ -119,7 +122,7 @@ interface ArkivdelRoutes extends Routable<Arkivdel, "Arkivdel"> {
   @get
   @operationId("GetArkivdelKlassifikasjonssystemList")
   getKlassifikasjonssystemList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path id: EInnsynId,
   ): ResponseList<Klassifikasjonssystem>;
 
@@ -135,7 +138,7 @@ interface ArkivdelRoutes extends Routable<Arkivdel, "Arkivdel"> {
   @get
   @operationId("GetArkivdelSaksmappeList")
   getSaksmappeList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path id: EInnsynId,
   ): ResponseList<Saksmappe>;
 
@@ -148,7 +151,7 @@ interface ArkivdelRoutes extends Routable<Arkivdel, "Arkivdel"> {
   @get
   @operationId("GetArkivdelMoetemappeList")
   getMoetemappeList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path id: EInnsynId,
   ): ResponseList<Moetemappe>;
 
@@ -175,7 +178,7 @@ interface KlassifikasjonssystemRoutes
   @get
   @operationId("GetKlassifikasjonssystemKlasseList")
   getKlasseList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path klassifikasjonssystemId: EInnsynId,
   ): ResponseList<Klasse>;
 
@@ -204,7 +207,7 @@ interface KlasseRoutes extends Routable<Klasse, "Klasse"> {
   @get
   @operationId("GetKlasseSaksmappeList")
   getSaksmappeList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path klasseId: EInnsynId,
   ): ResponseList<Saksmappe>;
 
@@ -220,7 +223,7 @@ interface KlasseRoutes extends Routable<Klasse, "Klasse"> {
   @get
   @operationId("GetKlasseMoetemappeList")
   getMoetemappeList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path klasseId: EInnsynId,
   ): ResponseList<Moetemappe>;
 
@@ -240,8 +243,9 @@ model Mappe extends NoarkBase {
   offentligTittelSensitiv: string;
   beskrivelse?: string;
   noekkelord?: string;
-  @visibility("read") publisertDato: plainDate;
-  @visibility("read") parent:
+  @visibility("read") publisertDato?: plainDate;
+  @visibility("read") oppdatertDato?: plainDate;
+  @visibility("read") parent?:
     | Saksmappe
     | Moetemappe
     | Arkiv
@@ -274,7 +278,7 @@ interface SaksmappeRoutes extends Routable<Saksmappe, "Saksmappe"> {
   @get
   @operationId("GetSaksmappeJournalpostList")
   getJournalpostList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path id: EInnsynId,
   ): ResponseList<Journalpost>;
 
@@ -311,7 +315,7 @@ interface MoetemappeRoutes extends Routable<Moetemappe, "Moetemappe"> {
   @get
   @operationId("GetMoetemappeMoetesakList")
   getMoetesakList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path id: EInnsynId,
   ): ResponseList<Moetesak>;
 
@@ -324,7 +328,7 @@ interface MoetemappeRoutes extends Routable<Moetemappe, "Moetemappe"> {
   @get
   @operationId("GetMoetemappeMoetedokumentList")
   getMoetedokumentList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path id: EInnsynId,
   ): ResponseList<Moetedokument>;
 
@@ -383,7 +387,7 @@ interface JournalpostRoutes extends Routable<Journalpost, "Journalpost"> {
   @get
   @operationId("GetJournalpostKorrespondansepartList")
   getKorrespondansepartList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path journalpostId: EInnsynId,
   ): ResponseList<Korrespondansepart>;
 
@@ -399,7 +403,7 @@ interface JournalpostRoutes extends Routable<Journalpost, "Journalpost"> {
   @get
   @operationId("GetJournalpostDokumentbeskrivelseList")
   getDokumentbeskrivelseList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path journalpostId: EInnsynId,
   ): ResponseList<Dokumentbeskrivelse>;
 
@@ -478,7 +482,7 @@ interface MoetesakRoutes extends Routable<Moetesak, "Moetesak"> {
   @get
   @operationId("GetMoetesakDokumentbeskrivelseList")
   getDokumentbeskrivelseList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path moetesakId: EInnsynId,
   ): ResponseList<Dokumentbeskrivelse>;
 
@@ -490,28 +494,28 @@ interface MoetesakRoutes extends Routable<Moetesak, "Moetesak"> {
     @body dokumentbeskrivelse: Dokumentbeskrivelse,
   ): Dokumentbeskrivelse;
 
-  // @route("/{moetesakId}/utredning")
-  // @get
-  // @operationId("GetMoetesakUtredning")
-  // getUtredning(@path moetesakId: EInnsynId): ResponseGet<Utredning>;
+  @route("/{moetesakId}/utredning")
+  @get
+  @operationId("GetMoetesakUtredning")
+  getUtredning(@path moetesakId: EInnsynId): ResponseGet<Utredning>;
 
-  // @route("/{moetesakId}/utredning")
-  // @post
-  // @operationId("PostMoetesakUtredning")
-  // addUtredning(
-  //   @path moetesakId: EInnsynId,
-  //   @body utredning: Utredning,
-  // ): Utredning;
+  @route("/{moetesakId}/utredning")
+  @post
+  @operationId("PostMoetesakUtredning")
+  addUtredning(
+    @path moetesakId: EInnsynId,
+    @body utredning: Utredning,
+  ): Utredning;
 
-  // @route("/{moetesakId}/vedtak")
-  // @get
-  // @operationId("GetMoetesakVedtak")
-  // getVedtak(@path moetesakId: EInnsynId): ResponseGet<Vedtak>;
+  @route("/{moetesakId}/vedtak")
+  @get
+  @operationId("GetMoetesakVedtak")
+  getVedtak(@path moetesakId: EInnsynId): ResponseGet<Vedtak>;
 
-  // @route("/{moetesakId}/vedtak")
-  // @post
-  // @operationId("PostMoetesakVedtak")
-  // addVedtak(@path moetesakId: EInnsynId, @body vedtak: Vedtak): Vedtak;
+  @route("/{moetesakId}/vedtak")
+  @post
+  @operationId("PostMoetesakVedtak")
+  addVedtak(@path moetesakId: EInnsynId, @body vedtak: Vedtak): Vedtak;
 }
 
 /* Utredning */
@@ -531,7 +535,7 @@ interface UtredningRoutes extends Routable<Utredning, "Utredning"> {
   @get
   @operationId("GetUtredningUtredningsdokumentList")
   getDokumentbeskrivelseList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path utredningId: EInnsynId,
   ): ResponseList<Dokumentbeskrivelse>;
 
@@ -567,24 +571,24 @@ model Vedtak extends NoarkBase {
 @route("/vedtak")
 @tag("Vedtak")
 interface VedtakRoutes extends Routable<Vedtak, "Vedtak"> {
-  // @route("/{vedtakId}/votering")
-  // @get
-  // @operationId("GetVedtakVoteringList")
-  // getVoteringList(
-  //   ...ListParameters,
-  //   @path vedtakId: EInnsynId,
-  // ): ResponseList<Votering>;
+  @route("/{vedtakId}/votering")
+  @get
+  @operationId("GetVedtakVoteringList")
+  getVoteringList(
+    ...ListQueryParameters,
+    @path vedtakId: EInnsynId,
+  ): ResponseList<Votering>;
 
-  // @route("/{vedtakId}/votering")
-  // @post
-  // @operationId("PostVedtakVotering")
-  // addVotering(@path vedtakId: EInnsynId, @body votering: Votering): Votering;
+  @route("/{vedtakId}/votering")
+  @post
+  @operationId("PostVedtakVotering")
+  addVotering(@path vedtakId: EInnsynId, @body votering: Votering): Votering;
 
   @route("/{vedtakId}/vedtaksdokument")
   @get
   @operationId("GetVedtakVedtaksdokumentList")
   getDokumentbeskrivelseList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path vedtakId: EInnsynId,
   ): ResponseList<Dokumentbeskrivelse>;
 
@@ -741,7 +745,7 @@ interface MoetedokumentRoutes extends Routable<Moetedokument, "Moetedokument"> {
   @get
   @operationId("GetMoetedokumentDokumentbeskrivelseList")
   getDokumentbeskrivelseList(
-    ...ListParameters,
+    ...ListQueryParameters,
     @path moetedokumentId: EInnsynId,
   ): ResponseList<Dokumentbeskrivelse>;
 

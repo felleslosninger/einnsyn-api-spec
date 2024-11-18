@@ -147,10 +147,10 @@ interface Routable<T, name extends valueof string = "_"> {
   @route("/{id}")
   @get
   @operationId("Get${name}")
-  get(...GetParameters, @path id: EInnsynId): ResponseGet<T>;
+  get(...GetQueryParameters, @path id: EInnsynId): ResponseGet<T>;
 
   @route("/{id}")
-  @put
+  @patch
   @operationId("Put${name}")
   update(@path id: EInnsynId, @body body: T): ResponseUpdate<T>;
 
@@ -165,7 +165,7 @@ interface GloballyRoutable<T, name extends valueof string = "_">
   @route("/")
   @get
   @operationId("Get${name}List")
-  list(...ListParameters): ResponseList<T>;
+  list(...ListQueryParameters): ResponseList<T>;
 
   @route("/")
   @post
@@ -173,11 +173,11 @@ interface GloballyRoutable<T, name extends valueof string = "_">
   add(@body body: T): ResponseAdd<T>;
 }
 
-model GetParameters {
+model GetQueryParameters {
   @query expand?: string[] = #[];
 }
 
-model ListParameters {
+model ListQueryParameters {
   /**
    * Specifies which fields in the response should be expanded.
    */
@@ -217,4 +217,66 @@ model ListParameters {
    * The Journalenhet to filter the result set by.
    */
   @query journalenhet?: string;
+}
+
+model FilterQueryParameters {
+  /**
+   * A query string to filter by. Quotes can be used to search for exact matches or phrases. Words can be excluded by prefixing them with a minus sign.
+   */
+  @query query?: string;
+
+  /**
+   * A list of enhet IDs to filter by. This will also match subenhets.
+   */
+  @query administrativEnhet?: string[];
+
+  /**
+   * A list of enhet IDs to filter by. This will only match the specified enhets, not subenhets.
+   */
+  @query administrativEnhetExact?: string[];
+
+  /**
+   * A list of enhet IDs to exclude from the result set. This will also exclude subenhets.
+   */
+  @query excludeAdministrativEnhet?: string[];
+
+  /**
+   * A list of enhet IDs to exclude from the result set. This will only exclude the specified enhets, not subenhets.
+   */
+  @query excludeAdministrativEnhetExact?: string[];
+
+  /**
+   * Filter by the published date of the document.
+   */
+  @query publisertDatoBefore?: utcDateTime;
+
+  /**
+   * Filter by the published date of the document.
+   */
+  @query publisertDatoAfter?: utcDateTime;
+
+  /**
+   * Filter by the updated date of the document.
+   */
+  @query oppdatertDatoBefore?: utcDateTime;
+
+  /**
+   * Filter by the updated date of the document.
+   */
+  @query oppdatertDatoAfter?: utcDateTime;
+
+  /**
+   * Filter by the date of a meeting.
+   */
+  @query moetedatoBefore?: utcDateTime;
+
+  /**
+   * Filter by the date of a meeting.
+   */
+  @query moetedatoAfter?: utcDateTime;
+}
+
+model SearchParameters {
+  ...FilterQueryParameters;
+  ...ListQueryParameters;
 }
