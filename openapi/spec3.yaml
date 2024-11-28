@@ -1139,7 +1139,7 @@ paths:
       description: Get a InnsynskravBestilling list.
       tags:
         - Innsynskrav
-      operationId: GetInnsynskravInnsynskravList
+      operationId: GetInnsynskravBestillingInnsynskravList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
