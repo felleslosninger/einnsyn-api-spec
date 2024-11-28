@@ -2,7 +2,7 @@ openapi: "3.0.0"
 
 info:
   title: eInnsyn REST API
-  version: "3.0"
+  version: "1.0"
 
 servers:
   - url: https://api.einnsyn.no/
@@ -14,7 +14,7 @@ tags:
   - name: Dokumentbeskrivelse
   - name: Dokumentobjekt
   - name: Enhet
-  - name: Innsynskrav
+  - name: InnsynskravBestilling
   - name: InnsynskravDel
   - name: Journalpost
   - name: Klasse
@@ -1026,7 +1026,7 @@ paths:
     get:
       description: Get a Innsynskrav list.
       tags:
-        - Innsynskrav
+        - InnsynskravBestilling
       operationId: GetInnsynskravList
       parameters:
         - $ref: "#/components/parameters/Expand"
@@ -1050,31 +1050,31 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: "#/components/schemas/Innsynskrav"
+                          $ref: "#/components/schemas/InnsynskravBestilling"
     post:
-      description: Create a Innsynskrav.
+      description: Create a InnsynskravBestilling.
       tags:
-        - Innsynskrav
-      operationId: PostInnsynskrav
+        - InnsynskravBestilling
+      operationId: PostInnsynskravBestilling
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Innsynskrav"
+              $ref: "#/components/schemas/InnsynskravBestilling"
       responses:
         "200":
           description: Successful response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Innsynskrav"
+                $ref: "#/components/schemas/InnsynskravBestilling"
 
   /innsynskrav/{innsynskravId}:
     get:
-      description: Get a Innsynskrav.
+      description: Get a InnsynskravBestilling.
       tags:
-        - Innsynskrav
-      operationId: GetInnsynskrav
+        - InnsynskravBestilling
+      operationId: GetInnsynskravBestilling
       parameters:
         - $ref: "#/components/parameters/Expand"
         - name: innsynskravId
@@ -1082,57 +1082,57 @@ paths:
           required: true
           schema:
             type: string
-          x-resourceId: Innsynskrav
+          x-resourceId: InnsynskravBestilling
       responses:
         "200":
           description: Successful response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Innsynskrav"
+                $ref: "#/components/schemas/InnsynskravBestilling"
     patch:
-      description: Update a Innsynskrav.
+      description: Update a InnsynskravBestilling.
       tags:
-        - Innsynskrav
-      operationId: PatchInnsynskrav
+        - InnsynskravBestilling
+      operationId: PatchInnsynskravBestilling
       parameters:
         - name: innsynskravId
           in: path
           required: true
           schema:
             type: string
-          x-resourceId: Innsynskrav
+          x-resourceId: InnsynskravBestilling
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Innsynskrav"
+              $ref: "#/components/schemas/InnsynskravBestilling"
       responses:
         "200":
           description: Successful response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Innsynskrav"
+                $ref: "#/components/schemas/InnsynskravBestilling"
     delete:
       description: Delete a request.
       tags:
-        - Innsynskrav
-      operationId: DeleteInnsynskrav
+        - InnsynskravBestilling
+      operationId: DeleteInnsynskravBestilling
       parameters:
         - name: innsynskravId
           in: path
           required: true
           schema:
             type: string
-          x-resourceId: Innsynskrav
+          x-resourceId: InnsynskravBestilling
       responses:
         "200":
           description: Successful response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Innsynskrav"
+                $ref: "#/components/schemas/InnsynskravBestilling"
 
   /innsynskrav/{innsynskravId}/innsynskravDel:
     get:
@@ -1151,10 +1151,10 @@ paths:
           required: true
           schema:
             type: string
-          x-resourceId: Innsynskrav
+          x-resourceId: InnsynskravBestilling
         - name: innsynskravId
           in: query
-          description: Filter by Innsynskrav
+          description: Filter by InnsynskravBestilling
           schema:
             type: string
       responses:
@@ -1175,17 +1175,17 @@ paths:
 
   /innsynskrav/{innsynskravId}/verify/{secret}:
     patch:
-      description: Verify a Innsynskrav.
+      description: Verify a InnsynskravBestilling.
       tags:
-        - Innsynskrav
-      operationId: VerifyInnsynskrav
+        - InnsynskravBestilling
+      operationId: VerifyInnsynskravBestilling
       parameters:
         - name: innsynskravId
           in: path
           required: true
           schema:
             type: string
-          x-resourceId: Innsynskrav
+          x-resourceId: InnsynskravBestilling
         - name: secret
           in: path
           required: true
@@ -1197,7 +1197,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Innsynskrav"
+                $ref: "#/components/schemas/InnsynskravBestilling"
 
   /innsynskravDel:
     get:
@@ -4292,7 +4292,7 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: "#/components/schemas/Innsynskrav"
+                          $ref: "#/components/schemas/InnsynskravBestilling"
 
   /bruker/{brukerId}/innsynskravDel:
     get:
@@ -5666,16 +5666,16 @@ components:
             - innsynskrav
             - innsynskravDel
 
-    Innsynskrav:
+    InnsynskravBestilling:
       type: object
-      x-resourceId: Innsynskrav
+      x-resourceId: InnsynskravBestilling
       x-idPrefix: "ik"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
             entity:
               type: string
-              enum: ["Innsynskrav"]
+              enum: ["InnsynskravBestilling"]
               readOnly: true
             email:
               type: string
@@ -5722,7 +5722,7 @@ components:
             innsynskrav:
               anyOf:
                 - type: string
-                - $ref: "#/components/schemas/Innsynskrav"
+                - $ref: "#/components/schemas/InnsynskravBestilling"
             journalpost:
               anyOf:
                 - type: string
