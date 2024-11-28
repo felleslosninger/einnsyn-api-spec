@@ -15,7 +15,7 @@ tags:
   - name: Dokumentobjekt
   - name: Enhet
   - name: InnsynskravBestilling
-  - name: InnsynskravDel
+  - name: Innsynskrav
   - name: Journalpost
   - name: Klasse
   - name: Korrespondansepart
@@ -1136,10 +1136,10 @@ paths:
 
   /innsynskrav/{innsynskravId}/innsynskravDel:
     get:
-      description: Get a InnsynskravDel list.
+      description: Get a Innsynskrav list.
       tags:
-        - InnsynskravDel
-      operationId: GetInnsynskravInnsynskravDelList
+        - Innsynskrav
+      operationId: GetInnsynskravInnsynskravList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
@@ -1171,7 +1171,7 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: "#/components/schemas/InnsynskravDel"
+                          $ref: "#/components/schemas/Innsynskrav"
 
   /innsynskrav/{innsynskravId}/verify/{secret}:
     patch:
@@ -1201,10 +1201,10 @@ paths:
 
   /innsynskravDel:
     get:
-      description: Get a InnsynskravDel list.
+      description: Get a Innsynskrav list.
       tags:
-        - InnsynskravDel
-      operationId: GetInnsynskravDelList
+        - Innsynskrav
+      operationId: GetInnsynskravList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
@@ -1227,14 +1227,14 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: "#/components/schemas/InnsynskravDel"
+                          $ref: "#/components/schemas/Innsynskrav"
 
   /innsynskravDel/{innsynskravDelId}:
     get:
-      description: Get a single InnsynskravDel.
+      description: Get a single Innsynskrav.
       tags:
-        - InnsynskravDel
-      operationId: GetInnsynskravDel
+        - Innsynskrav
+      operationId: GetInnsynskrav
       parameters:
         - $ref: "#/components/parameters/Expand"
         - name: innsynskravDelId
@@ -1242,14 +1242,14 @@ paths:
           required: true
           schema:
             type: string
-          x-resourceId: InnsynskravDel
+          x-resourceId: Innsynskrav
       responses:
         "200":
           description: Successful response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/InnsynskravDel"
+                $ref: "#/components/schemas/Innsynskrav"
 
   /klasse:
     get:
@@ -3353,10 +3353,10 @@ paths:
 
   /enhet/{enhetId}/innsynskravDel:
     get:
-      description: Get a list of InnsynskravDel for a Enhet.
+      description: Get a list of Innsynskrav for a Enhet.
       tags:
         - Enhet
-      operationId: GetEnhetInnsynskravDelList
+      operationId: GetEnhetInnsynskravList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
@@ -3387,7 +3387,7 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: "#/components/schemas/InnsynskravDel"
+                          $ref: "#/components/schemas/Innsynskrav"
 
   /journalpost:
     get:
@@ -4299,7 +4299,7 @@ paths:
       description: Get all innsynskravDel for a Bruker.
       tags:
         - Bruker
-      operationId: GetBrukerInnsynskravDelList
+      operationId: GetBrukerInnsynskravList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
@@ -4331,7 +4331,7 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: "#/components/schemas/InnsynskravDel"
+                          $ref: "#/components/schemas/Innsynskrav"
 
   /bruker/{brukerId}/lagretSoek:
     get:
@@ -5685,7 +5685,7 @@ components:
               items:
                 anyOf:
                   - type: string
-                  - $ref: "#/components/schemas/InnsynskravDel"
+                  - $ref: "#/components/schemas/Innsynskrav"
             verified:
               type: boolean
               default: false
@@ -5708,16 +5708,16 @@ components:
             - bruker
             - innsynskravDel
 
-    InnsynskravDel:
+    Innsynskrav:
       type: object
-      x-resourceId: InnsynskravDel
+      x-resourceId: Innsynskrav
       x-idPrefix: "ikd"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
             entity:
               type: string
-              enum: ["InnsynskravDel"]
+              enum: ["Innsynskrav"]
               readOnly: true
             innsynskrav:
               anyOf:
