@@ -1069,7 +1069,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/InnsynskravBestilling"
 
-  /innsynskravBestilling/{innsynskravId}:
+  /innsynskravBestilling/{innsynskravBestillingId}:
     get:
       description: Get a InnsynskravBestilling.
       tags:
@@ -1077,7 +1077,7 @@ paths:
       operationId: GetInnsynskravBestilling
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: innsynskravId
+        - name: innsynskravBestillingId
           in: path
           required: true
           schema:
@@ -1096,7 +1096,7 @@ paths:
         - InnsynskravBestilling
       operationId: PatchInnsynskravBestilling
       parameters:
-        - name: innsynskravId
+        - name: innsynskravBestillingId
           in: path
           required: true
           schema:
@@ -1120,7 +1120,7 @@ paths:
         - InnsynskravBestilling
       operationId: DeleteInnsynskravBestilling
       parameters:
-        - name: innsynskravId
+        - name: innsynskravBestillingId
           in: path
           required: true
           schema:
