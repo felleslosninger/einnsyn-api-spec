@@ -5714,7 +5714,7 @@ components:
               type: string
               enum: ["Innsynskrav"]
               readOnly: true
-            innsynskrav:
+            innsynskravBestilling:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/InnsynskravBestilling"
