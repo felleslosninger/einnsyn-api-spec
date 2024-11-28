@@ -1022,12 +1022,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Identifikator"
 
-  /innsynskrav:
+  /innsynskravBestilling:
     get:
-      description: Get a Innsynskrav list.
+      description: Get a InnsynskravBestilling list.
       tags:
         - InnsynskravBestilling
-      operationId: GetInnsynskravList
+      operationId: GetInnsynskravBestillingList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
@@ -1069,7 +1069,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/InnsynskravBestilling"
 
-  /innsynskrav/{innsynskravId}:
+  /innsynskravBestilling/{innsynskravId}:
     get:
       description: Get a InnsynskravBestilling.
       tags:
@@ -1134,9 +1134,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/InnsynskravBestilling"
 
-  /innsynskrav/{innsynskravId}/innsynskravDel:
+  /innsynskravBestilling/{innsynskravBestillingId}/innsynskrav:
     get:
-      description: Get a Innsynskrav list.
+      description: Get a InnsynskravBestilling list.
       tags:
         - Innsynskrav
       operationId: GetInnsynskravInnsynskravList
@@ -1146,13 +1146,13 @@ paths:
         - $ref: "#/components/parameters/SortOrder"
         - $ref: "#/components/parameters/StartingAfter"
         - $ref: "#/components/parameters/EndingBefore"
-        - name: innsynskravId
+        - name: innsynskravBestillingId
           in: path
           required: true
           schema:
             type: string
           x-resourceId: InnsynskravBestilling
-        - name: innsynskravId
+        - name: innsynskravBestillingId
           in: query
           description: Filter by InnsynskravBestilling
           schema:
@@ -1173,14 +1173,14 @@ paths:
                         items:
                           $ref: "#/components/schemas/Innsynskrav"
 
-  /innsynskrav/{innsynskravId}/verify/{secret}:
+  /innsynskravBestilling/{innsynskravBestillingId}/verify/{secret}:
     patch:
       description: Verify a InnsynskravBestilling.
       tags:
         - InnsynskravBestilling
       operationId: VerifyInnsynskravBestilling
       parameters:
-        - name: innsynskravId
+        - name: innsynskravBestillingId
           in: path
           required: true
           schema:
@@ -1199,7 +1199,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/InnsynskravBestilling"
 
-  /innsynskravDel:
+  /innsynskrav:
     get:
       description: Get a Innsynskrav list.
       tags:
@@ -1229,7 +1229,7 @@ paths:
                         items:
                           $ref: "#/components/schemas/Innsynskrav"
 
-  /innsynskravDel/{innsynskravDelId}:
+  /innsynskrav/{innsynskravId}:
     get:
       description: Get a single Innsynskrav.
       tags:
@@ -1237,7 +1237,7 @@ paths:
       operationId: GetInnsynskrav
       parameters:
         - $ref: "#/components/parameters/Expand"
-        - name: innsynskravDelId
+        - name: innsynskravId
           in: path
           required: true
           schema:
@@ -3351,7 +3351,7 @@ paths:
                         items:
                           $ref: "#/components/schemas/Arkiv"
 
-  /enhet/{enhetId}/innsynskravDel:
+  /enhet/{enhetId}/innsynskrav:
     get:
       description: Get a list of Innsynskrav for a Enhet.
       tags:
@@ -4255,12 +4255,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
-  /bruker/{brukerId}/innsynskrav:
+  /bruker/{brukerId}/innsynskravBestilling:
     get:
-      description: Get all innsynskrav for a Bruker.
+      description: Get all InnsynskravBestilling for a Bruker.
       tags:
         - Bruker
-      operationId: GetBrukerInnsynskravList
+      operationId: GetBrukerInnsynskravBestillingList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
@@ -4294,9 +4294,9 @@ paths:
                         items:
                           $ref: "#/components/schemas/InnsynskravBestilling"
 
-  /bruker/{brukerId}/innsynskravDel:
+  /bruker/{brukerId}/innsynskrav:
     get:
-      description: Get all innsynskravDel for a Bruker.
+      description: Get all Innsynskrav for a Bruker.
       tags:
         - Bruker
       operationId: GetBrukerInnsynskravList
@@ -5660,11 +5660,6 @@ components:
           required:
             - email
             - password
-          x-expandableFields:
-            - lagretSak
-            - lagretSoek
-            - innsynskrav
-            - innsynskravDel
 
     InnsynskravBestilling:
       type: object
@@ -5680,7 +5675,7 @@ components:
             email:
               type: string
               format: email
-            innsynskravDel:
+            innsynskrav:
               type: array
               items:
                 anyOf:
@@ -5703,10 +5698,10 @@ components:
                 - se
           required:
             - email
-            - innsynskravDel
+            - innsynskrav
           x-expandableFields:
             - bruker
-            - innsynskravDel
+            - innsynskrav
 
     Innsynskrav:
       type: object
