@@ -11,17 +11,19 @@ using TypeSpec.OpenAPI;
 @info({
   version: "1.0",
 })
-namespace eInnsyn;
+namespace EInnsyn;
 
-alias EInnsynId = string;
+@format("id")
+scalar eInnsynId<T = null> extends string;
 
+alias ExpandableObject<T> = eInnsynId<T> | T;
 namespace Base {
   @extension("x-resourceId", "Base")
   model Base {
     /**
      * The unique identifier for the resource. This is is assigned by the system when the resource is created.
      */
-    @visibility("read") id: string;
+    @visibility("read") id: eInnsynId<Base>;
 
     /**
      * A timestamp of when the resource was created. This field is updated automatically.
@@ -82,9 +84,9 @@ namespace Enhet {
     skalMottaKvittering?: boolean;
     visToppnode?: boolean;
     orderXmlVersjon?: integer;
-    underenhet?: EInnsynId | Enhet[];
-    handteresAv?: EInnsynId | Enhet;
-    parent?: EInnsynId | Enhet;
+    underenhet?: ExpandableObject<Enhet>[];
+    handteresAv?: ExpandableObject<Enhet>;
+    parent?: ExpandableObject<Enhet>;
   }
 }
 
@@ -107,45 +109,56 @@ namespace ApiKey {
     /**
      * The Enhet that requests using this key will be associated with.
      */
-    enhet?: EInnsynId | Enhet.Enhet;
+    enhet?: ExpandableObject<Enhet.Enhet>;
   }
 }
 
 namespace Responses {
+  model ListResponseBody<T extends Base.Base> {
+    items: Array<T>;
+    next?: url;
+    previous?: url;
+  }
+
+  model ErrorResponseBody {
+    status: string;
+    message: string;
+  }
+
+  model ValidationErrorResponseBody extends ErrorResponseBody {
+    fieldError: {
+      fieldName: string;
+      value?: string;
+      message?: string;
+    }[];
+  }
+
   /**
    * Result list
    */
-  model ListResponse<DTO extends Base.Base = Base.Base> {
+  model ListResponse<T extends Base.Base = Base.Base> {
     @statusCode _: 200;
-    @body body: {
-      items: DTO[];
-      next?: url;
-      previous?: url;
-    };
+    @body body: ListResponseBody<T>;
   }
 
-  model OkResponse<DTO extends Base.Base = Base.Base> {
+  model OkResponse<T extends Base.Base = Base.Base> {
     @statusCode _: 200;
-    @body body: DTO;
+    @body body: T;
   }
 
-  model AddResponse<DTO = Base.Base> {
+  model AddResponse<T extends Base.Base = Base.Base> {
     @statusCode _: 201;
-    @body body: DTO;
+    @body body: T;
   }
 
   @error
   model ErrorResponse {
     @statusCode _: 400;
-    @body body: {
-      status: string;
-      message: string;
-      fieldErrors?: string;
-    };
+    @body body: ErrorResponseBody;
   }
 }
 
-interface Routable<T extends Base.Base, name extends valueof string = "_"> {
+interface Routable<T extends Base.Base> {
   /**
    * Get an object.
    * @param id The ID of the object.
@@ -155,7 +168,7 @@ interface Routable<T extends Base.Base, name extends valueof string = "_"> {
   @get
   get(
     ...QueryParameters.GetParameters,
-    @path id: EInnsynId,
+    @path id: eInnsynId<T>,
   ): Responses.OkResponse<T>;
 
   /**
@@ -165,7 +178,7 @@ interface Routable<T extends Base.Base, name extends valueof string = "_"> {
    */
   @route("/{id}")
   @patch
-  update(@path id: EInnsynId, @body body: T): Responses.OkResponse<T>;
+  update(@path id: eInnsynId<T>, @body body: T): Responses.OkResponse<T>;
 
   /**
    * Delete an object.
@@ -174,13 +187,10 @@ interface Routable<T extends Base.Base, name extends valueof string = "_"> {
    */
   @route("/{id}")
   @delete
-  delete(@path id: EInnsynId): Responses.OkResponse<T>;
+  delete(@path id: eInnsynId<T>): Responses.OkResponse<T>;
 }
 
-interface GloballyRoutable<
-  T extends Base.Base,
-  name extends valueof string = "_"
-> extends Routable<T, name> {
+interface GloballyRoutable<T extends Base.Base> extends Routable<T> {
   @route("/")
   @get
   list(...QueryParameters.ListParameters): Responses.ListResponse<T>;
@@ -192,7 +202,10 @@ interface GloballyRoutable<
 
 namespace QueryParameters {
   model GetParameters {
-    @query expand?: string[] = #[];
+    /**
+     * Specifies which fields in the response should be expanded.
+     */
+    @query expand?: string[];
   }
 
   model ListParameters {
@@ -214,17 +227,17 @@ namespace QueryParameters {
     /**
      * A cursor for use in pagination. StartingAfter is a resource ID that defines your place in the list.
      */
-    @query startingAfter?: string;
+    @query startingAfter?: eInnsynId;
 
     /**
      * A cursor for use in pagination. EndingBefore is a resource ID that defines your place in the list.
      */
-    @query endingBefore?: string;
+    @query endingBefore?: eInnsynId;
 
     /**
      * A list of resource IDs to be returned. If this parameter is used, the other parameters will be ignored.
      */
-    @query ids?: string[];
+    @query ids?: eInnsynId[];
 
     /**
      * A list of external IDs to be returned. If this parameter is used, the other parameters will be ignored.
@@ -234,10 +247,10 @@ namespace QueryParameters {
     /**
      * The Journalenhet to filter the result set by.
      */
-    @query journalenhet?: string;
+    @query journalenhet?: eInnsynId;
   }
 
-  model FilterParameters {
+  model SearchParameters extends ListParameters {
     /**
      * A query string to filter by. Quotes can be used to search for exact matches or phrases. Words can be excluded by prefixing them with a minus sign.
      */
@@ -246,22 +259,22 @@ namespace QueryParameters {
     /**
      * A list of enhet IDs to filter by. This will also match subenhets.
      */
-    @query administrativEnhet?: string[];
+    @query administrativEnhet?: eInnsynId[];
 
     /**
      * A list of enhet IDs to filter by. This will only match the specified enhets, not subenhets.
      */
-    @query administrativEnhetExact?: string[];
+    @query administrativEnhetExact?: eInnsynId[];
 
     /**
      * A list of enhet IDs to exclude from the result set. This will also exclude subenhets.
      */
-    @query excludeAdministrativEnhet?: string[];
+    @query excludeAdministrativEnhet?: eInnsynId[];
 
     /**
      * A list of enhet IDs to exclude from the result set. This will only exclude the specified enhets, not subenhets.
      */
-    @query excludeAdministrativEnhetExact?: string[];
+    @query excludeAdministrativEnhetExact?: eInnsynId[];
 
     /**
      * Filter by the published date of the document.
@@ -292,10 +305,5 @@ namespace QueryParameters {
      * Filter by the date of a meeting.
      */
     @query moetedatoAfter?: utcDateTime;
-  }
-
-  model SearchParameters {
-    ...FilterParameters;
-    ...ListParameters;
   }
 }

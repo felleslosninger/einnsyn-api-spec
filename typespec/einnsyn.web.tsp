@@ -1,14 +1,14 @@
 import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/openapi3";
-import "./einnsyn.Base.tsp";
+import "./einnsyn.base.tsp";
 import "./einnsyn.noark.tsp";
 
 using Http;
 using OpenAPI;
-using eInnsyn;
+using EInnsyn;
 
-namespace eInnsyn;
+namespace EInnsyn;
 
 namespace Bruker {
   /**
@@ -25,78 +25,87 @@ namespace Bruker {
 
   @route("/bruker")
   @tag("Bruker")
-  interface BrukerRoutes extends GloballyRoutable<Bruker, "Bruker"> {
-    @route("/{brukerId}/innsynskrav")
+  interface BrukerRoutes extends GloballyRoutable<Bruker> {
+    @route("/{brukerId}/innsynskravBestilling")
     @get
-    getInnsynskravList(
-      @path brukerId: EInnsynId,
-    ): Responses.ListResponse<Innsynskrav.Innsynskrav>;
+    listInnsynskravBestilling(
+      ...QueryParameters.ListParameters,
+      @path brukerId: eInnsynId<Bruker>,
+    ): Responses.ListResponse<InnsynskravBestilling.InnsynskravBestilling>;
 
-    @route("/{brukerId}/innsynskrav")
+    @route("/{brukerId}/innsynskravBestilling")
     @post
-    addInnsynskrav(
-      @path brukerId: EInnsynId,
-      @body innsynskrav: Innsynskrav.Innsynskrav,
-    ): Responses.AddResponse<Innsynskrav.Innsynskrav>;
+    addInnsynskravBestilling(
+      @path brukerId: eInnsynId<Bruker>,
+      @body innsynskravBestilling: InnsynskravBestilling.InnsynskravBestilling,
+    ): Responses.AddResponse<InnsynskravBestilling.InnsynskravBestilling>;
 
-    @route("/{brukerId}/innsynskravDel")
+    @route("/{brukerId}/innsynskrav")
     @get
-    getInnsynskravDelList(
-      @path brukerId: EInnsynId,
-    ): Responses.ListResponse<InnsynskravDel.InnsynskravDel>;
+    listInnsynskrav(
+      ...QueryParameters.ListParameters,
+      @path brukerId: eInnsynId<Bruker>,
+    ): Responses.ListResponse<Innsynskrav.Innsynskrav>;
 
     @route("/{brukerId}/lagretSak")
     @get
-    getLagretSakList(
-      @path brukerId: EInnsynId,
+    listLagretSak(
+      ...QueryParameters.ListParameters,
+      @path brukerId: eInnsynId<Bruker>,
     ): Responses.ListResponse<LagretSak.LagretSak>;
 
     @route("/{brukerId}/lagretSak")
     @post
     addLagretSak(
-      @path brukerId: EInnsynId,
+      @path brukerId: eInnsynId<Bruker>,
       @body lagretSak: LagretSak.LagretSak,
     ): Responses.AddResponse<LagretSak.LagretSak>;
 
     @route("/{brukerId}/lagretSoek")
     @get
-    getLagretSoekList(
-      @path brukerId: EInnsynId,
+    listLagretSoek(
+      ...QueryParameters.ListParameters,
+      @path brukerId: eInnsynId<Bruker>,
     ): Responses.ListResponse<LagretSoek.LagretSoek>;
 
     @route("/{brukerId}/lagretSoek")
     @post
     addLagretSoek(
-      @path brukerId: EInnsynId,
+      @path brukerId: eInnsynId<Bruker>,
       @body lagretSoek: LagretSoek.LagretSoek,
     ): Responses.AddResponse<LagretSoek.LagretSoek>;
 
     @route("/{brukerId}/activate/{secret}")
     @patch
     activate(
-      @path brukerId: EInnsynId,
+      @path brukerId: eInnsynId<Bruker>,
       @path secret: string,
     ): Responses.OkResponse<Bruker>;
 
     @route("/{brukerId}/updatePassword")
     @patch
     updatePassword(
-      @path brukerId: EInnsynId,
-      @body password: string,
+      @path brukerId: eInnsynId<Bruker>,
+      @body updatePassword: {
+        oldPassword: string;
+        newPassword: string;
+      },
     ): Responses.OkResponse<Bruker>;
 
     @route("/{brukerId}/updatePassword/{secret}")
     @patch
     updatePasswordWithSecret(
-      @path brukerId: EInnsynId,
+      @path brukerId: eInnsynId<Bruker>,
       @path secret: string,
-      @body password: string,
+      @body updatePasswordWithSecret: {
+        newPassword: string;
+      },
     ): Responses.OkResponse<Bruker>;
 
     @route("/{brukerId}/requestPasswordReset")
     @patch
     requestPasswordReset(
-      @path brukerId: EInnsynId,
+      @path brukerId: eInnsynId<Bruker>,
     ): Responses.OkResponse<Bruker>;
   }
 }
@@ -109,15 +118,15 @@ namespace LagretSak {
   @extension("x-idPrefix", "lsak")
   model LagretSak extends Base.Base {
     @visibility("read") entity?: "LagretSak";
-    bruker: EInnsynId | Bruker.Bruker;
-    saksmappe?: EInnsynId | Saksmappe.Saksmappe;
-    moetemappe?: EInnsynId | Moetemappe.Moetemappe;
+    bruker: ExpandableObject<Bruker.Bruker>;
+    saksmappe?: ExpandableObject<Saksmappe.Saksmappe>;
+    moetemappe?: ExpandableObject<Moetemappe.Moetemappe>;
     subscribe?: boolean;
   }
 
   @route("/lagretSak")
   @tag("LagretSak")
-  interface LagretSakRoutes extends Routable<LagretSak, "LagretSak"> {}
+  interface LagretSakRoutes extends Routable<LagretSak> {}
 }
 
 namespace LagretSoek {
@@ -128,7 +137,7 @@ namespace LagretSoek {
   @extension("x-idPrefix", "lsoek")
   model LagretSoek extends Base.Base {
     @visibility("read") entity?: "LagretSoek";
-    bruker?: EInnsynId | Bruker.Bruker;
+    bruker?: ExpandableObject<Bruker.Bruker>;
     label?: string;
     legacyQuery?: string;
     subscribe?: boolean;
@@ -136,7 +145,7 @@ namespace LagretSoek {
 
   @route("/lagretSoek")
   @tag("LagretSoek")
-  interface LagretSoekRoutes extends Routable<LagretSoek, "LagretSoek"> {}
+  interface LagretSoekRoutes extends Routable<LagretSoek> {}
 }
 
 namespace Tilbakemelding {
@@ -166,8 +175,41 @@ namespace Tilbakemelding {
 
   @route("/tilbakemelding")
   @tag("Tilbakemelding")
-  interface TilbakemeldingRoutes
-    extends GloballyRoutable<Tilbakemelding, "Tilbakemelding"> {}
+  interface TilbakemeldingRoutes extends GloballyRoutable<Tilbakemelding> {}
+}
+
+namespace InnsynskravBestilling {
+  /**
+   * Innsynskrav
+   */
+  @extension("x-resourceId", "Innsynskrav")
+  @extension("x-idPrefix", "ik")
+  model InnsynskravBestilling extends Base.Base {
+    @visibility("read") entity?: "Innsynskrav";
+    @format("email") email: string;
+    innsynskrav: ExpandableObject<Innsynskrav.Innsynskrav>[];
+    verified?: boolean;
+    bruker?: ExpandableObject<Bruker.Bruker>;
+    language?: "nb" | "nn" | "en" | "se";
+  }
+
+  @route("/innsynskravBestilling")
+  @tag("InnsynskravBestilling")
+  interface InnsynskravRoutes extends GloballyRoutable<InnsynskravBestilling> {
+    @route("/{innsynskravBestillingId}/innsynskrav")
+    @get
+    listInnsynskrav(
+      ...QueryParameters.ListParameters,
+      @path innsynskravBestillingId: eInnsynId<InnsynskravBestilling>,
+    ): Responses.ListResponse<Innsynskrav.Innsynskrav>;
+
+    @route("/{innsynskravBestillingId}/verify/{secret}")
+    @patch
+    verify(
+      @path innsynskravBestillingId: eInnsynId,
+      @path secret: string,
+    ): Responses.OkResponse<InnsynskravBestilling>;
+  }
 }
 
 namespace Innsynskrav {
@@ -175,54 +217,19 @@ namespace Innsynskrav {
    * Innsynskrav
    */
   @extension("x-resourceId", "Innsynskrav")
-  @extension("x-idPrefix", "ik")
+  @extension("x-idPrefix", "ikd")
   model Innsynskrav extends Base.Base {
     @visibility("read") entity?: "Innsynskrav";
-    @format("email") email: string;
-    innsynskravDel: (EInnsynId | InnsynskravDel.InnsynskravDel)[];
-    verified?: boolean;
-    bruker?: EInnsynId | Bruker.Bruker;
-    language?: "nb" | "nn" | "en" | "se";
-  }
-
-  @route("/innsynskrav")
-  @tag("Innsynskrav")
-  interface InnsynskravRoutes
-    extends GloballyRoutable<Innsynskrav, "Innsynskrav"> {
-    @route("/{innsynskravId}/innsynskravDel")
-    @get
-    getInnsynskravDelList(
-      @path innsynskravId: EInnsynId,
-    ): Responses.ListResponse<InnsynskravDel.InnsynskravDel>;
-
-    @route("/{innsynskravId}/verify/{secret}")
-    @patch
-    verify(
-      @path innsynskravId: EInnsynId,
-      @path secret: string,
-    ): Responses.OkResponse<Innsynskrav>;
-  }
-}
-
-namespace InnsynskravDel {
-  /**
-   * InnsynskravDel
-   */
-  @extension("x-resourceId", "InnsynskravDel")
-  @extension("x-idPrefix", "ikd")
-  model InnsynskravDel extends Base.Base {
-    @visibility("read") entity?: "InnsynskravDel";
-    innsynskrav?: EInnsynId | Innsynskrav.Innsynskrav;
-    journalpost: EInnsynId | Journalpost.Journalpost;
-    enhet?: EInnsynId | Enhet.Enhet;
+    innsynskravBestilling?: ExpandableObject<InnsynskravBestilling.InnsynskravBestilling>;
+    journalpost: ExpandableObject<Journalpost.Journalpost>;
+    enhet?: ExpandableObject<Enhet.Enhet>;
     @visibility("read") @format("email") email?: string;
     sent?: utcDateTime;
   }
 
-  @route("/innsynskravDel")
-  @tag("InnsynskravDel")
-  interface InnsynskravDelRoutes
-    extends Routable<InnsynskravDel, "InnsynskravDel"> {}
+  @route("/innsynskrav")
+  @tag("Innsynskrav")
+  interface InnsynskravRoutes extends Routable<Innsynskrav> {}
 }
 
 namespace Search {
