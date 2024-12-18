@@ -16,7 +16,7 @@ namespace EInnsyn;
 @format("id")
 scalar eInnsynId<T = null> extends string;
 
-alias ExpandableObject<T> = eInnsynId<T> | T;
+alias ExpandableField<T> = eInnsynId<T> | T;
 namespace Base {
   @extension("x-resourceId", "Base")
   model Base {
@@ -84,9 +84,9 @@ namespace Enhet {
     skalMottaKvittering?: boolean;
     visToppnode?: boolean;
     orderXmlVersjon?: integer;
-    underenhet?: ExpandableObject<Enhet>[];
-    handteresAv?: ExpandableObject<Enhet>;
-    parent?: ExpandableObject<Enhet>;
+    underenhet?: ExpandableField<Enhet>[];
+    handteresAv?: ExpandableField<Enhet>;
+    parent?: ExpandableField<Enhet>;
   }
 }
 
@@ -109,7 +109,7 @@ namespace ApiKey {
     /**
      * The Enhet that requests using this key will be associated with.
      */
-    enhet?: ExpandableObject<Enhet.Enhet>;
+    enhet?: ExpandableField<Enhet.Enhet>;
   }
 }
 

@@ -23,7 +23,7 @@ namespace ArkivBase {
      * request on creation, or it can manually be set to an Enhet owned by
      * that derived Enhet.
      */
-    journalenhet: ExpandableObject<Enhet.Enhet>;
+    journalenhet: ExpandableField<Enhet.Enhet>;
   }
 }
 
@@ -46,7 +46,7 @@ namespace Arkiv {
     /**
      * The parent archive to which this archive belongs.
      */
-    parent?: ExpandableObject<Arkiv>;
+    parent?: ExpandableField<Arkiv>;
   }
 
   model ListByArkivParameters extends QueryParameters.ListParameters {
@@ -114,7 +114,7 @@ namespace Arkivdel {
   model Arkivdel extends ArkivBase.ArkivBase {
     @visibility("read") entity?: "Arkivdel";
     tittel: string;
-    parent?: ExpandableObject<Arkiv.Arkiv>;
+    parent?: ExpandableField<Arkiv.Arkiv>;
   }
 
   model ListByArkivdelParameters extends QueryParameters.ListParameters {
@@ -184,7 +184,7 @@ namespace Klassifikasjonssystem {
   model Klassifikasjonssystem extends ArkivBase.ArkivBase {
     @visibility("read") entity?: "Klassifikasjonssystem";
     tittel: string;
-    parent?: ExpandableObject<Arkivdel.Arkivdel>;
+    parent?: ExpandableField<Arkivdel.Arkivdel>;
   }
 
   @route("/klassifikasjonssystem")
@@ -280,9 +280,9 @@ namespace Saksmappe {
     @minValue(0) sakssekvensnummer: integer;
     saksnummer?: string;
     saksdato?: plainDate;
-    journalpost: ExpandableObject<Journalpost.Journalpost>[];
+    journalpost: ExpandableField<Journalpost.Journalpost>[];
     administrativEnhet: string;
-    @visibility("read") administrativEnhetObjekt: ExpandableObject<Enhet.Enhet>;
+    @visibility("read") administrativEnhetObjekt: ExpandableField<Enhet.Enhet>;
   }
 
   @route("/saksmappe")
@@ -311,14 +311,14 @@ namespace Moetemappe {
     @visibility("read") entity?: "Moetemappe";
     moetenummer: string;
     utvalg: string;
-    @visibility("read") utvalgObjekt: ExpandableObject<Enhet.Enhet>;
+    @visibility("read") utvalgObjekt: ExpandableField<Enhet.Enhet>;
     moetedato: utcDateTime;
     moetested?: string;
     @maxLength(5000) videoLink?: string;
-    referanseForrigeMoete?: ExpandableObject<Moetemappe>;
-    referanseNesteMoete?: ExpandableObject<Moetemappe>;
-    moetedokument?: ExpandableObject<Moetedokument.Moetedokument>[];
-    moetesak?: ExpandableObject<Moetesak.Moetesak>[];
+    referanseForrigeMoete?: ExpandableField<Moetemappe>;
+    referanseNesteMoete?: ExpandableField<Moetemappe>;
+    moetedokument?: ExpandableField<Moetedokument.Moetedokument>[];
+    moetesak?: ExpandableField<Moetesak.Moetesak>[];
   }
 
   @route("/moetemappe")
@@ -371,8 +371,8 @@ namespace Registrering {
      */
     @visibility("read") oppdatertDato: utcDateTime;
 
-    korrespondansepart?: ExpandableObject<Korrespondansepart.Korrespondansepart>[];
-    dokumentbeskrivelse?: ExpandableObject<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
+    korrespondansepart?: ExpandableField<Korrespondansepart.Korrespondansepart>[];
+    dokumentbeskrivelse?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
   }
 }
 
@@ -396,12 +396,12 @@ namespace Journalpost {
       | "ukjent";
     journaldato: plainDate;
     dokumentetsDato?: plainDate;
-    skjerming?: ExpandableObject<Saksmappe.Saksmappe>;
+    skjerming?: ExpandableField<Saksmappe.Saksmappe>;
     legacyJournalposttype?: string;
     legacyFoelgsakenReferanse?: string[];
     @visibility("read") administrativEnhet: string;
-    @visibility("read") administrativEnhetObjekt: ExpandableObject<Enhet.Enhet>;
-    @visibility("read") saksmappe: ExpandableObject<Saksmappe.Saksmappe>;
+    @visibility("read") administrativEnhetObjekt: ExpandableField<Enhet.Enhet>;
+    @visibility("read") saksmappe: ExpandableField<Saksmappe.Saksmappe>;
   }
 
   @route("/journalpost")
@@ -500,12 +500,12 @@ namespace Moetesak {
     @minValue(1900) moetesaksaar: integer;
     @minValue(0) moetesakssekvensnummer: integer;
     utvalg?: string;
-    @visibility("read") utvalgObjekt: ExpandableObject<Enhet.Enhet>;
+    @visibility("read") utvalgObjekt: ExpandableField<Enhet.Enhet>;
     videoLink?: string;
-    utredning?: ExpandableObject<Utredning.Utredning>;
-    innstilling?: ExpandableObject<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
-    vedtak?: ExpandableObject<Vedtak.Vedtak>;
-    moetemappe?: ExpandableObject<Moetemappe.Moetemappe>;
+    utredning?: ExpandableField<Utredning.Utredning>;
+    innstilling?: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
+    vedtak?: ExpandableField<Vedtak.Vedtak>;
+    moetemappe?: ExpandableField<Moetemappe.Moetemappe>;
   }
 
   @route("/moetesak")
@@ -560,9 +560,9 @@ namespace Utredning {
   @extension("x-idPrefix", "utr")
   model Utredning extends ArkivBase.ArkivBase {
     @visibility("read") entity?: "Utredning";
-    saksbeskrivelse: ExpandableObject<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
-    innstilling: ExpandableObject<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
-    utredningsdokument?: ExpandableObject<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
+    saksbeskrivelse: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
+    innstilling: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
+    utredningsdokument?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
   }
 
   @route("/utredning")
@@ -598,11 +598,11 @@ namespace Vedtak {
   @extension("x-idPrefix", "ved")
   model Vedtak extends ArkivBase.ArkivBase {
     @visibility("read") entity?: "Vedtak";
-    vedtakstekst: ExpandableObject<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
-    votering?: ExpandableObject<Votering.Votering>[];
+    vedtakstekst: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
+    votering?: ExpandableField<Votering.Votering>[];
     foo?: string[];
-    behandlingsprotokoll?: ExpandableObject<Behandlingsprotokoll.Behandlingsprotokoll>;
-    vedtaksdokument?: ExpandableObject<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
+    behandlingsprotokoll?: ExpandableField<Behandlingsprotokoll.Behandlingsprotokoll>;
+    vedtaksdokument?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
     dato: plainDate;
   }
 
@@ -652,9 +652,9 @@ namespace Votering {
   @extension("x-idPrefix", "vot")
   model Votering extends ArkivBase.ArkivBase {
     @visibility("read") entity?: "Votering";
-    moetedeltaker: ExpandableObject<Moetedeltaker.Moetedeltaker>;
+    moetedeltaker: ExpandableField<Moetedeltaker.Moetedeltaker>;
     stemme: "Ja" | "Nei" | "Blankt";
-    representerer?: ExpandableObject<Identifikator.Identifikator>;
+    representerer?: ExpandableField<Identifikator.Identifikator>;
   }
 
   @route("/votering")
@@ -734,7 +734,7 @@ namespace Dokumentbeskrivelse {
     dokumentnummer: integer;
     dokumenttype?: string;
     tilknyttetRegistreringSom: string;
-    dokumentobjekt?: ExpandableObject<Dokumentobjekt.Dokumentobjekt>[];
+    dokumentobjekt?: ExpandableField<Dokumentobjekt.Dokumentobjekt>[];
   }
 
   @route("/dokumentbeskrivelse")
@@ -758,7 +758,7 @@ namespace Dokumentobjekt {
     format?: string;
     sjekksum?: string;
     sjekksumAlgoritme?: string;
-    dokumentbeskrivelse?: ExpandableObject<Dokumentbeskrivelse.Dokumentbeskrivelse>;
+    dokumentbeskrivelse?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>;
   }
 
   @route("/dokumentobjekt")
@@ -773,7 +773,7 @@ namespace Moetedokument {
     moetedokumenttype: string;
     saksbehandler?: string;
     saksbehandlerSensitiv?: string;
-    moetemappe?: ExpandableObject<Moetemappe.Moetemappe>;
+    moetemappe?: ExpandableField<Moetemappe.Moetemappe>;
   }
 
   @route("/moetedokument")

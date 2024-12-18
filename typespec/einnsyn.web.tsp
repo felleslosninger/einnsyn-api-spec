@@ -118,9 +118,9 @@ namespace LagretSak {
   @extension("x-idPrefix", "lsak")
   model LagretSak extends Base.Base {
     @visibility("read") entity?: "LagretSak";
-    bruker: ExpandableObject<Bruker.Bruker>;
-    saksmappe?: ExpandableObject<Saksmappe.Saksmappe>;
-    moetemappe?: ExpandableObject<Moetemappe.Moetemappe>;
+    bruker: ExpandableField<Bruker.Bruker>;
+    saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
+    moetemappe?: ExpandableField<Moetemappe.Moetemappe>;
     subscribe?: boolean;
   }
 
@@ -137,7 +137,7 @@ namespace LagretSoek {
   @extension("x-idPrefix", "lsoek")
   model LagretSoek extends Base.Base {
     @visibility("read") entity?: "LagretSoek";
-    bruker?: ExpandableObject<Bruker.Bruker>;
+    bruker?: ExpandableField<Bruker.Bruker>;
     label?: string;
     legacyQuery?: string;
     subscribe?: boolean;
@@ -187,9 +187,9 @@ namespace InnsynskravBestilling {
   model InnsynskravBestilling extends Base.Base {
     @visibility("read") entity?: "Innsynskrav";
     @format("email") email: string;
-    innsynskrav: ExpandableObject<Innsynskrav.Innsynskrav>[];
+    innsynskrav: ExpandableField<Innsynskrav.Innsynskrav>[];
     verified?: boolean;
-    bruker?: ExpandableObject<Bruker.Bruker>;
+    bruker?: ExpandableField<Bruker.Bruker>;
     language?: "nb" | "nn" | "en" | "se";
   }
 
@@ -220,9 +220,9 @@ namespace Innsynskrav {
   @extension("x-idPrefix", "ikd")
   model Innsynskrav extends Base.Base {
     @visibility("read") entity?: "Innsynskrav";
-    innsynskravBestilling?: ExpandableObject<InnsynskravBestilling.InnsynskravBestilling>;
-    journalpost: ExpandableObject<Journalpost.Journalpost>;
-    enhet?: ExpandableObject<Enhet.Enhet>;
+    innsynskravBestilling?: ExpandableField<InnsynskravBestilling.InnsynskravBestilling>;
+    journalpost: ExpandableField<Journalpost.Journalpost>;
+    enhet?: ExpandableField<Enhet.Enhet>;
     @visibility("read") @format("email") email?: string;
     sent?: utcDateTime;
   }
@@ -240,7 +240,7 @@ namespace Search {
   @tag("Search")
   interface SearchRoutes {
     @get
-    get(...QueryParameters.SearchParameters): Responses.ListResponse<
+    search(...QueryParameters.SearchParameters): Responses.ListResponse<
       | Journalpost.Journalpost
       | Moetemappe.Moetemappe
       | Moetesak.Moetesak
