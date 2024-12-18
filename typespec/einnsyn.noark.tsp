@@ -46,7 +46,7 @@ namespace Arkiv {
     /**
      * The parent archive to which this archive belongs.
      */
-    parent?: ExpandableField<Arkiv>;
+    arkiv?: ExpandableField<Arkiv>;
   }
 
   model ListByArkivParameters extends QueryParameters.ListParameters {
@@ -114,7 +114,7 @@ namespace Arkivdel {
   model Arkivdel extends ArkivBase.ArkivBase {
     @visibility("read") entity?: "Arkivdel";
     tittel: string;
-    parent?: ExpandableField<Arkiv.Arkiv>;
+    arkiv?: ExpandableField<Arkiv.Arkiv>;
   }
 
   model ListByArkivdelParameters extends QueryParameters.ListParameters {
@@ -184,7 +184,7 @@ namespace Klassifikasjonssystem {
   model Klassifikasjonssystem extends ArkivBase.ArkivBase {
     @visibility("read") entity?: "Klassifikasjonssystem";
     tittel: string;
-    parent?: ExpandableField<Arkivdel.Arkivdel>;
+    arkivdel?: ExpandableField<Arkivdel.Arkivdel>;
   }
 
   @route("/klassifikasjonssystem")
