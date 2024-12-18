@@ -213,11 +213,8 @@ namespace Klasse {
   model Klasse extends ArkivBase.ArkivBase {
     @visibility("read") entity?: "Klasse";
     tittel: string;
-    parent?:
-      | eInnsynId
-      | Arkivdel.Arkivdel
-      | Klasse
-      | Klassifikasjonssystem.Klassifikasjonssystem;
+    klassifikasjonssystem?: ExpandableField<Klassifikasjonssystem.Klassifikasjonssystem>;
+    klasse?: ExpandableField<Klasse>;
   }
 
   @route("/klasse")
