@@ -23,7 +23,7 @@ namespace Base {
     /**
      * The unique identifier for the resource. This is is assigned by the system when the resource is created.
      */
-    @visibility("read") id: eInnsynId<Base>;
+    @visibility("read") id: eInnsynId;
 
     /**
      * A timestamp of when the resource was created. This field is updated automatically.
@@ -88,6 +88,14 @@ namespace Enhet {
     handteresAv?: ExpandableField<Enhet>;
     parent?: ExpandableField<Enhet>;
   }
+
+  model ListByEnhetParameters extends QueryParameters.ListParameters {
+    @path enhetId: eInnsynId<Enhet>;
+  }
+
+  @route("/enhet")
+  @tag("Enhet")
+  interface EnhetRoutes extends GloballyRoutable<Enhet> {}
 }
 
 namespace ApiKey {
@@ -104,13 +112,16 @@ namespace ApiKey {
     /**
      * The API key used to authenticate requests. This will only be shown once, and we will only store a hashed version.
      */
-    secretKey?: string;
+    @visibility("read") secretKey?: string;
 
     /**
      * The Enhet that requests using this key will be associated with.
      */
-    enhet?: ExpandableField<Enhet.Enhet>;
+    @visibility("read") enhet?: ExpandableField<Enhet.Enhet>;
   }
+  @route("/apiKey")
+  @tag("ApiKey")
+  interface ApiKeyRoutes extends Routable<ApiKey> {}
 }
 
 namespace Responses {
@@ -208,6 +219,13 @@ namespace QueryParameters {
     @query expand?: string[];
   }
 
+  model GetByIdParameters<T> extends GetParameters {
+    /**
+     * Get by an ID, for instance a parent.
+     */
+    @path id: eInnsynId<T>;
+  }
+
   model ListParameters {
     /**
      * Specifies which fields in the response should be expanded.
@@ -248,6 +266,20 @@ namespace QueryParameters {
      * The Journalenhet to filter the result set by.
      */
     @query journalenhet?: eInnsynId;
+  }
+
+  model ListByIdParameters<T> extends ListParameters {
+    /**
+     * List by an ID, for instance a parent.
+     */
+    @path id: eInnsynId<T>;
+  }
+
+  model HandleByIdParameters<T> {
+    /**
+     * POST/PUT/DELETE by an ID
+     */
+    @path id: eInnsynId<T>;
   }
 
   model SearchParameters extends ListParameters {

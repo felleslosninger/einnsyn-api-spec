@@ -11,6 +11,11 @@ using EInnsyn;
 namespace EInnsyn;
 
 namespace Bruker {
+  model ListByBrukerParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Bruker>;
+    @query brukerId: eInnsynId<Bruker>;
+  }
+
   /**
    * eInnsyn bruker
    */
@@ -20,92 +25,89 @@ namespace Bruker {
     @visibility("read") entity?: "Bruker";
     @format("email") email: string;
     @visibility("read") active: boolean;
+    password?: string;
     language?: "nb" | "nn" | "en" | "se" = "nb";
   }
 
   @route("/bruker")
   @tag("Bruker")
   interface BrukerRoutes extends GloballyRoutable<Bruker> {
-    @route("/{brukerId}/innsynskravBestilling")
+    @route("/{id}/innsynskravBestilling")
     @get
     listInnsynskravBestilling(
-      ...QueryParameters.ListParameters,
-      @path brukerId: eInnsynId<Bruker>,
+      ...ListByBrukerParameters,
     ): Responses.ListResponse<InnsynskravBestilling.InnsynskravBestilling>;
 
-    @route("/{brukerId}/innsynskravBestilling")
+    @route("/{id}/innsynskravBestilling")
     @post
     addInnsynskravBestilling(
-      @path brukerId: eInnsynId<Bruker>,
+      @path id: eInnsynId<Bruker>,
       @body innsynskravBestilling: InnsynskravBestilling.InnsynskravBestilling,
     ): Responses.AddResponse<InnsynskravBestilling.InnsynskravBestilling>;
 
-    @route("/{brukerId}/innsynskrav")
+    @route("/{id}/innsynskrav")
     @get
     listInnsynskrav(
-      ...QueryParameters.ListParameters,
-      @path brukerId: eInnsynId<Bruker>,
+      ...ListByBrukerParameters,
     ): Responses.ListResponse<Innsynskrav.Innsynskrav>;
 
-    @route("/{brukerId}/lagretSak")
+    @route("/{id}/lagretSak")
     @get
     listLagretSak(
-      ...QueryParameters.ListParameters,
-      @path brukerId: eInnsynId<Bruker>,
+      ...ListByBrukerParameters,
     ): Responses.ListResponse<LagretSak.LagretSak>;
 
-    @route("/{brukerId}/lagretSak")
+    @route("/{id}/lagretSak")
     @post
     addLagretSak(
-      @path brukerId: eInnsynId<Bruker>,
+      @path id: eInnsynId<Bruker>,
       @body lagretSak: LagretSak.LagretSak,
     ): Responses.AddResponse<LagretSak.LagretSak>;
 
-    @route("/{brukerId}/lagretSoek")
+    @route("/{id}/lagretSoek")
     @get
     listLagretSoek(
-      ...QueryParameters.ListParameters,
-      @path brukerId: eInnsynId<Bruker>,
+      ...ListByBrukerParameters,
     ): Responses.ListResponse<LagretSoek.LagretSoek>;
 
-    @route("/{brukerId}/lagretSoek")
+    @route("/{id}/lagretSoek")
     @post
     addLagretSoek(
-      @path brukerId: eInnsynId<Bruker>,
+      @path id: eInnsynId<Bruker>,
       @body lagretSoek: LagretSoek.LagretSoek,
     ): Responses.AddResponse<LagretSoek.LagretSoek>;
 
-    @route("/{brukerId}/activate/{secret}")
+    @route("/{id}/activate/{secret}")
     @patch
     activate(
-      @path brukerId: eInnsynId<Bruker>,
+      @path id: eInnsynId<Bruker>,
       @path secret: string,
     ): Responses.OkResponse<Bruker>;
 
-    @route("/{brukerId}/updatePassword")
+    @route("/{id}/updatePassword")
     @patch
     updatePassword(
-      @path brukerId: eInnsynId<Bruker>,
+      @path id: eInnsynId<Bruker>,
       @body updatePassword: {
         oldPassword: string;
         newPassword: string;
       },
     ): Responses.OkResponse<Bruker>;
 
-    @route("/{brukerId}/updatePassword/{secret}")
+    @route("/{id}/updatePassword/{secret}")
     @patch
     updatePasswordWithSecret(
-      @path brukerId: eInnsynId<Bruker>,
+      @path id: eInnsynId<Bruker>,
       @path secret: string,
       @body updatePasswordWithSecret: {
         newPassword: string;
       },
     ): Responses.OkResponse<Bruker>;
 
-    @route("/{brukerId}/requestPasswordReset")
+    @route("/{id}/requestPasswordReset")
     @patch
     requestPasswordReset(
-      @path brukerId: eInnsynId<Bruker>,
+      @path id: eInnsynId<Bruker>,
     ): Responses.OkResponse<Bruker>;
   }
 }
@@ -193,20 +195,25 @@ namespace InnsynskravBestilling {
     language?: "nb" | "nn" | "en" | "se";
   }
 
+  model ListByInnsynskravBestillingParameters
+    extends QueryParameters.ListParameters {
+    @path id: eInnsynId<InnsynskravBestilling>;
+    @query innsynskravBestillingId: eInnsynId<InnsynskravBestilling>;
+  }
+
   @route("/innsynskravBestilling")
   @tag("InnsynskravBestilling")
   interface InnsynskravRoutes extends GloballyRoutable<InnsynskravBestilling> {
-    @route("/{innsynskravBestillingId}/innsynskrav")
+    @route("/{id}/innsynskrav")
     @get
     listInnsynskrav(
-      ...QueryParameters.ListParameters,
-      @path innsynskravBestillingId: eInnsynId<InnsynskravBestilling>,
+      ...ListByInnsynskravBestillingParameters,
     ): Responses.ListResponse<Innsynskrav.Innsynskrav>;
 
-    @route("/{innsynskravBestillingId}/verify/{secret}")
+    @route("/{id}/verify/{secret}")
     @patch
     verify(
-      @path innsynskravBestillingId: eInnsynId,
+      @path id: eInnsynId,
       @path secret: string,
     ): Responses.OkResponse<InnsynskravBestilling>;
   }
@@ -227,23 +234,35 @@ namespace Innsynskrav {
     sent?: utcDateTime;
   }
 
+  model ListByInnsynskravParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Innsynskrav>;
+    @query innsynskravId: eInnsynId<Innsynskrav>;
+  }
+
   @route("/innsynskrav")
   @tag("Innsynskrav")
   interface InnsynskravRoutes extends Routable<Innsynskrav> {}
 }
 
 namespace Search {
-  /**
-   * Search journal data
-   */
-  @route("/search")
-  @tag("Search")
-  interface SearchRoutes {
-    @get
-    search(...QueryParameters.SearchParameters): Responses.ListResponse<
-      | Journalpost.Journalpost
-      | Moetemappe.Moetemappe
-      | Moetesak.Moetesak
-      | Saksmappe.Saksmappe>;
-  }
+// model SearchResponse
+//   extends Responses.ListResponseBody<
+//     | Journalpost.Journalpost
+//     | Moetemappe.Moetemappe
+//     | Moetesak.Moetesak
+//     | Saksmappe.Saksmappe> {}
+// /**
+//  * Search journal data
+//  */
+// @route("/search")
+// @tag("Search")
+// interface SearchRoutes {
+//   @get
+//   search(...QueryParameters.SearchParameters): Responses.ListResponse<
+//     | Journalpost.Journalpost
+//     | Moetemappe.Moetemappe
+//     | Moetesak.Moetesak
+//     | Saksmappe.Saksmappe>;
+// }
+
 }

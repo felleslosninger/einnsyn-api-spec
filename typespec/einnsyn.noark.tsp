@@ -50,59 +50,60 @@ namespace Arkiv {
   }
 
   model ListByArkivParameters extends QueryParameters.ListParameters {
-    @path arkivId: eInnsynId<Arkiv>;
+    @path id: eInnsynId<Arkiv>;
+    @query arkivId: eInnsynId<Arkiv>;
   }
 
   @route("/arkiv")
   @tag("Arkiv")
   interface ArkivRoutes extends GloballyRoutable<Arkiv> {
-    @route("/{arkivId}/arkivdel")
+    @route("/{id}/arkivdel")
     @get
     listArkivdel(
       ...ListByArkivParameters,
     ): Responses.ListResponse<Arkivdel.Arkivdel>;
 
-    @route("/{arkivId}/arkivdel")
+    @route("/{id}/arkivdel")
     @post
     addArkivdel(
-      @path arkivId: eInnsynId<Arkiv>,
+      @path id: eInnsynId<Arkiv>,
       @body arkivdel: Arkivdel.Arkivdel,
     ): Responses.AddResponse<Arkivdel.Arkivdel>;
 
-    @route("/{arkivId}/arkiv")
+    @route("/{id}/arkiv")
     @get
     listArkiv(...ListByArkivParameters): Responses.ListResponse<Arkiv>;
 
-    @route("/{arkivId}/arkiv")
+    @route("/{id}/arkiv")
     @post
     addArkiv(
-      @path arkivId: eInnsynId<Arkiv>,
+      @path id: eInnsynId<Arkiv>,
       @body arkiv: Arkiv,
     ): Responses.AddResponse<Arkiv>;
 
-    @route("/{arkivId}/saksmappe")
+    @route("/{id}/saksmappe")
     @get
     listSaksmappe(
       ...ListByArkivParameters,
     ): Responses.ListResponse<Saksmappe.Saksmappe>;
 
-    @route("/{arkivId}/saksmappe")
+    @route("/{id}/saksmappe")
     @post
     addSaksmappe(
-      @path arkivId: eInnsynId<Arkiv>,
+      @path id: eInnsynId<Arkiv>,
       @body saksmappe: Saksmappe.Saksmappe,
     ): Responses.AddResponse<Saksmappe.Saksmappe>;
 
-    @route("/{arkivId}/moetemappe")
+    @route("/{id}/moetemappe")
     @get
     listMoetemappe(
       ...ListByArkivParameters,
     ): Responses.ListResponse<Moetemappe.Moetemappe>;
 
-    @route("/{arkivId}/moetemappe")
+    @route("/{id}/moetemappe")
     @post
     addMoetemappe(
-      @path arkivId: eInnsynId<Arkiv>,
+      @path id: eInnsynId<Arkiv>,
       @body moetemappe: Moetemappe.Moetemappe,
     ): Responses.AddResponse<Moetemappe.Moetemappe>;
   }
@@ -118,61 +119,62 @@ namespace Arkivdel {
   }
 
   model ListByArkivdelParameters extends QueryParameters.ListParameters {
-    @path arkivdelId: eInnsynId<Arkivdel>;
+    @path id: eInnsynId<Arkivdel>;
+    @query arkivdelId: eInnsynId<Arkivdel>;
   }
 
   @route("/arkivdel")
   @tag("Arkivdel")
   interface ArkivdelRoutes extends Routable<Arkivdel> {
-    @route("/{arkivdelId}/klasse")
+    @route("/{id}/klasse")
     @get
     listKlasse(
       ...ListByArkivdelParameters,
     ): Responses.ListResponse<Klasse.Klasse>;
 
-    @route("/{arkivdelId}/klasse")
+    @route("/{id}/klasse")
     @post
     addKlasse(
-      @path arkivdelId: eInnsynId<Arkivdel>,
+      @path id: eInnsynId<Arkivdel>,
       @body klasse: Klasse.Klasse,
     ): Responses.AddResponse<Klasse.Klasse>;
 
-    @route("/{arkivdelId}/klassifikasjonssystem")
+    @route("/{id}/klassifikasjonssystem")
     @get
     listKlassifikasjonssystem(
       ...ListByArkivdelParameters,
     ): Responses.ListResponse<Klassifikasjonssystem.Klassifikasjonssystem>;
 
-    @route("/{arkivdelId}/klassifikasjonssystem")
+    @route("/{id}/klassifikasjonssystem")
     @post
     addKlassifikasjonssystem(
-      @path arkivdelId: eInnsynId<Arkivdel>,
+      @path id: eInnsynId<Arkivdel>,
       @body klassifikasjonssystem: Klassifikasjonssystem.Klassifikasjonssystem,
     ): Responses.AddResponse<Klassifikasjonssystem.Klassifikasjonssystem>;
 
-    @route("/{arkivdelId}/saksmappe")
+    @route("/{id}/saksmappe")
     @get
     listSaksmappe(
       ...ListByArkivdelParameters,
     ): Responses.ListResponse<Saksmappe.Saksmappe>;
 
-    @route("/{arkivdelId}/saksmappe")
+    @route("/{id}/saksmappe")
     @post
     addSaksmappe(
-      @path arkivdelId: eInnsynId<Arkivdel>,
+      @path id: eInnsynId<Arkivdel>,
       @body saksmappe: Saksmappe.Saksmappe,
     ): Responses.AddResponse<Saksmappe.Saksmappe>;
 
-    @route("/{arkivdelId}/moetemappe")
+    @route("/{id}/moetemappe")
     @get
     listMoetemappe(
       ...ListByArkivdelParameters,
     ): Responses.ListResponse<Moetemappe.Moetemappe>;
 
-    @route("/{arkivdelId}/moetemappe")
+    @route("/{id}/moetemappe")
     @post
     addMoetemappe(
-      @path arkivdelId: eInnsynId<Arkivdel>,
+      @path id: eInnsynId<Arkivdel>,
       @body moetemappe: Moetemappe.Moetemappe,
     ): Responses.AddResponse<Moetemappe.Moetemappe>;
   }
@@ -187,21 +189,26 @@ namespace Klassifikasjonssystem {
     arkivdel?: ExpandableField<Arkivdel.Arkivdel>;
   }
 
+  model ListByKlassifikasjonssystemParameters
+    extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Klassifikasjonssystem>;
+    @query klassifikasjonssystemId: eInnsynId<Klassifikasjonssystem>;
+  }
+
   @route("/klassifikasjonssystem")
   @tag("Klassifikasjonssystem")
   interface KlassifikasjonssystemRoutes
     extends Routable<Klassifikasjonssystem> {
-    @route("/{klassifikasjonssystemId}/klasse")
+    @route("/{id}/klasse")
     @get
     listKlasse(
-      ...QueryParameters.ListParameters,
-      @path klassifikasjonssystemId: eInnsynId<Klassifikasjonssystem>,
+      ...ListByKlassifikasjonssystemParameters,
     ): Responses.ListResponse<Klasse.Klasse>;
 
-    @route("/{klassifikasjonssystemId}/klasse")
+    @route("/{id}/klasse")
     @post
     addKlasse(
-      @path klassifikasjonssystemId: eInnsynId<Klassifikasjonssystem>,
+      @path id: eInnsynId<Klassifikasjonssystem>,
       @body klasse: Klasse.Klasse,
     ): Responses.AddResponse<Klasse.Klasse>;
   }
@@ -217,34 +224,37 @@ namespace Klasse {
     klasse?: ExpandableField<Klasse>;
   }
 
+  model ListByKlasseParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Klasse>;
+    @query klasseId: eInnsynId<Klasse>;
+  }
+
   @route("/klasse")
   @tag("Klasse")
   interface KlasseRoutes extends Routable<Klasse> {
-    @route("/{klasseId}/saksmappe")
+    @route("/{id}/saksmappe")
     @get
     listSaksmappe(
-      ...QueryParameters.ListParameters,
-      @path klasseId: eInnsynId<Klasse>,
+      ...ListByKlasseParameters,
     ): Responses.ListResponse<Saksmappe.Saksmappe>;
 
-    @route("/{klasseId}/saksmappe")
+    @route("/{id}/saksmappe")
     @post
     addSaksmappe(
-      @path klasseId: eInnsynId<Klasse>,
+      @path id: eInnsynId<Klasse>,
       @body saksmappe: Saksmappe.Saksmappe,
     ): Responses.AddResponse<Saksmappe.Saksmappe>;
 
-    @route("/{klasseId}/moetemappe")
+    @route("/{id}/moetemappe")
     @get
     listMoetemappe(
-      ...QueryParameters.ListParameters,
-      @path klasseId: eInnsynId<Klasse>,
+      ...ListByKlasseParameters,
     ): Responses.ListResponse<Moetemappe.Moetemappe>;
 
-    @route("/{klasseId}/moetemappe")
+    @route("/{id}/moetemappe")
     @post
     addMoetemappe(
-      @path klasseId: eInnsynId<Klasse>,
+      @path id: eInnsynId<Klasse>,
       @body moetemappe: Moetemappe.Moetemappe,
     ): Responses.AddResponse<Moetemappe.Moetemappe>;
   }
@@ -282,20 +292,24 @@ namespace Saksmappe {
     @visibility("read") administrativEnhetObjekt: ExpandableField<Enhet.Enhet>;
   }
 
+  model ListBySaksmappeParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Saksmappe>;
+    @query saksmappeId: eInnsynId<Saksmappe>;
+  }
+
   @route("/saksmappe")
   @tag("Saksmappe")
   interface SaksmappeRoutes extends Routable<Saksmappe> {
-    @route("/{saksmappeId}/journalpost")
+    @route("/{id}/journalpost")
     @get
     listJournalpost(
-      ...QueryParameters.ListParameters,
-      @path saksmappeId: eInnsynId<Saksmappe>,
+      ...ListBySaksmappeParameters,
     ): Responses.ListResponse<Journalpost.Journalpost>;
 
-    @route("/{saksmappeId}/journalpost")
+    @route("/{id}/journalpost")
     @post
     addJournalpost(
-      @path saksmappeId: eInnsynId<Saksmappe>,
+      @path id: eInnsynId<Saksmappe>,
       @body journalpost: Journalpost.Journalpost,
     ): Responses.AddResponse<Journalpost.Journalpost>;
   }
@@ -318,34 +332,37 @@ namespace Moetemappe {
     moetesak?: ExpandableField<Moetesak.Moetesak>[];
   }
 
+  model ListByMoetemappeParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Moetemappe>;
+    @query moetemappeId: eInnsynId<Moetemappe>;
+  }
+
   @route("/moetemappe")
   @tag("Moetemappe")
   interface MoetemappeRoutes extends Routable<Moetemappe> {
-    @route("/{moetemappeId}/moetesak")
+    @route("/{id}/moetesak")
     @get
     listMoetesak(
-      ...QueryParameters.ListParameters,
-      @path moetemappeId: eInnsynId<Moetemappe>,
+      ...ListByMoetemappeParameters,
     ): Responses.ListResponse<Moetesak.Moetesak>;
 
-    @route("/{moetemappeId}/moetesak")
+    @route("/{id}/moetesak")
     @post
     addMoetesak(
-      @path moetemappeId: eInnsynId<Moetemappe>,
+      @path id: eInnsynId<Moetemappe>,
       @body moetesak: Moetesak.Moetesak,
     ): Responses.AddResponse<Moetesak.Moetesak>;
 
-    @route("/{moetemappeId}/moetedokument")
+    @route("/{id}/moetedokument")
     @get
     listMoetedokument(
-      ...QueryParameters.ListParameters,
-      @path moetemappeId: eInnsynId<Moetemappe>,
+      ...ListByMoetemappeParameters,
     ): Responses.ListResponse<Moetedokument.Moetedokument>;
 
-    @route("/{moetemappeId}/moetedokument")
+    @route("/{id}/moetedokument")
     @post
     addMoetedokument(
-      @path moetemappeId: eInnsynId<Moetemappe>,
+      @path id: eInnsynId<Moetemappe>,
       @body moetedokument: Moetedokument.Moetedokument,
     ): Responses.AddResponse<Moetedokument.Moetedokument>;
   }
@@ -393,7 +410,7 @@ namespace Journalpost {
       | "ukjent";
     journaldato: plainDate;
     dokumentetsDato?: plainDate;
-    skjerming?: ExpandableField<Saksmappe.Saksmappe>;
+    skjerming?: ExpandableField<Skjerming.Skjerming>;
     legacyJournalposttype?: string;
     legacyFoelgsakenReferanse?: string[];
     @visibility("read") administrativEnhet: string;
@@ -401,41 +418,44 @@ namespace Journalpost {
     @visibility("read") saksmappe: ExpandableField<Saksmappe.Saksmappe>;
   }
 
+  model ListByJournalpostParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Journalpost>;
+    @query journalpostId: eInnsynId<Journalpost>;
+  }
+
   @route("/journalpost")
   @tag("Journalpost")
   interface JournalpostRoutes extends Routable<Journalpost> {
-    @route("/{journalpostId}/korrespondansepart")
+    @route("/{id}/korrespondansepart")
     @get
     listKorrespondansepart(
-      ...QueryParameters.ListParameters,
-      @path journalpostId: eInnsynId<Journalpost>,
+      ...ListByJournalpostParameters,
     ): Responses.ListResponse<Korrespondansepart.Korrespondansepart>;
 
-    @route("/{journalpostId}/korrespondansepart")
+    @route("/{id}/korrespondansepart")
     @post
     addKorrespondansepart(
-      @path journalpostId: eInnsynId<Journalpost>,
+      @path id: eInnsynId<Journalpost>,
       @body korrespondansepart: Korrespondansepart.Korrespondansepart,
     ): Responses.AddResponse<Korrespondansepart.Korrespondansepart>;
 
-    @route("/{journalpostId}/dokumentbeskrivelse")
+    @route("/{id}/dokumentbeskrivelse")
     @get
     listDokumentbeskrivelse(
-      ...QueryParameters.ListParameters,
-      @path journalpostId: eInnsynId<Journalpost>,
+      ...ListByJournalpostParameters,
     ): Responses.ListResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
 
-    @route("/{journalpostId}/dokumentbeskrivelse")
+    @route("/{id}/dokumentbeskrivelse")
     @post
     addDokumentbeskrivelse(
-      @path journalpostId: eInnsynId<Journalpost>,
+      @path id: eInnsynId<Journalpost>,
       @body dokumentbeskrivelse: Dokumentbeskrivelse.Dokumentbeskrivelse,
     ): Responses.AddResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
 
-    @route("/{journalpostId}/dokumentbeskrivelse/{dokumentbeskrivelseId}")
+    @route("/{id}/dokumentbeskrivelse/{dokumentbeskrivelseId}")
     @delete
     deleteDokumentbeskrivelse(
-      @path journalpostId: eInnsynId<Journalpost>,
+      @path id: eInnsynId<Journalpost>,
 
       @path
       dokumentbeskrivelseId: eInnsynId<Dokumentbeskrivelse.Dokumentbeskrivelse>,
@@ -453,7 +473,7 @@ namespace Korrespondansepart {
     korrespondanseparttype: string;
     saksbehandler?: string;
     epostadresse?: string;
-    @minValue(1000) @maxValue(9999) postnummer?: integer;
+    postnummer?: string;
     erBehandlingsansvarlig?: boolean;
     administrativEnhet?: string;
 
@@ -503,50 +523,57 @@ namespace Moetesak {
     innstilling?: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
     vedtak?: ExpandableField<Vedtak.Vedtak>;
     moetemappe?: ExpandableField<Moetemappe.Moetemappe>;
+    legacyMoetesakstype?: string;
+    legacyReferanseTilMoetesak?: string;
+  }
+
+  model ListByMoetesakParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Moetesak>;
+    @query moetesakId: eInnsynId<Moetesak>;
+  }
+
+  model GetByMoetesakParameters extends QueryParameters.GetParameters {
+    @path id: eInnsynId<Moetesak>;
+    @query moetesakId: eInnsynId<Moetesak>;
   }
 
   @route("/moetesak")
   @tag("Moetesak")
   interface MoetesakRoutes extends Routable<Moetesak> {
-    @route("/{moetesakId}/dokumentbeskrivelse")
+    @route("/{id}/dokumentbeskrivelse")
     @get
     listDokumentbeskrivelse(
-      ...QueryParameters.ListParameters,
-      @path moetesakId: eInnsynId<Moetesak>,
+      ...ListByMoetesakParameters,
     ): Responses.ListResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
 
-    @route("/{moetesakId}/dokumentbeskrivelse")
+    @route("/{id}/dokumentbeskrivelse")
     @post
     addDokumentbeskrivelse(
-      @path moetesakId: eInnsynId<Moetesak>,
+      @path id: eInnsynId<Moetesak>,
       @body dokumentbeskrivelse: Dokumentbeskrivelse.Dokumentbeskrivelse,
     ): Responses.AddResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
 
-    @route("/{moetesakId}/utredning")
+    @route("/{id}/utredning")
     @get
     getUtredning(
-      ...QueryParameters.ListParameters,
-      @path moetesakId: eInnsynId<Moetesak>,
+      ...GetByMoetesakParameters,
     ): Responses.OkResponse<Utredning.Utredning>;
 
-    @route("/{moetesakId}/utredning")
+    @route("/{id}/utredning")
     @post
     addUtredning(
-      @path moetesakId: eInnsynId<Moetesak>,
+      @path id: eInnsynId<Moetesak>,
       @body utredning: Utredning.Utredning,
     ): Responses.AddResponse<Utredning.Utredning>;
 
-    @route("/{moetesakId}/vedtak")
+    @route("/{id}/vedtak")
     @get
-    getVedtak(
-      ...QueryParameters.ListParameters,
-      @path moetesakId: eInnsynId<Moetesak>,
-    ): Responses.OkResponse<Vedtak.Vedtak>;
+    getVedtak(...GetByMoetesakParameters): Responses.OkResponse<Vedtak.Vedtak>;
 
-    @route("/{moetesakId}/vedtak")
+    @route("/{id}/vedtak")
     @post
     addVedtak(
-      @path moetesakId: eInnsynId<Moetesak>,
+      @path id: eInnsynId<Moetesak>,
       @body vedtak: Vedtak.Vedtak,
     ): Responses.AddResponse<Vedtak.Vedtak>;
   }
@@ -560,6 +587,11 @@ namespace Utredning {
     saksbeskrivelse: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
     innstilling: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
     utredningsdokument?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
+  }
+
+  model ListByUtredningParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Utredning>;
+    @query utredningId: eInnsynId<Utredning>;
   }
 
   @route("/utredning")
@@ -601,6 +633,11 @@ namespace Vedtak {
     behandlingsprotokoll?: ExpandableField<Behandlingsprotokoll.Behandlingsprotokoll>;
     vedtaksdokument?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
     dato: plainDate;
+  }
+
+  model ListByVedtakParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Vedtak>;
+    @query vedtakId: eInnsynId<Vedtak>;
   }
 
   @route("/vedtak")
@@ -736,15 +773,14 @@ namespace Dokumentbeskrivelse {
 
   @route("/dokumentbeskrivelse")
   @tag("Dokumentbeskrivelse")
-  interface DokumentbeskrivelseRoutes extends Routable<Dokumentbeskrivelse> {
-    @route("/dokumentbeskrivelse/{dokumentbeskrivelseId}/download/{subId}.{docExtension}")
-    @get
-    downloadDokumentbeskrivelse(
-      @path dokumentbeskrivelseId: eInnsynId,
-      @path subId: string,
-      @path docExtension: string,
-    ): Response<200>;
-  }
+  interface DokumentbeskrivelseRoutes extends Routable<Dokumentbeskrivelse> {}
+  // @route("/dokumentbeskrivelse/{dokumentbeskrivelseId}/download/{subId}.{docExtension}")
+  // @get
+  // downloadDokumentbeskrivelse(
+  //   @path dokumentbeskrivelseId: eInnsynId,
+  //   @path subId: string,
+  //   @path docExtension: string,
+  // ): Response<200>;
 }
 
 namespace Dokumentobjekt {
@@ -771,6 +807,11 @@ namespace Moetedokument {
     saksbehandler?: string;
     saksbehandlerSensitiv?: string;
     moetemappe?: ExpandableField<Moetemappe.Moetemappe>;
+  }
+
+  model ListByMoetedokumentParameters extends QueryParameters.ListParameters {
+    @path id: eInnsynId<Moetedokument>;
+    @query moetedokumentId: eInnsynId<Moetedokument>;
   }
 
   @route("/moetedokument")
