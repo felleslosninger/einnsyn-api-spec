@@ -27,6 +27,7 @@ jobs:
             export SHA=$( git rev-parse "$BRANCH:$FILE_TO_COMMIT" )
             echo "Branch: $BRANCH"
             echo "SHA: $SHA"
+            git branch --list
             gh api --method PUT /repos/:owner/:repo/contents/$FILE_TO_COMMIT \
               --field message="Autogenerate OpenAPI spec from TypeSpec" \
               --field content=@<( base64 -i $FILE_TO_COMMIT ) \
