@@ -23,8 +23,8 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            export SHA=$( git rev-parse :$FILE_TO_COMMIT )
             export BRANCH=${{ github.head_ref }}
+            export SHA=$( git rev-parse $BRANCH:$FILE_TO_COMMIT )
             echo "Branch: $BRANCH"
             gh api --method PUT /repos/:owner/:repo/contents/$FILE_TO_COMMIT \
               --field message="Autogenerate OpenAPI spec from TypeSpec" \
