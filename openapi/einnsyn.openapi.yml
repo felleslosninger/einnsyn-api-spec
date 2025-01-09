@@ -31,7 +31,6 @@ tags:
   - name: LagretSak
   - name: LagretSoek
   - name: Tilbakemelding
-  - name: Search
 paths:
   /apiKey:
     get:
@@ -4306,55 +4305,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Journalpost.Journalpost'
-  /search:
-    get:
-      operationId: SearchRoutes_search
-      parameters:
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.query'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.administrativEnhet'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.administrativEnhetExact'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.excludeAdministrativEnhet'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.excludeAdministrativEnhetExact'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.publisertDatoBefore'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.publisertDatoAfter'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.oppdatertDatoBefore'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.oppdatertDatoAfter'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.moetedatoBefore'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.moetedatoAfter'
-        - $ref: '#/components/parameters/QueryParameters.FilterParameters.entity'
-        - $ref: '#/components/parameters/QueryParameters.ListParameters.expand'
-        - $ref: '#/components/parameters/QueryParameters.ListParameters.limit'
-        - $ref: '#/components/parameters/QueryParameters.ListParameters.sortOrder'
-        - $ref: '#/components/parameters/QueryParameters.ListParameters.startingAfter'
-        - $ref: '#/components/parameters/QueryParameters.ListParameters.endingBefore'
-        - $ref: '#/components/parameters/QueryParameters.ListParameters.ids'
-        - $ref: '#/components/parameters/QueryParameters.ListParameters.externalIds'
-        - $ref: '#/components/parameters/QueryParameters.ListParameters.journalenhet'
-      responses:
-        '200':
-          description: Result list
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - items
-                properties:
-                  items:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Base.Base'
-                    description: A paginated list of items.
-                  next:
-                    type: string
-                    format: uri
-                    description: The URL for the next page of items.
-                  previous:
-                    type: string
-                    format: uri
-                    description: The URL for the previous page of items.
-      tags:
-        - Search
   /skjerming:
     get:
       operationId: SkjermingRoutes_list
@@ -5351,129 +5301,6 @@ components:
       schema:
         type: string
         format: id
-      explode: false
-    QueryParameters.FilterParameters.administrativEnhet:
-      name: administrativEnhet
-      in: query
-      required: false
-      description: A list of enhet IDs to filter by. This will also match subenhets.
-      schema:
-        type: array
-        items:
-          type: string
-          format: id
-          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-      explode: false
-    QueryParameters.FilterParameters.administrativEnhetExact:
-      name: administrativEnhetExact
-      in: query
-      required: false
-      description: A list of enhet IDs to filter by. This will only match the specified enhets, not subenhets.
-      schema:
-        type: array
-        items:
-          type: string
-          format: id
-          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-      explode: false
-    QueryParameters.FilterParameters.entity:
-      name: entity
-      in: query
-      required: false
-      description: Filter by the entity type.
-      schema:
-        type: string
-        enum:
-          - Journalpost
-          - Moetemappe
-          - Moetesak
-          - Saksmappe
-      explode: false
-    QueryParameters.FilterParameters.excludeAdministrativEnhet:
-      name: excludeAdministrativEnhet
-      in: query
-      required: false
-      description: A list of enhet IDs to exclude from the result set. This will also exclude subenhets.
-      schema:
-        type: array
-        items:
-          type: string
-          format: id
-          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-      explode: false
-    QueryParameters.FilterParameters.excludeAdministrativEnhetExact:
-      name: excludeAdministrativEnhetExact
-      in: query
-      required: false
-      description: A list of enhet IDs to exclude from the result set. This will only exclude the specified enhets, not subenhets.
-      schema:
-        type: array
-        items:
-          type: string
-          format: id
-          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-      explode: false
-    QueryParameters.FilterParameters.moetedatoAfter:
-      name: moetedatoAfter
-      in: query
-      required: false
-      description: Filter by the date of a meeting.
-      schema:
-        type: string
-        format: date-time
-      explode: false
-    QueryParameters.FilterParameters.moetedatoBefore:
-      name: moetedatoBefore
-      in: query
-      required: false
-      description: Filter by the date of a meeting.
-      schema:
-        type: string
-        format: date-time
-      explode: false
-    QueryParameters.FilterParameters.oppdatertDatoAfter:
-      name: oppdatertDatoAfter
-      in: query
-      required: false
-      description: Filter by the updated date of the document.
-      schema:
-        type: string
-        format: date-time
-      explode: false
-    QueryParameters.FilterParameters.oppdatertDatoBefore:
-      name: oppdatertDatoBefore
-      in: query
-      required: false
-      description: Filter by the updated date of the document.
-      schema:
-        type: string
-        format: date-time
-      explode: false
-    QueryParameters.FilterParameters.publisertDatoAfter:
-      name: publisertDatoAfter
-      in: query
-      required: false
-      description: Filter by the published date of the document.
-      schema:
-        type: string
-        format: date-time
-      explode: false
-    QueryParameters.FilterParameters.publisertDatoBefore:
-      name: publisertDatoBefore
-      in: query
-      required: false
-      description: Filter by the published date of the document.
-      schema:
-        type: string
-        format: date-time
-      explode: false
-    QueryParameters.FilterParameters.query:
-      name: query
-      in: query
-      required: false
-      description: A query string to filter by. Quotes can be used to search for exact matches or phrases. Words can be excluded by prefixing them with a minus sign.
-      schema:
-        type: string
       explode: false
     QueryParameters.GetParameters:
       name: expand
@@ -7431,6 +7258,72 @@ components:
         - $ref: '#/components/schemas/ArkivBase.ArkivBaseUpdate'
       description: Moetesaksbeskrivelse
       x-idPrefix: msb
+    QueryParameters.FilterParameters:
+      type: object
+      properties:
+        query:
+          type: string
+          description: A query string to filter by. Quotes can be used to search for exact matches or phrases. Words can be excluded by prefixing them with a minus sign.
+        administrativEnhet:
+          type: array
+          items:
+            type: string
+            format: id
+            description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+          description: A list of enhet IDs to filter by. This will also match subenhets.
+        administrativEnhetExact:
+          type: array
+          items:
+            type: string
+            format: id
+            description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+          description: A list of enhet IDs to filter by. This will only match the specified enhets, not subenhets.
+        excludeAdministrativEnhet:
+          type: array
+          items:
+            type: string
+            format: id
+            description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+          description: A list of enhet IDs to exclude from the result set. This will also exclude subenhets.
+        excludeAdministrativEnhetExact:
+          type: array
+          items:
+            type: string
+            format: id
+            description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+          description: A list of enhet IDs to exclude from the result set. This will only exclude the specified enhets, not subenhets.
+        publisertDatoBefore:
+          type: string
+          format: date-time
+          description: Filter by the published date of the document.
+        publisertDatoAfter:
+          type: string
+          format: date-time
+          description: Filter by the published date of the document.
+        oppdatertDatoBefore:
+          type: string
+          format: date-time
+          description: Filter by the updated date of the document.
+        oppdatertDatoAfter:
+          type: string
+          format: date-time
+          description: Filter by the updated date of the document.
+        moetedatoBefore:
+          type: string
+          format: date-time
+          description: Filter by the date of a meeting.
+        moetedatoAfter:
+          type: string
+          format: date-time
+          description: Filter by the date of a meeting.
+        entity:
+          type: string
+          enum:
+            - Journalpost
+            - Moetemappe
+            - Moetesak
+            - Saksmappe
+          description: Filter by the entity type.
     QueryParameters.ListParameters:
       type: object
       properties:
