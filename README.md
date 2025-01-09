@@ -1,6 +1,15 @@
 # <img src="https://einnsyn.no/8ebf89f8e40d3eb75183.svg" width="180px" alt="eInnsyn"/>
 
-This repository contains the API specification for [eInnsyn](https://einnsyn.no)'s API. The API is written in [TypeSpec](https://typespec.io).
+This repository contains the API specification for [eInnsyn](https://einnsyn.no)'s API. The API is written in [TypeSpec](https://typespec.io), with an auto-generated OpenAPI version in the [openapi](openapi)-folder.
+
+The [typespec](typespec)-folder contains the following files:
+* **einnsyn.arkiv.models.tsp**: Model definition for archive data, mostly  Noark 5 with some extensions for meetings.
+* **einnsyn.arkiv.operations.tsp**: Endpoints for archive models.
+* **einnsyn.queryparameters.tsp**: Base models for query parameters.
+* **einnsyn.responses.tsp**: Models for API responses.
+* **einnsyn.web.models.tsp***: Models for entities that are mainly used for the eInnsyn website, not related to archive data.
+* **einnsyn.web.operations.tsp**: Endpoints for web models.
+
 
 ## Authentication
 
@@ -24,74 +33,67 @@ Example journalpost ID: `jp_01jh532p3ve6haq7n53xgpqayh`
 
 We use a concept called "expandable fields", inspired by Stripe's API ([Expanding Responses](https://docs.stripe.com/api/expanding_objects)). Throughout the API, all references to entity objects are either an ID, or the actual object. By default, all nested objects in a `GET` response are sent as an ID. For `POST` and `PATCH` requests, all new objects are returned. If you need to access to nested objects, you can use the `expand` query parameter:
 
-```
+### Default expansion:
 
+```
 curl -H "X-EIN-API-KEY: secret\_..." https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy
 {
-"entity": "Saksmappe",
-"id": "sm_01jh532p0jfdh8j3evmpgk4atx",
-...
-"journalpost": [
-"jp_01jh532p3ve6haq7n53xgpqayh"
-]
+  "entity": "Saksmappe", 
+  "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
+  ...
+  "journalpost": [
+    "jp_01jh532p3ve6haq7n53xgpqayh"
+  ]
 }
-
 ```
 
-```
-
-curl -H "X-EIN-API-KEY: secret\_..." https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy?expand=journalpost
-{
-"entity": "Saksmappe",
-"id": "sm_01jh532p0jfdh8j3evmpgk4atx",
-...
-"journalpost": [
-{
-"entity": "Journalpost",
-"id": "jp_01jh532p3ve6haq7n53xgpqayh",
-...
-"korrespondansepart": [
-"kp_01jh532p50epvvcjfv8xrzzwp5",
-"kp_01jh532p6qfhxrz1w9fdw4jjrh"
-]
-}
-]
-}
+### Expand `journalpost`:
 
 ```
-
+curl ... https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy?expand=journalpost
+{
+  "entity": "Saksmappe",
+  "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
+  ...
+  "journalpost": [{
+    "entity": "Journalpost",
+    "id": "jp_01jh532p3ve6haq7n53xgpqayh",
+    ...
+    "korrespondansepart": [
+      "kp_01jh532p50epvvcjfv8xrzzwp5",
+      "kp_01jh532p6qfhxrz1w9fdw4jjrh"
+    ]
+  }]
+}
 ```
 
-curl -H "X-EIN-API-KEY: secret\_..." https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy?expand=journalpost.korrespondansepart
-{
-"entity": "Saksmappe",
-"id": "sm_01jh532p0jfdh8j3evmpgk4atx",
-...
-"journalpost": [
-{
-"entity": "Journalpost",
-"id": "jp_01jh532p3ve6haq7n53xgpqayh",
-...
-"korrespondansepart": [{
-"entity": "Korrespondansepart",
-"id": "kp_01jh532p50epvvcjfv8xrzzwp5",
-...
-},
-{
-"entity": "Korrespondansepart",
-"id": "kp_01jh532p6qfhxrz1w9fdw4jjrh",
-...
-}]
-}
-]
-}
+### Expand `journalpost.korrespondansepart`:
 
+```
+curl ... https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy?expand=journalpost.korrespondansepart
+{
+  "entity": "Saksmappe",
+  "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
+  ...
+  "journalpost": [{
+    "entity": "Journalpost",
+    "id": "jp_01jh532p3ve6haq7n53xgpqayh",
+    ...
+    "korrespondansepart": [{
+      "entity": "Korrespondansepart",
+      "id": "kp_01jh532p50epvvcjfv8xrzzwp5",
+      ...
+    },
+    {
+      "entity": "Korrespondansepart",
+      "id": "kp_01jh532p6qfhxrz1w9fdw4jjrh",
+      ...
+    }]
+  }]
+}
 ```
 
 ## Client libraries
 
 Client libraries for Java and TypeScript are in the works. We're also considering a .NET client library.
 
-```
-
-```
