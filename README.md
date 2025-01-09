@@ -3,12 +3,12 @@
 This repository contains the API specification for [eInnsyn](https://einnsyn.no)'s API. The API is written in [TypeSpec](https://typespec.io), with an auto-generated OpenAPI version in the [openapi](openapi)-folder.
 
 The [typespec](typespec)-folder contains the following files:
-- `einnsyn.arkiv.models.tsp`: Model definition for archive data, mostly  Noark 5 with some extensions for meetings.
-- `einnsyn.arkiv.operations.tsp`: Endpoints for archive models.
-- `einnsyn.queryparameters.tsp`: Base models for query parameters.
-- `einnsyn.responses.tsp`: Models for API responses.
-- `einnsyn.web.models.tsp`: Models for entities that are mainly used for the eInnsyn website, not related to archive data.
-- `einnsyn.web.operations.tsp`: Endpoints for web models.
+- [einnsyn.arkiv.models.tsp](typespec/einnsyn.arkiv.models.tsp): Model definition for archive data, mostly  Noark 5 with some extensions for meetings.
+- [einnsyn.arkiv.operations.tsp](typespec/einnsyn.arkiv.operations.tsp): Endpoints for archive models.
+- [einnsyn.queryparameters.tsp](typespec/einnsyn.queryparameters.tsp): Base models for query parameters.
+- [einnsyn.responses.tsp](typespec/einnsyn.responses.tsp): Models for API responses.
+- [einnsyn.web.models.tsp](typespec/einnsyn.web.models.tsp): Models for entities that are mainly used for the eInnsyn website, not related to archive data.
+- [einnsyn.web.operations.tsp](typespec/einnsyn.web.operations.tsp): Endpoints for web models.
 
 
 ## Authentication
