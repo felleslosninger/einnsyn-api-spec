@@ -17,13 +17,17 @@ jobs:
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILE_TO_COMMIT: "openapi/einnsyn.openapi.yml"
         run: |
           git add .
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git config --global user.name "Codegen"
-            git config --global user.email "github-actions[bot]@users.noreply.github.com"
-            git commit -S -m "Build OpenAPI from TypeSpec"
-            git push origin HEAD:${{ github.head_ref }}
+            export SHA=$( git rev-parse :$FILE_TO_COMMIT )
+            export BRANCH=$( git rev-parse --abbrev-ref HEAD )
+            gh api --method PUT /repos/:owner/:repo/contents/$FILE_TO_COMMIT \
+              --field message="Autogenerate OpenAPI spec from TypeSpec" \
+              --field content=@<( base64 -i $FILE_TO_COMMIT ) \
+              --field branch="$BRANCH" \
+              --field sha="$SHA"
           fi
