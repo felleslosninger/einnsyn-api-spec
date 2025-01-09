@@ -3,12 +3,12 @@
 This repository contains the API specification for [eInnsyn](https://einnsyn.no)'s API. The API is written in [TypeSpec](https://typespec.io), with an auto-generated OpenAPI version in the [openapi](openapi)-folder.
 
 The [typespec](typespec)-folder contains the following files:
-* **einnsyn.arkiv.models.tsp**: Model definition for archive data, mostly  Noark 5 with some extensions for meetings.
-* **einnsyn.arkiv.operations.tsp**: Endpoints for archive models.
-* **einnsyn.queryparameters.tsp**: Base models for query parameters.
-* **einnsyn.responses.tsp**: Models for API responses.
-* **einnsyn.web.models.tsp***: Models for entities that are mainly used for the eInnsyn website, not related to archive data.
-* **einnsyn.web.operations.tsp**: Endpoints for web models.
+- **einnsyn.arkiv.models.tsp**: Model definition for archive data, mostly  Noark 5 with some extensions for meetings.
+- **einnsyn.arkiv.operations.tsp**: Endpoints for archive models.
+- **einnsyn.queryparameters.tsp**: Base models for query parameters.
+- **einnsyn.responses.tsp**: Models for API responses.
+- **einnsyn.web.models.tsp***: Models for entities that are mainly used for the eInnsyn website, not related to archive data.
+- **einnsyn.web.operations.tsp**: Endpoints for web models.
 
 
 ## Authentication
@@ -21,6 +21,15 @@ To send an authenticated request, the API key should be sent in the `X-EIN-API-K
 curl -H "X-EIN-API-KEY: secret_..." https://api.einnsyn.no
 ```
 
+## General endpoint structure
+
+All entities has standard CRUD-endpoints:
+- `POST /{entityName}`: Create object
+- `GET /{entityName}`: Get a paginated list of objects
+- `GET /{entityName}/{id}`: Get an object
+- `PATCH /{entityName}/{id}`: Update an object
+- `DELETE /{entityName}/{id}`: Delete an object
+
 ## IDs
 
 All objects in eInnsyn will get an auto-generated `eInnsynId`. An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. In the API specification, all entities has an extension annotation describing it's ID prefix.
@@ -28,6 +37,8 @@ All objects in eInnsyn will get an auto-generated `eInnsynId`. An eInnsynId is a
 Example annotation for the Journalpost entity: `@extension("x-idPrefix", "jp")`.
 
 Example journalpost ID: `jp_01jh532p3ve6haq7n53xgpqayh`
+
+In addition, all Noark5 objects must have a globally unique systemId assigned by the publisher. This identifier can be used interchangeably with the eInnsynId in the API.
 
 ## Expanding responses
 
