@@ -24,7 +24,8 @@ jobs:
             echo "No changes to commit."
           else
             export SHA=$( git rev-parse :$FILE_TO_COMMIT )
-            export BRANCH=$( git rev-parse --abbrev-ref HEAD )
+            export BRANCH=${{ github.head_ref }}
+            echo "Branch: $BRANCH"
             gh api --method PUT /repos/:owner/:repo/contents/$FILE_TO_COMMIT \
               --field message="Autogenerate OpenAPI spec from TypeSpec" \
               --field content=@<( base64 -i $FILE_TO_COMMIT ) \
