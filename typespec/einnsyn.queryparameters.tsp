@@ -118,8 +118,4 @@ namespace QueryParameters {
      */
     @query entity?: "Journalpost" | "Moetemappe" | "Moetesak" | "Saksmappe";
   }
-
-  model SearchParameters extends ListParameters {
-    ...FilterParameters;
-  }
 }

@@ -153,3 +153,58 @@ namespace Tilbakemelding {
   @tag("Tilbakemelding")
   interface TilbakemeldingRoutes extends GloballyRoutable<Tilbakemelding> {}
 }
+
+namespace Search {
+  /**
+   * Search parameters
+   */
+  model SearchParameters extends QueryParameters.FilterParameters {
+    ...QueryParameters.ListParameters;
+  }
+  @route("/search")
+  @tag("Search")
+  interface SearchRoutes {
+    @route("")
+    @get
+    search(...SearchParameters): Responses.ListResponse<Base.Base>;
+  }
+}
+
+namespace Statistics {
+  /**
+   * Statistics parameters
+   */
+  model StatisticsParameters extends QueryParameters.FilterParameters {
+    aggregateFrom?: utcDateTime;
+    aggregateTo?: utcDateTime;
+  }
+  model StatisticsResponse {
+    @statusCode _: 200;
+    @body body: {
+      innsynskrav?: {
+        count: integer;
+        samples: {
+          startTime: utcDateTime;
+          endTime: utcDateTime;
+          count: integer;
+        }[];
+      };
+      download?: {
+        count: integer;
+        samples: {
+          startTime: utcDateTime;
+          endTime: utcDateTime;
+          count: integer;
+        }[];
+      };
+    };
+  }
+
+  @route("/statistics")
+  @tag("Statistics")
+  interface Statistics {
+    @route("")
+    @get
+    getStatistics(...StatisticsParameters): StatisticsResponse;
+  }
+}
