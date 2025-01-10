@@ -1,11 +1,11 @@
 name: Build OpenAPI and commit changes
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'typespec/**'
+  #pull_request:
+  #  branches:
+  #    - main
+  #  paths:
+  #    - 'typespec/**'
 
 jobs:
   build-and-commit:
