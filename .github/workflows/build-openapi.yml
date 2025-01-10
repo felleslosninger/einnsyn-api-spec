@@ -38,7 +38,7 @@ jobs:
             echo "No changes to commit."
           else
             echo "Diff:"
-            git diff --cached --quiet          
+            git diff          
             export BRANCH=${{ github.head_ref }}
             export SHA=$( git rev-parse "$BRANCH:$FILE_TO_COMMIT" )
             echo "Branch: $BRANCH"
