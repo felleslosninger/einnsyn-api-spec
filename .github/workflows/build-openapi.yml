@@ -4,21 +4,33 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'typespec/**'
 
 jobs:
   build-and-commit:
+    if: ${{ github.actor != 'einnsyn-codegen[bot]' }}
+    
     runs-on: ubuntu-latest
 
     steps:
+      - name: Fetch app token
+        uses: tibdex/github-app-token@v2.1.0
+        id: gh-api-token
+        with:
+          app_id: ${{ secrets.EIN_CODEGEN_APP_ID }}
+          private_key: ${{ secrets.EIN_CODEGEN_APP_PRIVATE_KEY }}
+          
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
+          
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bun run build
       - name: Commit and push changes
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.gh-api-token.outputs.token }}
           FILE_TO_COMMIT: "openapi/einnsyn.openapi.yml"
         run: |
           git add .
