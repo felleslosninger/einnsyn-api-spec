@@ -9,6 +9,8 @@ on:
 
 jobs:
   build-and-commit:
+    if: ${{ github.actor != 'einnsyn-codegen[bot]' }}
+    
     runs-on: ubuntu-latest
 
     steps:
