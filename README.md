@@ -25,11 +25,12 @@ curl -H "X-EIN-API-KEY: secret_..." https://api.einnsyn.no
 
 All entities has standard CRUD-endpoints:
 
-- `POST /{entityName}`: Create object
 - `GET /{entityName}`: Get a paginated list of objects
 - `GET /{entityName}/{id}`: Get an object
 - `PATCH /{entityName}/{id}`: Update an object
 - `DELETE /{entityName}/{id}`: Delete an object
+
+Objects that do not require a parent object (primarily arkiv) can be added directly at the root level using `POST /{entityName}`. However, objects that require a parent must be added through the parent object, for example: `POST /arkiv/ar_.../arkivdel`.
 
 ## IDs
 
