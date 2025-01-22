@@ -2,6 +2,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/openapi3";
 import "./einnsyn.arkiv.models.tsp";
+import "./einnsyn.web.operations.tsp";
 
 using TypeSpec.OpenAPI;
 
@@ -89,9 +90,10 @@ namespace LagretSoek {
   model LagretSoek extends Base.Base {
     @visibility("read") entity: "LagretSoek";
     bruker?: ExpandableField<Bruker.Bruker>;
-    label?: string;
-    legacyQuery?: string;
+    label: string;
     subscribe?: boolean;
+    searchParameters?: Search.SearchParameters;
+    legacyQuery?: string;
   }
 }
 

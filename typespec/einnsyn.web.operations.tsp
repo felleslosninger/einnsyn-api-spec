@@ -159,7 +159,43 @@ namespace Search {
    * Search parameters
    */
   model SearchParameters extends QueryParameters.FilterParameters {
-    ...QueryParameters.ListParameters;
+    /**
+     * Specifies which fields in the response should be expanded.
+     */
+    @query expand?: string[];
+
+    /**
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     */
+    @query limit?: integer = 25;
+
+    /**
+     * The sort order of the result set. The default is ascending.
+     */
+    @query sortOrder?: "asc" | "desc" = "desc";
+
+    /**
+     * A cursor for use in pagination. This is a list of size two, the value of the sortBy property and the unique id.
+     */
+    @query startingAfter?: string[];
+
+    /**
+     * A cursor for use in pagination. This is a list of size two, the value of the sortBy property and the unique id.
+     */
+    @query endingBefore?: string[];
+
+    /**
+     * The field to sort results by. The default is "score".
+     */
+    @query sortBy:
+      | "score"
+      | "id"
+      | "entity"
+      | "publisertDato"
+      | "oppdatertDato"
+      | "moetedato"
+      | "fulltekst"
+      | "type" = "score";
   }
   @route("/search")
   @tag("Search")
@@ -175,25 +211,25 @@ namespace Statistics {
    * Statistics parameters
    */
   model StatisticsParameters extends QueryParameters.FilterParameters {
-    aggregateFrom?: utcDateTime;
-    aggregateTo?: utcDateTime;
+    @query aggregateFrom?: plainDate;
+    @query aggregateTo?: plainDate;
   }
   model StatisticsResponse {
     @statusCode _: 200;
     @body body: {
       innsynskrav?: {
         count: integer;
-        samples: {
-          startTime: utcDateTime;
-          endTime: utcDateTime;
+        interval: integer;
+        bucket: {
+          time: utcDateTime;
           count: integer;
         }[];
       };
       download?: {
         count: integer;
-        samples: {
-          startTime: utcDateTime;
-          endTime: utcDateTime;
+        interval: integer;
+        bucket: {
+          time: utcDateTime;
           count: integer;
         }[];
       };
