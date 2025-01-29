@@ -43,6 +43,11 @@ namespace Base {
      * An external ID for the resource. This is similar to "systemId", but will be used for legacy IRIs that were used in earlier eInnsyn versions.
      */
     externalId?: string;
+
+    /**
+     * This object should not be accessible to the public before the given dateTime.
+     */
+    accessibleAfter?: utcDateTime;
   }
 }
 
@@ -527,6 +532,11 @@ namespace Registrering {
 
     korrespondansepart?: ExpandableField<Korrespondansepart.Korrespondansepart>[];
     dokumentbeskrivelse?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
+
+    /**
+     * The administrative unit that has been handed the responsibility for this resource.
+     */
+    avhendetTil?: ExpandableField<Enhet.Enhet>;
   }
 }
 
