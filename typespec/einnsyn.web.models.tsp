@@ -46,8 +46,8 @@ namespace InnsynskravBestilling {
     @visibility("read") entity: "Innsynskrav";
     @format("email") email: string;
     innsynskrav: ExpandableField<Innsynskrav.Innsynskrav>[];
-    verified?: boolean;
-    bruker?: ExpandableField<Bruker.Bruker>;
+    @visibility("read") verified?: boolean;
+    @visibility("read") bruker?: ExpandableField<Bruker.Bruker>;
     language?: "nb" | "nn" | "en" | "se" = "nb";
   }
 }
