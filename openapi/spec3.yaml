@@ -4958,14 +4958,14 @@ components:
               readOnly: true
             tittel:
               type: string
-            parent:
+            arkiv:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Arkiv"
           required:
             - tittel
           x-expandableFields:
-            - parent
+            - arkiv
 
     Arkivdel:
       type: object
@@ -4980,14 +4980,14 @@ components:
               readOnly: true
             tittel:
               type: string
-            parent:
+            arkiv:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Arkiv"
           required:
             - tittel
           x-expandableFields:
-            - parent
+            - arkiv
 
     Klasse:
       type: object
@@ -5003,16 +5003,24 @@ components:
               readOnly: true
             tittel:
               type: string
-            parent:
+            klasse:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Klasse"
+            klassifikasjonssystem:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Klassifikasjonssystem"
+            arkivdel:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Arkivdel"
-                - $ref: "#/components/schemas/Klasse"
-                - $ref: "#/components/schemas/Klassifikasjonssystem"
           required:
             - tittel
           x-expandableFields:
-            - parent
+            - klasse
+            - klassifikasjonssystem
+            - arkivdel
 
     Klassifikasjonssystem:
       type: object
@@ -5028,14 +5036,14 @@ components:
               readOnly: true
             tittel:
               type: string
-            parent:
+            arkivdel:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Arkivdel"
           required:
             - tittel
           x-expandableFields:
-            - parent
+            - arkivdel
 
     Registrering:
       type: object
@@ -5178,19 +5186,30 @@ components:
               description: >-
                 The date the resource was last updated. This field is updated
                 automatically, but can be set manually by admins.
-            parent:
+            arkivdel:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Arkivdel"
+            klasse:
+              anyOf:
+                - type: string
+                - $ref: "#/components/schemas/Klasse"
+            saksmappe:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Saksmappe"
+            moetemappe:
+              anyOf:
+                - type: string
                 - $ref: "#/components/schemas/Moetemappe"
-                - $ref: "#/components/schemas/Arkiv"
-                - $ref: "#/components/schemas/Arkivdel"
-                - $ref: "#/components/schemas/Klasse"
           required:
             - offentligTittel
             - offentligTittelSensitiv
           x-expandableFields:
-            - parent
+            - arkivdel
+            - klasse
+            - saksmappe
+            - moetemappe
 
     Saksmappe:
       type: object
@@ -5577,11 +5596,17 @@ components:
               type: boolean
             administrativEnhet:
               type: string
-            parent:
+            journalpost:
               anyOf:
                 - type: string
                 - $ref: "#/components/schemas/Journalpost"
+            moetedokument:
+              anyOf:
+                - type: string
                 - $ref: "#/components/schemas/Moetedokument"
+            moetesak:
+              anyOf:
+                - type: string
                 - $ref: "#/components/schemas/Moetesak"
           required:
             - korrespondansepartNavn
@@ -5589,6 +5614,8 @@ components:
             - korrespondanseparttype
           x-expandableFields:
             - journalpost
+            - moetedokument
+            - moetesak
 
     Skjerming:
       type: object
