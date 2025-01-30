@@ -266,8 +266,8 @@ namespace Journalpost {
     skjerming?: ExpandableField<Skjerming.Skjerming>;
     legacyJournalposttype?: string;
     legacyFoelgsakenReferanse?: string[];
-    administrativEnhet: string;
-    administrativEnhetObjekt: ExpandableField<Enhet.Enhet>;
+    administrativEnhet?: string;
+    administrativEnhetObjekt?: ExpandableField<Enhet.Enhet>;
     @visibility("read") saksmappe: ExpandableField<Saksmappe.Saksmappe>;
   }
 }
