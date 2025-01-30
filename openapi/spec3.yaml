@@ -14,8 +14,8 @@ tags:
   - name: Dokumentbeskrivelse
   - name: Dokumentobjekt
   - name: Enhet
+  - name: InnsynskravBestilling
   - name: Innsynskrav
-  - name: InnsynskravDel
   - name: Journalpost
   - name: Klasse
   - name: Korrespondansepart
@@ -1022,6 +1022,183 @@ paths:
               schema:
                 $ref: "#/components/schemas/Identifikator"
 
+  /innsynskravBestilling:
+    get:
+      description: Get a InnsynskravBestilling list.
+      tags:
+        - InnsynskravBestilling
+      operationId: GetInnsynskravBestillingList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - $ref: "#/components/parameters/IDs"
+        - $ref: "#/components/parameters/ExternalIDs"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/InnsynskravBestilling"
+    post:
+      description: Create a InnsynskravBestilling.
+      tags:
+        - InnsynskravBestilling
+      operationId: PostInnsynskravBestilling
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InnsynskravBestilling"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InnsynskravBestilling"
+
+  /innsynskravBestilling/{innsynskravBestillingId}:
+    get:
+      description: Get a InnsynskravBestilling.
+      tags:
+        - InnsynskravBestilling
+      operationId: GetInnsynskravBestilling
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - name: innsynskravBestillingId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: InnsynskravBestilling
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InnsynskravBestilling"
+    patch:
+      description: Update a InnsynskravBestilling.
+      tags:
+        - InnsynskravBestilling
+      operationId: PatchInnsynskravBestilling
+      parameters:
+        - name: innsynskravBestillingId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: InnsynskravBestilling
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InnsynskravBestilling"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InnsynskravBestilling"
+    delete:
+      description: Delete a request.
+      tags:
+        - InnsynskravBestilling
+      operationId: InnsynskravBestilling
+      parameters:
+        - name: innsynskravBestillingId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: InnsynskravBestilling
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InnsynskravBestilling"
+
+  /innsynskravBestilling/{innsynskravBestillingId}/innsynskrav:
+    get:
+      description: Get a Innsynskrav list.
+      tags:
+        - Innsynskrav
+      operationId: GetInnsynskravInnsynskravList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: innsynskravBestillingId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: InnsynskravBestilling
+        - name: innsynskravBestillingId
+          in: query
+          description: Filter by InnsynskravBestilling
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Innsynskrav"
+
+  /innsynskravBestilling/{innsynskravBestillingId}/verify/{secret}:
+    patch:
+      description: Verify a InnsynskravBestilling.
+      tags:
+        - InnsynskravBestilling
+      operationId: VerifyInnsynskravBestilling
+      parameters:
+        - name: innsynskravBestillingId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: InnsynskravBestilling
+        - name: secret
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InnsynskravBestilling"
+
   /innsynskrav:
     get:
       description: Get a Innsynskrav list.
@@ -1051,27 +1228,10 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Innsynskrav"
-    post:
-      description: Create a Innsynskrav.
-      tags:
-        - Innsynskrav
-      operationId: PostInnsynskrav
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Innsynskrav"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Innsynskrav"
 
   /innsynskrav/{innsynskravId}:
     get:
-      description: Get a Innsynskrav.
+      description: Get a single Innsynskrav.
       tags:
         - Innsynskrav
       operationId: GetInnsynskrav
@@ -1090,166 +1250,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Innsynskrav"
-    patch:
-      description: Update a Innsynskrav.
-      tags:
-        - Innsynskrav
-      operationId: PatchInnsynskrav
-      parameters:
-        - name: innsynskravId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Innsynskrav
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Innsynskrav"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Innsynskrav"
-    delete:
-      description: Delete a request.
-      tags:
-        - Innsynskrav
-      operationId: DeleteInnsynskrav
-      parameters:
-        - name: innsynskravId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Innsynskrav
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Innsynskrav"
-
-  /innsynskrav/{innsynskravId}/innsynskravDel:
-    get:
-      description: Get a InnsynskravDel list.
-      tags:
-        - InnsynskravDel
-      operationId: GetInnsynskravInnsynskravDelList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - name: innsynskravId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Innsynskrav
-        - name: innsynskravId
-          in: query
-          description: Filter by Innsynskrav
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/InnsynskravDel"
-
-  /innsynskrav/{innsynskravId}/verify/{secret}:
-    patch:
-      description: Verify a Innsynskrav.
-      tags:
-        - Innsynskrav
-      operationId: VerifyInnsynskrav
-      parameters:
-        - name: innsynskravId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Innsynskrav
-        - name: secret
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Innsynskrav"
-
-  /innsynskravDel:
-    get:
-      description: Get a InnsynskravDel list.
-      tags:
-        - InnsynskravDel
-      operationId: GetInnsynskravDelList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - $ref: "#/components/parameters/IDs"
-        - $ref: "#/components/parameters/ExternalIDs"
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/InnsynskravDel"
-
-  /innsynskravDel/{innsynskravDelId}:
-    get:
-      description: Get a single InnsynskravDel.
-      tags:
-        - InnsynskravDel
-      operationId: GetInnsynskravDel
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - name: innsynskravDelId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: InnsynskravDel
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InnsynskravDel"
 
   /klasse:
     get:
@@ -3351,12 +3351,12 @@ paths:
                         items:
                           $ref: "#/components/schemas/Arkiv"
 
-  /enhet/{enhetId}/innsynskravDel:
+  /enhet/{enhetId}/innsynskrav:
     get:
-      description: Get a list of InnsynskravDel for a Enhet.
+      description: Get a list of Innsynskrav for a Enhet.
       tags:
         - Enhet
-      operationId: GetEnhetInnsynskravDelList
+      operationId: GetEnhetInnsynskravList
       parameters:
         - $ref: "#/components/parameters/Expand"
         - $ref: "#/components/parameters/Limit"
@@ -3387,7 +3387,7 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: "#/components/schemas/InnsynskravDel"
+                          $ref: "#/components/schemas/Innsynskrav"
 
   /journalpost:
     get:
@@ -4255,6 +4255,45 @@ paths:
               schema:
                 $ref: "#/components/schemas/Bruker"
 
+  /bruker/{brukerId}/innsynskravBestilling:
+    get:
+      description: Get all InnsynskravBestilling for a Bruker.
+      tags:
+        - Bruker
+      operationId: GetBrukerInnsynskravBestillingList
+      parameters:
+        - $ref: "#/components/parameters/Expand"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/SortOrder"
+        - $ref: "#/components/parameters/StartingAfter"
+        - $ref: "#/components/parameters/EndingBefore"
+        - name: brukerId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-resourceId: Bruker
+        - name: brukerId
+          in: query
+          description: Filter by brukerId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResultList"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/InnsynskravBestilling"
+
   /bruker/{brukerId}/innsynskrav:
     get:
       description: Get all innsynskrav for a Bruker.
@@ -4293,45 +4332,6 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Innsynskrav"
-
-  /bruker/{brukerId}/innsynskravDel:
-    get:
-      description: Get all innsynskravDel for a Bruker.
-      tags:
-        - Bruker
-      operationId: GetBrukerInnsynskravDelList
-      parameters:
-        - $ref: "#/components/parameters/Expand"
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/SortOrder"
-        - $ref: "#/components/parameters/StartingAfter"
-        - $ref: "#/components/parameters/EndingBefore"
-        - name: brukerId
-          in: path
-          required: true
-          schema:
-            type: string
-          x-resourceId: Bruker
-        - name: brukerId
-          in: query
-          description: Filter by brukerId
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                allOf:
-                  - $ref: "#/components/schemas/ResultList"
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/InnsynskravDel"
 
   /bruker/{brukerId}/lagretSoek:
     get:
@@ -5690,29 +5690,27 @@ components:
           x-expandableFields:
             - lagretSak
             - lagretSoek
-            - innsynskrav
-            - innsynskravDel
 
-    Innsynskrav:
+    InnsynskravBestilling:
       type: object
-      x-resourceId: Innsynskrav
+      x-resourceId: InnsynskravBestilling
       x-idPrefix: "ik"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
             entity:
               type: string
-              enum: ["Innsynskrav"]
+              enum: ["InnsynskravBestilling"]
               readOnly: true
             email:
               type: string
               format: email
-            innsynskravDel:
+            innsynskrav:
               type: array
               items:
                 anyOf:
                   - type: string
-                  - $ref: "#/components/schemas/InnsynskravDel"
+                  - $ref: "#/components/schemas/Innsynskrav"
             verified:
               type: boolean
               default: false
@@ -5730,26 +5728,26 @@ components:
                 - se
           required:
             - email
-            - innsynskravDel
+            - innsynskrav
           x-expandableFields:
             - bruker
-            - innsynskravDel
+            - innsynskrav
 
-    InnsynskravDel:
+    Innsynskrav:
       type: object
-      x-resourceId: InnsynskravDel
+      x-resourceId: Innsynskrav
       x-idPrefix: "ikd"
       allOf:
         - $ref: "#/components/schemas/Base"
         - properties:
             entity:
               type: string
-              enum: ["InnsynskravDel"]
+              enum: ["Innsynskrav"]
               readOnly: true
-            innsynskrav:
+            innsynskravBestilling:
               anyOf:
                 - type: string
-                - $ref: "#/components/schemas/Innsynskrav"
+                - $ref: "#/components/schemas/InnsynskravBestilling"
             journalpost:
               anyOf:
                 - type: string
