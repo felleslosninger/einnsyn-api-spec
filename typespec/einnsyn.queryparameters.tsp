@@ -29,7 +29,7 @@ namespace QueryParameters {
     /**
      * The sort order of the result set. The default is ascending.
      */
-    @query sortOrder?: "asc" | "desc" = "asc";
+    @query sortOrder?: "asc" | "desc" = "desc";
 
     /**
      * A cursor for use in pagination. StartingAfter is a resource ID that defines your place in the list.
@@ -116,6 +116,21 @@ namespace QueryParameters {
     /**
      * Filter by the entity type.
      */
-    @query entity?: "Journalpost" | "Moetemappe" | "Moetesak" | "Saksmappe";
+    @query entity?: ("Journalpost" | "Moetemappe" | "Moetesak" | "Saksmappe")[];
+
+    /**
+     * A list of resource IDs to be returned. If this parameter is used, the other parameters will be ignored.
+     */
+    @query ids?: eInnsynId[];
+
+    /**
+     * A list of external IDs to be returned. If this parameter is used, the other parameters will be ignored.
+     */
+    @query externalIds?: string[];
+
+    /**
+     * The Journalenhet to filter the result set by.
+     */
+    @query journalenhet?: eInnsynId;
   }
 }
