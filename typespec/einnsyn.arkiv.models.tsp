@@ -248,7 +248,7 @@ namespace Journalpost {
   @extension("x-idPrefix", "jp")
   model Journalpost extends Registrering.Registrering {
     @visibility("read") entity: "Journalpost";
-    @minValue(1900) journalaar: integer;
+    @minValue(1700) journalaar: integer;
     @minValue(0) journalsekvensnummer: integer;
     @minValue(0) journalpostnummer: integer;
     journalposttype:
@@ -477,8 +477,8 @@ namespace Moetesak {
       | "orientering"
       | "referat"
       | "annet";
-    @minValue(1900) moetesaksaar: integer;
-    @minValue(0) moetesakssekvensnummer: integer;
+    @minValue(1700) moetesaksaar?: integer;
+    @minValue(0) moetesakssekvensnummer?: integer;
     utvalg?: string;
     @visibility("read") utvalgObjekt: ExpandableField<Enhet.Enhet>;
     videoLink?: string;
@@ -547,7 +547,7 @@ namespace Saksmappe {
   @extension("x-idPrefix", "sm")
   model Saksmappe extends Mappe.Mappe {
     @visibility("read") entity: "Saksmappe";
-    @minValue(1900) saksaar: integer;
+    @minValue(1700) saksaar: integer;
     @minValue(0) sakssekvensnummer: integer;
     saksnummer?: string;
     saksdato?: plainDate;
