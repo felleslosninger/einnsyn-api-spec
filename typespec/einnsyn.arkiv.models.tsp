@@ -25,16 +25,6 @@ namespace Base {
     @visibility("read") id: eInnsynId;
 
     /**
-     * A timestamp of when the resource was created. This field is updated automatically.
-     */
-    @visibility("read") created: utcDateTime;
-
-    /**
-     * A timestamp of when the resource was last updated. This field is updated automatically.
-     */
-    @visibility("read") updated: utcDateTime;
-
-    /**
      * This field is only present if the resource has been deleted. If present, it will always be `true`.
      */
     @visibility("read") deleted: boolean;
