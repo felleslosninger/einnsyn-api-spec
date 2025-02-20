@@ -8,14 +8,15 @@ using Http;
 namespace EInnsyn;
 
 namespace QueryParameters {
-  model GetParameters {
+  model QueryParameters {}
+  model GetParameters extends QueryParameters {
     /**
      * Specifies which fields in the response should be expanded.
      */
     @query expand?: string[];
   }
 
-  model ListParameters {
+  model ListParameters extends QueryParameters {
     /**
      * Specifies which fields in the response should be expanded.
      */
@@ -24,7 +25,10 @@ namespace QueryParameters {
     /**
      * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
      */
-    @query limit?: integer = 25;
+    @minValue(1)
+    @maxValue(100)
+    @query
+    limit?: integer = 25;
 
     /**
      * The sort order of the result set. The default is ascending.
@@ -57,7 +61,7 @@ namespace QueryParameters {
     @query journalenhet?: eInnsynId;
   }
 
-  model FilterParameters {
+  model FilterParameters extends QueryParameters {
     /**
      * A query string to filter by. Quotes can be used to search for exact matches or phrases. Words can be excluded by prefixing them with a minus sign.
      */
