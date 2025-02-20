@@ -8,11 +8,11 @@ using TypeSpec.Http;
 namespace EInnsyn;
 
 namespace Responses {
-  model ListResponseBody<T extends Base.Base> {
+  model PaginatedList<T extends Base.Base> {
     /**
      * A paginated list of items.
      */
-    items: Array<T>;
+    items: ExpandableField<T>[];
 
     /**
      * The URL for the next page of items.
@@ -25,25 +25,9 @@ namespace Responses {
     previous?: url;
   }
 
-  model ErrorResponseBody {
-    status: string;
-    message: string;
-  }
-
-  model ValidationErrorResponseBody extends ErrorResponseBody {
-    fieldError: {
-      fieldName: string;
-      value?: string;
-      message?: string;
-    }[];
-  }
-
-  /**
-   * Result list
-   */
   model ListResponse<T extends Base.Base> {
     @statusCode _: 200;
-    @body body: ListResponseBody<T>;
+    @body body: PaginatedList<T>;
   }
 
   model OkResponse<T extends Base.Base> {
@@ -54,11 +38,5 @@ namespace Responses {
   model AddResponse<T extends Base.Base> {
     @statusCode _: 201;
     @body body: T;
-  }
-
-  @error
-  model ErrorResponse {
-    @statusCode _: 400;
-    @body body: ErrorResponseBody;
   }
 }

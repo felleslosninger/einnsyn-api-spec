@@ -25,16 +25,6 @@ namespace Base {
     @visibility("read") id: eInnsynId;
 
     /**
-     * A timestamp of when the resource was created. This field is updated automatically.
-     */
-    @visibility("read") created: utcDateTime;
-
-    /**
-     * A timestamp of when the resource was last updated. This field is updated automatically.
-     */
-    @visibility("read") updated: utcDateTime;
-
-    /**
      * This field is only present if the resource has been deleted. If present, it will always be `true`.
      */
     @visibility("read") deleted: boolean;
@@ -43,6 +33,11 @@ namespace Base {
      * An external ID for the resource. This is similar to "systemId", but will be used for legacy IRIs that were used in earlier eInnsyn versions.
      */
     externalId?: string;
+
+    /**
+     * This object should not be accessible to the public before the given dateTime.
+     */
+    accessibleAfter?: utcDateTime;
   }
 }
 
@@ -243,7 +238,7 @@ namespace Journalpost {
   @extension("x-idPrefix", "jp")
   model Journalpost extends Registrering.Registrering {
     @visibility("read") entity: "Journalpost";
-    @minValue(1900) journalaar: integer;
+    @minValue(1700) journalaar: integer;
     @minValue(0) journalsekvensnummer: integer;
     @minValue(0) journalpostnummer: integer;
     journalposttype:
@@ -261,8 +256,8 @@ namespace Journalpost {
     skjerming?: ExpandableField<Skjerming.Skjerming>;
     legacyJournalposttype?: string;
     legacyFoelgsakenReferanse?: string[];
-    @visibility("read") administrativEnhet: string;
-    @visibility("read") administrativEnhetObjekt: ExpandableField<Enhet.Enhet>;
+    administrativEnhet?: string;
+    administrativEnhetObjekt?: ExpandableField<Enhet.Enhet>;
     @visibility("read") saksmappe: ExpandableField<Saksmappe.Saksmappe>;
   }
 }
@@ -472,8 +467,8 @@ namespace Moetesak {
       | "orientering"
       | "referat"
       | "annet";
-    @minValue(1900) moetesaksaar: integer;
-    @minValue(0) moetesakssekvensnummer: integer;
+    @minValue(1700) moetesaksaar?: integer;
+    @minValue(0) moetesakssekvensnummer?: integer;
     utvalg?: string;
     @visibility("read") utvalgObjekt: ExpandableField<Enhet.Enhet>;
     videoLink?: string;
@@ -527,6 +522,11 @@ namespace Registrering {
 
     korrespondansepart?: ExpandableField<Korrespondansepart.Korrespondansepart>[];
     dokumentbeskrivelse?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
+
+    /**
+     * The administrative unit that has been handed the responsibility for this resource.
+     */
+    avhendetTil?: ExpandableField<Enhet.Enhet>;
   }
 }
 
@@ -537,7 +537,7 @@ namespace Saksmappe {
   @extension("x-idPrefix", "sm")
   model Saksmappe extends Mappe.Mappe {
     @visibility("read") entity: "Saksmappe";
-    @minValue(1900) saksaar: integer;
+    @minValue(1700) saksaar: integer;
     @minValue(0) sakssekvensnummer: integer;
     saksnummer?: string;
     saksdato?: plainDate;
@@ -549,7 +549,7 @@ namespace Saksmappe {
     administrativEnhet?: string;
 
     /**
-     * The adminsistrative Enhet associated with this Saksmappe. This is derived from the code given in `administrativEnhet`.
+     * The administrative Enhet associated with this Saksmappe. This is derived from the code given in `administrativEnhet`.
      * If no `administrativEnhet` is given, or the code is not found, the `journalenhet` of the authenticated user will be used.
      */
     @visibility("read")
