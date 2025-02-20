@@ -165,9 +165,12 @@ namespace Search {
     @query expand?: string[];
 
     /**
-     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 25.
      */
-    @query limit?: integer = 25;
+    @minValue(1)
+    @maxValue(100)
+    @query
+    limit?: integer = 25;
 
     /**
      * The sort order of the result set. The default is ascending.
@@ -217,20 +220,20 @@ namespace Statistics {
   model StatisticsResponse {
     @statusCode _: 200;
     @body body: {
-      innsynskrav?: {
-        count: integer;
-        interval: integer;
-        bucket: {
-          time: utcDateTime;
-          count: integer;
+      @visibility("read") innsynskrav?: {
+        @visibility("read") count: integer;
+        @visibility("read") interval: integer;
+        @visibility("read") bucket: {
+          @visibility("read") time: utcDateTime;
+          @visibility("read") count: integer;
         }[];
       };
-      download?: {
-        count: integer;
-        interval: integer;
-        bucket: {
-          time: utcDateTime;
-          count: integer;
+      @visibility("read") download?: {
+        @visibility("read") count: integer;
+        @visibility("read") interval: integer;
+        @visibility("read") bucket: {
+          @visibility("read") time: utcDateTime;
+          @visibility("read") count: integer;
         }[];
       };
     };

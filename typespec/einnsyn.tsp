@@ -3,6 +3,7 @@ import "@typespec/openapi";
 import "@typespec/openapi3";
 import "./einnsyn.arkiv.operations.tsp";
 import "./einnsyn.web.operations.tsp";
+import "./einnsyn.exceptions.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
