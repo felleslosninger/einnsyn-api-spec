@@ -35,7 +35,7 @@ jobs:
         with:
           token: ${{ steps.gh-api-token.outputs.token }}
           repository: felleslosninger/einnsyn-codegen
-          event-type: run-codegen-all
+          event-type: codegen
           client-payload: |
             {
               "commit_message": "${{ env.commit_message }}"
