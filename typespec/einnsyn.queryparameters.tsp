@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/openapi3";
 import "./einnsyn.arkiv.models.tsp";
 
 using Http;

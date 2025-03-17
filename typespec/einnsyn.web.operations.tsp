@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/openapi3";
 import "./einnsyn.arkiv.models.tsp";
 import "./einnsyn.arkiv.operations.tsp";
 import "./einnsyn.web.models.tsp";
@@ -190,7 +189,7 @@ namespace Search {
     /**
      * The field to sort results by. The default is "score".
      */
-    @query sortBy:
+    @query sortBy?:
       | "score"
       | "id"
       | "entity"
@@ -219,21 +218,23 @@ namespace Statistics {
   }
   model StatisticsResponse {
     @statusCode _: 200;
-    @body body: {
-      @visibility("read") innsynskrav?: {
-        @visibility("read") count: integer;
-        @visibility("read") interval: integer;
-        @visibility("read") bucket: {
-          @visibility("read") time: utcDateTime;
-          @visibility("read") count: integer;
+
+    @body
+    body: {
+      @visibility(Lifecycle.Read) innsynskrav?: {
+        @visibility(Lifecycle.Read) count: integer;
+        @visibility(Lifecycle.Read) interval: integer;
+        @visibility(Lifecycle.Read) bucket: {
+          @visibility(Lifecycle.Read) time: utcDateTime;
+          @visibility(Lifecycle.Read) count: integer;
         }[];
       };
-      @visibility("read") download?: {
-        @visibility("read") count: integer;
-        @visibility("read") interval: integer;
-        @visibility("read") bucket: {
-          @visibility("read") time: utcDateTime;
-          @visibility("read") count: integer;
+      @visibility(Lifecycle.Read) download?: {
+        @visibility(Lifecycle.Read) count: integer;
+        @visibility(Lifecycle.Read) interval: integer;
+        @visibility(Lifecycle.Read) bucket: {
+          @visibility(Lifecycle.Read) time: utcDateTime;
+          @visibility(Lifecycle.Read) count: integer;
         }[];
       };
     };
@@ -244,6 +245,6 @@ namespace Statistics {
   interface Statistics {
     @route("")
     @get
-    getStatistics(...StatisticsParameters): StatisticsResponse;
+    query(...StatisticsParameters): StatisticsResponse;
   }
 }
