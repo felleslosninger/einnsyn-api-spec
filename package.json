@@ -7,12 +7,10 @@
 		"@typespec/http": "^0.66.0",
 		"@typespec/openapi": "^0.66.0",
 		"@typespec/openapi3": "^0.66.0",
-		"@typespec/rest": "^0.66.0",
-		"einnsyn-codegen": "file:../ein-api-codegen"
+		"@typespec/rest": "^0.66.0"
 	},
 	"scripts": {
-		"build": "tsp compile ./typespec/einnsyn.tsp --emit=@typespec/openapi3 --output-dir ./openapi/",
-		"codegen": "rm -rf ./out/* && tsp compile ./typespec/einnsyn.tsp --emit einnsyn-codegen"
+		"build": "tsp compile ./typespec/einnsyn.tsp --emit=@typespec/openapi3 --output-dir ./openapi/"
 	},
 	"private": true
 }
