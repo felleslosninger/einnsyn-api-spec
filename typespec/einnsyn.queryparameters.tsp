@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/openapi3";
 import "./einnsyn.arkiv.models.tsp";
 
 using Http;
@@ -8,14 +7,15 @@ using Http;
 namespace EInnsyn;
 
 namespace QueryParameters {
-  model GetParameters {
+  model QueryParameters {}
+  model GetParameters extends QueryParameters {
     /**
      * Specifies which fields in the response should be expanded.
      */
     @query expand?: string[];
   }
 
-  model ListParameters {
+  model ListParameters extends QueryParameters {
     /**
      * Specifies which fields in the response should be expanded.
      */
@@ -24,12 +24,15 @@ namespace QueryParameters {
     /**
      * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
      */
-    @query limit?: integer = 25;
+    @minValue(1)
+    @maxValue(100)
+    @query
+    limit?: integer = 25;
 
     /**
      * The sort order of the result set. The default is ascending.
      */
-    @query sortOrder?: "asc" | "desc" = "asc";
+    @query sortOrder?: "asc" | "desc" = "desc";
 
     /**
      * A cursor for use in pagination. StartingAfter is a resource ID that defines your place in the list.
@@ -57,7 +60,7 @@ namespace QueryParameters {
     @query journalenhet?: eInnsynId;
   }
 
-  model FilterParameters {
+  model FilterParameters extends QueryParameters {
     /**
      * A query string to filter by. Quotes can be used to search for exact matches or phrases. Words can be excluded by prefixing them with a minus sign.
      */
@@ -116,6 +119,21 @@ namespace QueryParameters {
     /**
      * Filter by the entity type.
      */
-    @query entity?: "Journalpost" | "Moetemappe" | "Moetesak" | "Saksmappe";
+    @query entity?: ("Journalpost" | "Moetemappe" | "Moetesak" | "Saksmappe")[];
+
+    /**
+     * A list of resource IDs to be returned. If this parameter is used, the other parameters will be ignored.
+     */
+    @query ids?: eInnsynId[];
+
+    /**
+     * A list of external IDs to be returned. If this parameter is used, the other parameters will be ignored.
+     */
+    @query externalIds?: string[];
+
+    /**
+     * The Journalenhet to filter the result set by.
+     */
+    @query journalenhet?: eInnsynId;
   }
 }

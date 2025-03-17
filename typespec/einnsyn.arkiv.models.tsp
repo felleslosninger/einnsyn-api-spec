@@ -22,27 +22,22 @@ namespace Base {
     /**
      * The unique identifier for the resource. This is is assigned by the system when the resource is created.
      */
-    @visibility("read") id: eInnsynId;
-
-    /**
-     * A timestamp of when the resource was created. This field is updated automatically.
-     */
-    @visibility("read") created: utcDateTime;
-
-    /**
-     * A timestamp of when the resource was last updated. This field is updated automatically.
-     */
-    @visibility("read") updated: utcDateTime;
+    @visibility(Lifecycle.Read) id: eInnsynId;
 
     /**
      * This field is only present if the resource has been deleted. If present, it will always be `true`.
      */
-    @visibility("read") deleted: boolean;
+    @visibility(Lifecycle.Read) deleted: boolean;
 
     /**
      * An external ID for the resource. This is similar to "systemId", but will be used for legacy IRIs that were used in earlier eInnsyn versions.
      */
     externalId?: string;
+
+    /**
+     * This object should not be accessible to the public before the given dateTime.
+     */
+    accessibleAfter?: utcDateTime;
   }
 }
 
@@ -52,7 +47,7 @@ namespace ApiKey {
    */
   @extension("x-idPrefix", "key")
   model ApiKey extends Base.Base {
-    @visibility("read") entity: "ApiKey";
+    @visibility(Lifecycle.Read) entity: "ApiKey";
 
     /**
      * A name for the API key. This can be used to identify the key, in case you have multiple keys for multiple systems.
@@ -62,7 +57,7 @@ namespace ApiKey {
     /**
      * The API key used to authenticate requests. This will only be shown once, and we will only store a hashed version.
      */
-    @visibility("read") secretKey: string;
+    @visibility(Lifecycle.Read) secretKey: string;
 
     /**
      * The Enhet that requests using this key will be associated with.
@@ -97,7 +92,7 @@ namespace Arkiv {
    */
   @extension("x-idPrefix", "ark")
   model Arkiv extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Arkiv";
+    @visibility(Lifecycle.Read) entity: "Arkiv";
 
     /**
      * The title of the archive.
@@ -117,7 +112,7 @@ namespace Arkivdel {
    */
   @extension("x-idPrefix", "arkd")
   model Arkivdel extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Arkivdel";
+    @visibility(Lifecycle.Read) entity: "Arkivdel";
 
     /**
      * The title of the Arkivdel.
@@ -127,7 +122,7 @@ namespace Arkivdel {
     /**
      * The parent Arkiv to which this Arkivdel belongs.
      */
-    @visibility("read") arkiv: ExpandableField<Arkiv.Arkiv>;
+    @visibility(Lifecycle.Read) arkiv: ExpandableField<Arkiv.Arkiv>;
   }
 }
 
@@ -137,7 +132,7 @@ namespace Behandlingsprotokoll {
    */
   @extension("x-idPrefix", "bp")
   model Behandlingsprotokoll extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Behandlingsprotokoll";
+    @visibility(Lifecycle.Read) entity: "Behandlingsprotokoll";
     tekstInnhold: string;
     tekstFormat: string;
   }
@@ -149,7 +144,7 @@ namespace Dokumentbeskrivelse {
    */
   @extension("x-idPrefix", "db")
   model Dokumentbeskrivelse extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Dokumentbeskrivelse";
+    @visibility(Lifecycle.Read) entity: "Dokumentbeskrivelse";
 
     /**
      * The title of the document, with sensitive information redacted.
@@ -171,7 +166,7 @@ namespace Dokumentbeskrivelse {
 namespace Dokumentobjekt {
   @extension("x-idPrefix", "do")
   model Dokumentobjekt extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Dokumentobjekt";
+    @visibility(Lifecycle.Read) entity: "Dokumentobjekt";
     referanseDokumentfil: url;
     format?: string;
     sjekksum?: string;
@@ -186,7 +181,7 @@ namespace Enhet {
    */
   @extension("x-idPrefix", "enh")
   model Enhet extends Base.Base {
-    @visibility("read") entity: "Enhet";
+    @visibility(Lifecycle.Read) entity: "Enhet";
     navn: string;
     navnNynorsk?: string;
     navnEngelsk?: string;
@@ -228,7 +223,7 @@ namespace Identifikator {
    */
   @extension("x-idPrefix", "ide")
   model Identifikator extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Identifikator";
+    @visibility(Lifecycle.Read) entity: "Identifikator";
     navn: string;
     identifikator: string;
     initialer: string;
@@ -242,8 +237,8 @@ namespace Journalpost {
    */
   @extension("x-idPrefix", "jp")
   model Journalpost extends Registrering.Registrering {
-    @visibility("read") entity: "Journalpost";
-    @minValue(1900) journalaar: integer;
+    @visibility(Lifecycle.Read) entity: "Journalpost";
+    @minValue(1700) journalaar: integer;
     @minValue(0) journalsekvensnummer: integer;
     @minValue(0) journalpostnummer: integer;
     journalposttype:
@@ -261,9 +256,9 @@ namespace Journalpost {
     skjerming?: ExpandableField<Skjerming.Skjerming>;
     legacyJournalposttype?: string;
     legacyFoelgsakenReferanse?: string[];
-    @visibility("read") administrativEnhet: string;
-    @visibility("read") administrativEnhetObjekt: ExpandableField<Enhet.Enhet>;
-    @visibility("read") saksmappe: ExpandableField<Saksmappe.Saksmappe>;
+    administrativEnhet?: string;
+    administrativEnhetObjekt?: ExpandableField<Enhet.Enhet>;
+    @visibility(Lifecycle.Read) saksmappe: ExpandableField<Saksmappe.Saksmappe>;
   }
 }
 
@@ -273,7 +268,7 @@ namespace Klasse {
    */
   @extension("x-idPrefix", "kla")
   model Klasse extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Klasse";
+    @visibility(Lifecycle.Read) entity: "Klasse";
 
     /**
      * The title of the class.
@@ -303,13 +298,13 @@ namespace Klassifikasjonssystem {
    */
   @extension("x-idPrefix", "ksys")
   model Klassifikasjonssystem extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Klassifikasjonssystem";
+    @visibility(Lifecycle.Read) entity: "Klassifikasjonssystem";
     tittel: string;
 
     /**
      * The parent arkivdel.
      */
-    @visibility("read") arkivdel: ExpandableField<Arkivdel.Arkivdel>;
+    @visibility(Lifecycle.Read) arkivdel: ExpandableField<Arkivdel.Arkivdel>;
   }
 }
 
@@ -319,7 +314,7 @@ namespace Korrespondansepart {
    */
   @extension("x-idPrefix", "kp")
   model Korrespondansepart extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Korrespondansepart";
+    @visibility(Lifecycle.Read) entity: "Korrespondansepart";
 
     /**
      * The name of the Korrespondansepart, with sensitive parts redacted.
@@ -345,18 +340,19 @@ namespace Korrespondansepart {
     /**
      * The Journalpost this Korrespondansepart is associated with, if any.
      */
-    @visibility("read") journalpost?: ExpandableField<Journalpost.Journalpost>;
+    @visibility(Lifecycle.Read)
+    journalpost?: ExpandableField<Journalpost.Journalpost>;
 
     /**
      * The Moetedokument this Korrespondansepart is associated with, if any.
      */
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     moetedokument?: ExpandableField<Moetedokument.Moetedokument>;
 
     /**
      * The Moetesak this Korrespondansepart is associated with, if any.
      */
-    @visibility("read") moetesak?: ExpandableField<Moetesak.Moetesak>;
+    @visibility(Lifecycle.Read) moetesak?: ExpandableField<Moetesak.Moetesak>;
   }
 }
 
@@ -396,17 +392,19 @@ namespace Mappe {
     /**
      * If this Mappe is the child of a Saksmappe, this field will contain the parent Saksmappe.
      */
-    @visibility("read") saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
+    @visibility(Lifecycle.Read)
+    saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
 
     /**
      * If this Mappe is the child of a Moetemappe, this field will contain the parent Moetemappe.
      */
-    @visibility("read") moetemappe?: ExpandableField<Moetemappe.Moetemappe>;
+    @visibility(Lifecycle.Read)
+    moetemappe?: ExpandableField<Moetemappe.Moetemappe>;
 
     /**
      * If this Mappe is not a child of a Saksmappe or Moetemappe, this field will contain the parent Arkivdel.
      */
-    @visibility("read") arkivdel?: ExpandableField<Arkivdel.Arkivdel>;
+    @visibility(Lifecycle.Read) arkivdel?: ExpandableField<Arkivdel.Arkivdel>;
   }
 }
 
@@ -416,7 +414,7 @@ namespace Moetedeltaker {
    */
   @extension("x-idPrefix", "md")
   model Moetedeltaker extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Moetedeltaker";
+    @visibility(Lifecycle.Read) entity: "Moetedeltaker";
     moetedeltakerNavn: string;
     moetedeltakerFunksjon?: string;
   }
@@ -428,7 +426,7 @@ namespace Moetedokument {
    */
   @extension("x-idPrefix", "mdok")
   model Moetedokument extends Registrering.Registrering {
-    @visibility("read") entity: "Moetedokument";
+    @visibility(Lifecycle.Read) entity: "Moetedokument";
     moetedokumenttype: string;
     saksbehandler?: string;
     saksbehandlerSensitiv?: string;
@@ -442,10 +440,10 @@ namespace Moetemappe {
    */
   @extension("x-idPrefix", "mm")
   model Moetemappe extends Mappe.Mappe {
-    @visibility("read") entity: "Moetemappe";
+    @visibility(Lifecycle.Read) entity: "Moetemappe";
     moetenummer: string;
     utvalg: string;
-    @visibility("read") utvalgObjekt: ExpandableField<Enhet.Enhet>;
+    @visibility(Lifecycle.Read) utvalgObjekt: ExpandableField<Enhet.Enhet>;
     moetedato: utcDateTime;
     moetested?: string;
     @maxLength(5000) videoLink?: string;
@@ -462,7 +460,7 @@ namespace Moetesak {
    */
   @extension("x-idPrefix", "ms")
   model Moetesak extends Registrering.Registrering {
-    @visibility("read") entity: "Moetesak";
+    @visibility(Lifecycle.Read) entity: "Moetesak";
     moetesakstype:
       | "moete"
       | "politisk"
@@ -472,10 +470,10 @@ namespace Moetesak {
       | "orientering"
       | "referat"
       | "annet";
-    @minValue(1900) moetesaksaar: integer;
-    @minValue(0) moetesakssekvensnummer: integer;
+    @minValue(1700) moetesaksaar?: integer;
+    @minValue(0) moetesakssekvensnummer?: integer;
     utvalg?: string;
-    @visibility("read") utvalgObjekt: ExpandableField<Enhet.Enhet>;
+    @visibility(Lifecycle.Read) utvalgObjekt: ExpandableField<Enhet.Enhet>;
     videoLink?: string;
     utredning?: ExpandableField<Utredning.Utredning>;
     innstilling?: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
@@ -492,7 +490,7 @@ namespace Moetesaksbeskrivelse {
    */
   @extension("x-idPrefix", "msb")
   model Moetesaksbeskrivelse extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Moetesaksbeskrivelse";
+    @visibility(Lifecycle.Read) entity: "Moetesaksbeskrivelse";
     tekstInnhold: string;
     tekstFormat: string;
   }
@@ -527,6 +525,11 @@ namespace Registrering {
 
     korrespondansepart?: ExpandableField<Korrespondansepart.Korrespondansepart>[];
     dokumentbeskrivelse?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
+
+    /**
+     * The administrative unit that has been handed the responsibility for this resource.
+     */
+    avhendetTil?: ExpandableField<Enhet.Enhet>;
   }
 }
 
@@ -536,8 +539,8 @@ namespace Saksmappe {
    */
   @extension("x-idPrefix", "sm")
   model Saksmappe extends Mappe.Mappe {
-    @visibility("read") entity: "Saksmappe";
-    @minValue(1900) saksaar: integer;
+    @visibility(Lifecycle.Read) entity: "Saksmappe";
+    @minValue(1700) saksaar: integer;
     @minValue(0) sakssekvensnummer: integer;
     saksnummer?: string;
     saksdato?: plainDate;
@@ -549,10 +552,10 @@ namespace Saksmappe {
     administrativEnhet?: string;
 
     /**
-     * The adminsistrative Enhet associated with this Saksmappe. This is derived from the code given in `administrativEnhet`.
+     * The administrative Enhet associated with this Saksmappe. This is derived from the code given in `administrativEnhet`.
      * If no `administrativEnhet` is given, or the code is not found, the `journalenhet` of the authenticated user will be used.
      */
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     administrativEnhetObjekt: ExpandableField<Enhet.Enhet>;
   }
 }
@@ -563,7 +566,7 @@ namespace Skjerming {
    */
   @extension("x-idPrefix", "skj")
   model Skjerming extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Skjerming";
+    @visibility(Lifecycle.Read) entity: "Skjerming";
     tilgangsrestriksjon: string;
     skjermingshjemmel?: string;
   }
@@ -575,7 +578,7 @@ namespace Utredning {
    */
   @extension("x-idPrefix", "utr")
   model Utredning extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Utredning";
+    @visibility(Lifecycle.Read) entity: "Utredning";
     saksbeskrivelse: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
     innstilling: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
     utredningsdokument?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
@@ -588,7 +591,7 @@ namespace Vedtak {
    */
   @extension("x-idPrefix", "ved")
   model Vedtak extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Vedtak";
+    @visibility(Lifecycle.Read) entity: "Vedtak";
     vedtakstekst: ExpandableField<Moetesaksbeskrivelse.Moetesaksbeskrivelse>;
     votering?: ExpandableField<Votering.Votering>[];
     behandlingsprotokoll?: ExpandableField<Behandlingsprotokoll.Behandlingsprotokoll>;
@@ -603,7 +606,7 @@ namespace Votering {
    */
   @extension("x-idPrefix", "vot")
   model Votering extends ArkivBase.ArkivBase {
-    @visibility("read") entity: "Votering";
+    @visibility(Lifecycle.Read) entity: "Votering";
     moetedeltaker: ExpandableField<Moetedeltaker.Moetedeltaker>;
     stemme: "Ja" | "Nei" | "Blankt";
     representerer?: ExpandableField<Identifikator.Identifikator>;

@@ -1,7 +1,7 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/openapi3";
 import "./einnsyn.arkiv.models.tsp";
+import "./einnsyn.web.operations.tsp";
 
 using TypeSpec.OpenAPI;
 
@@ -13,9 +13,9 @@ namespace Bruker {
    */
   @extension("x-idPrefix", "bru")
   model Bruker extends Base.Base {
-    @visibility("read") entity: "Bruker";
+    @visibility(Lifecycle.Read) entity: "Bruker";
     @format("email") email: string;
-    @visibility("read") active: boolean;
+    @visibility(Lifecycle.Read) active: boolean;
     @format("password") password: string;
     language?: "nb" | "nn" | "en" | "se" = "nb";
   }
@@ -27,11 +27,11 @@ namespace Innsynskrav {
    */
   @extension("x-idPrefix", "ikd")
   model Innsynskrav extends Base.Base {
-    @visibility("read") entity: "Innsynskrav";
+    @visibility(Lifecycle.Read) entity: "Innsynskrav";
     innsynskravBestilling?: ExpandableField<InnsynskravBestilling.InnsynskravBestilling>;
     journalpost: ExpandableField<Journalpost.Journalpost>;
     enhet?: ExpandableField<Enhet.Enhet>;
-    @visibility("read") @format("email") email?: string;
+    @visibility(Lifecycle.Read) @format("email") email?: string;
     sent?: utcDateTime;
   }
 }
@@ -42,11 +42,11 @@ namespace InnsynskravBestilling {
    */
   @extension("x-idPrefix", "ik")
   model InnsynskravBestilling extends Base.Base {
-    @visibility("read") entity: "Innsynskrav";
+    @visibility(Lifecycle.Read) entity: "InnsynskravBestilling";
     @format("email") email: string;
     innsynskrav: ExpandableField<Innsynskrav.Innsynskrav>[];
-    verified?: boolean;
-    bruker?: ExpandableField<Bruker.Bruker>;
+    @visibility(Lifecycle.Read) verified?: boolean;
+    @visibility(Lifecycle.Read) bruker?: ExpandableField<Bruker.Bruker>;
     language?: "nb" | "nn" | "en" | "se" = "nb";
   }
 }
@@ -57,12 +57,12 @@ namespace LagretSak {
    */
   @extension("x-idPrefix", "lsak")
   model LagretSak extends Base.Base {
-    @visibility("read") entity: "LagretSak";
+    @visibility(Lifecycle.Read) entity: "LagretSak";
 
     /**
      * The bruker that has saved this sak. This will be set to the authenticated user.
      */
-    @visibility("read") bruker: ExpandableField<Bruker.Bruker>;
+    @visibility(Lifecycle.Read) bruker: ExpandableField<Bruker.Bruker>;
 
     /**
      * The saksmappe that has been saved.
@@ -87,11 +87,12 @@ namespace LagretSoek {
    */
   @extension("x-idPrefix", "lsoek")
   model LagretSoek extends Base.Base {
-    @visibility("read") entity: "LagretSoek";
+    @visibility(Lifecycle.Read) entity: "LagretSoek";
     bruker?: ExpandableField<Bruker.Bruker>;
-    label?: string;
-    legacyQuery?: string;
+    label: string;
     subscribe?: boolean;
+    searchParameters?: Search.SearchParameters;
+    legacyQuery?: string;
   }
 }
 
@@ -101,7 +102,7 @@ namespace Tilbakemelding {
    */
   @extension("x-idPrefix", "tbm")
   model Tilbakemelding extends Base.Base {
-    @visibility("read") entity: "Tilbakemelding";
+    @visibility(Lifecycle.Read) entity: "Tilbakemelding";
     messageFromUser?: string;
     path?: string;
     referer?: string;
