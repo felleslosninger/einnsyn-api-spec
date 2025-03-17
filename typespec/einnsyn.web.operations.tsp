@@ -77,8 +77,8 @@ namespace Bruker {
     updatePassword(
       @path id: eInnsynId<Bruker>,
       @body updatePassword: {
-        oldPassword: string;
-        newPassword: string;
+        @format("password") oldPassword: string;
+        @format("password") newPassword: string;
       },
     ): Responses.OkResponse<Bruker>;
 
@@ -88,7 +88,7 @@ namespace Bruker {
       @path id: eInnsynId<Bruker>,
       @path secret: string,
       @body updatePasswordWithSecret: {
-        newPassword: string;
+        @format("password") newPassword: string;
       },
     ): Responses.OkResponse<Bruker>;
 
