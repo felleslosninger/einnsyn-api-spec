@@ -542,7 +542,7 @@ namespace Saksmappe {
     @visibility(Lifecycle.Read) entity: "Saksmappe";
     @minValue(1700) saksaar: integer;
     @minValue(0) sakssekvensnummer: integer;
-    saksnummer?: string;
+    @visibility(Lifecycle.Read) saksnummer: string;
     saksdato?: plainDate;
     journalpost?: ExpandableField<Journalpost.Journalpost>[];
 
