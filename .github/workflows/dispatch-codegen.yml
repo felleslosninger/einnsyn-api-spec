@@ -11,6 +11,7 @@ jobs:
 
     env:
       commit_message: ""
+      pr_body: ""
 
     steps:
       - name: Fetch app installation token
@@ -25,8 +26,10 @@ jobs:
           if [ "${{ github.event_name }}" == "push" ] && [[ "${{ github.event.head_commit.message }}" == *"Merge pull request"* ]]; then
             PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=#)\d+')
             PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=: ).*')
-            echo "commit_message=Triggered from ${{ github.repository }} [#${PR_NUMBER}](https://github.com/${{ github.repository }}/pull/${PR_NUMBER}) ${PR_TITLE}" >> $GITHUB_ENV
+            echo "pr_body=Triggered from ${{ github.repository }} [#${PR_NUMBER}](https://github.com/${{ github.repository }}/pull/${PR_NUMBER}) ${PR_TITLE}" >> $GITHUB_ENV
+            echo "commit_message=Triggered from ${{ github.repository }}#${PR_NUMBER}"
           else
+            echo "pr_body=Triggered from ${{ github.repository }}" >> $GITHUB_ENV
             echo "commit_message=Triggered from ${{ github.repository }}" >> $GITHUB_ENV
           fi
 
@@ -38,5 +41,6 @@ jobs:
           event-type: codegen
           client-payload: |
             {
-              "commit_message": "${{ env.commit_message }}"
+              "commit_message": "${{ env.commit_message }}",
+              "pr_body": "${{ env.pr_body }}"
             }
