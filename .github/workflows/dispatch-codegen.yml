@@ -14,20 +14,24 @@ jobs:
       pr_body: ""
 
     steps:
-      - name: Fetch app installation token
-        uses: tibdex/github-app-token@v2.1.0
-        id: gh-api-token
+      - name: Get token
+        uses: actions/create-github-app-token@v1
+        id: app-token
         with:
-          app_id: ${{ secrets.EIN_CODEGEN_APP_ID }}
-          private_key: ${{ secrets.EIN_CODEGEN_APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.EIN_CODEGEN_APP_ID }}
+          private-key: ${{ secrets.EIN_CODEGEN_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          skip-token-revoke: true
+          repositories: |
+            einnsyn-codegen
 
       - name: Set commit message if triggered by a PR
         run: |
           if [ "${{ github.event_name }}" == "push" ] && [[ "${{ github.event.head_commit.message }}" == *"Merge pull request"* ]]; then
-            PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=#)\d+')
-            PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=: ).*')
+            PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=#)\d+' | head -1)
+            PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | grep -v "^Merge pull request" | grep -v "^$" | head -1)
             echo "pr_body=Triggered from ${{ github.repository }} [#${PR_NUMBER}](https://github.com/${{ github.repository }}/pull/${PR_NUMBER}) ${PR_TITLE}" >> $GITHUB_ENV
-            echo "commit_message=Triggered from ${{ github.repository }}#${PR_NUMBER}"
+            echo "commit_message=Triggered from ${{ github.repository }}#${PR_NUMBER}" >> $GITHUB_ENV
           else
             echo "pr_body=Triggered from ${{ github.repository }}" >> $GITHUB_ENV
             echo "commit_message=Triggered from ${{ github.repository }}" >> $GITHUB_ENV
@@ -36,7 +40,7 @@ jobs:
       - name: Dispatch workflow
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ steps.gh-api-token.outputs.token }}
+          token: ${{ steps.app-token.outputs.token }}
           repository: felleslosninger/einnsyn-codegen
           event-type: codegen
           client-payload: |
