@@ -375,6 +375,15 @@ namespace Moetedokument {
       @body
       dokumentbeskrivelse: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>,
     ): Responses.AddResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
+
+    @route("/{id}/dokumentbeskrivelse/{dokumentbeskrivelseId}")
+    @delete
+    deleteDokumentbeskrivelse(
+      @path id: eInnsynId<Moetedokument>,
+
+      @path
+      dokumentbeskrivelseId: eInnsynId<Dokumentbeskrivelse.Dokumentbeskrivelse>,
+    ): Responses.OkResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
   }
 }
 
@@ -443,6 +452,15 @@ namespace Moetesak {
       @body
       dokumentbeskrivelse: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>,
     ): Responses.AddResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
+
+    @route("/{id}/dokumentbeskrivelse/{dokumentbeskrivelseId}")
+    @delete
+    deleteDokumentbeskrivelse(
+      @path id: eInnsynId<Moetesak>,
+
+      @path
+      dokumentbeskrivelseId: eInnsynId<Dokumentbeskrivelse.Dokumentbeskrivelse>,
+    ): Responses.OkResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
 
     @route("/{id}/utredning")
     @get
