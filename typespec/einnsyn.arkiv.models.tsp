@@ -544,6 +544,11 @@ namespace Saksmappe {
     @minValue(0) sakssekvensnummer: integer;
     @visibility(Lifecycle.Read) saksnummer: string;
     saksdato?: plainDate;
+
+    /**
+     * A list of journalposts associated with this Saksmappe. This is write-only, reads should use the separate `journalpost` endpoint.
+     */
+    @visibility(Lifecycle.Create, Lifecycle.Update)
     journalpost?: ExpandableField<Journalpost.Journalpost>[];
 
     /**
