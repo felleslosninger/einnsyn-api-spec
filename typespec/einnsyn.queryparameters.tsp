@@ -135,5 +135,10 @@ namespace QueryParameters {
      * The Journalenhet to filter the result set by.
      */
     @query journalenhet?: eInnsynId;
+
+    /**
+     * Match documents with (or without) fulltext.
+     */
+    @query fulltext?: boolean;
   }
 }
