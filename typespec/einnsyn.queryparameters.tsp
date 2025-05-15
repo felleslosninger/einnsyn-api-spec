@@ -137,7 +137,7 @@ namespace QueryParameters {
     @query journalpostnummer?: string[];
 
     /**
-     * Filter by journalpostsekvensnummer
+     * Filter by journalsekvensnummer
      */
     @query journalsekvensnummer?: string[];
 
