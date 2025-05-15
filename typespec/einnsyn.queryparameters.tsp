@@ -117,6 +117,41 @@ namespace QueryParameters {
     @query moetedatoAfter?: utcDateTime;
 
     /**
+     * Filter by saksaar
+     */
+    @query saksaar?: string[];
+
+    /**
+     * Filter by sakssekvensnummer
+     */
+    @query sakssekvensnummer?: string[];
+
+    /**
+     * Filter by saksnummer
+     */
+    @query saksnummer?: string[];
+
+    /**
+     * Filter by journalpostnummer
+     */
+    @query journalpostnummer?: string[];
+
+    /**
+     * Filter by journalpostsekvensnummer
+     */
+    @query journalsekvensnummer?: string[];
+
+    /**
+     * Filter by moetesaksaar
+     */
+    @query moetesaksaar?: string[];
+
+    /**
+     * Filter by moetesakssekvensnummer
+     */
+    @query moetesakssekvensnummer?: string[];
+
+    /**
      * Filter by the entity type.
      */
     @query entity?: ("Journalpost" | "Moetemappe" | "Moetesak" | "Saksmappe")[];
