@@ -7,6 +7,41 @@ using TypeSpec.OpenAPI;
 
 namespace EInnsyn;
 
+namespace ApiKey {
+  /**
+   * An API key used to authenticate requests to the eInnsyn API.
+   */
+  @extension("x-idPrefix", "key")
+  model ApiKey extends Base.Base {
+    @visibility(Lifecycle.Read) entity: "ApiKey";
+
+    /**
+     * A name for the API key. This can be used to identify the key, in case you have multiple keys for multiple systems.
+     */
+    name?: string;
+
+    /**
+     * The API key used to authenticate requests. This will only be shown once, and we will only store a hashed version.
+     */
+    @visibility(Lifecycle.Read) secretKey: string;
+
+    /**
+     * An Enhet that requests using this key will be associated with.
+     */
+    enhet?: ExpandableField<Enhet.Enhet>;
+
+    /**
+     * A Bruker that requests using this key will be associated with.
+     */
+    bruker?: ExpandableField<Bruker.Bruker>;
+
+    /**
+     * Specifies the expiration date of the API key. If this is set, the key will not be usable after this date.
+     */
+    expiresAt?: utcDateTime;
+  }
+}
+
 namespace Bruker {
   /**
    * eInnsyn bruker

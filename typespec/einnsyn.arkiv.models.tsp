@@ -41,31 +41,6 @@ namespace Base {
   }
 }
 
-namespace ApiKey {
-  /**
-   * An API key used to authenticate requests to the eInnsyn API.
-   */
-  @extension("x-idPrefix", "key")
-  model ApiKey extends Base.Base {
-    @visibility(Lifecycle.Read) entity: "ApiKey";
-
-    /**
-     * A name for the API key. This can be used to identify the key, in case you have multiple keys for multiple systems.
-     */
-    name?: string;
-
-    /**
-     * The API key used to authenticate requests. This will only be shown once, and we will only store a hashed version.
-     */
-    @visibility(Lifecycle.Read) secretKey: string;
-
-    /**
-     * The Enhet that requests using this key will be associated with.
-     */
-    enhet?: ExpandableField<Enhet.Enhet>;
-  }
-}
-
 namespace ArkivBase {
   /**
    * Properties shared by all Noark objects
