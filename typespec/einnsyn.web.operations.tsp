@@ -252,16 +252,15 @@ namespace Statistics {
 namespace AuthInfo {
   model AuthInfoResponse {
     @statusCode _: 200;
-    @body body: AuthInfo;
-  }
-
-  model AuthInfo {
-    @visibility(Lifecycle.Read) entity: "AuthInfo";
-    @visibility(Lifecycle.Read) authType: "Ansattporten" | "ApiKey" | "Bruker";
-    @visibility(Lifecycle.Read) type: "Bruker" | "Enhet";
-    @visibility(Lifecycle.Read) id: eInnsynId<Bruker | Enhet>;
-    @visibility(Lifecycle.Read) orgnummer?: string;
-    @visibility(Lifecycle.Read) email?: string;
+    @body body: {
+      @visibility(Lifecycle.Read) entity: "AuthInfo";
+      @visibility(Lifecycle.Read)
+      authType: "Ansattporten" | "ApiKey" | "Bruker";
+      @visibility(Lifecycle.Read) type: "Bruker" | "Enhet";
+      @visibility(Lifecycle.Read) id: eInnsynId<Bruker | Enhet>;
+      @visibility(Lifecycle.Read) orgnummer?: string;
+      @visibility(Lifecycle.Read) email?: string;
+    };
   }
 
   @route("/me")
