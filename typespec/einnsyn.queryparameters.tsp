@@ -89,32 +89,32 @@ namespace QueryParameters {
     /**
      * Filter by the published date of the document.
      */
-    @query publisertDatoBefore?: utcDateTime;
+    @query publisertDatoFrom?: utcDateTime | plainDate;
 
     /**
      * Filter by the published date of the document.
      */
-    @query publisertDatoAfter?: utcDateTime;
+    @query publisertDatoTo?: utcDateTime | plainDate;
 
     /**
      * Filter by the updated date of the document.
      */
-    @query oppdatertDatoBefore?: utcDateTime;
+    @query oppdatertDatoFrom?: utcDateTime | plainDate;
 
     /**
      * Filter by the updated date of the document.
      */
-    @query oppdatertDatoAfter?: utcDateTime;
+    @query oppdatertDatoTo?: utcDateTime | plainDate;
 
     /**
      * Filter by the date of a meeting.
      */
-    @query moetedatoBefore?: utcDateTime;
+    @query moetedatoFrom?: utcDateTime | plainDate;
 
     /**
      * Filter by the date of a meeting.
      */
-    @query moetedatoAfter?: utcDateTime;
+    @query moetedatoTo?: utcDateTime | plainDate;
 
     /**
      * Filter by saksaar
@@ -150,6 +150,21 @@ namespace QueryParameters {
      * Filter by moetesakssekvensnummer
      */
     @query moetesakssekvensnummer?: string[];
+
+    /**
+     * Filter by journalposttype
+     */
+    @query
+    journalposttype?: (
+      | "inngaaende_dokument"
+      | "utgaaende_dokument"
+      | "organinternt_dokument_uten_oppfoelging"
+      | "organinternt_dokument_for_oppfoelging"
+      | "saksframlegg"
+      | "sakskart"
+      | "moeteprotokoll"
+      | "moetebok"
+      | "ukjent")[];
 
     /**
      * Filter by the entity type.
