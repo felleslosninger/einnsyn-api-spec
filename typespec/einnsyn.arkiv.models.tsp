@@ -233,7 +233,7 @@ namespace Journalpost {
     legacyFoelgsakenReferanse?: string[];
     administrativEnhet?: string;
     administrativEnhetObjekt?: ExpandableField<Enhet.Enhet>;
-    @visibility(Lifecycle.Read) saksmappe: ExpandableField<Saksmappe.Saksmappe>;
+    @visibility(Lifecycle.Read, Lifecycle.Update) saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
   }
 }
 
