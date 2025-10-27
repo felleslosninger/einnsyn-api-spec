@@ -346,7 +346,8 @@ namespace Mappe {
      */
     offentligTittelSensitiv: string;
 
-    beskrivelse?: string;
+    @maxLength(1000) beskrivelse?: string;
+
     noekkelord?: string;
 
     /**
@@ -486,7 +487,7 @@ namespace Registrering {
      */
     offentligTittelSensitiv: string;
 
-    beskrivelse?: string;
+    @maxLength(1000) beskrivelse?: string;
 
     /**
      * The date the resource was published. This field is updated automatically, but can be set manually by admins.
