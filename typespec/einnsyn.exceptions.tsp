@@ -54,6 +54,11 @@ namespace Exceptions {
   }
 
   @error
+  model TooManyUnverifiedOrdersException extends EInnsynException {
+    type: "tooManyUnverifiedOrders";
+  }
+
+  @error
   model ValidationException extends EInnsynException {
     type: "validationError";
     fieldError: {
