@@ -161,7 +161,7 @@ namespace Enhet {
     /**
      * A URL-friendly unique slug for the resource.
      */
-    @pattern("^[a-z0-9\\-]+$") slug: string;
+    @pattern("^[a-z0-9\\-]+$") slug?: string;
 
     navn: string;
     navnNynorsk?: string;
@@ -347,7 +347,7 @@ namespace Mappe {
     /**
      * A URL-friendly unique slug for the resource.
      */
-    @pattern("^[a-z0-9\\-]+$") slug: string;
+    @pattern("^[a-z0-9\\-]+$") slug?: string;
 
     /**
      * The title of the Mappe, with sensitive information redacted.
@@ -492,7 +492,7 @@ namespace Registrering {
     /**
      * A URL-friendly unique slug for the resource.
      */
-    @pattern("^[a-z0-9\\-]+$") slug: string;
+    @pattern("^[a-z0-9\\-]+$") slug?: string;
 
     /**
      * The title of the resource, with sensitive information redacted.
