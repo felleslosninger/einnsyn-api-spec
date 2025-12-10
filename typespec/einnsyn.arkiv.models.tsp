@@ -182,6 +182,11 @@ namespace Enhet {
   model Enhet extends Base.Base {
     @visibility(Lifecycle.Read) entity: "Enhet";
 
+    /**
+     * A URL-friendly unique slug for the resource.
+     */
+    @pattern("^[a-z0-9\\-]+$") slug?: string;
+
     /** The official name of the unit in Norwegian bokmål. */
     navn: string;
 
@@ -332,7 +337,7 @@ namespace Journalpost {
     /** The full administrative unit object responsible for the registry entry (expandable reference). */
     administrativEnhetObjekt?: ExpandableField<Enhet.Enhet>;
 
-    /** The case this registry entry belongs to. */
+    /** The case this record belongs to. */
     @visibility(Lifecycle.Read, Lifecycle.Update)
     saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
   }
@@ -448,6 +453,11 @@ namespace Mappe {
    * An abstract base model for case files (Saksmappe) and meeting records (Moetemappe). It contains common properties for these folder-like structures.
    */
   model Mappe extends ArkivBase.ArkivBase {
+    /**
+     * A URL-friendly unique slug for the resource.
+     */
+    @pattern("^[a-z0-9\\-]+$") slug?: string;
+
     /**
      * The title of the Mappe, with sensitive information redacted.
      */
@@ -648,6 +658,11 @@ namespace Registrering {
    * An abstract base model for registry entries, such as journal entries (Journalpost) and meeting-related entries (Moetesak, Moetedokument).
    */
   model Registrering extends ArkivBase.ArkivBase {
+    /**
+     * A URL-friendly unique slug for the resource.
+     */
+    @pattern("^[a-z0-9\\-]+$") slug?: string;
+
     /**
      * The title of the resource, with sensitive information redacted.
      */
