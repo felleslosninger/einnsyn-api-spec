@@ -326,10 +326,10 @@ namespace Journalpost {
     /** Legacy field for references to related cases. */
     legacyFoelgsakenReferanse?: string[];
 
-    /** The administrative unit responsible for the registry entry. */
+    /** The identifier of the administrative unit responsible for the registry entry. */
     administrativEnhet?: string;
 
-    /** The administrative unit responsible for the registry entry. */
+    /** The full administrative unit object responsible for the registry entry (expandable reference). */
     administrativEnhetObjekt?: ExpandableField<Enhet.Enhet>;
 
     /** The case this registry entry belongs to. */
