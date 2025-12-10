@@ -157,6 +157,12 @@ namespace Enhet {
   @extension("x-idPrefix", "enh")
   model Enhet extends Base.Base {
     @visibility(Lifecycle.Read) entity: "Enhet";
+
+    /**
+     * A URL-friendly unique slug for the resource.
+     */
+    @pattern("^[a-z0-9\\-]+$") slug?: string;
+
     navn: string;
     navnNynorsk?: string;
     navnEngelsk?: string;
@@ -233,7 +239,9 @@ namespace Journalpost {
     legacyFoelgsakenReferanse?: string[];
     administrativEnhet?: string;
     administrativEnhetObjekt?: ExpandableField<Enhet.Enhet>;
-    @visibility(Lifecycle.Read, Lifecycle.Update) saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
+
+    @visibility(Lifecycle.Read, Lifecycle.Update)
+    saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
   }
 }
 
@@ -337,6 +345,11 @@ namespace Mappe {
    */
   model Mappe extends ArkivBase.ArkivBase {
     /**
+     * A URL-friendly unique slug for the resource.
+     */
+    @pattern("^[a-z0-9\\-]+$") slug?: string;
+
+    /**
      * The title of the Mappe, with sensitive information redacted.
      */
     offentligTittel: string;
@@ -347,7 +360,6 @@ namespace Mappe {
     offentligTittelSensitiv: string;
 
     @maxLength(1000) beskrivelse?: string;
-
     noekkelord?: string;
 
     /**
@@ -477,6 +489,11 @@ namespace Registrering {
    * Registrering
    */
   model Registrering extends ArkivBase.ArkivBase {
+    /**
+     * A URL-friendly unique slug for the resource.
+     */
+    @pattern("^[a-z0-9\\-]+$") slug?: string;
+
     /**
      * The title of the resource, with sensitive information redacted.
      */
