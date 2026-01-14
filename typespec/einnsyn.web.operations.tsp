@@ -217,7 +217,7 @@ namespace Statistics {
    */
   model StatisticsParameters extends QueryParameters.FilterParameters {
     /**
-     * The start date for aggregating statistics. If not provided, statistics from all available data will be included.
+     * The start date for aggregating statistics. If not provided, it will be set to one year before `aggregateTo`.
      */
     @query aggregateFrom?: plainDate;
 
