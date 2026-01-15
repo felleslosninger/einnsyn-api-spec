@@ -65,14 +65,14 @@ namespace Bruker {
     ): Responses.AddResponse<LagretSoek.LagretSoek>;
 
     @route("/{id}/activate/{secret}")
-    @patch
+    @patch(#{ implicitOptionality: true })
     activate(
       @path id: eInnsynId<Bruker>,
       @path secret: string,
     ): Responses.OkResponse<Bruker>;
 
     @route("/{id}/updatePassword")
-    @patch
+    @patch(#{ implicitOptionality: true })
     updatePassword(
       @path id: eInnsynId<Bruker>,
       @body updatePassword: {
@@ -82,7 +82,7 @@ namespace Bruker {
     ): Responses.OkResponse<Bruker>;
 
     @route("/{id}/updatePassword/{secret}")
-    @patch
+    @patch(#{ implicitOptionality: true })
     updatePasswordWithSecret(
       @path id: eInnsynId<Bruker>,
       @path secret: string,
@@ -92,7 +92,7 @@ namespace Bruker {
     ): Responses.OkResponse<Bruker>;
 
     @route("/{id}/requestPasswordReset")
-    @patch
+    @patch(#{ implicitOptionality: true })
     requestPasswordReset(
       @path id: eInnsynId<Bruker>,
     ): Responses.OkResponse<Bruker>;
@@ -127,7 +127,7 @@ namespace InnsynskravBestilling {
     ): Responses.ListResponse<Innsynskrav.Innsynskrav>;
 
     @route("/{id}/verify/{secret}")
-    @patch
+    @patch(#{ implicitOptionality: true })
     verify(
       @path id: eInnsynId,
       @path secret: string,
@@ -190,14 +190,21 @@ namespace Search {
      * The field to sort results by. The default is "score".
      */
     @query sortBy?:
-      | "score"
-      | "id"
+      | "administrativEnhetNavn"
+      | "dokumentetsDato"
       | "entity"
-      | "publisertDato"
-      | "oppdatertDato"
-      | "moetedato"
       | "fulltekst"
-      | "type" = "score";
+      | "id"
+      | "journaldato"
+      | "journalpostnummer"
+      | "journalposttype"
+      | "korrespondansepartNavn"
+      | "moetedato"
+      | "oppdatertDato"
+      | "publisertDato"
+      | "sakssekvensnummer"
+      | "score"
+      | "tittel" = "score";
   }
   @route("/search")
   @tag("Search")
