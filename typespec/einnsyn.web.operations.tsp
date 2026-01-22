@@ -215,41 +215,130 @@ namespace Search {
   }
 }
 
+/**
+ * Statistics namespace for querying usage and activity metrics
+ */
 namespace Statistics {
   /**
-   * Statistics parameters
+   * Parameters for querying statistics data
    */
   model StatisticsParameters extends QueryParameters.FilterParameters {
+    /**
+     * The start date for aggregating statistics. If not provided, it will be set to one year before `aggregateTo`.
+     */
     @query aggregateFrom?: plainDate;
+
+    /**
+     * The end date for aggregating statistics. If not provided, statistics up to the current date will be included.
+     */
     @query aggregateTo?: plainDate;
+
+    /**
+     * The preferred time interval for aggregating statistics data. Determines how data points are grouped in the time series.
+     * Note: There is a maximum limit of 1000 data points in the time series. If the requested interval combined with the
+     * date range would exceed this limit, the interval will be automatically adjusted to a larger granularity to stay
+     * within the limit. Default is "hour".
+     */
+    @query aggregateInterval?:
+      | "hour"
+      | "day"
+      | "week"
+      | "month"
+      | "year" = "hour";
   }
+  /**
+   * Response containing statistics data with summary and optional time series
+   */
   model StatisticsResponse {
     @statusCode _: 200;
 
     @body
     body: {
-      @visibility(Lifecycle.Read) innsynskrav?: {
-        @visibility(Lifecycle.Read) count: integer;
-        @visibility(Lifecycle.Read) interval: integer;
-        @visibility(Lifecycle.Read) bucket: {
-          @visibility(Lifecycle.Read) time: utcDateTime;
-          @visibility(Lifecycle.Read) count: integer;
-        }[];
+      /**
+       * Aggregated summary of statistics over the entire queried period
+       */
+      @visibility(Lifecycle.Read) summary: {
+        /**
+         * Total number of entities created in the period
+         */
+        @visibility(Lifecycle.Read) createdCount: integer;
+
+        /**
+         * Total number of entities created with fulltext content in the period
+         */
+        @visibility(Lifecycle.Read) createdWithFulltextCount: integer;
+
+        /**
+         * Total number of innsynskrav (access requests) created in the period
+         */
+        @visibility(Lifecycle.Read) createdInnsynskravCount: integer;
+
+        /**
+         * Total number of document downloads in the period
+         */
+        @visibility(Lifecycle.Read) downloadCount: integer;
       };
-      @visibility(Lifecycle.Read) download?: {
-        @visibility(Lifecycle.Read) count: integer;
-        @visibility(Lifecycle.Read) interval: integer;
-        @visibility(Lifecycle.Read) bucket: {
-          @visibility(Lifecycle.Read) time: utcDateTime;
-          @visibility(Lifecycle.Read) count: integer;
-        }[];
+
+      @visibility(Lifecycle.Read) metadata: {
+        /**
+         * The aggregation interval used for the time series data
+         */
+        @visibility(Lifecycle.Read) aggregateInterval: string;
+
+        /**
+         * The start date for the aggregated statistics
+         */
+        @visibility(Lifecycle.Read) aggregateFrom?: plainDate;
+
+        /**
+         * The end date for the aggregated statistics
+         */
+        @visibility(Lifecycle.Read) aggregateTo?: plainDate;
       };
+
+      /**
+       * Time series data showing statistics broken down by the specified aggregation interval.
+       * Each entry represents metrics for a specific time period.
+       */
+      @visibility(Lifecycle.Read) timeSeries?: {
+        /**
+         * The timestamp for this time series data point
+         */
+        @visibility(Lifecycle.Read) time: utcDateTime;
+
+        /**
+         * Number of entities created during this time interval
+         */
+        @visibility(Lifecycle.Read) createdCount: integer;
+
+        /**
+         * Number of entities created with fulltext content during this time interval
+         */
+        @visibility(Lifecycle.Read) createdWithFulltextCount: integer;
+
+        /**
+         * Number of innsynskrav (access requests) created during this time interval
+         */
+        @visibility(Lifecycle.Read) createdInnsynskravCount: integer;
+
+        /**
+         * Number of document downloads during this time interval
+         */
+        @visibility(Lifecycle.Read) downloadCount: integer;
+      }[];
     };
   }
 
+  /**
+   * Statistics API endpoints for querying usage and activity metrics
+   */
   @route("/statistics")
   @tag("Statistics")
   interface Statistics {
+    /**
+     * Query statistics data with optional filtering and aggregation parameters.
+     * Returns both a summary of total statistics and optional time series data.
+     */
     @route("")
     @get
     query(...StatisticsParameters): StatisticsResponse;
