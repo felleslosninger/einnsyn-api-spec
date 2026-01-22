@@ -39,7 +39,7 @@ interface Routable<T extends Base.Base> {
    * @returns The updated object.
    */
   @route("/{id}")
-  @patch
+  @patch(#{ implicitOptionality: true })
   update(@path id: eInnsynId<T>, @body body: T): Responses.OkResponse<T>;
 
   /**
@@ -174,7 +174,14 @@ namespace Behandlingsprotokoll {
 namespace Dokumentbeskrivelse {
   @route("/dokumentbeskrivelse")
   @tag("Dokumentbeskrivelse")
-  interface DokumentbeskrivelseRoutes extends Routable<Dokumentbeskrivelse> {}
+  interface DokumentbeskrivelseRoutes extends Routable<Dokumentbeskrivelse> {
+    @route("/{id}/dokumentobjekt")
+    @post
+    addDokumentobjekt(
+      @path id: eInnsynId<Dokumentbeskrivelse>,
+      @body body: ExpandableField<Dokumentobjekt.Dokumentobjekt>,
+    ): Responses.AddResponse<Dokumentobjekt.Dokumentobjekt>;
+  }
 }
 
 namespace Dokumentobjekt {
@@ -277,6 +284,20 @@ namespace Journalpost {
       @path
       dokumentbeskrivelseId: eInnsynId<Dokumentbeskrivelse.Dokumentbeskrivelse>,
     ): Responses.OkResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
+
+    @route("/{id}/skjerming")
+    @post
+    addSkjerming(
+      @path id: eInnsynId<Journalpost>,
+      @body skjerming: ExpandableField<Skjerming.Skjerming>,
+    ): Responses.AddResponse<Skjerming.Skjerming>;
+
+    @route("/{id}/skjerming/{skjermingId}")
+    @delete
+    deleteSkjerming(
+      @path id: eInnsynId<Journalpost>,
+      @path skjermingId: eInnsynId<Skjerming.Skjerming>,
+    ): Responses.OkResponse<Skjerming.Skjerming>;
   }
 }
 
