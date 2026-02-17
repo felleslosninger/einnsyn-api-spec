@@ -202,6 +202,7 @@ namespace Search {
       | "moetedato"
       | "oppdatertDato"
       | "publisertDato"
+      | "standardDato"
       | "sakssekvensnummer"
       | "score"
       | "tittel" = "score";

@@ -170,6 +170,18 @@ namespace QueryParameters {
     @query moetedatoTo?: timeString;
 
     /**
+     * Filter by the legacy "standardDato". This is the default date for each entity type.
+     * For instance, for Moetemappe this would be "moetedato", for Journalpost this would be "journaldato".
+     */
+    @query standardDatoFrom?: timeString;
+
+    /**
+     * Filter by the legacy "standardDato". This is the default date for each entity type.
+     * For instance, for Moetemappe this would be "moetedato", for Journalpost this would be "journaldato".
+     */
+    @query standardDatoTo?: timeString;
+
+    /**
      * Filter by saksaar
      */
     @query saksaar?: string[];
