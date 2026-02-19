@@ -15,10 +15,10 @@ The [typespec](typespec)-folder contains the following files:
 
 The eInnsyn API uses API keys to authenticate requests. The keys are long-lived, and should be handled carefully. All API keys are prefixed with `secret_`.
 
-To send an authenticated request, the API key should be sent in the `X-EIN-API-KEY` header:
+To send an authenticated request, the API key should be sent in the `API-KEY` header:
 
 ```
-curl -H "X-EIN-API-KEY: secret_..." https://api.einnsyn.no
+curl -H "API-KEY: secret_..." https://api.einnsyn.no
 ```
 
 ## General endpoint structure
@@ -49,7 +49,7 @@ We use a concept called "expandable fields", inspired by Stripe's API ([Expandin
 ### Default expansion:
 
 ```
-curl -H "X-EIN-API-KEY: secret\_..." https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy
+curl -H "API-KEY: secret\_..." https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy
 {
   "entity": "Saksmappe",
   "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
