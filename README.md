@@ -34,6 +34,30 @@ Resources that do not require a parent object can usually be added directly at t
 
 The API also includes task-specific endpoints such as `/search`, `/statistics`, and `/me`.
 
+## Pagination
+
+List endpoints use cursor-based pagination. You can control page size with `limit` (between 1 and 100, default 25), use `startingAfter` to fetch the next page, and `endingBefore` to paginate backwards. List responses contain an `items` array and may include `next` and `previous` URLs:
+
+```sh
+curl -H "API-KEY: <api-key>" "https://api.einnsyn.no/journalpost?limit=2"
+{
+  "items": [
+    {
+      "entity": "Journalpost",
+      "id": "jp_01jh532p3ve6haq7n53xgpqayh"
+    },
+    {
+      "entity": "Journalpost",
+      "id": "jp_01jh532p6qfhxrz1w9fdw4jjrh"
+    }
+  ],
+  "next": "https://api.einnsyn.no/journalpost?limit=2&startingAfter=jp_01jh532p6qfhxrz1w9fdw4jjrh",
+  "previous": null
+}
+```
+
+If you pass `ids` or `externalIds`, the other list parameters are ignored.
+
 ## IDs
 
 All objects in eInnsyn get an auto-generated `eInnsynId`. An `eInnsynId` is a Base32-encoded UUID with a prefix that indicates the type of resource. In the API specification, each entity has an extension annotation describing its ID prefix.
@@ -44,6 +68,15 @@ Example journalpost ID: `jp_01jh532p3ve6haq7n53xgpqayh`
 
 In addition, all Noark5 objects must have a globally unique systemId assigned by the publisher. This identifier can be used interchangeably with the eInnsynId in the API.
 
+## Read-only and write-only fields
+
+Some fields are only available during certain lifecycle stages. In the TypeSpec source, this is expressed with `@visibility(...)`.
+
+- Read-only fields are returned by `GET` requests, but are not meant to be sent when creating or updating resources.
+- Write-only fields can be sent when creating or updating resources, but are omitted from `GET` responses.
+
+For example, `Saksmappe.saksnummer` and `Saksmappe.administrativEnhetObjekt` are read-only, while `Saksmappe.journalpost` is write-only. Because of that, `journalpost` is not returned by `GET /saksmappe/{id}` and cannot be expanded there. To read the journalposts for a case, use `GET /saksmappe/{id}/journalpost` instead.
+
 ## Expanding responses
 
 We use a concept called "expandable fields", inspired by Stripe's API ([Expanding Responses](https://docs.stripe.com/api/expanding_objects)). Throughout the API, references to entity objects are either an ID or the expanded object. On endpoints that support `expand`, nested objects in a `GET` response are sent as IDs by default. If you need nested objects, you can use the `expand` query parameter:
@@ -51,60 +84,53 @@ We use a concept called "expandable fields", inspired by Stripe's API ([Expandin
 ### Default expansion:
 
 ```sh
-curl -H "API-KEY: <api-key>" https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy
+curl -H "API-KEY: <api-key>" https://api.einnsyn.no/journalpost/jp_01jh532p3ve6haq7n53xgpqayh
 {
-  "entity": "Saksmappe",
-  "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
+  "entity": "Journalpost",
+  "id": "jp_01jh532p3ve6haq7n53xgpqayh",
   ...
-  "journalpost": [
-    "jp_01jh532p3ve6haq7n53xgpqayh"
-  ]
+  "saksmappe": "sm_01jh50h5brf7wrbwga8xd0rwdy"
 }
 ```
 
-### Expand `journalpost`:
+### Expand `saksmappe`:
 
 ```sh
-curl ... https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy?expand=journalpost
+curl ... https://api.einnsyn.no/journalpost/jp_01jh532p3ve6haq7n53xgpqayh?expand=saksmappe
 {
-  "entity": "Saksmappe",
-  "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
+  "entity": "Journalpost",
+  "id": "jp_01jh532p3ve6haq7n53xgpqayh",
   ...
-  "journalpost": [{
-    "entity": "Journalpost",
-    "id": "jp_01jh532p3ve6haq7n53xgpqayh",
+  "saksmappe": {
+    "entity": "Saksmappe",
+    "id": "sm_01jh50h5brf7wrbwga8xd0rwdy",
+    "saksnummer": "2025/1234",
     ...
-    "korrespondansepart": [
-      "kp_01jh532p50epvvcjfv8xrzzwp5",
-      "kp_01jh532p6qfhxrz1w9fdw4jjrh"
-    ]
-  }]
+    "administrativEnhetObjekt": "enh_01jh532p50epvvcjfv8xrzzwp5"
+  }
 }
 ```
 
-### Expand `journalpost.korrespondansepart`:
+### Expand `saksmappe.administrativEnhetObjekt`:
 
 ```sh
-curl ... https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy?expand=journalpost.korrespondansepart
+curl ... https://api.einnsyn.no/journalpost/jp_01jh532p3ve6haq7n53xgpqayh?expand=saksmappe.administrativEnhetObjekt
 {
-  "entity": "Saksmappe",
-  "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
+  "entity": "Journalpost",
+  "id": "jp_01jh532p3ve6haq7n53xgpqayh",
   ...
-  "journalpost": [{
-    "entity": "Journalpost",
-    "id": "jp_01jh532p3ve6haq7n53xgpqayh",
+  "saksmappe": {
+    "entity": "Saksmappe",
+    "id": "sm_01jh50h5brf7wrbwga8xd0rwdy",
+    "saksnummer": "2025/1234",
     ...
-    "korrespondansepart": [{
-      "entity": "Korrespondansepart",
-      "id": "kp_01jh532p50epvvcjfv8xrzzwp5",
+    "administrativEnhetObjekt": {
+      "entity": "Enhet",
+      "id": "enh_01jh532p50epvvcjfv8xrzzwp5",
+      "navn": "Oslo kommune",
       ...
-    },
-    {
-      "entity": "Korrespondansepart",
-      "id": "kp_01jh532p6qfhxrz1w9fdw4jjrh",
-      ...
-    }]
-  }]
+    }
+  }
 }
 ```
 
