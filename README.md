@@ -1,9 +1,11 @@
 # <img src="https://einnsyn.no/8ebf89f8e40d3eb75183.svg" width="180px" alt="eInnsyn"/>
 
-This repository contains the API specification for [eInnsyn](https://einnsyn.no)'s API. The API is written in [TypeSpec](https://typespec.io), with an auto-generated OpenAPI version in the [openapi](openapi)-folder.
+This repository contains the API specification for [eInnsyn](https://einnsyn.no)'s API. The API is written in [TypeSpec](https://typespec.io), and the generated OpenAPI document is available at [openapi/einnsyn.openapi.yml](openapi/einnsyn.openapi.yml).
 
-The [typespec](typespec)-folder contains the following files:
+The main files in the [typespec](typespec)-folder are:
 
+- [einnsyn.tsp](typespec/einnsyn.tsp): Entry point for the API, including service metadata and authentication.
+- [einnsyn.exceptions.tsp](typespec/einnsyn.exceptions.tsp): Shared exception and error response definitions.
 - [einnsyn.arkiv.models.tsp](typespec/einnsyn.arkiv.models.tsp): Model definition for archive data, mostly Noark 5 with some extensions for meetings.
 - [einnsyn.arkiv.operations.tsp](typespec/einnsyn.arkiv.operations.tsp): Endpoints for archive models.
 - [einnsyn.queryparameters.tsp](typespec/einnsyn.queryparameters.tsp): Base models for query parameters.
@@ -13,28 +15,52 @@ The [typespec](typespec)-folder contains the following files:
 
 ## Authentication
 
-The eInnsyn API uses API keys to authenticate requests. The keys are long-lived, and should be handled carefully. All API keys are prefixed with `secret_`.
+The eInnsyn API uses API keys to authenticate requests. To send an authenticated request, include the API key in the `API-KEY` header:
 
-To send an authenticated request, the API key should be sent in the `X-EIN-API-KEY` header:
-
-```
-curl -H "X-EIN-API-KEY: secret_..." https://api.einnsyn.no
+```sh
+curl -H "API-KEY: <api-key>" https://api.einnsyn.no
 ```
 
 ## General endpoint structure
 
-All entities has standard CRUD-endpoints:
+Most routable resources expose standard CRUD endpoints:
 
 - `GET /{entityName}`: Get a paginated list of objects
 - `GET /{entityName}/{id}`: Get an object
 - `PATCH /{entityName}/{id}`: Update an object
 - `DELETE /{entityName}/{id}`: Delete an object
 
-Objects that do not require a parent object (primarily arkiv) can be added directly at the root level using `POST /{entityName}`. However, objects that require a parent must be added through the parent object, for example: `POST /arkiv/ar_.../arkivdel`.
+Resources that do not require a parent object can usually be added directly at the root level using `POST /{entityName}`. Resources that require a parent are added through the parent resource, for example `POST /arkiv/{id}/arkivdel`.
+
+The API also includes task-specific endpoints such as `/search`, `/statistics`, and `/me`.
+
+## Pagination
+
+List endpoints use cursor-based pagination. You can control page size with `limit` (between 1 and 100, default 25), use `startingAfter` to fetch the next page, and `endingBefore` to paginate backwards. List responses contain an `items` array and may include `next` and `previous` URLs:
+
+```sh
+curl -H "API-KEY: <api-key>" "https://api.einnsyn.no/journalpost?limit=2"
+{
+  "items": [
+    {
+      "entity": "Journalpost",
+      "id": "jp_01jh532p3ve6haq7n53xgpqayh"
+    },
+    {
+      "entity": "Journalpost",
+      "id": "jp_01jh532p6qfhxrz1w9fdw4jjrh"
+    }
+  ],
+  "next": "https://api.einnsyn.no/journalpost?limit=2&startingAfter=jp_01jh532p6qfhxrz1w9fdw4jjrh",
+  "previous": null
+}
+```
+
+If you pass `ids` or `externalIds`, the other list parameters are ignored.
 
 ## IDs
 
-All objects in eInnsyn will get an auto-generated `eInnsynId`. An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. In the API specification, all entities has an extension annotation describing it's ID prefix.
+All objects in eInnsyn get an auto-generated `eInnsynId`. An `eInnsynId` is a Base32-encoded UUID with a prefix that indicates the type of resource. In the API specification, each entity has an extension annotation describing its ID prefix.
 
 Example annotation for the Journalpost entity: `@extension("x-idPrefix", "jp")`.
 
@@ -42,70 +68,73 @@ Example journalpost ID: `jp_01jh532p3ve6haq7n53xgpqayh`
 
 In addition, all Noark5 objects must have a globally unique systemId assigned by the publisher. This identifier can be used interchangeably with the eInnsynId in the API.
 
+## Read-only and write-only fields
+
+Some fields are only available during certain lifecycle stages. In the TypeSpec source, this is expressed with `@visibility(...)`.
+
+- Read-only fields are returned by `GET` requests, but are not meant to be sent when creating or updating resources.
+- Write-only fields can be sent when creating or updating resources, but are omitted from `GET` responses.
+
+For example, `Saksmappe.saksnummer` and `Saksmappe.administrativEnhetObjekt` are read-only, while `Saksmappe.journalpost` is write-only. Because of that, `journalpost` is not returned by `GET /saksmappe/{id}` and cannot be expanded there. To read the journalposts for a case, use `GET /saksmappe/{id}/journalpost` instead.
+
 ## Expanding responses
 
-We use a concept called "expandable fields", inspired by Stripe's API ([Expanding Responses](https://docs.stripe.com/api/expanding_objects)). Throughout the API, all references to entity objects are either an ID, or the actual object. By default, all nested objects in a `GET` response are sent as an ID. For `POST` and `PATCH` requests, all new objects are returned. If you need to access nested objects, you can use the `expand` query parameter:
+We use a concept called "expandable fields", inspired by Stripe's API ([Expanding Responses](https://docs.stripe.com/api/expanding_objects)). Throughout the API, references to entity objects are either an ID or the expanded object. On endpoints that support `expand`, nested objects in a `GET` response are sent as IDs by default. If you need nested objects, you can use the `expand` query parameter:
 
 ### Default expansion:
 
-```
-curl -H "X-EIN-API-KEY: secret\_..." https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy
+```sh
+curl -H "API-KEY: <api-key>" https://api.einnsyn.no/journalpost/jp_01jh532p3ve6haq7n53xgpqayh
 {
-  "entity": "Saksmappe",
-  "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
+  "entity": "Journalpost",
+  "id": "jp_01jh532p3ve6haq7n53xgpqayh",
   ...
-  "journalpost": [
-    "jp_01jh532p3ve6haq7n53xgpqayh"
-  ]
+  "saksmappe": "sm_01jh50h5brf7wrbwga8xd0rwdy"
 }
 ```
 
-### Expand `journalpost`:
+### Expand `saksmappe`:
 
-```
-curl ... https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy?expand=journalpost
+```sh
+curl ... https://api.einnsyn.no/journalpost/jp_01jh532p3ve6haq7n53xgpqayh?expand=saksmappe
 {
-  "entity": "Saksmappe",
-  "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
+  "entity": "Journalpost",
+  "id": "jp_01jh532p3ve6haq7n53xgpqayh",
   ...
-  "journalpost": [{
-    "entity": "Journalpost",
-    "id": "jp_01jh532p3ve6haq7n53xgpqayh",
+  "saksmappe": {
+    "entity": "Saksmappe",
+    "id": "sm_01jh50h5brf7wrbwga8xd0rwdy",
+    "saksnummer": "2025/1234",
     ...
-    "korrespondansepart": [
-      "kp_01jh532p50epvvcjfv8xrzzwp5",
-      "kp_01jh532p6qfhxrz1w9fdw4jjrh"
-    ]
-  }]
+    "administrativEnhetObjekt": "enh_01jh532p50epvvcjfv8xrzzwp5"
+  }
 }
 ```
 
-### Expand `journalpost.korrespondansepart`:
+### Expand `saksmappe.administrativEnhetObjekt`:
 
-```
-curl ... https://api.einnsyn.no/saksmappe/sm_01jh50h5brf7wrbwga8xd0rwdy?expand=journalpost.korrespondansepart
+```sh
+curl ... https://api.einnsyn.no/journalpost/jp_01jh532p3ve6haq7n53xgpqayh?expand=saksmappe.administrativEnhetObjekt
 {
-  "entity": "Saksmappe",
-  "id": "sm_01jh532p0jfdh8j3evmpgk4atx",
+  "entity": "Journalpost",
+  "id": "jp_01jh532p3ve6haq7n53xgpqayh",
   ...
-  "journalpost": [{
-    "entity": "Journalpost",
-    "id": "jp_01jh532p3ve6haq7n53xgpqayh",
+  "saksmappe": {
+    "entity": "Saksmappe",
+    "id": "sm_01jh50h5brf7wrbwga8xd0rwdy",
+    "saksnummer": "2025/1234",
     ...
-    "korrespondansepart": [{
-      "entity": "Korrespondansepart",
-      "id": "kp_01jh532p50epvvcjfv8xrzzwp5",
+    "administrativEnhetObjekt": {
+      "entity": "Enhet",
+      "id": "enh_01jh532p50epvvcjfv8xrzzwp5",
+      "navn": "Oslo kommune",
       ...
-    },
-    {
-      "entity": "Korrespondansepart",
-      "id": "kp_01jh532p6qfhxrz1w9fdw4jjrh",
-      ...
-    }]
-  }]
+    }
+  }
 }
 ```
 
 ## Client libraries
 
-Client libraries for Java and TypeScript are in the works. We're also considering a .NET client library.
+- Java SDK: [felleslosninger/einnsyn-sdk-java](https://github.com/felleslosninger/einnsyn-sdk-java)
+- TypeScript SDK: [felleslosninger/einnsyn-sdk-typescript](https://github.com/felleslosninger/einnsyn-sdk-typescript)
