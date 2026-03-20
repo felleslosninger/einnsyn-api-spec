@@ -157,7 +157,7 @@ namespace Dokumentobjekt {
   model Dokumentobjekt extends ArkivBase.ArkivBase {
     @visibility(Lifecycle.Read) entity: "Dokumentobjekt";
 
-    /** A reference (URL) to the document file. */
+    /** A reference (URL) to the document file. This will be hidden from public view unless it redirects to a HTML page. */
     referanseDokumentfil: url;
 
     /** The file format of the document (e.g., 'PDF/A'). */
@@ -171,6 +171,9 @@ namespace Dokumentobjekt {
 
     /** The document description this object belongs to. */
     dokumentbeskrivelse?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>;
+
+    /** The URL to access the actual document. This will either be a binary download, or a redirect to a HTML page. */
+    @visibility(Lifecycle.Read) url: url;
   }
 }
 
