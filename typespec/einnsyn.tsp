@@ -9,7 +9,7 @@ using TypeSpec.Http;
 
 @service(#{ title: "eInnsyn" })
 @info(#{ version: "1.0" })
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "X-EIN-API-KEY">)
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "API-KEY">)
 namespace EInnsyn;
 
 using EInnsyn;
