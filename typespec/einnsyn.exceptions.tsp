@@ -59,6 +59,11 @@ namespace Exceptions {
   }
 
   @error
+  model TooManyRequestsException extends EInnsynException {
+    type: "tooManyRequests";
+  }
+
+  @error
   model ValidationException extends EInnsynException {
     type: "validationError";
     fieldError: {
