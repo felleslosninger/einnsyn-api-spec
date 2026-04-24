@@ -28,15 +28,17 @@ namespace QueryParameters {
   model QueryParameters {}
   model GetParameters extends QueryParameters {
     /**
-     * Specifies which fields in the response should be expanded.
+     * Specifies which fields in the response should be expanded. Maximum 100 values.
      */
+    @maxItems(100)
     @query expand?: string[];
   }
 
   model ListParameters extends QueryParameters {
     /**
-     * Specifies which fields in the response should be expanded.
+     * Specifies which fields in the response should be expanded. Maximum 100 values.
      */
+    @maxItems(100)
     @query expand?: string[];
 
     /**
@@ -63,13 +65,15 @@ namespace QueryParameters {
     @query endingBefore?: eInnsynId;
 
     /**
-     * A list of resource IDs to be returned. If this parameter is used, the other parameters will be ignored.
+     * A list of resource IDs to be returned. Maximum 100 values. If this parameter is used, the other parameters will be ignored.
      */
+    @maxItems(100)
     @query ids?: eInnsynId[];
 
     /**
-     * A list of external IDs to be returned. If this parameter is used, the other parameters will be ignored.
+     * A list of external IDs to be returned. Maximum 100 values. If this parameter is used, the other parameters will be ignored.
      */
+    @maxItems(100)
     @query externalIds?: string[];
 
     /**
@@ -237,13 +241,15 @@ namespace QueryParameters {
     @query entity?: ("Journalpost" | "Moetemappe" | "Moetesak" | "Saksmappe")[];
 
     /**
-     * A list of resource IDs to be returned. If this parameter is used, the other parameters will be ignored.
+     * A list of resource IDs to be returned. Maximum 100 values. If this parameter is used, the other parameters will be ignored.
      */
+    @maxItems(100)
     @query ids?: eInnsynId[];
 
     /**
-     * A list of external IDs to be returned. If this parameter is used, the other parameters will be ignored.
+     * A list of external IDs to be returned. Maximum 100 values. If this parameter is used, the other parameters will be ignored.
      */
+    @maxItems(100)
     @query externalIds?: string[];
 
     /**
