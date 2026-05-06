@@ -301,6 +301,12 @@ namespace Journalpost {
   }
 }
 
+namespace Mmatrikkelnummer {
+  @route("/mmatrikkelnummer")
+  @tag("Mmatrikkelnummer")
+  interface MmatrikkelnummerRoutes extends GloballyRoutable<Mmatrikkelnummer> {}
+}
+
 namespace Klasse {
   model ListByKlasseParameters extends QueryParameters.ListParameters {
     @path id: eInnsynId<Klasse>;
