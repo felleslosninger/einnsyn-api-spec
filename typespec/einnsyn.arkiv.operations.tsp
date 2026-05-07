@@ -301,10 +301,10 @@ namespace Journalpost {
   }
 }
 
-namespace Mmatrikkelnummer {
-  @route("/mmatrikkelnummer")
-  @tag("Mmatrikkelnummer")
-  interface MmatrikkelnummerRoutes extends GloballyRoutable<Mmatrikkelnummer> {}
+namespace Matrikkelnummer {
+  @route("/matrikkelnummer")
+  @tag("Matrikkelnummer")
+  interface MatrikkelnummerRoutes extends GloballyRoutable<Matrikkelnummer> {}
 }
 
 namespace Klasse {

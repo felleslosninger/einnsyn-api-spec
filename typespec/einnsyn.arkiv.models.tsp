@@ -341,7 +341,7 @@ namespace Journalpost {
     administrativEnhetObjekt?: ExpandableField<Enhet.Enhet>;
 
     /** A list of cadastral identifiers associated with this registry entry. */
-    mmatrikkelnummer?: ExpandableField<Mmatrikkelnummer.Mmatrikkelnummer>[];
+    matrikkelnummer?: ExpandableField<Matrikkelnummer.Matrikkelnummer>[];
 
     /** The case this record belongs to. */
     @visibility(Lifecycle.Read, Lifecycle.Update)
@@ -349,13 +349,13 @@ namespace Journalpost {
   }
 }
 
-namespace Mmatrikkelnummer {
+namespace Matrikkelnummer {
   /**
    * Represents a single cadastral identifier entry.
    */
   @extension("x-idPrefix", "mat")
-  model Mmatrikkelnummer extends Base.Base {
-    @visibility(Lifecycle.Read) entity: "Mmatrikkelnummer";
+  model Matrikkelnummer extends Base.Base {
+    @visibility(Lifecycle.Read) entity: "Matrikkelnummer";
 
     /** The municipality number for the cadastral entry. */
     kommunenummer: string;
@@ -757,7 +757,7 @@ namespace Saksmappe {
     administrativEnhetObjekt: ExpandableField<Enhet.Enhet>;
 
     /** A list of cadastral identifiers associated with this case. */
-    mmatrikkelnummer?: ExpandableField<Mmatrikkelnummer.Mmatrikkelnummer>[];
+    matrikkelnummer?: ExpandableField<Matrikkelnummer.Matrikkelnummer>[];
   }
 }
 
