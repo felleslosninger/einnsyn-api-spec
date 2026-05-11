@@ -351,25 +351,30 @@ namespace Journalpost {
 
 namespace Matrikkelnummer {
   /**
-   * Represents a single cadastral identifier entry.
+   * Represents a globally shared cadastral identifier entry.
    */
   @extension("x-idPrefix", "mat")
-  model Matrikkelnummer extends Base.Base {
+  model Matrikkelnummer extends ArkivBase.ArkivBase {
     @visibility(Lifecycle.Read) entity: "Matrikkelnummer";
 
     /** The municipality number for the cadastral entry. */
+    @pattern("^[0-9]{4}$")
     kommunenummer: string;
 
     /** The cadastral farm number. */
+    @minValue(0)
     gaardsnummer: integer;
 
     /** The cadastral usage number. */
+    @minValue(0)
     bruksnummer: integer;
 
     /** The optional leasehold number. */
+    @minValue(0)
     festenummer?: integer;
 
     /** The optional section number. */
+    @minValue(0)
     seksjonsnummer?: integer;
   }
 }
