@@ -351,7 +351,7 @@ namespace Journalpost {
 
 namespace Matrikkelnummer {
   /**
-   * Represents a globally shared cadastral identifier entry.
+   * Represents a cadastral identifier entry owned by a journalenhet.
    */
   @extension("x-idPrefix", "mat")
   model Matrikkelnummer extends ArkivBase.ArkivBase {
