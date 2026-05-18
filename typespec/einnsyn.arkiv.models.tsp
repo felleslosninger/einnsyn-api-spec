@@ -340,9 +340,42 @@ namespace Journalpost {
     /** The full administrative unit object responsible for the registry entry (expandable reference). */
     administrativEnhetObjekt?: ExpandableField<Enhet.Enhet>;
 
+    /** A list of cadastral identifiers associated with this registry entry. */
+    matrikkelnummer?: ExpandableField<Matrikkelnummer.Matrikkelnummer>[];
+
     /** The case this record belongs to. */
     @visibility(Lifecycle.Read, Lifecycle.Update)
     saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
+  }
+}
+
+namespace Matrikkelnummer {
+  /**
+   * Represents a cadastral identifier entry owned by a journalenhet.
+   */
+  @extension("x-idPrefix", "mat")
+  model Matrikkelnummer extends ArkivBase.ArkivBase {
+    @visibility(Lifecycle.Read) entity: "Matrikkelnummer";
+
+    /** The municipality number for the cadastral entry. */
+    @pattern("^[0-9]{4}$")
+    kommunenummer: string;
+
+    /** The cadastral farm number. */
+    @minValue(0)
+    gaardsnummer: integer;
+
+    /** The cadastral usage number. */
+    @minValue(0)
+    bruksnummer: integer;
+
+    /** The optional leasehold number. */
+    @minValue(0)
+    festenummer?: integer;
+
+    /** The optional section number. */
+    @minValue(0)
+    seksjonsnummer?: integer;
   }
 }
 
@@ -727,6 +760,9 @@ namespace Saksmappe {
      */
     @visibility(Lifecycle.Read)
     administrativEnhetObjekt: ExpandableField<Enhet.Enhet>;
+
+    /** A list of cadastral identifiers associated with this case. */
+    matrikkelnummer?: ExpandableField<Matrikkelnummer.Matrikkelnummer>[];
   }
 }
 
