@@ -346,6 +346,28 @@ namespace Journalpost {
   }
 }
 
+namespace Matrikkelnummer {
+  @extension("x-idPrefix", "mat")
+  model Matrikkelnummer extends Base.Base {
+    @visibility(Lifecycle.Read) entity: "Matrikkelnummer";
+
+    @pattern("^[0-9]{4}$")
+    kommunenummer: string;
+
+    @minValue(0)
+    gaardsnummer: integer;
+
+    @minValue(0)
+    bruksnummer: integer;
+
+    @minValue(0)
+    festenummer?: integer;
+
+    @minValue(0)
+    seksjonsnummer?: integer;
+  }
+}
+
 namespace Klasse {
   /**
    * Klasse
@@ -473,6 +495,7 @@ namespace Mappe {
 
     @maxLength(1000) beskrivelse?: string;
     noekkelord?: string;
+    matrikkelnummer?: ExpandableField<Matrikkelnummer.Matrikkelnummer>[];
 
     /**
      * The date the resource was published. This field is updated automatically, but can be set manually by admins.
@@ -677,6 +700,7 @@ namespace Registrering {
     offentligTittelSensitiv: string;
 
     @maxLength(1000) beskrivelse?: string;
+    matrikkelnummer?: ExpandableField<Matrikkelnummer.Matrikkelnummer>[];
 
     /**
      * The date the resource was published. This field is updated automatically, but can be set manually by admins.
