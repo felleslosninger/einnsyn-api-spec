@@ -196,9 +196,32 @@ namespace Enhet {
     @query enhetId: eInnsynId<Enhet>;
   }
 
+  model EnhetFilterParameters extends QueryParameters.ListParameters {
+    /**
+     * Free-text filter against navn, navnNynorsk, navnEngelsk, navnSami,
+     * orgnummer and enhetskode.
+     */
+    @query query?: string;
+
+    /**
+     * Filter by exact orgnummer(s).
+     */
+    @maxItems(100)
+    @query orgnummer?: string[];
+  }
+
   @route("/enhet")
   @tag("Enhet")
   interface EnhetRoutes extends GloballyRoutable<Enhet> {
+    /**
+     * List all enhets, with optional filtering by orgnummer or free-text query.
+     */
+    @route("")
+    @get
+    list(
+      ...EnhetFilterParameters,
+    ): Responses.ListResponse<Enhet>;
+
     @route("/{id}/underenhet")
     @get
     listUnderenhet(...ListByEnhetParameters): Responses.ListResponse<Enhet>;
