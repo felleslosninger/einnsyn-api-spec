@@ -96,6 +96,22 @@ namespace Bruker {
     requestPasswordReset(
       @path id: eInnsynId<Bruker>,
     ): Responses.OkResponse<Bruker>;
+
+    @route("/{id}/requestEmailChange")
+    @patch(#{ implicitOptionality: false })
+    requestEmailChange(
+      @path id: eInnsynId<Bruker>,
+      @body requestEmailChange: {
+        @format("email") newEmail: string;
+      },
+    ): Responses.OkResponse<Bruker>;
+
+    @route("/{id}/confirmEmailChange/{secret}")
+    @patch(#{ implicitOptionality: false })
+    confirmEmailChange(
+      @path id: eInnsynId<Bruker>,
+      @path secret: string,
+    ): Responses.OkResponse<Bruker>;
   }
 }
 
