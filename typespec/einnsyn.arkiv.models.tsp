@@ -451,6 +451,46 @@ namespace Korrespondansepart {
   }
 }
 
+namespace Matrikkelnummer {
+  /**
+   * Identifies a property unit (matrikkelenhet) in the Norwegian cadastre, following Kartverket's standard format.
+   */
+  @extension("x-idPrefix", "mat")
+  model Matrikkelnummer extends ArkivBase.ArkivBase {
+    @visibility(Lifecycle.Read) entity: "Matrikkelnummer";
+
+    /** Four-digit municipality number (kommunenummer). */
+    @pattern("^[0-9]{4}$") kommunenummer: string;
+
+    /** Garden number (gaardsnummer). */
+    @minValue(0) gaardsnummer: integer;
+
+    /** Bruk number (bruksnummer). */
+    @minValue(0) bruksnummer: integer;
+
+    /** Leasehold number (festenummer). 0 means no leasehold. */
+    @minValue(0) festenummer?: integer;
+
+    /** Section number (seksjonsnummer). 0 means no section. */
+    @minValue(0) seksjonsnummer?: integer;
+
+    /** The Saksmappe this Matrikkelnummer is associated with, if any. */
+    @visibility(Lifecycle.Read) saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
+
+    /** The Moetemappe this Matrikkelnummer is associated with, if any. */
+    @visibility(Lifecycle.Read) moetemappe?: ExpandableField<Moetemappe.Moetemappe>;
+
+    /** The Journalpost this Matrikkelnummer is associated with, if any. */
+    @visibility(Lifecycle.Read) journalpost?: ExpandableField<Journalpost.Journalpost>;
+
+    /** The Moetesak this Matrikkelnummer is associated with, if any. */
+    @visibility(Lifecycle.Read) moetesak?: ExpandableField<Moetesak.Moetesak>;
+
+    /** The Moetedokument this Matrikkelnummer is associated with, if any. */
+    @visibility(Lifecycle.Read) moetedokument?: ExpandableField<Moetedokument.Moetedokument>;
+  }
+}
+
 namespace Mappe {
   /**
    * An abstract base model for case files (Saksmappe) and meeting records (Moetemappe). It contains common properties for these folder-like structures.
@@ -505,6 +545,9 @@ namespace Mappe {
      * If this Mappe is not a child of a Saksmappe or Moetemappe, this field will contain the parent Arkivdel.
      */
     @visibility(Lifecycle.Read) arkivdel?: ExpandableField<Arkivdel.Arkivdel>;
+
+    /** Property identifiers (matrikkelnummer) associated with this Mappe. */
+    matrikkelnummer?: ExpandableField<Matrikkelnummer.Matrikkelnummer>[];
   }
 }
 
@@ -690,6 +733,9 @@ namespace Registrering {
 
     korrespondansepart?: ExpandableField<Korrespondansepart.Korrespondansepart>[];
     dokumentbeskrivelse?: ExpandableField<Dokumentbeskrivelse.Dokumentbeskrivelse>[];
+
+    /** Property identifiers (matrikkelnummer) associated with this Registrering. */
+    matrikkelnummer?: ExpandableField<Matrikkelnummer.Matrikkelnummer>[];
 
     /**
      * The administrative unit that has been handed the responsibility for this resource.
