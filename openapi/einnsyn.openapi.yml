@@ -8761,6 +8761,14 @@ components:
           maxLength: 1000
         noekkelord:
           type: string
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
         publisertDato:
           type: string
           format: date-time
@@ -8824,6 +8832,14 @@ components:
           maxLength: 1000
         noekkelord:
           type: string
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
         publisertDato:
           type: string
           format: date-time
@@ -8863,6 +8879,14 @@ components:
           maxLength: 1000
         noekkelord:
           type: string
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
         publisertDato:
           type: string
           format: date-time
@@ -8899,6 +8923,14 @@ components:
           maxLength: 1000
         noekkelord:
           type: string
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
         publisertDato:
           type: string
           format: date-time
@@ -8917,6 +8949,58 @@ components:
       allOf:
         - $ref: '#/components/schemas/ArkivBase.ArkivBaseUpdate'
       description: An abstract base model for case files (Saksmappe) and meeting records (Moetemappe). It contains common properties for these folder-like structures.
+    Matrikkelnummer.Matrikkelnummer:
+      type: object
+      required:
+        - entity
+        - kommunenummer
+        - gaardsnummer
+        - bruksnummer
+      properties:
+        entity:
+          type: string
+          enum:
+            - Matrikkelnummer
+          readOnly: true
+        kommunenummer:
+          type: string
+          pattern: ^[0-9]{4}$
+        gaardsnummer:
+          type: integer
+          minimum: 0
+        bruksnummer:
+          type: integer
+          minimum: 0
+        festenummer:
+          type: integer
+          minimum: 0
+        seksjonsnummer:
+          type: integer
+          minimum: 0
+      allOf:
+        - $ref: '#/components/schemas/Base.Base'
+      x-idPrefix: mat
+    Matrikkelnummer.MatrikkelnummerUpdate:
+      type: object
+      properties:
+        kommunenummer:
+          type: string
+          pattern: ^[0-9]{4}$
+        gaardsnummer:
+          type: integer
+          minimum: 0
+        bruksnummer:
+          type: integer
+          minimum: 0
+        festenummer:
+          type: integer
+          minimum: 0
+        seksjonsnummer:
+          type: integer
+          minimum: 0
+      allOf:
+        - $ref: '#/components/schemas/Base.BaseUpdate'
+      x-idPrefix: mat
     Moetedeltaker.Moetedeltaker:
       type: object
       required:
@@ -10008,6 +10092,14 @@ components:
         beskrivelse:
           type: string
           maxLength: 1000
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
         publisertDato:
           type: string
           format: date-time
@@ -10061,6 +10153,14 @@ components:
         beskrivelse:
           type: string
           maxLength: 1000
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
         publisertDato:
           type: string
           format: date-time
@@ -10114,6 +10214,14 @@ components:
         beskrivelse:
           type: string
           maxLength: 1000
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
         publisertDato:
           type: string
           format: date-time
@@ -10164,6 +10272,14 @@ components:
         beskrivelse:
           type: string
           maxLength: 1000
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
         publisertDato:
           type: string
           format: date-time
@@ -10218,6 +10334,14 @@ components:
         beskrivelse:
           type: string
           maxLength: 1000
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
         publisertDato:
           type: string
           format: date-time
