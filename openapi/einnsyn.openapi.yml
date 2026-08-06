@@ -6423,6 +6423,8 @@ components:
         type: array
         items:
           type: string
+        minItems: 2
+        maxItems: 2
       explode: false
     Search.SearchParameters.expand:
       name: expand
@@ -6492,6 +6494,8 @@ components:
         type: array
         items:
           type: string
+        minItems: 2
+        maxItems: 2
       explode: false
     Statistics.StatisticsParameters.aggregateFrom:
       name: aggregateFrom
@@ -10457,11 +10461,15 @@ components:
           type: array
           items:
             type: string
+          minItems: 2
+          maxItems: 2
           description: A cursor for use in pagination. This is a list of size two, the value of the sortBy property and the unique id.
         endingBefore:
           type: array
           items:
             type: string
+          minItems: 2
+          maxItems: 2
           description: A cursor for use in pagination. This is a list of size two, the value of the sortBy property and the unique id.
         sortBy:
           type: string
@@ -10689,11 +10697,15 @@ components:
           type: array
           items:
             type: string
+          minItems: 2
+          maxItems: 2
           description: A cursor for use in pagination. This is a list of size two, the value of the sortBy property and the unique id.
         endingBefore:
           type: array
           items:
             type: string
+          minItems: 2
+          maxItems: 2
           description: A cursor for use in pagination. This is a list of size two, the value of the sortBy property and the unique id.
         sortBy:
           type: string
