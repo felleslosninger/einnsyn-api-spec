@@ -211,6 +211,16 @@ namespace Search {
       | "score"
       | "tittel" = "score";
   }
+
+  /**
+   * A set of search parameters stored as plain data, e.g. on a saved search.
+   */
+  // `SearchParameters` carries HTTP metadata (`@query`) on every property, which makes
+  // it an operation-parameter model rather than a data model. `PlainData` produces an
+  // identical model with those annotations stripped, so the same field definitions can
+  // be reused as a plain object without mixing metadata into a request/response body.
+  model SavedSearchParameters is TypeSpec.Http.PlainData<SearchParameters>;
+
   @route("/search")
   @tag("Search")
   interface SearchRoutes {
