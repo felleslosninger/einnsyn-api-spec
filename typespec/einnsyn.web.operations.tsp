@@ -179,11 +179,15 @@ namespace Search {
     /**
      * A cursor for use in pagination. This is a list of size two, the value of the sortBy property and the unique id.
      */
+    @minItems(2)
+    @maxItems(2)
     @query startingAfter?: string[];
 
     /**
      * A cursor for use in pagination. This is a list of size two, the value of the sortBy property and the unique id.
      */
+    @minItems(2)
+    @maxItems(2)
     @query endingBefore?: string[];
 
     /**
