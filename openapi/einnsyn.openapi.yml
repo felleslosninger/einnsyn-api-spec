@@ -15,6 +15,7 @@ tags:
   - name: Klasse
   - name: Klassifikasjonssystem
   - name: Korrespondansepart
+  - name: Matrikkelnummer
   - name: Moetedeltaker
   - name: Moetedokument
   - name: Moetemappe
@@ -2688,6 +2689,73 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Korrespondansepart.KorrespondansepartCreate'
+  /journalpost/{id}/matrikkelnummer:
+    get:
+      operationId: JournalpostRoutes_listMatrikkelnummer
+      parameters:
+        - $ref: '#/components/parameters/Journalpost.ListByJournalpostParameters.id'
+        - $ref: '#/components/parameters/Journalpost.ListByJournalpostParameters.journalpostId'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.expand'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.limit'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.sortOrder'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.startingAfter'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.endingBefore'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.ids'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.externalIds'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.journalenhet'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      anyOf:
+                        - type: string
+                          format: id
+                          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+                        - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+                    description: A paginated list of items.
+                  next:
+                    type: string
+                    format: uri
+                    description: The URL for the next page of items.
+                  previous:
+                    type: string
+                    format: uri
+                    description: The URL for the previous page of items.
+      tags:
+        - Journalpost
+    post:
+      operationId: JournalpostRoutes_addMatrikkelnummer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: id
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+      tags:
+        - Journalpost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerCreate'
   /journalpost/{id}/skjerming:
     post:
       operationId: JournalpostRoutes_addSkjerming
@@ -3519,6 +3587,116 @@ paths:
                 $ref: '#/components/schemas/LagretSoek.LagretSoek'
       tags:
         - LagretSoek
+  /matrikkelnummer:
+    get:
+      operationId: MatrikkelnummerRoutes_list
+      description: List all objects.
+      parameters:
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.expand'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.limit'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.sortOrder'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.startingAfter'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.endingBefore'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.ids'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.externalIds'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.journalenhet'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      anyOf:
+                        - type: string
+                          format: id
+                          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+                        - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+                    description: A paginated list of items.
+                  next:
+                    type: string
+                    format: uri
+                    description: The URL for the next page of items.
+                  previous:
+                    type: string
+                    format: uri
+                    description: The URL for the previous page of items.
+      tags:
+        - Matrikkelnummer
+  /matrikkelnummer/{id}:
+    get:
+      operationId: MatrikkelnummerRoutes_get
+      description: Get an object.
+      parameters:
+        - $ref: '#/components/parameters/QueryParameters.GetParameters'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the object.
+          schema:
+            type: string
+            format: id
+      responses:
+        '200':
+          description: The object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+      tags:
+        - Matrikkelnummer
+    patch:
+      operationId: MatrikkelnummerRoutes_update
+      description: Update an object.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the object.
+          schema:
+            type: string
+            format: id
+      responses:
+        '200':
+          description: The updated object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+      tags:
+        - Matrikkelnummer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerUpdate'
+    delete:
+      operationId: MatrikkelnummerRoutes_delete
+      description: Delete an object.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the object.
+          schema:
+            type: string
+            format: id
+      responses:
+        '200':
+          description: The deleted object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+      tags:
+        - Matrikkelnummer
   /me:
     get:
       operationId: AuthInfoRoutes_get
@@ -3855,6 +4033,73 @@ paths:
                 $ref: '#/components/schemas/Dokumentbeskrivelse.Dokumentbeskrivelse'
       tags:
         - Moetedokument
+  /moetedokument/{id}/matrikkelnummer:
+    get:
+      operationId: MoetedokumentRoutes_listMatrikkelnummer
+      parameters:
+        - $ref: '#/components/parameters/Moetedokument.ListByMoetedokumentParameters.id'
+        - $ref: '#/components/parameters/Moetedokument.ListByMoetedokumentParameters.moetedokumentId'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.expand'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.limit'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.sortOrder'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.startingAfter'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.endingBefore'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.ids'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.externalIds'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.journalenhet'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      anyOf:
+                        - type: string
+                          format: id
+                          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+                        - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+                    description: A paginated list of items.
+                  next:
+                    type: string
+                    format: uri
+                    description: The URL for the next page of items.
+                  previous:
+                    type: string
+                    format: uri
+                    description: The URL for the previous page of items.
+      tags:
+        - Moetedokument
+    post:
+      operationId: MoetedokumentRoutes_addMatrikkelnummer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: id
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+      tags:
+        - Moetedokument
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerCreate'
   /moetemappe:
     get:
       operationId: MoetemappeRoutes_list
@@ -3965,6 +4210,73 @@ paths:
                 $ref: '#/components/schemas/Moetemappe.Moetemappe'
       tags:
         - Moetemappe
+  /moetemappe/{id}/matrikkelnummer:
+    get:
+      operationId: MoetemappeRoutes_listMatrikkelnummer
+      parameters:
+        - $ref: '#/components/parameters/Moetemappe.ListByMoetemappeParameters.id'
+        - $ref: '#/components/parameters/Moetemappe.ListByMoetemappeParameters.moetemappeId'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.expand'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.limit'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.sortOrder'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.startingAfter'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.endingBefore'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.ids'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.externalIds'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.journalenhet'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      anyOf:
+                        - type: string
+                          format: id
+                          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+                        - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+                    description: A paginated list of items.
+                  next:
+                    type: string
+                    format: uri
+                    description: The URL for the next page of items.
+                  previous:
+                    type: string
+                    format: uri
+                    description: The URL for the previous page of items.
+      tags:
+        - Moetemappe
+    post:
+      operationId: MoetemappeRoutes_addMatrikkelnummer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: id
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+      tags:
+        - Moetemappe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerCreate'
   /moetemappe/{id}/moetedokument:
     get:
       operationId: MoetemappeRoutes_listMoetedokument
@@ -4330,6 +4642,73 @@ paths:
                 $ref: '#/components/schemas/Dokumentbeskrivelse.Dokumentbeskrivelse'
       tags:
         - Moetesak
+  /moetesak/{id}/matrikkelnummer:
+    get:
+      operationId: MoetesakRoutes_listMatrikkelnummer
+      parameters:
+        - $ref: '#/components/parameters/Moetesak.ListByMoetesakParameters.id'
+        - $ref: '#/components/parameters/Moetesak.ListByMoetesakParameters.moetesakId'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.expand'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.limit'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.sortOrder'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.startingAfter'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.endingBefore'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.ids'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.externalIds'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.journalenhet'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      anyOf:
+                        - type: string
+                          format: id
+                          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+                        - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+                    description: A paginated list of items.
+                  next:
+                    type: string
+                    format: uri
+                    description: The URL for the next page of items.
+                  previous:
+                    type: string
+                    format: uri
+                    description: The URL for the previous page of items.
+      tags:
+        - Moetesak
+    post:
+      operationId: MoetesakRoutes_addMatrikkelnummer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: id
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+      tags:
+        - Moetesak
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerCreate'
   /moetesak/{id}/utredning:
     get:
       operationId: MoetesakRoutes_getUtredning
@@ -4697,6 +5076,73 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Journalpost.JournalpostCreate'
+  /saksmappe/{id}/matrikkelnummer:
+    get:
+      operationId: SaksmappeRoutes_listMatrikkelnummer
+      parameters:
+        - $ref: '#/components/parameters/Saksmappe.ListBySaksmappeParameters.id'
+        - $ref: '#/components/parameters/Saksmappe.ListBySaksmappeParameters.saksmappeId'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.expand'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.limit'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.sortOrder'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.startingAfter'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.endingBefore'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.ids'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.externalIds'
+        - $ref: '#/components/parameters/QueryParameters.ListParameters.journalenhet'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      anyOf:
+                        - type: string
+                          format: id
+                          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+                        - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+                    description: A paginated list of items.
+                  next:
+                    type: string
+                    format: uri
+                    description: The URL for the next page of items.
+                  previous:
+                    type: string
+                    format: uri
+                    description: The URL for the previous page of items.
+      tags:
+        - Saksmappe
+    post:
+      operationId: SaksmappeRoutes_addMatrikkelnummer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: id
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+      tags:
+        - Saksmappe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerCreate'
   /search:
     get:
       operationId: SearchRoutes_search
@@ -7678,40 +8124,6 @@ components:
         - $ref: '#/components/schemas/Base.BaseUpdate'
       description: Represents a request for access to a specific registry entry (Journalpost).
       x-idPrefix: ikd
-    Innsynskrav.InnsynskravUpdateItem:
-      type: object
-      required:
-        - journalpost
-      properties:
-        innsynskravBestilling:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/InnsynskravBestilling.InnsynskravBestilling'
-          description: The order containing this access request.
-        journalpost:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/Journalpost.JournalpostUpdateItem'
-          description: The registry entry being requested.
-        enhet:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/Enhet.Enhet'
-          description: The public authority responsible for handling the request.
-        sent:
-          type: string
-          format: date-time
-          description: The timestamp when the request was sent to the public authority.
-      allOf:
-        - $ref: '#/components/schemas/Base.Base'
-      description: Represents a request for access to a specific registry entry (Journalpost).
-      x-idPrefix: ikd
     Innsynskrav.ListByInnsynskravParameters:
       type: object
       required:
@@ -7824,7 +8236,7 @@ components:
               - type: string
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-              - $ref: '#/components/schemas/Innsynskrav.InnsynskravUpdateItem'
+              - $ref: '#/components/schemas/Innsynskrav.Innsynskrav'
           description: The list of individual access requests in this order.
         language:
           type: string
@@ -8155,84 +8567,6 @@ components:
         - $ref: '#/components/schemas/Registrering.RegistreringUpdate'
       description: Represents a registry entry for a document, corresponding to the Journalpost in the Noark 5 standard. It is a record of an incoming, outgoing, or internal document.
       x-idPrefix: jp
-    Journalpost.JournalpostUpdateItem:
-      type: object
-      required:
-        - journalaar
-        - journalsekvensnummer
-        - journalpostnummer
-        - journalposttype
-        - journaldato
-      properties:
-        journalaar:
-          type: integer
-          minimum: 1700
-          description: The year the registry entry was created.
-        journalsekvensnummer:
-          type: integer
-          minimum: 0
-          description: The sequence number of the registry entry within the journal year.
-        journalpostnummer:
-          type: integer
-          minimum: 0
-          description: The post number within the journal.
-        journalposttype:
-          type: string
-          enum:
-            - inngaaende_dokument
-            - utgaaende_dokument
-            - organinternt_dokument_uten_oppfoelging
-            - organinternt_dokument_for_oppfoelging
-            - saksframlegg
-            - sakskart
-            - moeteprotokoll
-            - moetebok
-            - ukjent
-          description: The type of registry entry.
-        journaldato:
-          type: string
-          format: date
-          description: The date the registry entry was recorded.
-        dokumentetsDato:
-          type: string
-          format: date
-          description: The date of the document itself.
-        skjerming:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/Skjerming.Skjerming'
-          description: Access control information for the registry entry.
-        legacyJournalposttype:
-          type: string
-          description: Legacy field for the journal post type.
-        legacyFoelgsakenReferanse:
-          type: array
-          items:
-            type: string
-          description: Legacy field for references to related cases.
-        administrativEnhet:
-          type: string
-          description: The identifier of the administrative unit responsible for the registry entry.
-        administrativEnhetObjekt:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/Enhet.Enhet'
-          description: The full administrative unit object responsible for the registry entry (expandable reference).
-        saksmappe:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/Saksmappe.SaksmappeUpdateItem'
-          description: The case this record belongs to.
-      allOf:
-        - $ref: '#/components/schemas/Registrering.RegistreringUpdateItem'
-      description: Represents a registry entry for a document, corresponding to the Journalpost in the Noark 5 standard. It is a record of an incoming, outgoing, or internal document.
-      x-idPrefix: jp
     Journalpost.ListByJournalpostParameters:
       type: object
       required:
@@ -8555,41 +8889,6 @@ components:
         - $ref: '#/components/schemas/ArkivBase.ArkivBaseUpdate'
       description: Represents a correspondent, which is a sender or recipient of a document.
       x-idPrefix: kp
-    Korrespondansepart.KorrespondansepartUpdateItem:
-      type: object
-      required:
-        - korrespondansepartNavn
-        - korrespondansepartNavnSensitiv
-        - korrespondanseparttype
-      properties:
-        korrespondansepartNavn:
-          type: string
-          description: The name of the Korrespondansepart, with sensitive parts redacted.
-        korrespondansepartNavnSensitiv:
-          type: string
-          description: The name of the Korrespondansepart, with all parts included.
-        korrespondanseparttype:
-          type: string
-          description: The type of correspondent (e.g., 'sender', 'recipient').
-        saksbehandler:
-          type: string
-          description: The case officer associated with this correspondent.
-        epostadresse:
-          type: string
-          description: The email address of the correspondent.
-        postnummer:
-          type: string
-          description: The postal code of the correspondent.
-        erBehandlingsansvarlig:
-          type: boolean
-          description: Indicates if the correspondent is the data controller.
-        administrativEnhet:
-          type: string
-          description: The code for the administrative Enhet associated with this Korrespondansepart.
-      allOf:
-        - $ref: '#/components/schemas/ArkivBase.ArkivBase'
-      description: Represents a correspondent, which is a sender or recipient of a document.
-      x-idPrefix: kp
     LagretSak.LagretSak:
       type: object
       required:
@@ -8800,6 +9099,15 @@ components:
             - $ref: '#/components/schemas/Arkivdel.Arkivdel'
           description: If this Mappe is not a child of a Saksmappe or Moetemappe, this field will contain the parent Arkivdel.
           readOnly: true
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+          description: Property identifiers (matrikkelnummer) associated with this Mappe.
       allOf:
         - $ref: '#/components/schemas/ArkivBase.ArkivBase'
       description: An abstract base model for case files (Saksmappe) and meeting records (Moetemappe). It contains common properties for these folder-like structures.
@@ -8839,6 +9147,15 @@ components:
               description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
             - $ref: '#/components/schemas/Klasse.Klasse'
           description: An optional Klasse for this Mappe.
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerCreateItem'
+          description: Property identifiers (matrikkelnummer) associated with this Mappe.
       allOf:
         - $ref: '#/components/schemas/ArkivBase.ArkivBase'
       description: An abstract base model for case files (Saksmappe) and meeting records (Moetemappe). It contains common properties for these folder-like structures.
@@ -8878,6 +9195,15 @@ components:
               description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
             - $ref: '#/components/schemas/Klasse.Klasse'
           description: An optional Klasse for this Mappe.
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerCreateItem'
+          description: Property identifiers (matrikkelnummer) associated with this Mappe.
       allOf:
         - $ref: '#/components/schemas/ArkivBase.ArkivBase'
       description: An abstract base model for case files (Saksmappe) and meeting records (Moetemappe). It contains common properties for these folder-like structures.
@@ -8914,9 +9240,216 @@ components:
               description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
             - $ref: '#/components/schemas/Klasse.KlasseUpdate'
           description: An optional Klasse for this Mappe.
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerUpdateItem'
+          description: Property identifiers (matrikkelnummer) associated with this Mappe.
       allOf:
         - $ref: '#/components/schemas/ArkivBase.ArkivBaseUpdate'
       description: An abstract base model for case files (Saksmappe) and meeting records (Moetemappe). It contains common properties for these folder-like structures.
+    Matrikkelnummer.Matrikkelnummer:
+      type: object
+      required:
+        - entity
+        - kommunenummer
+        - gaardsnummer
+        - bruksnummer
+      properties:
+        entity:
+          type: string
+          enum:
+            - Matrikkelnummer
+          readOnly: true
+        kommunenummer:
+          type: string
+          pattern: ^[0-9]{4}$
+          description: Four-digit municipality number (kommunenummer).
+        gaardsnummer:
+          type: integer
+          minimum: 0
+          description: Garden number (gaardsnummer).
+        bruksnummer:
+          type: integer
+          minimum: 0
+          description: Bruk number (bruksnummer).
+        festenummer:
+          type: integer
+          minimum: 0
+          description: Leasehold number (festenummer). 0 means no leasehold.
+        seksjonsnummer:
+          type: integer
+          minimum: 0
+          description: Section number (seksjonsnummer). 0 means no section.
+        saksmappe:
+          anyOf:
+            - type: string
+              format: id
+              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+            - $ref: '#/components/schemas/Saksmappe.Saksmappe'
+          description: The Saksmappe this Matrikkelnummer is associated with, if any.
+          readOnly: true
+        moetemappe:
+          anyOf:
+            - type: string
+              format: id
+              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+            - $ref: '#/components/schemas/Moetemappe.Moetemappe'
+          description: The Moetemappe this Matrikkelnummer is associated with, if any.
+          readOnly: true
+        journalpost:
+          anyOf:
+            - type: string
+              format: id
+              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+            - $ref: '#/components/schemas/Journalpost.Journalpost'
+          description: The Journalpost this Matrikkelnummer is associated with, if any.
+          readOnly: true
+        moetesak:
+          anyOf:
+            - type: string
+              format: id
+              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+            - $ref: '#/components/schemas/Moetesak.Moetesak'
+          description: The Moetesak this Matrikkelnummer is associated with, if any.
+          readOnly: true
+        moetedokument:
+          allOf:
+            - anyOf:
+                - type: string
+                  format: id
+                  description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+                - $ref: '#/components/schemas/Moetedokument.Moetedokument'
+          description: The Moetedokument this Matrikkelnummer is associated with, if any.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/ArkivBase.ArkivBase'
+      description: Identifies a property unit (matrikkelenhet) in the Norwegian cadastre, following Kartverket's standard format.
+      x-idPrefix: mat
+    Matrikkelnummer.MatrikkelnummerCreate:
+      type: object
+      required:
+        - kommunenummer
+        - gaardsnummer
+        - bruksnummer
+      properties:
+        kommunenummer:
+          type: string
+          pattern: ^[0-9]{4}$
+          description: Four-digit municipality number (kommunenummer).
+        gaardsnummer:
+          type: integer
+          minimum: 0
+          description: Garden number (gaardsnummer).
+        bruksnummer:
+          type: integer
+          minimum: 0
+          description: Bruk number (bruksnummer).
+        festenummer:
+          type: integer
+          minimum: 0
+          description: Leasehold number (festenummer). 0 means no leasehold.
+        seksjonsnummer:
+          type: integer
+          minimum: 0
+          description: Section number (seksjonsnummer). 0 means no section.
+      allOf:
+        - $ref: '#/components/schemas/ArkivBase.ArkivBase'
+      description: Identifies a property unit (matrikkelenhet) in the Norwegian cadastre, following Kartverket's standard format.
+      x-idPrefix: mat
+    Matrikkelnummer.MatrikkelnummerCreateItem:
+      type: object
+      required:
+        - kommunenummer
+        - gaardsnummer
+        - bruksnummer
+      properties:
+        kommunenummer:
+          type: string
+          pattern: ^[0-9]{4}$
+          description: Four-digit municipality number (kommunenummer).
+        gaardsnummer:
+          type: integer
+          minimum: 0
+          description: Garden number (gaardsnummer).
+        bruksnummer:
+          type: integer
+          minimum: 0
+          description: Bruk number (bruksnummer).
+        festenummer:
+          type: integer
+          minimum: 0
+          description: Leasehold number (festenummer). 0 means no leasehold.
+        seksjonsnummer:
+          type: integer
+          minimum: 0
+          description: Section number (seksjonsnummer). 0 means no section.
+      allOf:
+        - $ref: '#/components/schemas/ArkivBase.ArkivBase'
+      description: Identifies a property unit (matrikkelenhet) in the Norwegian cadastre, following Kartverket's standard format.
+      x-idPrefix: mat
+    Matrikkelnummer.MatrikkelnummerUpdate:
+      type: object
+      properties:
+        kommunenummer:
+          type: string
+          pattern: ^[0-9]{4}$
+          description: Four-digit municipality number (kommunenummer).
+        gaardsnummer:
+          type: integer
+          minimum: 0
+          description: Garden number (gaardsnummer).
+        bruksnummer:
+          type: integer
+          minimum: 0
+          description: Bruk number (bruksnummer).
+        festenummer:
+          type: integer
+          minimum: 0
+          description: Leasehold number (festenummer). 0 means no leasehold.
+        seksjonsnummer:
+          type: integer
+          minimum: 0
+          description: Section number (seksjonsnummer). 0 means no section.
+      allOf:
+        - $ref: '#/components/schemas/ArkivBase.ArkivBaseUpdate'
+      description: Identifies a property unit (matrikkelenhet) in the Norwegian cadastre, following Kartverket's standard format.
+      x-idPrefix: mat
+    Matrikkelnummer.MatrikkelnummerUpdateItem:
+      type: object
+      required:
+        - kommunenummer
+        - gaardsnummer
+        - bruksnummer
+      properties:
+        kommunenummer:
+          type: string
+          pattern: ^[0-9]{4}$
+          description: Four-digit municipality number (kommunenummer).
+        gaardsnummer:
+          type: integer
+          minimum: 0
+          description: Garden number (gaardsnummer).
+        bruksnummer:
+          type: integer
+          minimum: 0
+          description: Bruk number (bruksnummer).
+        festenummer:
+          type: integer
+          minimum: 0
+          description: Leasehold number (festenummer). 0 means no leasehold.
+        seksjonsnummer:
+          type: integer
+          minimum: 0
+          description: Section number (seksjonsnummer). 0 means no section.
+      allOf:
+        - $ref: '#/components/schemas/ArkivBase.ArkivBase'
+      description: Identifies a property unit (matrikkelenhet) in the Norwegian cadastre, following Kartverket's standard format.
+      x-idPrefix: mat
     Moetedeltaker.Moetedeltaker:
       type: object
       required:
@@ -9070,31 +9603,6 @@ components:
           description: The meeting this document belongs to.
       allOf:
         - $ref: '#/components/schemas/Registrering.RegistreringUpdate'
-      description: Represents a document related to a meeting, such as an agenda or minutes.
-      x-idPrefix: mdok
-    Moetedokument.MoetedokumentUpdateItem:
-      type: object
-      required:
-        - moetedokumenttype
-      properties:
-        moetedokumenttype:
-          type: string
-          description: The type of meeting document (e.g., 'Agenda', 'Minutes').
-        saksbehandler:
-          type: string
-          description: The case officer responsible for the document.
-        saksbehandlerSensitiv:
-          type: string
-          description: The case officer responsible for the document, including sensitive information.
-        moetemappe:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/Moetemappe.Moetemappe'
-          description: The meeting this document belongs to.
-      allOf:
-        - $ref: '#/components/schemas/Registrering.RegistreringUpdateItem'
       description: Represents a document related to a meeting, such as an agenda or minutes.
       x-idPrefix: mdok
     Moetemappe.ListByMoetemappeParameters:
@@ -9353,7 +9861,7 @@ components:
               - type: string
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-              - $ref: '#/components/schemas/Moetedokument.MoetedokumentUpdateItem'
+              - $ref: '#/components/schemas/Moetedokument.Moetedokument'
           description: Documents associated with the meeting.
         moetesak:
           type: array
@@ -10032,6 +10540,15 @@ components:
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
               - $ref: '#/components/schemas/Dokumentbeskrivelse.Dokumentbeskrivelse'
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
+          description: Property identifiers (matrikkelnummer) associated with this Registrering.
         avhendetTil:
           anyOf:
             - type: string
@@ -10085,6 +10602,15 @@ components:
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
               - $ref: '#/components/schemas/Dokumentbeskrivelse.Dokumentbeskrivelse'
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerCreateItem'
+          description: Property identifiers (matrikkelnummer) associated with this Registrering.
         avhendetTil:
           anyOf:
             - type: string
@@ -10138,6 +10664,15 @@ components:
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
               - $ref: '#/components/schemas/Dokumentbeskrivelse.Dokumentbeskrivelse'
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerCreateItem'
+          description: Property identifiers (matrikkelnummer) associated with this Registrering.
         avhendetTil:
           anyOf:
             - type: string
@@ -10179,7 +10714,7 @@ components:
               - type: string
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-              - $ref: '#/components/schemas/Korrespondansepart.KorrespondansepartUpdateItem'
+              - $ref: '#/components/schemas/Korrespondansepart.Korrespondansepart'
         dokumentbeskrivelse:
           type: array
           items:
@@ -10188,6 +10723,15 @@ components:
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
               - $ref: '#/components/schemas/Dokumentbeskrivelse.Dokumentbeskrivelse'
+        matrikkelnummer:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Matrikkelnummer.MatrikkelnummerUpdateItem'
+          description: Property identifiers (matrikkelnummer) associated with this Registrering.
         avhendetTil:
           allOf:
             - anyOf:
@@ -10198,59 +10742,6 @@ components:
           description: The administrative unit that has been handed the responsibility for this resource.
       allOf:
         - $ref: '#/components/schemas/ArkivBase.ArkivBaseUpdate'
-      description: An abstract base model for registry entries, such as journal entries (Journalpost) and meeting-related entries (Moetesak, Moetedokument).
-    Registrering.RegistreringUpdateItem:
-      type: object
-      required:
-        - offentligTittel
-        - offentligTittelSensitiv
-      properties:
-        slug:
-          type: string
-          pattern: ^[a-z0-9\-]+$
-          description: A URL-friendly unique slug for the resource.
-        offentligTittel:
-          type: string
-          description: The title of the resource, with sensitive information redacted.
-        offentligTittelSensitiv:
-          type: string
-          description: The title of the resource, with sensitive information included.
-        beskrivelse:
-          type: string
-          maxLength: 1000
-        publisertDato:
-          type: string
-          format: date-time
-          description: The date the resource was published. This field is updated automatically, but can be set manually by admins.
-        oppdatertDato:
-          type: string
-          format: date-time
-          description: The date the resource was last updated. This field is updated automatically, but can be set manually by admins.
-        korrespondansepart:
-          type: array
-          items:
-            anyOf:
-              - type: string
-                format: id
-                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-              - $ref: '#/components/schemas/Korrespondansepart.KorrespondansepartUpdateItem'
-        dokumentbeskrivelse:
-          type: array
-          items:
-            anyOf:
-              - type: string
-                format: id
-                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-              - $ref: '#/components/schemas/Dokumentbeskrivelse.Dokumentbeskrivelse'
-        avhendetTil:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/Enhet.Enhet'
-          description: The administrative unit that has been handed the responsibility for this resource.
-      allOf:
-        - $ref: '#/components/schemas/ArkivBase.ArkivBase'
       description: An abstract base model for registry entries, such as journal entries (Journalpost) and meeting-related entries (Moetesak, Moetedokument).
     Saksmappe.ListBySaksmappeParameters:
       type: object
@@ -10392,44 +10883,13 @@ components:
               - type: string
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-              - $ref: '#/components/schemas/Journalpost.JournalpostUpdateItem'
+              - $ref: '#/components/schemas/Journalpost.Journalpost'
           description: A list of journalposts associated with this Saksmappe. This is write-only, reads should use the separate `journalpost` endpoint.
         administrativEnhet:
           type: string
           description: A code for the administrative Enhet associated with this Saksmappe.
       allOf:
         - $ref: '#/components/schemas/Mappe.MappeUpdate'
-      description: Represents a case file, which is a folder for collecting all documents related to a specific case.
-      x-idPrefix: sm
-    Saksmappe.SaksmappeUpdateItem:
-      type: object
-      required:
-        - saksaar
-        - sakssekvensnummer
-      properties:
-        saksaar:
-          type: integer
-          minimum: 1700
-        sakssekvensnummer:
-          type: integer
-          minimum: 0
-        saksdato:
-          type: string
-          format: date
-        journalpost:
-          type: array
-          items:
-            anyOf:
-              - type: string
-                format: id
-                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-              - $ref: '#/components/schemas/Journalpost.JournalpostUpdateItem'
-          description: A list of journalposts associated with this Saksmappe. This is write-only, reads should use the separate `journalpost` endpoint.
-        administrativEnhet:
-          type: string
-          description: A code for the administrative Enhet associated with this Saksmappe.
-      allOf:
-        - $ref: '#/components/schemas/Mappe.Mappe'
       description: Represents a case file, which is a folder for collecting all documents related to a specific case.
       x-idPrefix: sm
     Search.SavedSearchParameters:
