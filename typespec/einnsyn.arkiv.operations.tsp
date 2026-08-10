@@ -321,6 +321,19 @@ namespace Journalpost {
       @path id: eInnsynId<Journalpost>,
       @path skjermingId: eInnsynId<Skjerming.Skjerming>,
     ): Responses.OkResponse<Skjerming.Skjerming>;
+
+    @route("/{id}/matrikkelnummer")
+    @get
+    listMatrikkelnummer(
+      ...ListByJournalpostParameters,
+    ): Responses.ListResponse<Matrikkelnummer.Matrikkelnummer>;
+
+    @route("/{id}/matrikkelnummer")
+    @post
+    addMatrikkelnummer(
+      @path id: eInnsynId<Journalpost>,
+      @body matrikkelnummer: Matrikkelnummer.Matrikkelnummer,
+    ): Responses.AddResponse<Matrikkelnummer.Matrikkelnummer>;
   }
 }
 
@@ -390,6 +403,12 @@ namespace Korrespondansepart {
   interface KorrespondansepartRoutes extends Routable<Korrespondansepart> {}
 }
 
+namespace Matrikkelnummer {
+  @route("/matrikkelnummer")
+  @tag("Matrikkelnummer")
+  interface MatrikkelnummerRoutes extends Routable<Matrikkelnummer> {}
+}
+
 namespace Moetedeltaker {
   @route("/moetedeltaker")
   @tag("Moetedeltaker")
@@ -428,6 +447,19 @@ namespace Moetedokument {
       @path
       dokumentbeskrivelseId: eInnsynId<Dokumentbeskrivelse.Dokumentbeskrivelse>,
     ): Responses.OkResponse<Dokumentbeskrivelse.Dokumentbeskrivelse>;
+
+    @route("/{id}/matrikkelnummer")
+    @get
+    listMatrikkelnummer(
+      ...ListByMoetedokumentParameters,
+    ): Responses.ListResponse<Matrikkelnummer.Matrikkelnummer>;
+
+    @route("/{id}/matrikkelnummer")
+    @post
+    addMatrikkelnummer(
+      @path id: eInnsynId<Moetedokument>,
+      @body matrikkelnummer: Matrikkelnummer.Matrikkelnummer,
+    ): Responses.AddResponse<Matrikkelnummer.Matrikkelnummer>;
   }
 }
 
@@ -465,6 +497,19 @@ namespace Moetemappe {
       @path id: eInnsynId<Moetemappe>,
       @body moetedokument: Moetedokument.Moetedokument,
     ): Responses.AddResponse<Moetedokument.Moetedokument>;
+
+    @route("/{id}/matrikkelnummer")
+    @get
+    listMatrikkelnummer(
+      ...ListByMoetemappeParameters,
+    ): Responses.ListResponse<Matrikkelnummer.Matrikkelnummer>;
+
+    @route("/{id}/matrikkelnummer")
+    @post
+    addMatrikkelnummer(
+      @path id: eInnsynId<Moetemappe>,
+      @body matrikkelnummer: Matrikkelnummer.Matrikkelnummer,
+    ): Responses.AddResponse<Matrikkelnummer.Matrikkelnummer>;
   }
 }
 
@@ -529,6 +574,19 @@ namespace Moetesak {
       @path id: eInnsynId<Moetesak>,
       @body vedtak: Vedtak.Vedtak,
     ): Responses.AddResponse<Vedtak.Vedtak>;
+
+    @route("/{id}/matrikkelnummer")
+    @get
+    listMatrikkelnummer(
+      ...ListByMoetesakParameters,
+    ): Responses.ListResponse<Matrikkelnummer.Matrikkelnummer>;
+
+    @route("/{id}/matrikkelnummer")
+    @post
+    addMatrikkelnummer(
+      @path id: eInnsynId<Moetesak>,
+      @body matrikkelnummer: Matrikkelnummer.Matrikkelnummer,
+    ): Responses.AddResponse<Matrikkelnummer.Matrikkelnummer>;
   }
 }
 
@@ -559,6 +617,19 @@ namespace Saksmappe {
       @path id: eInnsynId<Saksmappe>,
       @body journalpost: Journalpost.Journalpost,
     ): Responses.AddResponse<Journalpost.Journalpost>;
+
+    @route("/{id}/matrikkelnummer")
+    @get
+    listMatrikkelnummer(
+      ...ListBySaksmappeParameters,
+    ): Responses.ListResponse<Matrikkelnummer.Matrikkelnummer>;
+
+    @route("/{id}/matrikkelnummer")
+    @post
+    addMatrikkelnummer(
+      @path id: eInnsynId<Saksmappe>,
+      @body matrikkelnummer: Matrikkelnummer.Matrikkelnummer,
+    ): Responses.AddResponse<Matrikkelnummer.Matrikkelnummer>;
   }
 }
 
