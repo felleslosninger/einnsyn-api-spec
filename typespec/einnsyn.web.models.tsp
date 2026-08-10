@@ -154,7 +154,7 @@ namespace LagretSoek {
     subscribe?: boolean;
 
     /** The parameters of the saved search. */
-    searchParameters?: Search.SearchParameters;
+    searchParameters?: Search.SavedSearchParameters;
 
     /** A legacy field for storing the raw query string. */
     legacyQuery?: string;
