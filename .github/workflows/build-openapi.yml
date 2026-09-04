@@ -7,6 +7,9 @@ on:
     paths:
       - 'typespec/**'
 
+permissions:
+  contents: read
+
 jobs:
   build-and-commit:
     if: ${{ github.actor != 'einnsyn-codegen[bot]' }}
