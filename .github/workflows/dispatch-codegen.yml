@@ -11,9 +11,9 @@ jobs:
   dispatch-codegen:
     runs-on: ubuntu-latest
 
-    env:
-      commit_message: ""
-      pr_body: ""
+    permissions:
+      contents: read
+      pull-requests: read
 
     steps:
       - name: Get token
@@ -27,19 +27,34 @@ jobs:
           repositories: |
             einnsyn-codegen
 
-      - name: Set commit message if triggered by a PR
+      - name: Build dispatch payload
+        id: payload
         env:
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
         run: |
-          if [ "${{ github.event_name }}" == "push" ] && [[ "$COMMIT_MESSAGE" == *"Merge pull request"* ]]; then
-            PR_NUMBER=$(echo "$COMMIT_MESSAGE" | grep -oP '(?<=#)\d+' | head -1)
-            PR_TITLE=$(echo "$COMMIT_MESSAGE" | grep -v "^Merge pull request" | grep -v "^$" | head -1)
-            echo "pr_body=Triggered from ${{ github.repository }} [#${PR_NUMBER}](https://github.com/${{ github.repository }}/pull/${PR_NUMBER}) ${PR_TITLE}" >> $GITHUB_ENV
-            echo "commit_message=Triggered from ${{ github.repository }}#${PR_NUMBER}" >> $GITHUB_ENV
+          # Look up the pull request this commit came from, if any. Works for
+          # merge, squash and rebase merges, and returns [] for direct pushes.
+          PR_JSON=$(gh api "/repos/${REPO}/commits/${SHA}/pulls")
+          PR_NUMBER=$(printf '%s' "$PR_JSON" | jq -r '.[0].number // ""')
+          PR_TITLE=$(printf '%s' "$PR_JSON" | jq -r '.[0].title // ""')
+
+          if [ -n "$PR_NUMBER" ]; then
+            COMMIT_MESSAGE="Triggered from ${REPO}#${PR_NUMBER}"
+            PR_BODY="Triggered from ${REPO} [#${PR_NUMBER}](https://github.com/${REPO}/pull/${PR_NUMBER}) ${PR_TITLE}"
           else
-            echo "pr_body=Triggered from ${{ github.repository }}" >> $GITHUB_ENV
-            echo "commit_message=Triggered from ${{ github.repository }}" >> $GITHUB_ENV
+            COMMIT_MESSAGE="Triggered from ${REPO}"
+            PR_BODY="Triggered from ${REPO}"
           fi
+
+          # Let jq do the JSON escaping: the PR title is untrusted input and
+          # must not be able to break out of its string in the payload.
+          jq -nc \
+            --arg commit_message "$COMMIT_MESSAGE" \
+            --arg pr_body "$PR_BODY" \
+            '{$commit_message, $pr_body}' > payload.json
+          echo "json=$(cat payload.json)" >> "$GITHUB_OUTPUT"
 
       - name: Dispatch workflow
         uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # pin@v4.0.1
@@ -47,8 +62,4 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           repository: felleslosninger/einnsyn-codegen
           event-type: codegen
-          client-payload: |
-            {
-              "commit_message": "${{ env.commit_message }}",
-              "pr_body": "${{ env.pr_body }}"
-            }
+          client-payload: ${{ steps.payload.outputs.json }}
