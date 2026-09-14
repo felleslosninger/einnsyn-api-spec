@@ -11,43 +11,66 @@ permissions:
 jobs:
   build-and-commit:
     if: ${{ github.actor != 'einnsyn-codegen[bot]' }}
-    
+
     runs-on: ubuntu-latest
 
+    # Dependabot PRs does not have access to secrets. Those will not update the OpenAPI spec automatically, just verify that it does not change.
+    env:
+      HAS_APP_CREDENTIALS: ${{ secrets.EIN_CODEGEN_CLIENT_ID != '' && secrets.EIN_CODEGEN_APP_PRIVATE_KEY != '' }}
+
     steps:
-      - name: Fetch app token
-        uses: actions/create-github-app-token@v3.2.0 # This release is immutable, so pinning to a commit is not necessary
-        id: gh-api-token
-        with:
-          client-id: ${{ secrets.EIN_CODEGEN_CLIENT_ID }}
-          private-key: ${{ secrets.EIN_CODEGEN_APP_PRIVATE_KEY }}
-          
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # pin@v7.0.1
         with:
           ref: ${{ github.head_ref }}
-          
+
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # pin@v2.2.0
         with:
           bun-version: 1.4.2
       - run: bun install
       - run: bun run build
+
+      - name: Check for changes
+        id: diff
+        run: |
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Without the app token the spec cannot be pushed back to the branch.
+      # Rather than put the codegen app's private key within reach of a job
+      # that runs `bun install` on a freshly bumped dependency, verify only:
+      # fail the check and let a human regenerate and push.
+      - name: Verify committed spec is up to date
+        if: ${{ env.HAS_APP_CREDENTIALS != 'true' && steps.diff.outputs.changed == 'true' }}
+        run: |
+          git --no-pager diff --cached
+          echo "::error::The committed OpenAPI spec no longer matches the TypeSpec sources, and this run has no app credentials to push the update itself. Run 'bun install && bun run build' locally and push the result to this branch."
+          exit 1
+
+      - name: Fetch app token
+        if: ${{ env.HAS_APP_CREDENTIALS == 'true' && steps.diff.outputs.changed == 'true' }}
+        uses: actions/create-github-app-token@v3.2.0 # This release is immutable, so pinning to a commit is not necessary
+        id: gh-api-token
+        with:
+          client-id: ${{ secrets.EIN_CODEGEN_CLIENT_ID }}
+          private-key: ${{ secrets.EIN_CODEGEN_APP_PRIVATE_KEY }}
+
       - name: Commit and push changes
+        if: ${{ env.HAS_APP_CREDENTIALS == 'true' && steps.diff.outputs.changed == 'true' }}
         env:
           GITHUB_TOKEN: ${{ steps.gh-api-token.outputs.token }}
           FILE_TO_COMMIT: "openapi/einnsyn.openapi.yml"
           BRANCH: ${{ github.head_ref }}
         run: |
-          git add .
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            export SHA=$( git rev-parse "$BRANCH:$FILE_TO_COMMIT" )
-            echo "Branch: $BRANCH"
-            echo "SHA: $SHA"
-            git branch --list
-            gh api --method PUT /repos/:owner/:repo/contents/$FILE_TO_COMMIT \
-              --field message="Autogenerate OpenAPI spec from TypeSpec" \
-              --field content=@<( base64 -i $FILE_TO_COMMIT ) \
-              --field branch="$BRANCH" \
-              --field sha="$SHA"
-          fi
+          export SHA=$( git rev-parse "$BRANCH:$FILE_TO_COMMIT" )
+          echo "Branch: $BRANCH"
+          echo "SHA: $SHA"
+          gh api --method PUT /repos/:owner/:repo/contents/$FILE_TO_COMMIT \
+            --field message="Autogenerate OpenAPI spec from TypeSpec" \
+            --field content=@<( base64 -i $FILE_TO_COMMIT ) \
+            --field branch="$BRANCH" \
+            --field sha="$SHA"
