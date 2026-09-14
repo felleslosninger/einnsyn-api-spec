@@ -20,7 +20,7 @@ jobs:
         uses: actions/create-github-app-token@v3.2.0 # This release is immutable, so pinning to a commit is not necessary
         id: app-token
         with:
-          app-id: ${{ secrets.EIN_CODEGEN_APP_ID }}
+          client-id: ${{ secrets.EIN_CODEGEN_CLIENT_ID }}
           private-key: ${{ secrets.EIN_CODEGEN_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
           skip-token-revoke: true
