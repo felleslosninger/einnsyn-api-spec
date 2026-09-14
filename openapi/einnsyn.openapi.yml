@@ -2216,7 +2216,7 @@ paths:
         - Innsynskrav
   /innsynskravBestilling:
     get:
-      operationId: InnsynskravRoutes_list
+      operationId: InnsynskravRoutes_list_2
       description: List all objects.
       parameters:
         - $ref: '#/components/parameters/QueryParameters.ListParameters.expand'
@@ -2276,7 +2276,7 @@ paths:
               $ref: '#/components/schemas/InnsynskravBestilling.InnsynskravBestillingCreate'
   /innsynskravBestilling/{id}:
     get:
-      operationId: InnsynskravRoutes_get
+      operationId: InnsynskravRoutes_get_2
       description: Get an object.
       parameters:
         - $ref: '#/components/parameters/QueryParameters.GetParameters'
@@ -2297,7 +2297,7 @@ paths:
       tags:
         - InnsynskravBestilling
     patch:
-      operationId: InnsynskravRoutes_update
+      operationId: InnsynskravRoutes_update_2
       description: Update an object.
       parameters:
         - name: id
@@ -2323,7 +2323,7 @@ paths:
             schema:
               $ref: '#/components/schemas/InnsynskravBestilling.InnsynskravBestillingUpdate'
     delete:
-      operationId: InnsynskravRoutes_delete
+      operationId: InnsynskravRoutes_delete_2
       description: Delete an object.
       parameters:
         - name: id
