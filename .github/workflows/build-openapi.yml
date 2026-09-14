@@ -16,6 +16,7 @@ jobs:
 
     # Dependabot PRs does not have access to secrets. Those will not update the OpenAPI spec automatically, just verify that it does not change.
     env:
+      FILE_TO_COMMIT: "openapi/einnsyn.openapi.yml"
       HAS_APP_CREDENTIALS: ${{ secrets.EIN_CODEGEN_CLIENT_ID != '' && secrets.EIN_CODEGEN_APP_PRIVATE_KEY != '' }}
 
     steps:
@@ -32,8 +33,7 @@ jobs:
       - name: Check for changes
         id: diff
         run: |
-          git add .
-          if git diff --cached --quiet; then
+          if git diff --quiet -- "$FILE_TO_COMMIT"; then
             echo "No changes to commit."
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
@@ -47,7 +47,7 @@ jobs:
       - name: Verify committed spec is up to date
         if: ${{ env.HAS_APP_CREDENTIALS != 'true' && steps.diff.outputs.changed == 'true' }}
         run: |
-          git --no-pager diff --cached
+          git --no-pager diff -- "$FILE_TO_COMMIT"
           echo "::error::The committed OpenAPI spec no longer matches the TypeSpec sources, and this run has no app credentials to push the update itself. Run 'bun install && bun run build' locally and push the result to this branch."
           exit 1
 
@@ -63,7 +63,6 @@ jobs:
         if: ${{ env.HAS_APP_CREDENTIALS == 'true' && steps.diff.outputs.changed == 'true' }}
         env:
           GITHUB_TOKEN: ${{ steps.gh-api-token.outputs.token }}
-          FILE_TO_COMMIT: "openapi/einnsyn.openapi.yml"
           BRANCH: ${{ github.head_ref }}
         run: |
           export SHA=$( git rev-parse "$BRANCH:$FILE_TO_COMMIT" )
