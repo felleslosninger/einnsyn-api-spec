@@ -66,7 +66,14 @@ Example annotation for the Journalpost entity: `@extension("x-idPrefix", "jp")`.
 
 Example journalpost ID: `jp_01jh532p3ve6haq7n53xgpqayh`
 
-In addition, all Noark5 objects must have a globally unique systemId assigned by the publisher. This identifier can be used interchangeably with the eInnsynId in the API.
+In addition, Noark5 objects can have a `systemId` assigned by the publisher, and any object can have an `externalId` (used for legacy IRIs from earlier eInnsyn versions). Where these are unique, they can be used interchangeably with the `eInnsynId` in the API.
+
+They are not unique for every entity, and where they are not, they can not be used to look up an object:
+
+- `Arkiv`, `Arkivdel` and `Klasse`: neither `systemId` nor `externalId` is unique.
+- `Korrespondansepart`: `externalId` is not unique. Its `systemId` is.
+
+For these entities you have to use the `eInnsynId`, or the `systemId` for a Korrespondansepart. A non-unique `externalId` may also match several objects when used in the `externalIds` list parameter.
 
 ## Read-only and write-only fields
 
