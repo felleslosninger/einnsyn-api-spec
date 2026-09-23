@@ -243,28 +243,28 @@ namespace Enhet {
     /** If true, this unit should be hidden from public view. */
     skjult?: boolean;
 
-    /** If true, this unit is configured to use the eFormidling platform for digital communication. */
+    /** If true, this unit is configured to use the eFormidling platform for digital communication. Only admins can set this. */
     eFormidling?: boolean;
 
-    /** If true, this is a technical or system-internal unit, not a real-world organizational unit. */
+    /** If true, this is a technical or system-internal unit, not a real-world organizational unit. Only admins can set this. */
     teknisk?: boolean;
 
-    /** A flag indicating if legacy identifiers for this unit should be converted. */
+    /** A flag indicating if legacy identifiers for this unit should be converted. Only admins can set this. */
     skalKonvertereId?: boolean;
 
-    /** A flag indicating if the unit should receive receipts for submissions. */
+    /** A flag indicating if the unit should receive receipts for submissions. Only admins can set this. */
     skalMottaKvittering?: boolean;
 
-    /** A UI hint to display this unit as a top-level node in a hierarchy. */
+    /** A UI hint to display this unit as a top-level node in a hierarchy. Only admins can set this. */
     visToppnode?: boolean;
 
-    /** The version of the order XML format used by this unit. */
+    /** The version of the order XML format used by this unit. Only admins can set this. */
     orderXmlVersjon?: integer;
 
     /** A list of sub-units belonging to this unit. */
     underenhet?: ExpandableField<Enhet>[];
 
-    /** The unit that is responsible for handling tasks on behalf of this unit. */
+    /** The unit that is responsible for handling tasks on behalf of this unit. Only admins can set this. */
     handteresAv?: ExpandableField<Enhet>;
 
     /** The parent unit in the organizational hierarchy. */
