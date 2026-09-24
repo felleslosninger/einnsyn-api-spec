@@ -206,7 +206,7 @@ namespace Enhet {
     /** The name of the unit in Sami. */
     navnSami?: string;
 
-    /** The 9-digit organization number from the Brønnøysund Register Centre. */
+    /** The 9-digit organization number from the Brønnøysund Register Centre. Only admins can change it after creation. */
     @pattern("^[0-9]{9}$") orgnummer: string;
 
     /** An internal code or identifier for the unit. */
@@ -224,7 +224,7 @@ namespace Enhet {
     /** The dedicated email address for receiving Freedom of Information (FOI) requests. */
     @format("email") innsynskravEpost: string;
 
-    /** The type of the organizational unit. */
+    /** The type of the organizational unit. Only admins can create top nodes, that is `DUMMYENHET` units whose ancestors are all `DUMMYENHET`. */
     @oneOf enhetstype:
       | "ADMINISTRATIVENHET" // Administrative unit
       | "AVDELING" // Department
@@ -242,6 +242,11 @@ namespace Enhet {
 
     /** If true, this unit should be hidden from public view. */
     skjult?: boolean;
+
+    /**
+     * Whether an admin has verified this unit. Unverified units are listed only for admins, can be fetched by id or orgnummer by admins and the unit itself, and cannot publish data or create API keys. Only admins can read or set this field.
+     */
+    verified?: boolean;
 
     /** If true, this unit is configured to use the eFormidling platform for digital communication. */
     eFormidling?: boolean;
