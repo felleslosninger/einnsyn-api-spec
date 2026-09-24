@@ -7596,7 +7596,7 @@ components:
         orgnummer:
           type: string
           pattern: ^[0-9]{9}$
-          description: The 9-digit organization number from the Brønnøysund Register Centre.
+          description: The 9-digit organization number from the Brønnøysund Register Centre. Only admins can change it after creation.
         enhetskode:
           type: string
           description: An internal code or identifier for the unit.
@@ -7627,7 +7627,7 @@ components:
             - SEKSJON
             - UTVALG
             - VIRKSOMHET
-          description: The type of the organizational unit.
+          description: The type of the organizational unit. Only admins can create top nodes, that is `DUMMYENHET` units whose ancestors are all `DUMMYENHET`.
         avsluttetDato:
           type: string
           format: date
@@ -7635,6 +7635,9 @@ components:
         skjult:
           type: boolean
           description: If true, this unit should be hidden from public view.
+        verified:
+          type: boolean
+          description: Whether an admin has verified this unit. Unverified units are listed only for admins, can be fetched by id or orgnummer by admins and the unit itself, and cannot publish data or create API keys. Only admins can read or set this field.
         eFormidling:
           type: boolean
           description: If true, this unit is configured to use the eFormidling platform for digital communication.
@@ -7720,7 +7723,7 @@ components:
         orgnummer:
           type: string
           pattern: ^[0-9]{9}$
-          description: The 9-digit organization number from the Brønnøysund Register Centre.
+          description: The 9-digit organization number from the Brønnøysund Register Centre. Only admins can change it after creation.
         enhetskode:
           type: string
           description: An internal code or identifier for the unit.
@@ -7751,7 +7754,7 @@ components:
             - SEKSJON
             - UTVALG
             - VIRKSOMHET
-          description: The type of the organizational unit.
+          description: The type of the organizational unit. Only admins can create top nodes, that is `DUMMYENHET` units whose ancestors are all `DUMMYENHET`.
         avsluttetDato:
           type: string
           format: date
@@ -7759,6 +7762,9 @@ components:
         skjult:
           type: boolean
           description: If true, this unit should be hidden from public view.
+        verified:
+          type: boolean
+          description: Whether an admin has verified this unit. Unverified units are listed only for admins, can be fetched by id or orgnummer by admins and the unit itself, and cannot publish data or create API keys. Only admins can read or set this field.
         eFormidling:
           type: boolean
           description: If true, this unit is configured to use the eFormidling platform for digital communication.
