@@ -22,6 +22,21 @@ namespace Responses {
      * The URL for the previous page of items.
      */
     previous?: url;
+
+    /**
+     * The total number of matching items. Only returned by the search endpoint.
+     */
+    total?: {
+      /**
+       * The number of matching items. A lower bound when `capped` is true.
+       */
+      value: int64;
+
+      /**
+       * True if counting stopped at `value`, meaning there are at least `value` matching items.
+       */
+      capped: boolean;
+    };
   }
 
   model ListResponse<T extends Base.Base> {
