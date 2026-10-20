@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Get token
-        uses: actions/create-github-app-token@v3.2.0 # This release is immutable, so pinning to a commit is not necessary
+        uses: actions/create-github-app-token@v3.3.0 # This release is immutable, so pinning to a commit is not necessary
         id: app-token
         with:
           client-id: ${{ secrets.EIN_CODEGEN_CLIENT_ID }}
