@@ -1549,7 +1549,7 @@ paths:
               properties:
                 oldPassword:
                   type: string
-                  format: password
+                  format: current-password
                 newPassword:
                   type: string
                   format: password
