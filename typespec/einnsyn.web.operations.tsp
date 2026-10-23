@@ -76,7 +76,8 @@ namespace Bruker {
     updatePassword(
       @path id: eInnsynId<Bruker>,
       @body updatePassword: {
-        @format("password") oldPassword: string;
+        // "password" would apply input rules, we don't want that when checking a password.
+        @format("current-password") oldPassword: string;
         @format("password") newPassword: string;
       },
     ): Responses.OkResponse<Bruker>;
