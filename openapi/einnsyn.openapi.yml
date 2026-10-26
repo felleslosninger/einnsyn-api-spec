@@ -5928,6 +5928,7 @@ paths:
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.administrativEnhetExact'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.excludeAdministrativEnhet'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.excludeAdministrativEnhetExact'
+        - $ref: '#/components/parameters/QueryParameters.FilterParameters.mappe'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.tittel'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.korrespondansepartNavn'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.skjermingshjemmel'
@@ -6156,6 +6157,7 @@ paths:
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.administrativEnhetExact'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.excludeAdministrativEnhet'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.excludeAdministrativEnhetExact'
+        - $ref: '#/components/parameters/QueryParameters.FilterParameters.mappe'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.tittel'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.korrespondansepartNavn'
         - $ref: '#/components/parameters/QueryParameters.FilterParameters.skjermingshjemmel'
@@ -7498,6 +7500,18 @@ components:
         type: array
         items:
           type: string
+      explode: false
+    QueryParameters.FilterParameters.mappe:
+      name: mappe
+      in: query
+      required: false
+      description: A list of Saksmappe or Moetemappe IDs. Matches the Journalposts and Moetesaker that belong to them.
+      schema:
+        type: array
+        items:
+          type: string
+          format: id
+          description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
       explode: false
     QueryParameters.FilterParameters.moetedatoFrom:
       name: moetedatoFrom
@@ -11185,6 +11199,13 @@ components:
             format: id
             description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
           description: A list of enhet IDs to exclude from the result set. This will only exclude the specified enhets, not subenhets.
+        mappe:
+          type: array
+          items:
+            type: string
+            format: id
+            description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+          description: A list of Saksmappe or Moetemappe IDs. Matches the Journalposts and Moetesaker that belong to them.
         tittel:
           type: array
           items:
@@ -11897,6 +11918,13 @@ components:
             format: id
             description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
           description: A list of enhet IDs to exclude from the result set. This will only exclude the specified enhets, not subenhets.
+        mappe:
+          type: array
+          items:
+            type: string
+            format: id
+            description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+          description: A list of Saksmappe or Moetemappe IDs. Matches the Journalposts and Moetesaker that belong to them.
         tittel:
           type: array
           items:
