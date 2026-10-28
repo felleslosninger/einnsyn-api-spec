@@ -8176,7 +8176,6 @@ components:
       type: object
       required:
         - id
-        - deleted
       properties:
         id:
           type: string
