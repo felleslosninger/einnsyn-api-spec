@@ -121,6 +121,12 @@ namespace InnsynskravBestilling {
   @route("/innsynskravBestilling")
   @tag("InnsynskravBestilling")
   interface InnsynskravRoutes extends GloballyRoutable<InnsynskravBestilling> {
+    @route("/{id}/send")
+    @post
+    send(
+      @path id: eInnsynId<InnsynskravBestilling>,
+    ): Responses.OkResponse<InnsynskravBestilling>;
+
     @route("/{id}/innsynskrav")
     @get
     listInnsynskrav(

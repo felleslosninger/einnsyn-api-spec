@@ -2749,6 +2749,25 @@ paths:
                     description: The total number of matching items. Only returned by the search endpoint.
       tags:
         - InnsynskravBestilling
+  /innsynskravBestilling/{id}/send:
+    post:
+      operationId: InnsynskravRoutes_send
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: id
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InnsynskravBestilling.InnsynskravBestilling'
+      tags:
+        - InnsynskravBestilling
   /innsynskravBestilling/{id}/verify/{secret}:
     patch:
       operationId: InnsynskravRoutes_verify
