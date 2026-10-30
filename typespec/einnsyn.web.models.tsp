@@ -95,6 +95,9 @@ namespace InnsynskravBestilling {
     /** The list of individual access requests in this order. */
     innsynskrav: ExpandableField<Innsynskrav.Innsynskrav>[];
 
+    /** Whether the request is saved as a draft and has not been sent. */
+    @visibility(Lifecycle.Create, Lifecycle.Read) draft?: boolean;
+
     /** Indicates whether the email address has been verified. */
     @visibility(Lifecycle.Read) verified?: boolean;
 

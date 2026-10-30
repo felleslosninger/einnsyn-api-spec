@@ -9041,6 +9041,40 @@ components:
         - $ref: '#/components/schemas/Base.BaseUpdate'
       description: Represents a request for access to a specific registry entry (Journalpost).
       x-idPrefix: ikd
+    Innsynskrav.InnsynskravUpdateItem:
+      type: object
+      required:
+        - journalpost
+      properties:
+        innsynskravBestilling:
+          anyOf:
+            - type: string
+              format: id
+              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+            - $ref: '#/components/schemas/InnsynskravBestilling.InnsynskravBestillingUpdateItem'
+          description: The order containing this access request.
+        journalpost:
+          anyOf:
+            - type: string
+              format: id
+              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+            - $ref: '#/components/schemas/Journalpost.Journalpost'
+          description: The registry entry being requested.
+        enhet:
+          anyOf:
+            - type: string
+              format: id
+              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+            - $ref: '#/components/schemas/Enhet.Enhet'
+          description: The public authority responsible for handling the request.
+        sent:
+          type: string
+          format: date-time
+          description: The timestamp when the request was sent to the public authority.
+      allOf:
+        - $ref: '#/components/schemas/Base.Base'
+      description: Represents a request for access to a specific registry entry (Journalpost).
+      x-idPrefix: ikd
     Innsynskrav.ListByInnsynskravParameters:
       type: object
       required:
@@ -9082,6 +9116,9 @@ components:
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
               - $ref: '#/components/schemas/Innsynskrav.Innsynskrav'
           description: The list of individual access requests in this order.
+        draft:
+          type: boolean
+          description: Whether the request is saved as a draft and has not been sent.
         verified:
           type: boolean
           description: Indicates whether the email address has been verified.
@@ -9126,6 +9163,9 @@ components:
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
               - $ref: '#/components/schemas/Innsynskrav.InnsynskravCreateItem'
           description: The list of individual access requests in this order.
+        draft:
+          type: boolean
+          description: Whether the request is saved as a draft and has not been sent.
         language:
           type: string
           enum:
@@ -9153,7 +9193,7 @@ components:
               - type: string
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-              - $ref: '#/components/schemas/Innsynskrav.Innsynskrav'
+              - $ref: '#/components/schemas/Innsynskrav.InnsynskravUpdateItem'
           description: The list of individual access requests in this order.
         language:
           type: string
@@ -9166,6 +9206,38 @@ components:
           default: nb
       allOf:
         - $ref: '#/components/schemas/Base.BaseUpdate'
+      description: Represents an order containing one or more access requests (Innsynskrav).
+      x-idPrefix: ik
+    InnsynskravBestilling.InnsynskravBestillingUpdateItem:
+      type: object
+      required:
+        - email
+        - innsynskrav
+      properties:
+        email:
+          type: string
+          format: email
+          description: The email address of the person who placed the order.
+        innsynskrav:
+          description: The list of individual access requests in this order.
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Innsynskrav.InnsynskravUpdateItem'
+        language:
+          type: string
+          enum:
+            - nb
+            - nn
+            - en
+            - se
+          description: The preferred language for communication.
+          default: nb
+      allOf:
+        - $ref: '#/components/schemas/Base.Base'
       description: Represents an order containing one or more access requests (Innsynskrav).
       x-idPrefix: ik
     InnsynskravBestilling.ListByInnsynskravBestillingParameters:
