@@ -109,9 +109,14 @@ namespace QueryParameters {
     @query excludeAdministrativEnhetExact?: eInnsynId[];
 
     /**
-     * A list of Saksmappe or Moetemappe IDs. Matches the Journalposts and Moetesaker that belong to them.
+     * A list of Saksmappe IDs. Matches the Journalposts that belong to them.
      */
-    @query mappe?: eInnsynId[];
+    @query saksmappe?: eInnsynId[];
+
+    /**
+     * A list of Moetemappe IDs. Matches the Moetesaker that belong to them.
+     */
+    @query moetemappe?: eInnsynId[];
 
     /**
      * Filter by title. This is a free text search.
