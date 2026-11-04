@@ -109,12 +109,12 @@ namespace QueryParameters {
     @query excludeAdministrativEnhetExact?: eInnsynId[];
 
     /**
-     * A list of Saksmappe IDs. Matches the Journalposts that belong to them.
+     * A list of Saksmappe IDs. Matches the Saksmapper and the Journalposts that belong to them.
      */
     @query saksmappe?: eInnsynId[];
 
     /**
-     * A list of Moetemappe IDs. Matches the Moetesaker that belong to them.
+     * A list of Moetemappe IDs. Matches the Moetemapper and the Moetesaker that belong to them.
      */
     @query moetemappe?: eInnsynId[];
 

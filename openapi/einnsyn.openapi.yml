@@ -7523,7 +7523,7 @@ components:
       name: moetemappe
       in: query
       required: false
-      description: A list of Moetemappe IDs. Matches the Moetesaker that belong to them.
+      description: A list of Moetemappe IDs. Matches the Moetemapper and the Moetesaker that belong to them.
       schema:
         type: array
         items:
@@ -7605,7 +7605,7 @@ components:
       name: saksmappe
       in: query
       required: false
-      description: A list of Saksmappe IDs. Matches the Journalposts that belong to them.
+      description: A list of Saksmappe IDs. Matches the Saksmapper and the Journalposts that belong to them.
       schema:
         type: array
         items:
@@ -11218,14 +11218,14 @@ components:
             type: string
             format: id
             description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-          description: A list of Saksmappe IDs. Matches the Journalposts that belong to them.
+          description: A list of Saksmappe IDs. Matches the Saksmapper and the Journalposts that belong to them.
         moetemappe:
           type: array
           items:
             type: string
             format: id
             description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-          description: A list of Moetemappe IDs. Matches the Moetesaker that belong to them.
+          description: A list of Moetemappe IDs. Matches the Moetemapper and the Moetesaker that belong to them.
         tittel:
           type: array
           items:
@@ -11944,14 +11944,14 @@ components:
             type: string
             format: id
             description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-          description: A list of Saksmappe IDs. Matches the Journalposts that belong to them.
+          description: A list of Saksmappe IDs. Matches the Saksmapper and the Journalposts that belong to them.
         moetemappe:
           type: array
           items:
             type: string
             format: id
             description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-          description: A list of Moetemappe IDs. Matches the Moetesaker that belong to them.
+          description: A list of Moetemappe IDs. Matches the Moetemapper and the Moetesaker that belong to them.
         tittel:
           type: array
           items:
