@@ -8976,18 +8976,20 @@ components:
             - $ref: '#/components/schemas/InnsynskravBestilling.InnsynskravBestilling'
           description: The order containing this access request.
         journalpost:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/Journalpost.Journalpost'
+          allOf:
+            - anyOf:
+                - type: string
+                  format: id
+                  description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+                - $ref: '#/components/schemas/Journalpost.Journalpost'
           description: The registry entry being requested.
         enhet:
-          anyOf:
-            - type: string
-              format: id
-              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
-            - $ref: '#/components/schemas/Enhet.Enhet'
+          allOf:
+            - anyOf:
+                - type: string
+                  format: id
+                  description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+                - $ref: '#/components/schemas/Enhet.Enhet'
           description: The public authority responsible for handling the request.
         email:
           type: string
@@ -9102,6 +9104,7 @@ components:
           format: email
           description: The email address of the person who placed the order.
         innsynskrav:
+          description: The list of individual access requests in this order.
           type: array
           items:
             anyOf:
@@ -9109,7 +9112,6 @@ components:
                 format: id
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
               - $ref: '#/components/schemas/Innsynskrav.Innsynskrav'
-          description: The list of individual access requests in this order.
         verified:
           type: boolean
           description: Indicates whether the email address has been verified.
@@ -9293,6 +9295,16 @@ components:
               description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
             - $ref: '#/components/schemas/Saksmappe.Saksmappe'
           description: The case this record belongs to.
+        innsynskrav:
+          type: array
+          items:
+            anyOf:
+              - type: string
+                format: id
+                description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+              - $ref: '#/components/schemas/Innsynskrav.Innsynskrav'
+          description: The authenticated user's own requests for access to this record. Only set for logged-in users.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/Registrering.Registrering'
       description: Represents a registry entry for a document, corresponding to the Journalpost in the Noark 5 standard. It is a record of an incoming, outgoing, or internal document.
@@ -10053,6 +10065,14 @@ components:
                 description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
               - $ref: '#/components/schemas/Matrikkelnummer.Matrikkelnummer'
           description: Property identifiers (matrikkelnummer) associated with this Mappe.
+        lagretSak:
+          anyOf:
+            - type: string
+              format: id
+              description: An eInnsynId is a Base32 encoded UUID, with a prefix to indicate the type of resource. All objects in eInnsyn has an eInnsynId.
+            - $ref: '#/components/schemas/LagretSak.LagretSak'
+          description: The authenticated user's LagretSak for this Mappe, if they have saved it. Only set for logged-in users.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/ArkivBase.ArkivBase'
       description: An abstract base model for case files (Saksmappe) and meeting records (Moetemappe). It contains common properties for these folder-like structures.

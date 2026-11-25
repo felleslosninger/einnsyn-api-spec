@@ -352,6 +352,10 @@ namespace Journalpost {
     /** The case this record belongs to. */
     @visibility(Lifecycle.Read, Lifecycle.Update)
     saksmappe?: ExpandableField<Saksmappe.Saksmappe>;
+
+    /** The authenticated user's own requests for access to this record. Only set for logged-in users. */
+    @visibility(Lifecycle.Read)
+    innsynskrav?: ExpandableField<Innsynskrav.Innsynskrav>[];
   }
 }
 
@@ -557,6 +561,10 @@ namespace Mappe {
 
     /** Property identifiers (matrikkelnummer) associated with this Mappe. */
     matrikkelnummer?: ExpandableField<Matrikkelnummer.Matrikkelnummer>[];
+
+    /** The authenticated user's LagretSak for this Mappe, if they have saved it. Only set for logged-in users. */
+    @visibility(Lifecycle.Read)
+    lagretSak?: ExpandableField<LagretSak.LagretSak>;
   }
 }
 
